@@ -5,7 +5,7 @@ import os
 import enum
 from flask import Flask
 from dotenv import load_dotenv
-from datetime import datetime
+from datetime import datetime, timezone
 
 load_dotenv()
 
@@ -20,13 +20,13 @@ class User(db.Model):
     name: Mapped[str] = mapped_column(String(120), nullable=False)
     email: Mapped[str] = mapped_column(String(120), unique=True, nullable=False)
     password: Mapped[str] = mapped_column(String(),nullable=False)
-    role_id: Mapped[int] = mapped_column(ForeignKey('roles.id'),nullable=True)
+    #role_id: Mapped[int] = mapped_column(ForeignKey('roles.id'),nullable=True)
     is_active: Mapped[bool] = mapped_column(Boolean(), nullable=False, default=True)
 
     #relations
-    comments = relationship('Comments',back_populates='users')
-    payments = relationship('Payments',back_populates='users')
-    roles = relationship('Roles',back_populates='users')
+    #comments = relationship('Comments',back_populates='users')
+    #payments = relationship('Payments',back_populates='users')
+    #roles = relationship('Roles',back_populates='users')
     
 
     def serialize(self):
@@ -42,8 +42,8 @@ class Roles(db.Model):
     name: Mapped[str] = mapped_column(String(120),unique=True,nullable=False)
 
     #relations
-    users = relationship('User',back_populates='roles')
-    company = relationship('Companies',back_populates='roles')
+    #users = relationship('User',back_populates='roles')
+    #company = relationship('Companies',back_populates='roles')
 
     def serialize(self):
         return {
@@ -52,22 +52,30 @@ class Roles(db.Model):
         }
     
 
-class MediaType(enum.Enum):
-    Image = "image"
-    
+#class MediaType(enum.Enum):
+#    Image = "image"
+
 
 class Companies(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(120))
-    bussiness_email: Mapped[str] = mapped_column(String(120), unique=True, nullable=False)#email corporativo
-    logo_url: Mapped[MediaType] = mapped_column(Enum(MediaType),name="mediatype_enum",nullable=False)
-    company_url:Mapped[str] = mapped_column(String(250),nullable = False)
-    role_id: Mapped[int] = mapped_column(ForeignKey('roles.id'))
+    description: Mapped[str] = mapped_column(String(255),nullable=False)
+    email: Mapped[str] = mapped_column(String(120), unique=True, nullable=False)#email corporativo
+    phone: Mapped[str] = mapped_column(String(50),nullable=False)
+    website: Mapped[str] = mapped_column(String(250),nullable=False)
+    country: Mapped[str] = mapped_column(String(50),nullable=False)
+    logo_url: Mapped[str] = mapped_column(String(255),nullable=False)
+    rating: Mapped[float] = mapped_column(Float,nullable=False)
+    slug: Mapped[str] = mapped_column(String(120),nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc))
+    status: Mapped[str] = mapped_column(String(50),nullable=False)
+    #role_id: Mapped[int] = mapped_column(ForeignKey('roles.id'))
+    #logo_url: Mapped[MediaType] = mapped_column(Enum(MediaType,name="mediatype_enum"),nullable=False)
 
     #relations
-    roles = relationship('Roles',back_populates='company')
-    offer = relationship('Offers',back_populates='company')
-    comments = relationship('Comments',back_populates='company')
+    #roles = relationship('Roles',back_populates='company')
+    #offer = relationship('Offers',back_populates='company')
+    #comments = relationship('Comments',back_populates='company')
     
 
     #serialize
@@ -75,9 +83,15 @@ class Companies(db.Model):
         return {
             "id": self.id,
             "name": self.name,
-            "bussiness_email": self.bussiness_email,
+            "description": self.description,
+            "email": self.email,
+            "phone": self.phone,
+            "website": self.website,
+            "country": self.country,
             "logo_url": self.logo_url,
-            "company_url": self.company_url,
+            "rating": self.rating,
+            "slug": self.slug,
+            "status": self.status
         }
 
 class Offers(db.Model):
@@ -85,15 +99,15 @@ class Offers(db.Model):
     title: Mapped[str] = mapped_column(String(120), nullable=False) 
     description: Mapped[str] = mapped_column(String(520))
     price:Mapped[float] = mapped_column(Float, nullable=False)
-    type:Mapped[str] = mapped_column(String(120))
+    type_offert:Mapped[str] = mapped_column(String(120))
     image_url: Mapped[int]
     company_id: Mapped[int] = mapped_column(ForeignKey('companies.id'))
     created_at: Mapped[datetime] = mapped_column(DateTime)
 
     #relations
-    company = relationship('Companies',back_populates='offer')
-    comments = relationship('Comments',back_populates='offer')
-    payments = relationship('Payments',back_populates='offer')
+    #company = relationship('Companies',back_populates='offers')
+    #comments = relationship('Comments',back_populates='offers')
+    #payments = relationship('Payments',back_populates='offers')
 
     #serialize
     def serialize(self):
@@ -115,9 +129,9 @@ class Comments(db.Model):
 
 
     #relations
-    offer = relationship('Offers',back_populates='comments')
-    company = relationship('Companies',back_populates='comments')
-    users = relationship('User',back_populates='comments')
+    #offer = relationship('Offers',back_populates='comments')
+    #company = relationship('Companies',back_populates='comments')
+    #users = relationship('User',back_populates='comments')
 
     #serialize
     def serialize(self):
@@ -136,8 +150,8 @@ class Payments(db.Model):
     status:Mapped[str] = mapped_column(String(120))
 
     #relations
-    users = relationship('User',back_populates='payments')
-    offers = relationship('Offers',back_populates='payments')
+    #users = relationship('User',back_populates='payments')
+    #offer = relationship('Offers',back_populates='payments')
 
     #serialize
     def serialize(self):
