@@ -18,12 +18,13 @@ class User(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     email: Mapped[str] = mapped_column(String(120), unique=True, nullable=False)
     password: Mapped[str] = mapped_column(nullable=False)
-    #role_id: Mapped[int] = mapped_column(ForeignKey('role_id'),nullable=True)
+    role_id: Mapped[int] = mapped_column(ForeignKey('roles.id'),nullable=True)
     is_active: Mapped[bool] = mapped_column(Boolean(), nullable=False)
 
     #relations
-    # comments = relationship('Comments',back_populates='users')
-    # payments = relationship('Payments',back_populates='users')
+    comments = relationship('Comments',back_populates='users')
+    payments = relationship('Payments',back_populates='users')
+    roles = relationship('Roles',back_populates='users')
     
 
     def serialize(self):
@@ -36,6 +37,10 @@ class User(db.Model):
 class Roles(db.Model):
     id:Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(120),unique=True,nullable=False)
+
+    #relations
+    users = relationship('User',back_populates='roles')
+    company = relationship('Companies',back_populates='roles')
 
     def serialize(self):
         return {
@@ -52,9 +57,13 @@ class Companies(db.Model):
     bussiness_email: Mapped[str] = mapped_column(String(120), unique=True, nullable=False)#email corporativo
     logo_url: Mapped[int]
     company_url:Mapped[str] = mapped_column(String(250),nullable = False)
-    #role_id: Mapped[int] = mapped_column(ForeignKey('role_id'))
+    role_id: Mapped[int] = mapped_column(ForeignKey('roles.id'))
 
     #relations
+    roles = relationship('Roles',back_populates='company')
+    offer = relationship('Offers',back_populates='company')
+    comments = relationship('Comments',back_populates='company')
+    
 
     #serialize
     def serialize(self):
@@ -71,12 +80,15 @@ class Offers(db.Model):
     title: Mapped[str] = mapped_column(String(120), nullable=False) 
     description: Mapped[str] = mapped_column(String(520))
     price:Mapped[int] = mapped_column(Integer, nullable=False)
-    #type:Mapped[str] = mapped_column(String(120))
+    type:Mapped[str] = mapped_column(String(120))
     image_url: Mapped[int]
-    #company_id: Mapped[int] = mapped_column(ForeignKey('company_id'))
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    company_id: Mapped[int] = mapped_column(ForeignKey('companies.id'))
+    created_at: Mapped[datetime] = mapped_column(DateTime)
 
     #relations
+    company = relationship('Companies',back_populates='offer')
+    comments = relationship('Comments',back_populates='offer')
+    payments = relationship('Payments',back_populates='offer')
 
     #serialize
     def serialize(self):
@@ -90,13 +102,17 @@ class Offers(db.Model):
         }
 class Comments(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
-    # user_id: Mapped[int] = mapped_column(ForeignKey('user_id'))
-    # offer_id: Mapped[int] = mapped_column(ForeignKey('offer_id'))
+    user_id: Mapped[int] = mapped_column(ForeignKey('user.id'))
+    offer_id: Mapped[int] = mapped_column(ForeignKey('offers.id'))
+    company_id: Mapped[int] = mapped_column(ForeignKey('companies.id'))
     content: Mapped[str] = mapped_column(String(520))
     created_at: Mapped[str] = mapped_column(String(120))
 
 
     #relations
+    offer = relationship('Offers',back_populates='comments')
+    company = relationship('Companies',back_populates='comments')
+    users = relationship('User',back_populates='comments')
 
     #serialize
     def serialize(self):
@@ -107,14 +123,16 @@ class Comments(db.Model):
         }
 class Payments(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
-    # user_id: Mapped[int] = mapped_column(ForeignKey('user_id'))
-    # offer_id: Mapped[int] = mapped_column(ForeignKey('offer_id'))
+    user_id: Mapped[int] = mapped_column(ForeignKey('user.id'))
+    offer_id: Mapped[int] = mapped_column(ForeignKey('offers.id'))
     amount: Mapped[int] = mapped_column()
     payment_method: Mapped[str] = mapped_column(String(120))
     created_at: Mapped[str] = mapped_column(String(120))
     status:Mapped[str] = mapped_column(String(120))
 
     #relations
+    users = relationship('User',back_populates='payments')
+    offers = relationship('Offers',back_populates='payments')
 
     #serialize
     def serialize(self):
