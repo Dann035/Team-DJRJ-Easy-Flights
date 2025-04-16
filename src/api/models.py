@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import String, Boolean,ForeignKey,Float,Integer, DateTime,Enum
+from sqlalchemy import String, Boolean,ForeignKey,Float,Integer, DateTime,Enum,Text
 from sqlalchemy.orm import Mapped, mapped_column,relationship
 import os
 import enum
@@ -20,13 +20,13 @@ class User(db.Model):
     name: Mapped[str] = mapped_column(String(120), nullable=False)
     email: Mapped[str] = mapped_column(String(120), unique=True, nullable=False)
     password: Mapped[str] = mapped_column(String(),nullable=False)
-    #role_id: Mapped[int] = mapped_column(ForeignKey('roles.id'),nullable=True)
+    role_id: Mapped[int] = mapped_column(ForeignKey('roles.id'),nullable=True, default=2)
     is_active: Mapped[bool] = mapped_column(Boolean(), nullable=False, default=True)
 
     #relations
-    #comments = relationship('Comments',back_populates='users')
-    #payments = relationship('Payments',back_populates='users')
-    #roles = relationship('Roles',back_populates='users')
+    comments = relationship('Comments',back_populates='user')
+    payments = relationship('Payments',back_populates='user')
+    role = relationship('Roles',backref='user')
     
 
     def serialize(self):
@@ -35,15 +35,11 @@ class User(db.Model):
             "name": self.name,
             "email": self.email
         }
-    
+
 
 class Roles(db.Model):
     id:Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(120),unique=True,nullable=False)
-
-    #relations
-    #users = relationship('User',back_populates='roles')
-    #company = relationship('Companies',back_populates='roles')
 
     def serialize(self):
         return {
@@ -69,12 +65,12 @@ class Companies(db.Model):
     slug: Mapped[str] = mapped_column(String(120),nullable=False)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc))
     status: Mapped[str] = mapped_column(String(50),nullable=False)
-    #role_id: Mapped[int] = mapped_column(ForeignKey('roles.id'))
+    role_id: Mapped[int] = mapped_column(ForeignKey('roles.id'),nullable=False, default=3)
     #logo_url: Mapped[MediaType] = mapped_column(Enum(MediaType,name="mediatype_enum"),nullable=False)
 
     #relations
-    #roles = relationship('Roles',back_populates='company')
-    #offer = relationship('Offers',back_populates='company')
+    role = relationship('Roles',backref='company')
+    offers = relationship('Offers',back_populates='company')
     #comments = relationship('Comments',back_populates='company')
     
 
@@ -97,17 +93,17 @@ class Companies(db.Model):
 class Offers(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str] = mapped_column(String(120), nullable=False) 
-    description: Mapped[str] = mapped_column(String(520))
+    description: Mapped[str] = mapped_column(Text, nullable=True)
     price:Mapped[float] = mapped_column(Float, nullable=False)
     type_offert:Mapped[str] = mapped_column(String(120))
-    image_url: Mapped[int]
+    image_url: Mapped[str] = mapped_column(Text, nullable=False)
     company_id: Mapped[int] = mapped_column(ForeignKey('companies.id'))
     created_at: Mapped[datetime] = mapped_column(DateTime)
 
     #relations
-    #company = relationship('Companies',back_populates='offers')
-    #comments = relationship('Comments',back_populates='offers')
-    #payments = relationship('Payments',back_populates='offers')
+    company = relationship('Companies',back_populates='offers')
+    comments = relationship('Comments',back_populates='offert')
+    payments = relationship('Payments',back_populates='offert')
 
     #serialize
     def serialize(self):
@@ -129,9 +125,10 @@ class Comments(db.Model):
 
 
     #relations
-    #offer = relationship('Offers',back_populates='comments')
+    user = relationship('User',back_populates='comments')
+    offert = relationship('Offers',back_populates='comments')
+
     #company = relationship('Companies',back_populates='comments')
-    #users = relationship('User',back_populates='comments')
 
     #serialize
     def serialize(self):
@@ -150,8 +147,8 @@ class Payments(db.Model):
     status:Mapped[str] = mapped_column(String(120))
 
     #relations
-    #users = relationship('User',back_populates='payments')
-    #offer = relationship('Offers',back_populates='payments')
+    user = relationship('User',back_populates='payments')
+    offert = relationship('Offers',back_populates='payments')
 
     #serialize
     def serialize(self):
