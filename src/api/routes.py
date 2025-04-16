@@ -71,7 +71,8 @@ def login():
 
         if check_password_hash(user.password, current_user_password):
             access_token = create_access_token(identity=user.id)
-            return jsonify(access_token=access_token), 200
+            return jsonify({
+                "msg": "Login successful", "token": access_token}), 200
         else:
             return jsonify({"msg": "User not exist"}), 401
     except Exception as e:
@@ -79,8 +80,25 @@ def login():
 
 @api.route('/protected', methods=['POST'])
 @jwt_required()
-def signup():
-    pass
+def secret():
+    try:
+        current_user = get_jwt_identity()
+        claims = get_claims()
+        
+        if not current_user:
+            return jsonify({"msg": "Missing user"}), 400
+        
+        user = User.query.filter_by(email=current_user).first()
+        if not user:
+            return jsonify({"msg": "User not found"}), 404
+        
+        return jsonify({
+            "msg": "Access Allowed",
+            "user": user.serialize(),
+        }), 200
+    except Exception as e:
+        return jsonify({"msg": "Missing data"}), 400
+
 
 @api.route('/user/<int:user_id>', methods=['GET'])
 def signup():
