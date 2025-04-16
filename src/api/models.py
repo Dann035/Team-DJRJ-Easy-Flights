@@ -1,7 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import String, Boolean,ForeignKey,Float,Integer, DateTime
+from sqlalchemy import String, Boolean,ForeignKey,Float,Integer, DateTime,Enum
 from sqlalchemy.orm import Mapped, mapped_column,relationship
 import os
+import enum
 from flask import Flask
 from dotenv import load_dotenv
 from datetime import datetime
@@ -50,14 +51,16 @@ class Roles(db.Model):
             "name": self.name,
         }
     
-    
 
+class MediaType(enum.Enum):
+    Image = "image"
+    
 
 class Companies(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(120))
     bussiness_email: Mapped[str] = mapped_column(String(120), unique=True, nullable=False)#email corporativo
-    logo_url: Mapped[int]
+    logo_url: Mapped[MediaType] = mapped_column(Enum(MediaType),name="mediatype_enum",nullable=False)
     company_url:Mapped[str] = mapped_column(String(250),nullable = False)
     role_id: Mapped[int] = mapped_column(ForeignKey('roles.id'))
 
@@ -81,7 +84,7 @@ class Offers(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str] = mapped_column(String(120), nullable=False) 
     description: Mapped[str] = mapped_column(String(520))
-    price:Mapped[int] = mapped_column(Integer, nullable=False)
+    price:Mapped[float] = mapped_column(Float, nullable=False)
     type:Mapped[str] = mapped_column(String(120))
     image_url: Mapped[int]
     company_id: Mapped[int] = mapped_column(ForeignKey('companies.id'))
@@ -127,7 +130,7 @@ class Payments(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     user_id: Mapped[int] = mapped_column(ForeignKey('user.id'))
     offer_id: Mapped[int] = mapped_column(ForeignKey('offers.id'))
-    amount: Mapped[int] = mapped_column()
+    amount: Mapped[float] = mapped_column(Float,nullable=False)
     payment_method: Mapped[str] = mapped_column(String(120))
     created_at: Mapped[str] = mapped_column(String(120))
     status:Mapped[str] = mapped_column(String(120))
