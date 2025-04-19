@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import String, ForeignKey
-from api.models.base import db
+from Backend.models.base import db
 
 class Comments(db.Model):
     __tablename__ = 'comments'

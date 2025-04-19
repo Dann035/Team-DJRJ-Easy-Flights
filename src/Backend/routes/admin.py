@@ -1,10 +1,10 @@
 from flask import request, jsonify, Blueprint
-from api.models.Roles import Roles
-from api.models.Companies import Companies
-from api.models.Offers import Offers
-from api.models.Comments import Comments
-from api.models.User import User
-from api.models.base import db
+from Backend.models.Roles import Roles
+from Backend.models.Companies import Companies
+from Backend.models.Offers import Offers
+from Backend.models.Comments import Comments
+from Backend.models.User import User
+from Backend.models.base import db
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity, get_jwt
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps

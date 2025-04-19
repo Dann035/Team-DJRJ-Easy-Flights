@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { signupUser } from "../../services/api";
 
 
 function Signup() {
@@ -20,22 +21,23 @@ function Signup() {
     const handleSubmit = async (e) => {
         try{
             e.preventDefault();
-            const res = await fetch('http://127.0.0.1:3001/api/signup', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData)
-            })
-            const data = await res.json();
+            signupUser(formData);
+            // const res = await fetch('http://127.0.0.1:3001/api/signup', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //     },
+            //     body: JSON.stringify(formData)
+            // })
+            // const data = await res.json();
             
-            if(data.status !== 'OK'){
-                throw new Error('Error al regisrtrar el usuario');
-                console.error(res.statusText);
-            }
-            alert('Usuario creado correctamente');
-                navigate('/');
-                return;
+            // if(data.status !== 'OK'){
+            //     throw new Error('Error al regisrtrar el usuario');
+            //     console.error(res.statusText);
+            // }
+            // alert('Usuario creado correctamente');
+            //     navigate('/');
+            //     return;
         }catch(err){
             console.error(err);
             alert('Error al registrar el usuario');

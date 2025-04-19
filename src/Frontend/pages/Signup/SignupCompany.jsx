@@ -1,13 +1,25 @@
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 
 
 function SignupCompany() {
+    const [dataForm, setDataForm] = useState(null);
     const navigate = useNavigate();
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData.entries());
+        setDataForm(data);
+    }
+
+
+
     return (
         <>
             <h1>Signup Company</h1>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <section className="row">
                     <fieldset className="col-4">
                         <label >Name</label>
@@ -25,39 +37,39 @@ function SignupCompany() {
                 <section className="row">
                     <fieldset className="col-4">
                         <label >Phone</label>
-                        <input type="text" name="name" required/>
+                        <input type="tel" name="phone" required/>
                     </fieldset>
                     <fieldset className="col-4">
                         <label >Website</label>
-                        <input type="text" name="name" required/>
+                        <input type="url" name="website" required/>
                     </fieldset>
                     <fieldset className="col-4">
                         <label >Country</label>
-                        <input type="text" name="name" required/>
+                        <input type="text" name="country" required/>
                     </fieldset>
                 </section>
                 <section className="row">
                     <fieldset className="col-4">
                         <label >Logo URL</label>
-                        <input type="text" name="name" required/>
+                        <input type="url" name="logo_url" required/>
                     </fieldset>
                     <fieldset className="col-4">
                         <label >Slug</label>
-                        <input type="text" name="name" required/>
+                        <input type="text" name="slug" required/>
                     </fieldset>
                     <fieldset className="col-4">
                         <label >Status</label>
-                        <input type="text" name="name" required/>
+                        <input type="text" name="status" required/>
                     </fieldset>
                 </section>
                 <section className="row">
                     <fieldset className="col-2">
                         <label >Rating</label>
-                        <input type="text" name="name" required/>
+                        <input type="number" className="rating"/>
                     </fieldset>
                     <fieldset className="col-10">
                         <label >Description</label>
-                        <textarea type="text" name="name" required/>
+                        <textarea type="text" name="description" required></textarea>
                     </fieldset>
                 </section>
                 <button type="submit">Signup Company</button>

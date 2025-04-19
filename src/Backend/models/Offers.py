@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import String, Boolean, ForeignKey,DateTime, Float, Text
 from datetime import datetime, timezone
-from api.models.base import db
+from Backend.models.base import db
 
 class Offers(db.Model):
     __tablename__ = 'offers'

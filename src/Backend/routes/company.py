@@ -1,6 +1,6 @@
 from flask import request, jsonify, Blueprint
-from api.models.base import db
-from api.models.Companies import Companies
+from Backend.models.base import db
+from Backend.models.Companies import Companies
 
 
 company_bp = Blueprint('company', __name__)
