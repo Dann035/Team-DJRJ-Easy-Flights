@@ -21,6 +21,7 @@ function Signup() {
     const handleSubmit = async (e) => {
         try{
             e.preventDefault();
+            signupUser(formData)
             navigate('/');
         }catch(err){
             console.error(err);

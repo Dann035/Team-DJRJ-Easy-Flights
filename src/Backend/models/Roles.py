@@ -1,6 +1,11 @@
+from typing import TYPE_CHECKING
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import String
-from Backend.models.base import db
+from .base import db
+
+if TYPE_CHECKING:
+    from .User import User
+    from .Companies import Companies
 
 
 class Roles(db.Model):

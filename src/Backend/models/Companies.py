@@ -1,7 +1,13 @@
 from .base import db
+from typing import TYPE_CHECKING
 from datetime import datetime, timezone
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import String, Boolean, ForeignKey, Float, Integer, DateTime, Enum
+
+if TYPE_CHECKING:
+    from .Roles import Roles
+    from .Comments import Comments
+    from .Offers import Offers
 
 class Companies(db.Model):
     __tablename__ = 'companies'
@@ -22,9 +28,9 @@ class Companies(db.Model):
     role_id: Mapped[int] = mapped_column(ForeignKey('roles.id'),nullable=True, default=3)
 
     #relations
-    # comments = relationship('Comments',back_populates='company')
+    comments = relationship('Comments',back_populates='company')
     role = relationship('Roles',back_populates='company')
-    # offert = relationship('Offers',back_populates='company')
+    offert = relationship('Offers',back_populates='company')
 
     #serialize
     def serialize(self):
