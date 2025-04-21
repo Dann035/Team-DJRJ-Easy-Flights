@@ -21,32 +21,13 @@ function Signup() {
     const handleSubmit = async (e) => {
         try{
             e.preventDefault();
-            signupUser(formData);
-            // const res = await fetch('http://127.0.0.1:3001/api/signup', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify(formData)
-            // })
-            // const data = await res.json();
-            
-            // if(data.status !== 'OK'){
-            //     throw new Error('Error al regisrtrar el usuario');
-            //     console.error(res.statusText);
-            // }
-            // alert('Usuario creado correctamente');
-            //     navigate('/');
-            //     return;
+            navigate('/');
         }catch(err){
             console.error(err);
             alert('Error al registrar el usuario');
             navigate('/');
             return;
         }
-        
-        
-
     }
 
     return (
@@ -63,7 +44,7 @@ function Signup() {
                 </fieldset>
                 <fieldset>
                     <label htmlFor="password">Password :</label>
-                    <input onChange={handleChange} value={formData.password} type="password" name="password"id="password" required/>
+                    <input onChange={handleChange} value={formData.password} type="password" name="password" id="password" required/>
                 </fieldset>
                 <button type="submit">Signup</button>
                 <button onClick={()=> navigate('/')} type="button">Ir a Login</button>

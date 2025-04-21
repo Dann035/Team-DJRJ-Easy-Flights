@@ -1,5 +1,3 @@
-import { useNavigate } from "react-router-dom";
-
 
 export async function signupUser(formData){
     const res = await fetch('http://127.0.0.1:3001/api/signup', {
@@ -16,7 +14,23 @@ export async function signupUser(formData){
         console.error(res.statusText);
     }
     alert('Usuario creado correctamente');
-        useNavigate('/');
         return;
 }
 
+export async function signupCompany(formData){
+    const res = await fetch('http://127.0.0.1:3001/api/signup/company', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+    })
+    const data = await res.json();
+    
+    if(data.status !== 'OK'){
+        throw new Error('Error al regisrtrar la compañia');
+        console.error(res.statusText);
+    }
+    alert('Compañia creada correctamente');
+        return;
+}

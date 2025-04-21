@@ -1,13 +1,14 @@
 from flask import Blueprint, request, jsonify
 from Backend.models.base import db
 from Backend.models.User import User
+from Backend.models.Companies import Companies
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity, get_jwt
 from werkzeug.security import generate_password_hash, check_password_hash
 
 user_bp = Blueprint('user_bp', __name__)
 
 @user_bp.route('/signup', methods=['POST'])
-def signup():
+def signup_user():
     try:
         user_name = request.json.get('name', None)
         user_email = request.json.get('email', None)
@@ -79,14 +80,22 @@ def login():
         if not current_user_password:
             return jsonify({"msg": "You must enter your password"}), 400
 
-        user = User.query.filter_by(email=current_user_email).first()
-        if not user:
-            return jsonify({"msg": "User not found"}), 404
+        if current_role == 'user':
+            user = User.query.filter_by(email=current_user_email).first()
+            if not user:
+                return jsonify({"msg": "User not found"}), 404
+        elif current_role == 'company':
+            company = Companies.query.filter_by(email=current_user_email).first()
+            if not company:
+                return jsonify({"msg": "Company not found"}), 404
 
         if check_password_hash(user.password, current_user_password):
             access_token = create_access_token(
                 identity=current_user_email,
-                additional_claims={"role": current_role,"user": user.id}   
+                additional_claims={
+                    "role": current_role,
+                    "user": user.id
+                }   
             )
             return jsonify({
                 "msg": "Login successful", "token": access_token}), 200

@@ -1,20 +1,21 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { signupCompany } from "../../services/api";
 
 
 
 function SignupCompany() {
-    const [dataForm, setDataForm] = useState(null);
+    // const [dataForm, setDataForm] = useState(null);
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData.entries());
-        setDataForm(data);
+        data.role = 'company';
+        signupCompany(data);
+        navigate('/');
     }
-
-
 
     return (
         <>
@@ -26,11 +27,11 @@ function SignupCompany() {
                         <input type="text" name="name" required/>
                     </fieldset>
                     <fieldset className="col-4">
-                        <label htmlFor="password">Password</label>
+                        <label >Password</label>
                         <input type="password" name="password" required/>
                     </fieldset>
                     <fieldset className="col-4">
-                        <label htmlFor="email">Email</label>
+                        <label >Email</label>
                         <input type="email" name="email" required/>
                     </fieldset>
                 </section>
@@ -65,7 +66,7 @@ function SignupCompany() {
                 <section className="row">
                     <fieldset className="col-2">
                         <label >Rating</label>
-                        <input type="number" className="rating"/>
+                        <input type="text" name="rating" required/>
                     </fieldset>
                     <fieldset className="col-10">
                         <label >Description</label>

@@ -1,6 +1,7 @@
 from flask import request, jsonify, Blueprint
 from Backend.models.base import db
 from Backend.models.Companies import Companies
+from werkzeug.security import generate_password_hash
 
 
 company_bp = Blueprint('company', __name__)
@@ -20,6 +21,7 @@ def signup_company():
         company_rating = request.json.get('rating', None)
         company_slug = request.json.get('slug', None)
         company_status = request.json.get('status', None)
+        company_role = request.json.get('role', None)
 
         if not company_name:
             return jsonify({"msg": "Missing company name"}), 400
@@ -43,6 +45,8 @@ def signup_company():
             return jsonify({"msg": "Missing company slug"}), 400
         if not company_status:
             return jsonify({"msg": "Missing company status"}), 400
+        if not company_role:
+            return jsonify({"msg": "Missing company role"}), 400
 
         company = Companies.query.filter_by(email=company_email).first()
         if company:
@@ -60,7 +64,8 @@ def signup_company():
             logo_url=company_logo_url,
             rating=company_rating,
             slug=company_slug,
-            status=company_status
+            status=company_status,
+            role = company_role
         )
         db.session.add(new_company)
         db.session.commit()
