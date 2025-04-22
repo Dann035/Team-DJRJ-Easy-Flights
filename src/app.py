@@ -5,11 +5,12 @@ import os
 from flask import Flask, request, jsonify, url_for, send_from_directory
 from flask_migrate import Migrate
 from flask_swagger import swagger
-from api.utils import APIException, generate_sitemap
-from api.models import db
-from api.routes import api
-from api.admin import setup_admin
-from api.commands import setup_commands
+from Backend.utils import APIException, generate_sitemap
+from Backend.models.base import db
+from Backend.models import User, Roles, Companies, Payments, Comments 
+from Backend.routes import api, admin
+from Backend.admin import setup_admin
+from Backend.commands import setup_commands
 from flask_jwt_extended import JWTManager
 
 
@@ -39,6 +40,8 @@ else:
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 MIGRATE = Migrate(app, db, compare_type=True)
 db.init_app(app)
+
+
 
 # add the admin
 setup_admin(app)
