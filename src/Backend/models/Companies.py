@@ -22,9 +22,9 @@ class Companies(db.Model):
     role_id: Mapped[int] = mapped_column(ForeignKey('roles.id'),nullable=True, default=3)
 
     #relations
-    # comments = relationship('Comments',back_populates='company')
+    comments = relationship('Comments',back_populates='company')
     role = relationship('Roles',back_populates='company')
-    # offert = relationship('Offers',back_populates='company')
+    offert = relationship('Offers',back_populates='company')
 
     #serialize
     def serialize(self):

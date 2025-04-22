@@ -1,6 +1,7 @@
 export const initialStore=()=>{
   return{
     message: null,
+    offers:[],
     todos: [
       {
         id: 1,
@@ -16,23 +17,43 @@ export const initialStore=()=>{
   }
 }
 
-export default function storeReducer(store, action = {}) {
-  switch(action.type){
-    case 'set_hello':
+export default function storeReducer(store, action = {type:""}) {
+  switch (action.type) {
+    case "set_hello":
       return {
         ...store,
-        message: action.payload
+        message: action.payload,
       };
-      
-    case 'add_task':
 
-      const { id,  color } = action.payload
+    //OFERTAS
 
+    case "get_offers":
       return {
         ...store,
-        todos: store.todos.map((todo) => (todo.id === id ? { ...todo, background: color } : todo))
+        offers: action.payload,
       };
+    
+    case "add_offer":
+      return{
+        ...store,
+        offers:[...store.offers,action.payload]
+      }
+
+    case "delete_offers":
+      let filterOffers = store.offers.filter(
+        (offert) => offert.id !== action.payload
+      );
+      return {
+        ...store,
+        offers: filterOffers,
+      };
+
+    case "edit_offer":
+      let indice = store.findIndex((item) => item.id === action.payload.id);
+      store[indice] = action.payload;
+      return [...store];
+
     default:
-      throw Error('Unknown action.');
+      throw Error("Unknown action.");
   }    
 }

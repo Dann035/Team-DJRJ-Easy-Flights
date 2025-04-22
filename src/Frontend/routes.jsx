@@ -10,6 +10,8 @@ import { Home } from "./pages/Home";
 import Login from "./pages/Login/Login.jsx";
 import SignupCompany from "./pages/Signup/SignupCompany.jsx";
 import Signup from "./pages/Signup/Signup.jsx";
+import { Begginning } from "./pages/Offers/Beggining.jsx";
+import { AddOffers } from "./pages/Offers/AddOffers.jsx";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -18,6 +20,8 @@ export const router = createBrowserRouter(
         <Route path="/signup" element={<Signup />} />
         <Route path="/signupCompany" element={<SignupCompany />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/begin" element={<Begginning/>}/>
+        <Route path="/addoffer" element={<AddOffers/>}></Route>
       </Route>
     )
 );

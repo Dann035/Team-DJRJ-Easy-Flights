@@ -11,11 +11,11 @@ class Payments(db.Model):
     created_at: Mapped[str] = mapped_column(String(120))
     status:Mapped[str] = mapped_column(String(120))
     user_id: Mapped[int] = mapped_column(ForeignKey('user.id'))
-    #offer_id: Mapped[int] = mapped_column(ForeignKey('offers.id'))
+    offer_id: Mapped[int] = mapped_column(ForeignKey('offers.id'))
 
     #relations
     user = relationship('User',back_populates='payments')
-    #offert = relationship('Offers',back_populates='payments')
+    offert = relationship('Offers',back_populates='payments')
 
     #serialize
     def serialize(self):
