@@ -34,3 +34,19 @@ export async function signupCompany(formData){
     alert('Compañia creada correctamente');
         return;
 }
+
+const verifyToken = async (token) => {
+    try {
+        const res = await fetch('http://127.0.0.1:3001/api/protected', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        const data = await res.json();
+        alert('Access Allowed');
+    } catch (err) {
+        console.error(err);
+    }
+}

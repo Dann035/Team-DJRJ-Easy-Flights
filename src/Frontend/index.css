@@ -877,3 +877,50 @@ body > footer {
         text-decoration: underline;
     }
 }
+
+.list{
+    list-style: none;
+    padding: 5px;
+    margin: 10px;
+}
+.tg-container{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.tg-image{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.tg-tittle{
+    position: absolute;
+    text-align: start;
+    top: 30%;
+    left: 5%;
+    color: #fff;
+}
+
+.tg-texts{
+    position: absolute;
+    text-align: start;
+    top: 50%;
+    left: 5%;
+    width: 50%;
+    color: #fff;
+}
+
+.tg-btn-explore{
+    position: absolute;
+    top: 65%;
+    left: 5%;
+}
+
+.tg-btn-LearnMore{
+    position: absolute;
+    top: 65%;
+    left: 20%;
+}

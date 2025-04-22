@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { signupCompany } from "../../services/api";
+import { signupCompany } from "../../services/signup";
 
 
 
