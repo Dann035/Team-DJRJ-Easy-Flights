@@ -8,27 +8,28 @@ comments_bp = Blueprint('comments', __name__)
 
 # endpoint para crear un comentario   
 @comments_bp.route('/comments', methods=['POST'])
-@jwt_required() #necesario tener usuario si qres hacer comentario
+#@jwt_required() #necesario tener usuario si qres hacer comentario
 def create_comments():
     #commentario extrae el contenido, el id de la oferta y el id del usuario
-    user_id= get_jwt_identity #funcion extrae id dekl user
+    #user_id= get_jwt_identity #funcion extrae id dekl user
     data= request.get_json()#extrae todos los datos del request en json
-    content=data.get("content")#extrae contenido de data
-    offer_id=data.get("offer_id")#extrae el id de la oferta de data
+    content=data.get("content", None)#extrae contenido de data
+    offer_id=data.get("offer_id", None)#extrae el id de la oferta de data
 
     if not content:
         return jsonify({"error": "Missing content"}), 400 #comentario no puede estar vacío
     #objeto de comentario
     comment= Comments(
-        user_id=user_id,
+        #user_id=15,
+        created_at="a",
         content=content,
-        offer_id=offer_id,
+        offer_id=31,
     )
     #lineas copiadas de user
     db.session.add(comment)
     db.session.commit()
     #de dictionary otra vez a json
-    return jsonify({"comment was created:", comment.serialize()}), 201#success
+    return jsonify(comment.serialize()), 201#success
 
 #endpoint para extraer comentarios de una offer en particular
 @comments_bp.route('/offers/<int:offer_id>/comments', methods=['GET'])#ruta debe tener offer_id. No necesario tener usuario
@@ -38,7 +39,7 @@ def get_comments_from_offer(offer_id):
 
 #endpoint para editar comentarios
 @comments_bp.route('/comments/<int:comment_id>', methods=['PUT'])
-@jwt_required()
+#@jwt_required()
 def edit_comment(comment_id):
     user_id= get_jwt_identity
     comment= Comments.query.get(comment_id)
@@ -60,7 +61,7 @@ def get_comments_from_user(user_id):
 
 #endpoint para borrar comentarios
 @comments_bp.route('/comments/<int:comment_id>', methods=['DELETE'])
-@jwt_required()
+#@jwt_required()
 def delete_comment(comment_id):
     user_id= get_jwt_identity
     comment= Comments.query.get(comment_id)
