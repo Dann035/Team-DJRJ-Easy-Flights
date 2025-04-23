@@ -1,18 +1,20 @@
 export const Footer = () => (
 	<footer className="footer mt-auto py-3 text-center">
-		<div className="d-flex mb-5">
+		<div className="d-flex mb-5 flex-wrap justify-content-around text-start">
 			<section>
 				<h5>Easy-Flights</h5>
-				<p>Subscribe to our newsletter for the latest updates on features add releases.</p>
+				<p>Subscribe to our newsletter for the latest updates on features and releases.</p>
 				<form>
 					<input type="email" name="email" placeholder="Enter your email here..." />
 					<button>Subscribe</button>
 				</form>
-				<span>By subscribing, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a> and consent to receive updates</span>
+				<span className="d-block mt-2 small">
+					By subscribing, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a> and consent to receive updates.
+				</span>
 			</section>
 			<section>
 				<h5>Quick Links</h5>
-				<ul className="list">
+				<ul className="list-unstyled">
 					<li><a href="#">About Us</a></li>
 					<li><a href="#">Contact Us</a></li>
 					<li><a href="#">Blog Posts</a></li>
@@ -22,7 +24,7 @@ export const Footer = () => (
 			</section>
 			<section>
 				<h5>Connect With Us</h5>
-				<ul className="list">
+				<ul className="list-unstyled">
 					<li><a href="#">Newsletter</a></li>
 					<li><a href="#">Events</a></li>
 					<li><a href="#">Partnerships</a></li>
@@ -31,8 +33,8 @@ export const Footer = () => (
 				</ul>
 			</section>
 			<section>
-				<h5>Fallow Us</h5>
-				<ul className="list">
+				<h5>Follow Us</h5>
+				<ul className="list-unstyled">
 					<li><a href="#">Facebook</a></li>
 					<li><a href="#">Twitter</a></li>
 					<li><a href="#">Instagram</a></li>
@@ -41,13 +43,15 @@ export const Footer = () => (
 				</ul>
 			</section>
 		</div>
+
 		<hr />
-		<div className="d-flex justify-content-between">
+
+		<div className="d-flex justify-content-between flex-wrap text-center">
 			<section>
 				<span>Copyright © 2022 Easy-Flights. All rights reserved.</span>
 			</section>
 			<section>
-				<ul className="d-flex gap-3 list">
+				<ul className="d-flex gap-3 list-unstyled justify-content-center">
 					<li><a href="#">Terms of Service</a></li>
 					<li><a href="#">Privacy Policy</a></li>
 					<li><a href="#">Cookie Policy</a></li>
