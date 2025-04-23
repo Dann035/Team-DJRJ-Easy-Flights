@@ -16,12 +16,10 @@ import { AddOffers } from "./pages/Offers/AddOffers.jsx";
 export const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Layout />} errorElement={<h1>Not found!</h1>} >
-        <Route path= "/" element={<Login />} />
+        <Route path= "/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signupCompany" element={<SignupCompany />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/begin" element={<Begginning/>}/>
-        <Route path="/addoffer" element={<AddOffers/>}></Route>
       </Route>
     )
 );

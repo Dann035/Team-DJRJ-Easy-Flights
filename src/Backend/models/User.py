@@ -1,6 +1,12 @@
+from typing import TYPE_CHECKING
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import String, Boolean, ForeignKey
 from .base import db
+
+if TYPE_CHECKING:
+    from .Roles import Roles
+    from .Comments import Comments
+    from .Payments import Payments
 
 class User(db.Model):
     __tablename__ = 'user'

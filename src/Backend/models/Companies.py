@@ -1,7 +1,13 @@
 from .base import db
+from typing import TYPE_CHECKING
 from datetime import datetime, timezone
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import String, Boolean, ForeignKey, Float, Integer, DateTime, Enum
+
+if TYPE_CHECKING:
+    from .Roles import Roles
+    from .Comments import Comments
+    from .Offers import Offers
 
 class Companies(db.Model):
     __tablename__ = 'companies'

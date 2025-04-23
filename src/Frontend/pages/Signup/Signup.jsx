@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { signupUser } from "../../services/api";
+import { signupUser } from "../../services/signup";
 
 
 function Signup() {
@@ -21,6 +21,7 @@ function Signup() {
     const handleSubmit = async (e) => {
         try{
             e.preventDefault();
+            signupUser(formData)
             navigate('/');
         }catch(err){
             console.error(err);
