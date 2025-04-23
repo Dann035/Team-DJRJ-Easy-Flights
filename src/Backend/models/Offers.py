@@ -34,4 +34,5 @@ class Offers(db.Model):
             "price": self.price,
             "image_url": self.image_url,
             "created_at": self.created_at,
+            "type_offert": self.type_offert
         }

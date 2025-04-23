@@ -19,6 +19,7 @@ class Comments(db.Model):
     company_id: Mapped[int] = mapped_column(ForeignKey('companies.id'),nullable=True)
 
 
+
     #relations
     user = relationship('User',back_populates='comments')
     offert = relationship('Offers',back_populates='comments')
