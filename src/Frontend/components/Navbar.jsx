@@ -78,7 +78,7 @@ export const Navbar = () => {
                             </ul>
                         </li>
                     </ul>
-                    <button className="btn-nav-login" onClick={() => navigate("/signup")}>
+                    <button id="btn-nav-login" onClick={() => navigate("/signup")}>
                         <img
                             src="user-profile.gif"
                             alt="login"

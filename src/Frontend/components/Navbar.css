@@ -3,12 +3,21 @@
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
 }
 
-.btn-nav-login {
+#btn-nav-login {
     border-radius: 100vmax;
     margin-right: 10px;
     background-color: transparent;
     border: none;
-    cursor: pointer;
+    cursor: pointer;;
+}
+.btn-nav-exp{
+    background-color: #09f;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .item-nav{
