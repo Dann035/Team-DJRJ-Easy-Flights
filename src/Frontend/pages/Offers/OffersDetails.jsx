@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useGlobalReducer from "../../hooks/useGlobalReducer";
 
@@ -6,12 +6,12 @@ import useGlobalReducer from "../../hooks/useGlobalReducer";
 export const OffersDetails = () =>{
 
     const {id} = useParams();
-    const {store,dispatch} = useGlobalReducer()
+    const [offer,setOffer] = useState({})
+    
 
-
+    
     useEffect(() => {
         
-
         fetch(`https://turbo-space-invention-g47jx555vvx9c95jv-3001.app.github.dev/api/offers/${id}`, {
             method: "GET",
             headers: {
@@ -19,26 +19,29 @@ export const OffersDetails = () =>{
             },
         })
         .then((resp) => resp.json())
-        .then(data => {
-            dispatch({type: "get_offers", payload: data.offers.id})
+        .then(data => {setOffer(data.offer)})
+        .catch(error=>{
+            console.error("Ha salido un error", error )
+        
         })
     }
-    , [id,dispatch]) 
+    , [id]) 
 
 
     return (
-        <div>
-            <h1 className="text-center">Detalles de la oferta</h1>
-            {store.offers && (
-                <div className="card p-5" id="cardaddoffer">
-                    <h2 className="text-danger">{store.offers.title}</h2>
-                    <p>{store.offers.description}</p>
-                    <p>Precio: {store.offers.price}</p>
-                    <p>Tipo de oferta: {store.offers.type_offert}</p>
-                    <img src={store.offers.image_url} alt="Imagen de la oferta" />
-                </div>
-            )}
-            
+        <div className="container-fluid">
+            <div className="card p-5" id="cardaddoffer">
+                <h1>Detalles de la oferta</h1>
+                {offer ? (
+                    <>
+                        <h2>{offer.title}</h2>
+                        
+                        
+                    </>
+                ) : (
+                    <p>Cargando detalles de la oferta...</p>
+                )}
+            </div>
         </div>
-    )
+    );
 }

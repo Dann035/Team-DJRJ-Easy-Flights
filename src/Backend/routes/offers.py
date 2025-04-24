@@ -55,6 +55,19 @@ def get_offers():
         }), 200
 
 
+#Enpoint de obtener una oferta      
+@offers_bp.route('/offers/<int:offer_id>', methods=['GET'])
+def get_offer(offer_id):
+    offer= Offers.query.get(offer_id)
+    if not offer:
+        return jsonify({"msg": "Offer not found"}), 404
+    
+    #data
+    return jsonify({
+        "msg": "Offer retrieved",
+        "offer": offer.serialize()
+    }), 200
+
      
 
 #Enpoint de modificar ofertas

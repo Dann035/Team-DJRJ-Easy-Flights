@@ -73,7 +73,7 @@ export const OffersCard = ({offert}) => {
                 <p>{offert.title}</p>
                 <p>{offert.description}</p>
                 <p>{offert.type_offert}</p>
-                <p>{offert.price}</p>
+                <p>{offert.price}€</p>
 
                 <Link to={"/offerdetails/" + offert.id}>
                     <button className="btn btn-primary">MORE</button>
