@@ -21,5 +21,10 @@ export const router = createBrowserRouter(
         <Route path="/signup" element={<Signup />} />
         <Route path="/signupCompany" element={<SignupCompany />} />
       </Route>
-    )
+    ),
+    {
+      future: {
+          v7_startTransition: true,
+      },
+    }  
 );

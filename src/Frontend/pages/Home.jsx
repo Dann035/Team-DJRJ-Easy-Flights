@@ -8,10 +8,10 @@ import Comments from "../components/Comments/Comments.jsx";
 export const Home = () => {
 
     return (
-        <>
+        <div className="container">
 			<Tagline />
             <TravelShow />
             <Comments />
-		</>
+		</div>
     );
 };
