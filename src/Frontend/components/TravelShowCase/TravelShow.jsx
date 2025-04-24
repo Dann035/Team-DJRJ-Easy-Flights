@@ -52,7 +52,7 @@ function TravelShow() {
             </div>
             <div className="ts-images d-flex justify-content-center gap-3">
                 <img
-                    src="public/singapore_final_cover.webp"
+                    src="singapore_final_cover.webp"
                     alt="Travel Image"
                     style={{
                         width: "200px",
@@ -82,7 +82,7 @@ function TravelShow() {
                     }}
                 />
                 <img
-                    src="public/tokyo-lifestyle-arquitectura-elh.webp"
+                    src="tokyo-lifestyle-arquitectura-elh.webp"
                     alt="Travel Image"
                     style={{
                         width: "200px",
