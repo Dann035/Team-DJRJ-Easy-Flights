@@ -1,3 +1,5 @@
+import "./Footer.css"
+
 export const Footer = () => (
 	<footer className="footer mt-auto py-3 text-center">
 		<div className="d-flex mb-5 flex-wrap justify-content-around text-start">
@@ -6,7 +8,7 @@ export const Footer = () => (
 				<p>Subscribe to our newsletter for the latest updates on features and releases.</p>
 				<form>
 					<input type="email" name="email" placeholder="Enter your email here..." />
-					<button>Subscribe</button>
+					<button className="ft-btn">Subscribe</button>
 				</form>
 				<span className="d-block mt-2 small">
 					By subscribing, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a> and consent to receive updates.
