@@ -80,7 +80,7 @@ export const Navbar = () => {
                     </ul>
                     <button id="btn-nav-login" onClick={() => navigate("/signup")}>
                         <img
-                            src="user-profile.gif"
+                            src="./user-profile.gif"
                             alt="login"
                             className="img-nav-login"
                         />
