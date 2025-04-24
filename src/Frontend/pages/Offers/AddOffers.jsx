@@ -39,7 +39,7 @@ export const AddOffers = () => {
       .then((resp) => resp.json())
       .then((data) => {
         dispatch({ type: "add_offer", payload: data })
-        navigate("/begin")
+        navigate("/")
       });
   };
 
@@ -93,7 +93,7 @@ export const AddOffers = () => {
           </div>
 
           <div>
-            <Link to="/begin">
+            <Link to="/">
                 <button className="btn btn-light">Ofertas</button>
             </Link>
           </div>

@@ -45,6 +45,7 @@ def create_offer():
 @offers_bp.route('/offers', methods=['GET'])
 def get_offers():
         offers = Offers.query.all()
+        
     
         
         offers_serialized = [offer.serialize() for offer in offers]
@@ -52,6 +53,8 @@ def get_offers():
             "msg": "Offers retrieved",
             "offers": offers_serialized
         }), 200
+
+
      
 
 #Enpoint de modificar ofertas
