@@ -1,8 +1,8 @@
-import React from "react";
+import "./TravelShow.css"
 
 function TravelShow() {
     return (
-        <section className="text-center my-5">
+        <section className="travelS text-center my-5">
             <h1>Travel Showcase</h1>
             <p>
                 Explore breathtaking destinations through our stunning
