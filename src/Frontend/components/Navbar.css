@@ -1,0 +1,45 @@
+.nav-container{
+    background-color: var(--clr-light400-blue);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.btn-nav-login {
+    border-radius: 100vmax;
+    margin-right: 10px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.item-nav{
+    margin-right: 20px;
+    color: white !important;
+    font-size: 1.2rem;
+}
+.link-nav{
+    color: var(--clr-white);
+    font-weight: 800;
+    position: relative;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+
+    &:hover{
+        color: var(--clr-primary700-blue);
+    }
+}
+.link-nav::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 4px;
+    background-color: var(--clr-white);
+    transition: width .3s ease;
+    position: absolute;
+    left: 0;
+    bottom: 10px;
+    /* Efecto de sombra blanca al 30% */
+    backdrop-filter: drop-shadow(0 2px 6px rgba(255,255,255,0.8));
+}
+
+.link-nav:hover::after {
+    width: 100%;
+}

@@ -1,0 +1,199 @@
+.form-body{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url("planeta-tierra.jpg");
+    background-size: cover;
+}
+
+
+.container-form{
+    display: flex;
+    border-radius: 20px;
+    box-shadow: 0 5px 7px rgba(0, 0, 0, .2);
+    max-width: 900px;
+    height: 550px;
+    transition: all 1s ease;
+    background-color: var(--clr-white);
+    backdrop-filter: blur(5px) saturate(181%);
+    -webkit-backdrop-filter: blur(5px) saturate(181%);
+}
+
+.information{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background-color: var(--clr-light200-blue);
+    width: 40%;
+    padding: 20px;
+    backdrop-filter: blur(5px) saturate(181%);
+    -webkit-backdrop-filter: blur(5px) saturate(181%);
+}
+.info-childs{
+    width: 100%;
+    padding: 0 30px;
+}
+.info-childs h2{
+    font-size: 2.5rem;
+}
+.info-childs p{
+    margin: 15px 0;
+    color: var(--clr-secundarytext);
+}
+.info-childs input {
+    background-color: var(--clr-white);
+    outline: none;
+    border: none;
+    padding: 8px 20px;
+    /* border: solid 2px var(--clr-light400-blue); */
+    border-radius: 100vmax;
+    color: var(--clr-secundarytext);
+    box-shadow: 0 0 8px rgba(0, 0, 0, .3);
+
+    &:hover{
+        background-color: var(--clr-light400-blue);
+        color: var(--clr-white);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, .5);
+    }
+}
+
+.forgot-pass{
+    text-decoration: none;
+    color: var(--clr-light400-blue);
+    font-size: .9rem;
+}
+
+.btn-register{
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.rd-type-role{
+    margin: 10px;
+}
+
+.form-information{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 60%;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.form-information-childs{
+    padding: 0 30px;
+}
+.form-information-childs h2{
+    font-size: 2.5rem;
+}
+.form-information-childs p{
+    margin: 15px 0;
+    color: var(--clr-secundarytext);
+}
+.icons{
+    margin: 15px 0;
+}
+.icons i{
+    border-radius: 50%;
+    padding: 15px;
+    margin: 0 10px;
+    color: var(--clr-black);
+    transition: background-color .3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .4);
+
+    &:hover{
+        background-color: var(--clr-light400-blue);
+        color: var(--clr-white);
+        box-shadow: 1px 2px 5px rgba(0, 0, 0, .6);
+    }
+}
+
+form{
+    margin-top: 30px;
+}
+form label{
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    border-radius: 100vmax;
+    border: solid 2px var(--clr-light400-blue);
+    padding: 0 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+}
+form label input{
+    background-color: var(--clr-white);
+    outline: none;
+    border: none;
+    padding: 10px;
+    border-radius: inherit;
+    color: var(--clr-black);
+    width: 100%;
+
+    &::placeholder{
+        color: rgb(203, 203, 203);
+    }
+}
+form label i{
+    color: rgb(203, 203, 203);
+    margin-right: 10px;
+}
+form input[type="submit"]{
+    background-color: var(--clr-light200-blue);
+    outline: none;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 100vmax;
+    color: var(--clr-secundarytext);
+    box-shadow: 0 0 8px rgba(0, 0, 0, .3);
+
+    &:hover{
+        background-color: var(--clr-light400-blue);
+        color: var(--clr-white);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, .5);
+    }
+}
+
+/* responsive */
+
+@media screen and (max-width: 750px){
+    html{
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 580px){
+    html{
+        font-size: 10px;
+    }
+
+    .container-form{
+        flex-direction: column;
+        height: auto;
+    }
+    .information{
+        width: 100%;
+        padding: 20px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    .form-information{
+        width: 100%;
+        padding: 20px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+}
