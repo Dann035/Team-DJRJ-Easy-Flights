@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./Login.css";
 
 function Login() {
     const navigate = useNavigate();
@@ -47,78 +48,104 @@ function Login() {
 
             if (!data.token) {
                 throw new Error("Error al login");
+                navigate("/login");
                 console.error(res.statusText);
             }
             localStorage.setItem("access_token", data.token);
             alert("Login correcto");
-            navigate("/home");
+            navigate("/");
             return;
         } catch (err) {
             console.error(err);
             alert("Error al hacer login");
-            navigate("/");
+            navigate("/login");
             return;
         }
     };
 
     return (
         <>
-            <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
-                <fieldset>
-                    <label htmlFor="email">Email</label>
-                    <input
-                        onChange={handleChange}
-                        value={formData.email}
-                        type="email"
-                        name="email"
-                        required
-                    />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="password">Password</label>
-                    <input
-                        onChange={handleChange}
-                        value={formData.password}
-                        type="password"
-                        name="password"
-                        required
-                    />
-                </fieldset>
-                <fieldset className="d-flex align-items-center justify-content-center">
-                    <fieldset className="d-flex flex-column me-4 text-center">
-                        <span>Role: </span>
-                        <div className="d-flex align-items-center justify-content-center gap-2">
-                            <fieldset className="d-flex align-items-center justify-content-center">
+            <div className="form-body">
+                <div className="container-form">
+                    <div className="information">
+                        <div className="info-childs">
+                            <h2>Bienvenido</h2>
+                            <p>
+                                Registrate y reserva ya tus merecidas vacaciones
+                            </p>
+                            <input
+                            onClick={handleRole}
+                            type="button" 
+                            value="Registrarse" 
+                            />
+                        </div>
+                    </div>
+                    <div className="form-information">
+                        <div className="form-information-childs">
+                            <h2>Iniciar Sesión</h2>
+                            <div className="icons">
+                                <i className="fa-brands fa-google"></i>
+                                <i className="fa-brands fa-facebook"></i>
+                                <i className="fa-brands fa-linkedin"></i>
+                                <i className="fa-brands fa-apple"></i>
+                            </div>
+                            <p>O Inicia Sesión con una cuenta</p>
+                            <form onSubmit={handleSubmit}>
+                                <label>
+                                    <i className="fa-solid fa-envelope"></i>
+                                    <input
+                                        onChange={handleChange}
+                                        value={formData.email}
+                                        type="email"
+                                        name="email"
+                                        placeholder="Correo Electronico"
+                                    />
+                                </label>
+                                <label>
+                                    <i className="fa-solid fa-lock"></i>
+                                    <input
+                                        onChange={handleChange}
+                                        value={formData.password}
+                                        type="password"
+                                        name="password"
+                                        placeholder="Contraseña"
+                                    />
+                                </label>
+                                <a className="forgot-pass" href="/forgotPass">
+                                    Olvidaste tu contraseña?
+                                </a>
+                                <br />
                                 <input
-                                    onChange={handleRoleChange}
+                                    className="rd-type-role"
                                     type="radio"
                                     name="role"
+                                    id="user"
                                     value="user"
                                     checked={userRole === "user"}
-                                />
-                                <label htmlFor="role">User</label>
-                            </fieldset>
-                            <fieldset className="d-flex align-items-center justify-content-center">
-                                <input
                                     onChange={handleRoleChange}
+                                />
+                                <i className="fa-solid fa-circle-user"></i>
+                                <input
+                                    className="rd-type-role"
                                     type="radio"
                                     name="role"
+                                    id="company"
                                     value="company"
-                                    checked={userRole === "company"}
+                                    onChange={handleRoleChange}
+                                    cheched={userRole === "company"}
                                 />
-                                <label htmlFor="role">Company</label>
-                            </fieldset>
+                                <i className="fa-solid fa-briefcase"></i>
+                                <br />
+                                <input
+                                    className="btn-register"
+                                    type="submit"
+                                    value="Login"
+                                />
+                            </form>
                         </div>
-                    </fieldset>
-                    <button type="submit">Login</button>
-                    {}
-                    <button onClick={handleRole} type="button">
-                        Register
-                    </button>
-                    <button type="reset">Reset</button>
-                </fieldset>
-            </form>
+                    </div>
+                </div>
+            </div>
         </>
     );
 }

@@ -1,11 +1,14 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import "./Navbar.css";
+
 
 export const Navbar = () => {
+    const navigate = useNavigate();
 
     return (
-        <nav className="navbar navbar-expand-lg bg-body-tertiary">
+        <nav className="nav-container navbar navbar-expand-lg">
             <div className="container-fluid">
-                <a className="navbar-brand" href="#">
+                <a className="navbar-brand" href="/">
                     Easy-Flights
                 </a>
                 <button
@@ -23,29 +26,29 @@ export const Navbar = () => {
                     className="collapse navbar-collapse"
                     id="navbarSupportedContent"
                 >
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li className="nav-item">
+                    <ul className="nav-list navbar-nav me-auto mb-2 mb-lg-0">
+                        <li className="item-nav nav-item">
                             <a
-                                className="nav-link active"
+                                className="link-nav nav-link"
                                 aria-current="page"
                                 href="#"
                             >
                                 Destinations
                             </a>
                         </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">
+                        <li className="item-nav nav-item">
+                            <a className="link-nav nav-link" href="#">
                                 Travel Tips
                             </a>
                         </li>
-						<li className="nav-item">
-                            <a className="nav-link" aria-disabled="true">
+                        <li className="item-nav nav-item">
+                            <a className="link-nav nav-link" aria-disabled="true">
                                 Gallery
                             </a>
                         </li>
-                        <li className="nav-item dropdown">
+                        <li className="item-nav nav-item dropdown">
                             <a
-                                className="nav-link dropdown-toggle"
+                                className="link-nav nav-link dropdown-toggle"
                                 href="#"
                                 role="button"
                                 data-bs-toggle="dropdown"
@@ -53,7 +56,7 @@ export const Navbar = () => {
                             >
                                 More Info
                             </a>
-                            <ul className="dropdown-menu">
+                            <ul className="item-nav-drdown dropdown-menu">
                                 <li>
                                     <a className="dropdown-item" href="#">
                                         Action
@@ -74,10 +77,15 @@ export const Navbar = () => {
                                 </li>
                             </ul>
                         </li>
-                        
                     </ul>
-                    <button>Join</button>
-					<button>Explore</button>
+                    <button className="btn-nav-login" onClick={() => navigate("/signup")}>
+                        <img
+                            src="user-profile.gif"
+                            alt="login"
+                            className="img-nav-login"
+                        />
+                    </button>
+                    <button className="btn-nav-exp">Explore</button>
                 </div>
             </div>
         </nav>
