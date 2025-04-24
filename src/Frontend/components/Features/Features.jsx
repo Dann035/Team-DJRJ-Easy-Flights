@@ -2,7 +2,7 @@ import "./Features.css";
 
 function Features() {
     return (
-        <section className="container text-center">
+        <section className="ft-container container text-center">
             <div>
                 <p>Explore</p>
                 <h1 className="fw-bold">Discover Your Next Adventure with Us</h1>
