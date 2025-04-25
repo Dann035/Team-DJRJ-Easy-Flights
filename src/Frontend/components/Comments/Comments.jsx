@@ -4,7 +4,7 @@ function Comments() {
     const [comments, setComments] = useState([]);
   
     useEffect(() => {
-      fetch("https://ideal-enigma-v6q9p7vvx7wqcp6wq-3001.app.github.dev/api/offers/37/comments")  // or your live GitHub URL
+      fetch("https://ideal-enigma-v6q9p7vvx7wqcp6wq-3001.app.github.dev/api/offers/37/comments")
         .then(res => res.json())
         .then(data => {
           console.log("Fetched comments:", data);
