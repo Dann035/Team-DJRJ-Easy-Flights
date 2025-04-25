@@ -23,12 +23,10 @@ def create_comments():
         #user_id=15,
         created_at="a",
         content=content,
-        offer_id=31,
+        offer_id=37,
     )
-    #lineas copiadas de user
     db.session.add(comment)
     db.session.commit()
-    #de dictionary otra vez a json
     return jsonify(comment.serialize()), 201#success
 
 #endpoint para extraer comentarios de una offer en particular
