@@ -82,6 +82,7 @@ function Login() {
                     </div>
                     <div className="form-information">
                         <div className="form-information-childs">
+                            <span onClick={() => navigate('/')} className="btn-cancelar"><i class="fa-solid fa-xmark"></i></span>
                             <h2>Iniciar Sesión</h2>
                             <div className="icons">
                                 <i className="fa-brands fa-google"></i>
@@ -99,6 +100,7 @@ function Login() {
                                         type="email"
                                         name="email"
                                         placeholder="Correo Electronico"
+                                        required
                                     />
                                 </label>
                                 <label>
@@ -109,6 +111,7 @@ function Login() {
                                         type="password"
                                         name="password"
                                         placeholder="Contraseña"
+                                        required
                                     />
                                 </label>
                                 <a className="forgot-pass" href="/forgotPass">

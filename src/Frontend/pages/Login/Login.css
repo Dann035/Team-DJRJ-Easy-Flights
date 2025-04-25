@@ -9,7 +9,23 @@
     background-size: cover;
 }
 
+.btn-cancelar{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    border-radius: 100vmax;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .4);
+    transition: background-color .3s ease;
 
+    &:hover{
+        background-color: var(--clr-light400-blue);
+        color: var(--clr-white);
+        box-shadow: 1px 2px 5px rgba(0, 0, 0, .6);
+    }
+}
 .container-form{
     display: flex;
     border-radius: 20px;
