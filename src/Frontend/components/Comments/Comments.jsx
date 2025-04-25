@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-
+const url= import.meta.env.VITE_BACKEND_URL
 function Comments() {
     const [comments, setComments] = useState([]);
   
     useEffect(() => {
-      fetch("https://ideal-enigma-v6q9p7vvx7wqcp6wq-3001.app.github.dev/api/offers/37/comments")
+      fetch(`${url}/api/offers/37/comments`)
         .then(res => res.json())
         .then(data => {
           console.log("Fetched comments:", data);
