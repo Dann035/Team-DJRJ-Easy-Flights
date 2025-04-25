@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 const url= import.meta.env.VITE_BACKEND_URL
+import "./Comments.css";
+
 function Comments() {
     const [comments, setComments] = useState([]);
   

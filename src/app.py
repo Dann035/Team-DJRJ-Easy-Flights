@@ -12,6 +12,7 @@ from Backend.routes import api, admin
 from Backend.admin import setup_admin
 from Backend.commands import setup_commands
 from flask_jwt_extended import JWTManager
+from flask_cors import CORS
 
 
 # from models import Person
@@ -41,7 +42,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 MIGRATE = Migrate(app, db, compare_type=True)
 db.init_app(app)
 
-
+CORS(app, origins="*")
 
 # add the admin
 setup_admin(app)

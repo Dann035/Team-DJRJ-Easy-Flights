@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import useGlobalReducer from "../../hooks/useGlobalReducer";
+import { Link } from "react-router-dom";
 
 export const OffersCard = ({offert}) => {
+
+  
 
   const {store,dispatch} = useGlobalReducer()
   const [showModal,setShowModal] = useState(false);
@@ -70,9 +73,11 @@ export const OffersCard = ({offert}) => {
                 <p>{offert.title}</p>
                 <p>{offert.description}</p>
                 <p>{offert.type_offert}</p>
-                <p>{offert.price}</p>
+                <p>{offert.price}€</p>
 
-
+                <Link to={"/offerdetails/" + offert.id}>
+                    <button className="btn btn-primary">MORE</button>
+                </Link>
                 
                 <button onClick={()=>deleteOffer()}>❌</button>
                 <button onClick={()=> setShowModal(true)}>✏️</button>

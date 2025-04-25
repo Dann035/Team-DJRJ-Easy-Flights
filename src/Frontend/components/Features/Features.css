@@ -1,0 +1,20 @@
+.travelS{
+    animation: fadeIn linear both;
+    animation-timeline: view();
+    animation-range-start: entry 20%;
+    animation-range-end: cover 30%;
+}
+
+.box-feature{
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.btn-feature{
+    background-color: #09f;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}

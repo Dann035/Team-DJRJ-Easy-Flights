@@ -1,0 +1,6 @@
+/* .travelS{
+    animation: fadeIn linear both;
+    animation-timeline: view();
+    animation-range-start: entry 20%;
+    animation-range-end: cover 30%;
+} */
