@@ -4,7 +4,7 @@ import { OffersCard } from "./OffersCard";
 import { Link, useNavigate } from "react-router-dom";
 
 
-export const Begginning = () =>{
+export const Offers = () =>{
 
     const {store,dispatch} = useGlobalReducer()
     const navigate = useNavigate()
