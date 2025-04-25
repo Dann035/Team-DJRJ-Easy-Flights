@@ -1,7 +1,7 @@
 const URL = import.meta.env.VITE_BACKEND_URL;
 
 export async function signupUser(formData){
-    const res = await fetch(`${URL}signup`, {
+    const res = await fetch(`${URL}/api/signup`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -19,7 +19,7 @@ export async function signupUser(formData){
 }
 
 export async function signupCompany(formData){
-    const res = await fetch(`${URL}signup/company`, {
+    const res = await fetch(`${URL}/api/signup/company`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
