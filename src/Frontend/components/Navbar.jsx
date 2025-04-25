@@ -8,7 +8,7 @@ export const Navbar = () => {
     return (
         <nav className="nav-container navbar navbar-expand-lg">
             <div className="container-fluid">
-                <img src="public/logo-easy-flights.webp" alt="Logo Easy-Flights" className="navbar-brand" width={'100px'} />
+                <img src="logo-easy-flights.webp" alt="Logo Easy-Flights" className="navbar-brand" width={'100px'} />
                 <button
                     className="navbar-toggler"
                     type="button"
