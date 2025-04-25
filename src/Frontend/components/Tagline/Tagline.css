@@ -1,0 +1,63 @@
+.tg-container{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+
+    animation: fadeIn linear both;
+    animation-timeline: view();
+    animation-range-start: entry 20%;
+    animation-range-end: cover 30%;
+}
+
+.tg-image{
+    position: relative;
+    width: 100%;
+    height: 80vh;
+    border-radius: 15px;
+}
+
+.tg-tittle{
+    position: absolute;
+    text-align: start;
+    font-weight: 800;
+    font-size: 4rem;
+    top: 20%;
+    left: 5%;
+    color: #fff;
+}
+
+.tg-texts{
+    position: absolute;
+    text-align: start;
+    font-weight: 700;
+    font-size: 1.2rem;
+    top: 49%;
+    left: 5%;
+    width: 50%;
+    color: #fff;
+}
+
+.tg-btn-explore{
+    position: absolute;
+    background-color: #09f;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    top: 65%;
+    left: 5%;
+}
+
+
+.tg-btn-LearnMore{
+    position: absolute;
+    background-color: #09f;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    top: 65%;
+    left: 15%;
+}
+

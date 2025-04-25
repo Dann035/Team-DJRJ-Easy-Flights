@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signupUser } from "../../services/signup";
-
+import "./Signup.css";
 
 function Signup() {
     const navigate = useNavigate();
@@ -33,23 +33,76 @@ function Signup() {
 
     return (
         <>
-            <h1>Signup</h1>
-            <form onSubmit={handleSubmit}>
-                <fieldset>
-                    <label htmlFor="name">Name :</label>
-                    <input onChange={handleChange} value={formData.name} type="text" name="name" id="name" required/>
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="email">Email :</label>
-                    <input onChange={handleChange} value={formData.email} type="email" name="email" id="email" required/>
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="password">Password :</label>
-                    <input onChange={handleChange} value={formData.password} type="password" name="password" id="password" required/>
-                </fieldset>
-                <button type="submit">Signup</button>
-                <button onClick={()=> navigate('/')} type="button">Ir a Login</button>
-            </form>
+            <div className="form-body">
+                <div className="container-form">
+                    <div className="information">
+                        <div className="info-childs">
+                            <h2>Bienvenido</h2>
+                            <p>
+                                Registrate y reserva ya tus merecidas vacaciones
+                            </p>
+                            <input
+                            onClick={() => navigate('/login')}
+                            type="button" 
+                            value="Iniciar Sesión" 
+                            />
+                        </div>
+                    </div>
+                    <div className="form-information">
+                        <div className="form-information-childs">
+                            <h2>Registrarse</h2>
+                            <div className="icons">
+                                <i class="fa-brands fa-google"></i>
+                                <i class="fa-brands fa-facebook"></i>
+                                <i class="fa-brands fa-linkedin"></i>
+                                <i class="fa-brands fa-apple"></i>
+                            </div>
+                            <p>O registrate con una cuenta</p>
+                            <form onSubmit={handleSubmit}>
+                                <label>
+                                    <i class="fa-solid fa-user"></i>
+                                    <input
+                                        onChange={handleChange}
+                                        value={formData.name}
+                                        type="text"
+                                        name="name"
+                                        placeholder="Nombres Completo"
+                                    />
+                                </label>
+                                <label>
+                                    <i class="fa-solid fa-envelope"></i>
+                                    <input
+                                        onChange={handleChange}
+                                        value={formData.email}
+                                        type="email"
+                                        name="email"
+                                        placeholder="Correo Electronico"
+                                    />
+                                </label>
+                                <label>
+                                    <i class="fa-solid fa-lock"></i>
+                                    <input
+                                        onChange={handleChange}
+                                        value={formData.password}
+                                        type="password"
+                                        name="password"
+                                        placeholder="Contraseña"
+                                    />
+                                </label>
+                                <a className="forgot-pass" href="/forgotPass">
+                                    Olvidaste tu contraseña?
+                                </a>
+                                <br />
+                                <input
+                                    className="btn-register"
+                                    type="submit"
+                                    value="Registrarse"
+                                />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </>
     );
 }

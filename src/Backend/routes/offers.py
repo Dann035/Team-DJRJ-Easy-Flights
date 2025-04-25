@@ -45,6 +45,7 @@ def create_offer():
 @offers_bp.route('/offers', methods=['GET'])
 def get_offers():
         offers = Offers.query.all()
+        
     
         
         offers_serialized = [offer.serialize() for offer in offers]
@@ -52,6 +53,21 @@ def get_offers():
             "msg": "Offers retrieved",
             "offers": offers_serialized
         }), 200
+
+
+#Enpoint de obtener una oferta      
+@offers_bp.route('/offers/<int:offer_id>', methods=['GET'])
+def get_offer(offer_id):
+    offer= Offers.query.get(offer_id)
+    if not offer:
+        return jsonify({"msg": "Offer not found"}), 404
+    
+    #data
+    return jsonify({
+        "msg": "Offer retrieved",
+        "offer": offer.serialize()
+    }), 200
+
      
 
 #Enpoint de modificar ofertas

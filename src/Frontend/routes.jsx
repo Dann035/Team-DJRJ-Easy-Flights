@@ -10,8 +10,8 @@ import { Home } from "./pages/Home";
 import Login from "./pages/Login/Login.jsx";
 import SignupCompany from "./pages/Signup/SignupCompany.jsx";
 import Signup from "./pages/Signup/Signup.jsx";
-import { Begginning } from "./pages/Offers/Beggining.jsx";
 import { AddOffers } from "./pages/Offers/AddOffers.jsx";
+import { OffersDetails } from "./pages/Offers/OffersDetails.jsx";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -20,6 +20,13 @@ export const router = createBrowserRouter(
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signupCompany" element={<SignupCompany />} />
+        <Route path="/addoffer" element={<AddOffers/>} />
+        <Route path="/offerdetails/:id" element={<OffersDetails/>}/>
       </Route>
-    )
+    ),
+    {
+      future: {
+          v7_startTransition: true,
+      },
+    }  
 );
