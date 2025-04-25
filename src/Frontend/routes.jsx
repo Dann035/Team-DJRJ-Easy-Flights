@@ -13,6 +13,10 @@ import Signup from "./pages/Signup/Signup.jsx";
 import { Begginning } from "./pages/Offers/Beggining.jsx";
 import { AddOffers } from "./pages/Offers/AddOffers.jsx";
 
+import Destinations from "./pages/Feeatures/Destinations.jsx";
+import Packages from "./pages/Feeatures/Packages.jsx";
+import Experiences from "./pages/Feeatures/Experiences.jsx";
+
 export const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Layout />} errorElement={<h1>Not found!</h1>} >
@@ -20,6 +24,9 @@ export const router = createBrowserRouter(
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signupCompany" element={<SignupCompany />} />
+        <Route path="destinations" element={<Destinations />} />
+        <Route path="packages" element={<Packages />} />
+        <Route path="experiences" element={<Experiences />} />
       </Route>
     ),
     {

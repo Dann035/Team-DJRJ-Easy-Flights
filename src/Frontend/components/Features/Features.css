@@ -18,3 +18,66 @@
     padding: 10px 20px;
     border-radius: 5px;
 }
+
+/* imagen de background para los box features*/
+.box-feature {
+    position: relative;
+    background-color: #f8f8f8; /* fondo por defecto */
+    overflow: hidden;
+    padding: 2rem;
+    border-radius: 8px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Oculta el contenido al hacer hover */
+.box-feature:hover > * {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 0.3s ease;
+    
+}
+
+/* Añade imagen como fondo al hacer hover */
+.box-feature::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 0;
+}
+
+.feature-1::before {
+    background-image: url('https://www.gotokyo.org/es/plan/tokyo-outline/images/main.jpg');
+}
+
+.feature-2::before {
+    background-image: url('https://www.vinccihoteles.com/uploads/cms_apps/imagenes/viajes-foto.jpg');
+}
+
+.feature-3::before {
+    background-image: url('https://res.cloudinary.com/worldpackers/image/upload/c_limit,f_auto,q_auto,w_1140/fah6n0d54grafevu93yv');
+}
+
+/* Mostrar imagen en hover */
+.box-feature:hover::before {
+    opacity: 1;
+}
+
+/* Asegura que el contenido esté encima */
+.box-feature > * {
+    z-index: 1;
+    position: relative;
+    transition: all 0.3s ease;
+}
