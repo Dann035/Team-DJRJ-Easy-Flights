@@ -30,23 +30,28 @@ function Tagline() {
             <button className="tg-btn-LearnMore">Learn More</button>
             <div className="search-tvl-container">
                 <section>
-                    <button><i className="fa-solid fa-hotel"></i>Hoteles</button>
-                    <button><i className="fa-solid fa-plane"></i>Transporte + Hotel</button>
-                    <button><i className="fa-solid fa-ship"></i>Cruceros</button>
-                    <button><i className="fa-solid fa-suitcase"></i>Grandes Viajes</button>
-                    <button><i className="fa-solid fa-train"></i>Trenes</button>
-                    <button><i className="fa-solid fa-sun"></i>Caribe</button>
-                    <button><i className="fa-solid fa-tree"></i>Paquete Disney</button>
-                    <button><i className="fa-solid fa-plane-up"></i>Vuelos</button>
+                    <button className="btn-tvl-type"><i className="fa-solid fa-hotel"></i>Hoteles</button>
+                    <button className="btn-tvl-type"><i className="fa-solid fa-plane"></i>Transporte + Hotel</button>
+                    <button className="btn-tvl-type"><i className="fa-solid fa-ship"></i>Cruceros</button>
+                    <button className="btn-tvl-type"><i className="fa-solid fa-suitcase"></i>Grandes Viajes</button>
+                    <button className="btn-tvl-type"><i className="fa-solid fa-train"></i>Trenes</button>
+                    <button className="btn-tvl-type"><i className="fa-solid fa-sun"></i>Caribe</button>
+                    <button className="btn-tvl-type"><i className="fa-solid fa-tree"></i>Paquete Disney</button>
+                    <button className="btn-tvl-type"><i className="fa-solid fa-plane-up"></i>Vuelos</button>
                 </section>
-                <section className="d-flex">
-                    <fieldset>
+                <section className="tvl-section-box d-flex">
+                    <fieldset className="box-tvl-destination d-flex flex-column">
                         <label>Destino</label>
-                        <input type="text" placeholder="Ciudad, región o nombre del alojamiento" />
+                        <input 
+                        className="ipt-tvl-destination"
+                        name="destination"
+                        type="text" 
+                        placeholder="Ciudad, región o nombre del alojamiento" />
                     </fieldset>
-                    <fieldset>
+                    <fieldset className="box-tvl-dates d-flex flex-column">
                         <label>Fechas</label>
                         <DatePicker
+                            className="start-date"
                             selected={startDate}
                             onChange={(date) => setStartDate(date)}
                             selectsStart
@@ -56,6 +61,7 @@ function Tagline() {
                             dateFormat="dd/MM/yyyy"
                         />
                         <DatePicker
+                            className="end-date"
                             selected={endDate}
                             onChange={(date) => setEndDate(date)}
                             selectsEnd
@@ -66,9 +72,11 @@ function Tagline() {
                             dateFormat="dd/MM/yyyy"
                         />
                     </fieldset>
-                    <fieldset>
+                    <fieldset className="d-flex flex-column">
                         <label>Personas</label>
                         <input
+                            className="ipt-tvl-persona"
+                            name="person"
                             type="number"
                             min="1"
                             max="10"

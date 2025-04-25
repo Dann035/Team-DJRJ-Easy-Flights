@@ -1,6 +1,7 @@
+const URL = import.meta.env.VITE_BACKEND_URL;
 
 export async function signupUser(formData){
-    const res = await fetch('http://127.0.0.1:3001/api/signup', {
+    const res = await fetch(`${URL}signup`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -18,7 +19,7 @@ export async function signupUser(formData){
 }
 
 export async function signupCompany(formData){
-    const res = await fetch('http://127.0.0.1:3001/api/signup/company', {
+    const res = await fetch(`${URL}signup/company`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -37,7 +38,7 @@ export async function signupCompany(formData){
 
 const verifyToken = async (token) => {
     try {
-        const res = await fetch('http://127.0.0.1:3001/api/protected', {
+        const res = await fetch(`${URL}protected`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

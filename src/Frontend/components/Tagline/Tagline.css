@@ -61,3 +61,27 @@
     left: 15%;
 }
 
+.btn-tvl-type{
+    background-color: transparent;
+    color: var(--clr-primary700-blue);
+    border: 1px solid var(--clr-primary700-blue);
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 5px;
+    transition: background-color 0.3s ease;
+
+    &:hover{
+        background-color: var(--clr-primary700-blue);
+        color: var(--clr-white);
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        margin: 5px;
+    }
+}
+
+.box-tvl-destination{}
+.ipt-tvl-destination{}
+.tvl-section-box{}
+.start-date{}
+.end-date{}
