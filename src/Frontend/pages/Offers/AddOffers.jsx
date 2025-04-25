@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import useGlobalReducer from "../../hooks/useGlobalReducer";
 import { Link, useNavigate } from "react-router-dom";
-
+const url = import.meta.env.VITE_BACKEND_URL
 
 
 export const AddOffers = () => {
@@ -27,7 +27,7 @@ export const AddOffers = () => {
 
   const newOffert = () => {
     fetch(
-      "https://turbo-space-invention-g47jx555vvx9c95jv-3001.app.github.dev/api/offers",
+      `${url}/api/offers`,
       {
         method: "POST",
         headers: {
@@ -39,7 +39,7 @@ export const AddOffers = () => {
       .then((resp) => resp.json())
       .then((data) => {
         dispatch({ type: "add_offer", payload: data })
-        navigate("/begin")
+        navigate("/")
       });
   };
 
@@ -93,7 +93,7 @@ export const AddOffers = () => {
           </div>
 
           <div>
-            <Link to="/begin">
+            <Link to="/">
                 <button className="btn btn-light">Ofertas</button>
             </Link>
           </div>

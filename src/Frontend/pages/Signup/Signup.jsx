@@ -22,11 +22,11 @@ function Signup() {
         try{
             e.preventDefault();
             signupUser(formData)
-            navigate('/');
+            navigate('/login');
         }catch(err){
             console.error(err);
             alert('Error al registrar el usuario');
-            navigate('/');
+            navigate('/login');
             return;
         }
     }
@@ -50,6 +50,7 @@ function Signup() {
                     </div>
                     <div className="form-information">
                         <div className="form-information-childs">
+                            <span onClick={() => navigate('/')} className="btn-cancelar"><i class="fa-solid fa-xmark"></i></span>
                             <h2>Registrarse</h2>
                             <div className="icons">
                                 <i class="fa-brands fa-google"></i>
@@ -67,6 +68,7 @@ function Signup() {
                                         type="text"
                                         name="name"
                                         placeholder="Nombres Completo"
+                                        required
                                     />
                                 </label>
                                 <label>
@@ -77,6 +79,7 @@ function Signup() {
                                         type="email"
                                         name="email"
                                         placeholder="Correo Electronico"
+                                        required
                                     />
                                 </label>
                                 <label>
@@ -87,6 +90,7 @@ function Signup() {
                                         type="password"
                                         name="password"
                                         placeholder="Contraseña"
+                                        required
                                     />
                                 </label>
                                 <a className="forgot-pass" href="/forgotPass">

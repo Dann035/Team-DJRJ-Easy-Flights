@@ -8,9 +8,7 @@ export const Navbar = () => {
     return (
         <nav className="nav-container navbar navbar-expand-lg">
             <div className="container-fluid">
-                <a className="navbar-brand" href="/">
-                    Easy-Flights
-                </a>
+                <img src="public/logo-easy-flights.webp" alt="Logo Easy-Flights" className="navbar-brand" width={'100px'} />
                 <button
                     className="navbar-toggler"
                     type="button"
@@ -80,7 +78,7 @@ export const Navbar = () => {
                     </ul>
                     <button id="btn-nav-login" onClick={() => navigate("/signup")}>
                         <img
-                            src="user-profile.gif"
+                            src="./user-profile.gif"
                             alt="login"
                             className="img-nav-login"
                         />

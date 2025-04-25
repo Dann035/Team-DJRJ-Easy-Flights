@@ -3,8 +3,10 @@ import useGlobalReducer from "../../hooks/useGlobalReducer";
 import { OffersCard } from "./OffersCard";
 import { Link, useNavigate } from "react-router-dom";
 
+const url = import.meta.env.VITE_BACKEND_URL
 
-export const Begginning = () =>{
+
+export const Offers = () =>{
 
     const {store,dispatch} = useGlobalReducer()
     const navigate = useNavigate()
@@ -14,7 +16,7 @@ export const Begginning = () =>{
     }
 
     useEffect(()=>{
-        fetch("https://turbo-space-invention-g47jx555vvx9c95jv-3001.app.github.dev/api/offers",{
+        fetch(`${url}/api/offers`,{
             method:"GET",
             headers:{
                 "Content-Type": "application/json"
@@ -33,7 +35,7 @@ export const Begginning = () =>{
 				<button className="botonAdd" onClick={moveToAddOffer}>New Offer</button>
 			</div>
             <h1 className="text-center">Ofertas de viajes</h1>
-            <div className="row">
+            <div className="row mt-5">
                 {store.offers?.length === 0 ? (
                     <p ><strong className="text-info">Aún no hay ofertas</strong></p>
                 ) : (store.offers?.map((offert, index) => (
