@@ -30,7 +30,7 @@ export const Offers = () =>{
 
 
     return (
-        <div className="container-fluid">
+        <div className="container-fluid box-offers">
             <div>
 				<button className="botonAdd" onClick={moveToAddOffer}>New Offer</button>
 			</div>

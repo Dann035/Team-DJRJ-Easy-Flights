@@ -8,7 +8,7 @@ export const Navbar = () => {
     return (
         <nav className="nav-container navbar navbar-expand-lg">
             <div className="container-fluid">
-                <img src="logo-easy-flights.webp" alt="Logo Easy-Flights" className="navbar-brand" width={'100px'} />
+                <img src="logo-easy-flights.webp" alt="Logo Easy-Flights" className="img-nav navbar-brand" width={'100px'} />
                 <button
                     className="navbar-toggler"
                     type="button"
@@ -21,10 +21,10 @@ export const Navbar = () => {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div
-                    className="collapse navbar-collapse"
+                    className="collapse navbar-collapse navbar-interno"
                     id="navbarSupportedContent"
                 >
-                    <ul className="nav-list navbar-nav me-auto mb-2 mb-lg-0">
+                    <ul className="nav-list navbar-nav mb-2 mb-lg-0">
                         <li className="item-nav nav-item">
                             <a
                                 className="link-nav nav-link"
@@ -76,14 +76,16 @@ export const Navbar = () => {
                             </ul>
                         </li>
                     </ul>
-                    <button id="btn-nav-login" onClick={() => navigate("/signup")}>
-                        <img
-                            src="./user-profile.gif"
-                            alt="login"
-                            className="img-nav-login"
-                        />
-                    </button>
-                    <button className="btn-nav-exp">Explore</button>
+                    <div>
+                        <button id="btn-nav-login" onClick={() => navigate("/signup")}>
+                            <img
+                                src="./user-profile.gif"
+                                alt="login"
+                                className="img-nav-login"
+                            />
+                        </button>
+                        <button className="btn-nav-exp">Explore</button>
+                    </div>
                 </div>
             </div>
         </nav>
