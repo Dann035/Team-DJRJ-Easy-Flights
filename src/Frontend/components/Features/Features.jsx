@@ -12,11 +12,11 @@ function Features() {
             </div>
             <div className="d-flex justify-content-between p-3 gap-3">
                 {/* Box Feature 1: Destinations */}
-                <Link to="/destinations" className="box-feature feature-1">
-                    <i></i>
-                    <h3>Top Travel Destinations You Can't Miss</h3>
-                    <p>From vibrant cities to serene landscapes, explore it all.</p>
-                </Link>
+            <Link to="/destinations" className="box-feature feature-1">
+              <i></i>
+              <h3>¿No sabes a dónde viajar? Inspírate aquí</h3>
+              <p>Explora 10 destinos turísticos inolvidables y elige tu próxima aventura soñada.</p>
+            </Link>
 
                 {/* Box Feature 2: Packages */}
                 <Link to="/packages" className="box-feature feature-2">
@@ -27,9 +27,9 @@ function Features() {
 
                 {/* Box Feature 3: Experiences */}
                 <Link to="/experiences" className="box-feature feature-3">
-                    <i></i>
-                    <h3>Unique Experiences Await at Every Turn</h3>
-                    <p>Create unforgettable memories with our exclusive offerings.</p>
+                 <i></i>
+                 <h3>Planifica tu Viaje y Divide los Gastos</h3>
+                 <p>Calcula tu presupuesto, reparte gastos entre amigos y organiza cada detalle fácilmente.</p>
                 </Link>
             </div>
             <div className="d-flex justify-content-center gap-3 mt-4 mb-3">
