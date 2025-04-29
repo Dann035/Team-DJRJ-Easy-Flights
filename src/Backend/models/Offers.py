@@ -19,6 +19,8 @@ class Offers(db.Model):
     image_url: Mapped[str] = mapped_column(Text, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc), nullable=True)
     company_id: Mapped[int] = mapped_column(ForeignKey('companies.id'), nullable=True)
+    duration: Mapped[str] = mapped_column(String(120),nullable=True)
+    location: Mapped[str] = mapped_column(String(120),nullable=True)
 
     #relations
     comments = relationship('Comments',back_populates='offert')
@@ -34,5 +36,7 @@ class Offers(db.Model):
             "price": self.price,
             "image_url": self.image_url,
             "created_at": self.created_at,
-            "type_offert": self.type_offert
+            "type_offert": self.type_offert,
+            "duration":self.duration,
+            "location":self.location
         }

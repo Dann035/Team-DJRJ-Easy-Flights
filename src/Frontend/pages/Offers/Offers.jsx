@@ -30,11 +30,12 @@ export const Offers = () =>{
 
 
     return (
+            
         <div className="container-fluid box-offers">
+            <h1 className="text-center">Ofertas de viajes</h1>
             <div>
 				<button className="botonAdd" onClick={moveToAddOffer}>New Offer</button>
 			</div>
-            <h1 className="text-center">Ofertas de viajes</h1>
             <div className="row mt-5">
                 {store.offers?.length === 0 ? (
                     <p ><strong className="text-info">Aún no hay ofertas</strong></p>

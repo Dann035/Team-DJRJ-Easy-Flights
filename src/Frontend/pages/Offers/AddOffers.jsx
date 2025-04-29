@@ -14,6 +14,8 @@ export const AddOffers = () => {
     price: "",
     type_offert: "",
     image_url: "",
+    location: "",
+    duration: ""
   });
 
   
@@ -62,6 +64,11 @@ export const AddOffers = () => {
                 <option value="Viaje en avion">Viaje en avion</option>
                 <option value="Viaje en crucero">Viaje en crucero</option>
             </select> */}
+            <label htmlFor="duration" className="text-white">Detalles de la oferta:</label>
+            <input type="text" id="duration" name="duration" placeholder="Duración de la oferta" onChange={saveChange}></input>
+
+            <label htmlFor="location" className="text-white">Detalles de la oferta:</label>
+            <input type="text" id="location" name="location" placeholder="Lugar de la oferta" onChange={saveChange}></input>
 
             <label htmlFor="price" className="text-white">Precio de la oferta: </label>
             <input type="number" id="price" name="price" placeholder="Detalla el precio de su oferta" onChange={saveChange}></input>
@@ -79,10 +86,10 @@ export const AddOffers = () => {
           <h2>Vista previa de la oferta:</h2>
           <div className="text-center">
             {offer.image_url && (<img src={offer.image_url} alt="Vista previa" style={{maxWidth:"100%", maxHeight: "200px"}}/>)}
-            <h3>{offer.title || "Título de la oferta"}</h3>
+            {/* <h3>{offer.title || "Título de la oferta"}</h3>
             <p className="text-white">{offer.description || "Descripción de la oferta"}</p>
             <p className="text-white"><strong className="text-white">Tipo:</strong> {offer.type_offert || "Tipo de oferta"}</p>
-            <p className="text-white"><strong>Tipo:</strong> {offer.price || "0.00"}</p>
+            <p className="text-white"><strong>Tipo:</strong> {offer.price || "0.00"}</p> */}
           </div>
         </div>
 
