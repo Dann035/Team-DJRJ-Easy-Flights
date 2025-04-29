@@ -17,7 +17,8 @@ def create_offer():
         price = request.json.get('price', None)
         type_offert = request.json.get('type_offert', None)
         image_url = request.json.get('image_url', None)
-           
+        location = request.json.get('location', None)
+        duration = request.json.get('duration', None)   
 
         if not title:
             return jsonify({"msg": "Missing title"}), 400
@@ -29,10 +30,14 @@ def create_offer():
             return jsonify({"msg": "Missing type_offert"}), 400
         if not image_url:
             return jsonify({"msg": "Missing image_url"}), 400
+        if not location:
+            return jsonify({"msg": "Missing location"}), 400
+        if not duration:
+            return jsonify({"msg": "Missing duration"}), 400
 
     
 
-        new_offer = Offers(title=title, description=description, price=price, type_offert=type_offert, image_url=image_url)
+        new_offer = Offers(title=title, description=description, price=price, type_offert=type_offert, image_url=image_url, location=location, duration=duration)
         db.session.add(new_offer)
         db.session.commit()
 
@@ -82,6 +87,8 @@ def update_offer(offer_id):
     price = request.json.get('price', None)
     type_offert = request.json.get('type_offert', None)
     image_url = request.json.get('image_url', None)
+    location = request.json.get('location', None)
+    duration = request.json.get('duration', None)
 
     if title:
         offer.title = title
@@ -93,6 +100,10 @@ def update_offer(offer_id):
         offer.type_offert = type_offert
     if image_url:
         offer.image_url = image_url
+    if location:
+        offer.location = location
+    if duration:
+        offer.duration = duration    
 
     db.session.commit()
 
