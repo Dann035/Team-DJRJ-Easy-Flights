@@ -17,6 +17,7 @@ import TravelTips from "./pages/TravelTips/TravelTips.jsx";
 import Destinations from "./pages/Feeatures/Destinations.jsx";
 import Packages from "./pages/Feeatures/Packages.jsx";
 import Experiences from "./pages/Feeatures/Experiences.jsx";
+import AboutUs from "./pages/AboutUs/AboutUs.jsx";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -26,6 +27,7 @@ export const router = createBrowserRouter(
         <Route path="/signup" element={<Signup />} />
         <Route path="/signupCompany" element={<SignupCompany />} />
         <Route path="/travel-tips" element={<TravelTips />} />
+        <Route path="/about" element={<AboutUs />} />
         <Route path="/destinations" element={<Destinations />} />
         <Route path="packages" element={<Packages />} />
         <Route path="experiences" element={<Experiences />} />
