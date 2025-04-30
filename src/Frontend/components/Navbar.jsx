@@ -1,6 +1,5 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./Navbar.css";
-
 
 export const Navbar = () => {
     const navigate = useNavigate();
@@ -8,7 +7,15 @@ export const Navbar = () => {
     return (
         <nav className="nav-container navbar navbar-expand-lg">
             <div className="container-fluid">
-                <img src="logo-easy-flights.webp" alt="Logo Easy-Flights" className="img-nav navbar-brand" width={'100px'} />
+                {/* He modificado el logo porque no llevaba al inicio de la página */}
+                <img
+                    src="logo-easy-flights.webp"
+                    alt="Logo Easy-Flights"
+                    className="img-nav navbar-brand"
+                    width={'100px'}
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => navigate("/")}
+                />
                 <button
                     className="navbar-toggler"
                     type="button"
@@ -23,26 +30,23 @@ export const Navbar = () => {
                 <div
                     className="collapse navbar-collapse navbar-interno"
                     id="navbarSupportedContent"
+
                 >
-                    <ul className="nav-list navbar-nav mb-2 mb-lg-0">
-                        <li className="item-nav nav-item">
-                            <a
-                                className="link-nav nav-link"
-                                aria-current="page"
-                                href="#"
-                            >
+                    <ul className="nav-list navbar-nav me-auto mb-2 mb-lg-0">
+                    <li className="item-nav nav-item">
+                            <Link className="link-nav nav-link" to="destinations">
                                 Destinations
-                            </a>
+                            </Link>
                         </li>
                         <li className="item-nav nav-item">
-                            <a className="link-nav nav-link" href="#">
+                            <Link className="link-nav nav-link" to="/travel-tips">
                                 Travel Tips
-                            </a>
+                            </Link>
                         </li>
-                        <li className="item-nav nav-item">
-                            <a className="link-nav nav-link" aria-disabled="true">
+                       {/* <li className="item-nav nav-item">
+                            <Link className="link-nav nav-link" to="#">
                                 Gallery
-                            </a>
+                            </Link>
                         </li>
                         <li className="item-nav nav-item dropdown">
                             <a
@@ -56,25 +60,25 @@ export const Navbar = () => {
                             </a>
                             <ul className="item-nav-drdown dropdown-menu">
                                 <li>
-                                    <a className="dropdown-item" href="#">
+                                    <Link className="dropdown-item" to="#">
                                         Action
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li>
-                                    <a className="dropdown-item" href="#">
+                                    <Link className="dropdown-item" to="#">
                                         Another action
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li>
                                     <hr className="dropdown-divider" />
                                 </li>
                                 <li>
-                                    <a className="dropdown-item" href="#">
+                                    <Link className="dropdown-item" to="#">
                                         Something else here
-                                    </a>
+                                    </Link>
                                 </li>
                             </ul>
-                        </li>
+                        </li>*/}
                     </ul>
                     <div>
                         <button id="btn-nav-login" onClick={() => navigate("/signup")}>
@@ -84,7 +88,7 @@ export const Navbar = () => {
                                 className="img-nav-login"
                             />
                         </button>
-                        <button className="btn-nav-exp">Explore</button>
+                       {/* <button className="btn-nav-exp">Explore</button> */}
                     </div>
                 </div>
             </div>
