@@ -1,13 +1,40 @@
 
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
-import { useState } from "react";
+import { use, useState } from "react";
 import "./Tagline.css";
+import useGlobalReducer from "../../hooks/useGlobalReducer";
+import { OffersCard } from "../../pages/Offers/OffersCard";
+import Modal from "../Modal/Modal";
 
 function Tagline() {
+    const { store, dispatch } = useGlobalReducer();
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [personas, setPersonas] = useState(1);
+    const [destino, setDestino] = useState("");
+    const [showModal, setShowModal] = useState(false);
+    const [filteredOffers, setFilteredOffers] = useState([]);
+
+    const handleBuscar = async () => {
+        if (!destino || !startDate || !endDate) {
+            alert("Selecciona destino y fechas");
+            return;
+        }
+
+
+        const res = store.offers.filter(oferta => oferta.title === destino);
+        setFilteredOffers(res);
+        setShowModal(true);
+        // Llama a tu API para obtener ofertas filtradas
+        // const res = await fetch(
+        //     `/api/offers?destino=${destino}&start=${startDate.toISOString()}&end=${endDate.toISOString()}`
+        // );
+        // const data = await res.json();
+        // setFilteredOffers(data.offers || []);
+        // setShowModal(true);
+    };
+
 
     return (
         <section className="tg-container mt-3">
@@ -29,64 +56,78 @@ function Tagline() {
             <button className="tg-btn-explore">Explore</button>
             <button className="tg-btn-LearnMore">Learn More</button>
             <div className="search-tvl-container">
-                <section>
-                    <button className="btn-tvl-type"><i className="fa-solid fa-hotel"></i>Hoteles</button>
-                    <button className="btn-tvl-type"><i className="fa-solid fa-plane"></i>Transporte + Hotel</button>
-                    <button className="btn-tvl-type"><i className="fa-solid fa-ship"></i>Cruceros</button>
-                    <button className="btn-tvl-type"><i className="fa-solid fa-suitcase"></i>Grandes Viajes</button>
-                    <button className="btn-tvl-type"><i className="fa-solid fa-train"></i>Trenes</button>
-                    <button className="btn-tvl-type"><i className="fa-solid fa-sun"></i>Caribe</button>
-                    <button className="btn-tvl-type"><i className="fa-solid fa-tree"></i>Paquete Disney</button>
-                    <button className="btn-tvl-type"><i className="fa-solid fa-plane-up"></i>Vuelos</button>
-                </section>
                 <section className="tvl-section-box d-flex">
                     <fieldset className="box-tvl-destination d-flex flex-column">
-                        <label>Destino</label>
-                        <input 
-                        className="ipt-tvl-destination"
-                        name="destination"
-                        type="text" 
-                        placeholder="Ciudad, región o nombre del alojamiento" />
+                        <label>Destino:</label>
+                        <select name="destino" id="select-destino" onChange={(destino)=>setDestino(destino)} value={destino}>
+                            <option value="0" selected hidden>Elige el destino</option>
+                            <option value="1">Barcelona</option>
+                            <option value="3">New York</option>
+                            <option value="4">Tokio</option>
+                            <option value="5">Francia</option>
+                            <option value="6">Dubai</option>
+                            <option value="7">Australia</option>
+                            <option value="8">Peru</option>
+                            <option value="9">Nassau</option>
+                            <option value="10">Rome</option>
+                        </select>
                     </fieldset>
                     <fieldset className="box-tvl-dates d-flex flex-column">
-                        <label>Fechas</label>
-                        <DatePicker
-                            className="start-date"
-                            selected={startDate}
-                            onChange={(date) => setStartDate(date)}
-                            selectsStart
-                            startDate={startDate}
-                            endDate={endDate}
-                            placeholderText="Fecha de salida"
-                            dateFormat="dd/MM/yyyy"
-                        />
-                        <DatePicker
-                            className="end-date"
-                            selected={endDate}
-                            onChange={(date) => setEndDate(date)}
-                            selectsEnd
-                            startDate={startDate}
-                            endDate={endDate}
-                            minDate={startDate}
-                            placeholderText="Fecha de regreso"
-                            dateFormat="dd/MM/yyyy"
-                        />
+                        <label>Fechas:</label>
+                        <section>
+                            <DatePicker
+                                className="start-end-date"
+                                selected={startDate}
+                                onChange={date => setStartDate(date)}
+                                selectsStart
+                                startDate={startDate}
+                                endDate={endDate}
+                                placeholderText="Fecha de salida"
+                                dateFormat="dd/MM/yyyy"
+                                popperPlacement="bottom-start"
+                                popperClassName="custom-datepicker"
+                                portalId="root-portal"
+                                // popperContainer={document.getElementById('root-portal')}
+                            />
+                            <DatePicker
+                                className="start-end-date"
+                                selected={endDate}
+                                onChange={date => setEndDate(date)}
+                                selectsEnd
+                                startDate={startDate}
+                                endDate={endDate}
+                                minDate={startDate}
+                                placeholderText="Fecha de regreso"
+                                dateFormat="dd/MM/yyyy"
+                                popperPlacement="bottom-start"
+                                popperClassName="custom-datepicker"
+                                portalId="root-portal"
+                                // popperContainer={document.getElementById('root-portal')}
+                            />
+                        </section>
                     </fieldset>
-                    <fieldset className="d-flex flex-column">
-                        <label>Personas</label>
-                        <input
-                            className="ipt-tvl-persona"
-                            name="person"
-                            type="number"
-                            min="1"
-                            max="10"
-                            value={personas}
-                            onChange={e => setPersonas(e.target.value)}
-                            style={{ width: "60px" }}
-                        />
-                    </fieldset>
+                    <button className="tvl-btn-explore" onClick={handleBuscar}>
+                        Buscar ofertas
+                    </button>
                 </section>
             </div>
+            {showModal && (
+                <Modal onClose={() => setShowModal(false)}>
+                    <h2>Ofertas disponibles</h2>
+                    {filteredOffers.length === 0 ? (
+                        <p>No hay ofertas para los criterios seleccionados.</p>
+                    ) : (
+                        <ul>
+                            {filteredOffers.map(oferta => (
+                                <li key={oferta.id}>
+                                    <OffersCard offert={oferta} />
+                                    <strong>{oferta.title}</strong> - {oferta.price}€
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </Modal>
+            )}
         </section>
         
     )

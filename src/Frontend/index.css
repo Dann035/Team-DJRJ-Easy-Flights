@@ -41,6 +41,17 @@
     margin: 10px;
 }
 
+.box-offers{
+    animation: fade-right ease both;
+    animation-timeline: view();
+    animation-range-start: entry 10%;
+    animation-range-end: cover 30%;
+}
+@keyframes fade-right {
+    from { opacity: 0; transform: translateX(2000px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
 .travelS,
 .ft-container,
 .tg-container,

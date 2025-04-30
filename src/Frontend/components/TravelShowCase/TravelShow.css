@@ -4,3 +4,25 @@
     animation-range-start: entry 20%;
     animation-range-end: cover 30%;
 } */
+
+.ts-images{
+    animation: fade-left ease both;
+    animation-timeline: view();
+    animation-range-start: entry 10%;
+    animation-range-end: cover 30%;
+}
+
+.ts-img{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+    &:hover{
+        scale: 1.1;
+    }
+}
+
+@keyframes fade-left {
+    from { opacity: 0; transform: translateX(-1000px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+

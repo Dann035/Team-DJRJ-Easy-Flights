@@ -1,34 +1,35 @@
 import React from 'react';
+import "./Destinations.css"
 
 export default function Destinations() {
     const destinations = [
         {
             name: 'Nasau, Bahamas',
-            description: 'Un paraíso idílico con aguas cristalinas y playas impresionantes.',
+            description: 'Un paraíso idílico con aguas cristalinas y playas impresionantes. Para mas informacion Haz click en la imagen.',
             imageUrl: 'bmot-islands-nassau-stay-quad-at.webp',
             site: 'Atlantis Resort',
             siteUrl: 'https://www.atlantisbahamas.com/',
         },
         {
             name: 'París, Francia',
-            description: 'La Ciudad de la Luz es famosa por su arte, historia y monumentos icónicos.',
+            description: 'La Ciudad de la Luz es famosa por su arte, historia y monumentos icónicos. No olvides planificar tu visita para la Torre Eiffel en sus páginas oficiales, para mas informacion Haz click en la imagen.',
             imageUrl: 'eiffel.webp',
             site: 'Torre Eiffel',
             siteUrl: 'https://www.toureiffel.paris/en',
         },
         {
             name: 'Tokio, Japón',
-            description: 'Una vibrante metrópoli que mezcla tradición y tecnología moderna.',
+            description: 'Una vibrante metrópoli que mezcla tradición y tecnología moderna. Planifica tu viaje desde sus portales oficiales. Para mas informacion haz click en la imagen.',
             imageUrl: 'tokyo-lifestyle-arquitectura-elh.webp',
             site: 'Shibuya Crossing',
             siteUrl: 'https://www.gotokyo.org/en/spot/25/index.html',
         },
         {
             name: 'Roma, Italia',
-            description: 'Hogar de ruinas antiguas, arte increíble y una cocina deliciosa.',
+            description: 'Hogar de ruinas antiguas, arte increíble y una cocina deliciosa. No te quedes sin poder visitar el coliseo de Roma planifica tu visita desde sus páginas oficiales, para mas información haz click en la imagen.',
             imageUrl: 'roma_d59824b1_250226111509_1280x.webp',
             site: 'Coliseo',
-            siteUrl: 'https://www.coopculture.it/en/colosseo-e-shop.cfm',
+            siteUrl: 'https://www.colosseumdiroma-tickets.com/',
         },
         {
             name: 'Ciudad del Cabo, Sudáfrica',
@@ -76,12 +77,12 @@ export default function Destinations() {
 
     return (
         <div className="container" style={{ padding: '2rem' }}>
-            <h1>Top 10 Destinos Turísticos</h1>
-            <p>Explora los lugares más hermosos del mundo, desde playas tropicales hasta ciudades icónicas.</p>
+            <h1 className="text-center mb-4 postcard-title">Top 10 Destinos Turísticos</h1>
+            <p className="text-center mb-5 ">Explora los lugares más hermosos del mundo, desde playas tropicales hasta ciudades icónicas.</p>
             {destinations.map((destination, index) => (
                 <div key={index} className="destination">
-                    <h2>{destination.name}</h2>
-                    <p>{destination.description}</p>
+                    <h2 className="titlecountry mt-3">{destination.name}</h2>
+                    <p >{destination.description}</p>
                     <a href={destination.siteUrl} target="_blank" rel="noopener noreferrer">
                         <img
                             src={destination.imageUrl}
