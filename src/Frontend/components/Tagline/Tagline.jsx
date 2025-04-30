@@ -1,13 +1,40 @@
 
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
-import { useState } from "react";
+import { use, useState } from "react";
 import "./Tagline.css";
+import useGlobalReducer from "../../hooks/useGlobalReducer";
+import { OffersCard } from "../../pages/Offers/OffersCard";
+import Modal from "../Modal/Modal";
 
 function Tagline() {
+    const { store, dispatch } = useGlobalReducer();
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [personas, setPersonas] = useState(1);
+    const [destino, setDestino] = useState("");
+    const [showModal, setShowModal] = useState(false);
+    const [filteredOffers, setFilteredOffers] = useState([]);
+
+    const handleBuscar = async () => {
+        if (!destino || !startDate || !endDate) {
+            alert("Selecciona destino y fechas");
+            return;
+        }
+
+
+        const res = store.offers.filter(oferta => oferta.title === destino);
+        setFilteredOffers(res);
+        setShowModal(true);
+        // Llama a tu API para obtener ofertas filtradas
+        // const res = await fetch(
+        //     `/api/offers?destino=${destino}&start=${startDate.toISOString()}&end=${endDate.toISOString()}`
+        // );
+        // const data = await res.json();
+        // setFilteredOffers(data.offers || []);
+        // setShowModal(true);
+    };
+
 
     return (
         <section className="tg-container mt-3">
@@ -32,7 +59,7 @@ function Tagline() {
                 <section className="tvl-section-box d-flex">
                     <fieldset className="box-tvl-destination d-flex flex-column">
                         <label>Destino:</label>
-                        <select name="destino" id="select-destino">
+                        <select name="destino" id="select-destino" onChange={(destino)=>setDestino(destino)} value={destino}>
                             <option value="0" selected hidden>Elige el destino</option>
                             <option value="1">Barcelona</option>
                             <option value="3">New York</option>
@@ -51,7 +78,7 @@ function Tagline() {
                             <DatePicker
                                 className="start-end-date"
                                 selected={startDate}
-                                onChange={(date) => setStartDate(date)}
+                                onChange={date => setStartDate(date)}
                                 selectsStart
                                 startDate={startDate}
                                 endDate={endDate}
@@ -60,12 +87,12 @@ function Tagline() {
                                 popperPlacement="bottom-start"
                                 popperClassName="custom-datepicker"
                                 portalId="root-portal"
-                                popperContainer={document.getElementById('root-portal')}
+                                // popperContainer={document.getElementById('root-portal')}
                             />
                             <DatePicker
                                 className="start-end-date"
                                 selected={endDate}
-                                onChange={(date) => setEndDate(date)}
+                                onChange={date => setEndDate(date)}
                                 selectsEnd
                                 startDate={startDate}
                                 endDate={endDate}
@@ -75,12 +102,32 @@ function Tagline() {
                                 popperPlacement="bottom-start"
                                 popperClassName="custom-datepicker"
                                 portalId="root-portal"
-                                popperContainer={document.getElementById('root-portal')}
+                                // popperContainer={document.getElementById('root-portal')}
                             />
                         </section>
                     </fieldset>
+                    <button className="tvl-btn-explore" onClick={handleBuscar}>
+                        Buscar ofertas
+                    </button>
                 </section>
             </div>
+            {showModal && (
+                <Modal onClose={() => setShowModal(false)}>
+                    <h2>Ofertas disponibles</h2>
+                    {filteredOffers.length === 0 ? (
+                        <p>No hay ofertas para los criterios seleccionados.</p>
+                    ) : (
+                        <ul>
+                            {filteredOffers.map(oferta => (
+                                <li key={oferta.id}>
+                                    <OffersCard offert={oferta} />
+                                    <strong>{oferta.title}</strong> - {oferta.price}€
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </Modal>
+            )}
         </section>
         
     )

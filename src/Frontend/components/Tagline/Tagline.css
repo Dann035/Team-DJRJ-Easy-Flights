@@ -137,3 +137,17 @@
     transform: translate(-50%, 0);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+.tvl-section-box{
+    width: fit-content;
+    align-items: last baseline;
+}
+
+.tvl-btn-explore{
+    background-color: #09f;
+    color: #fff;
+    border: none;
+    height: 40px;
+    padding: 5px 20px;
+    border-radius: 5px;
+}
