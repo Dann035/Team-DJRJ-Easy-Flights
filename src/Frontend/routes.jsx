@@ -16,7 +16,7 @@ import { OffersDetails } from "./pages/Offers/OffersDetails.jsx";
 import TravelTips from "./pages/TravelTips/TravelTips.jsx";
 import Destinations from "./pages/Feeatures/Destinations.jsx";
 import Packages from "./pages/Feeatures/Packages.jsx";
-import Experiences from "./pages/Feeatures/Experiences.jsx";
+import Tools from "./pages/Feeatures/Tools.jsx";
 import AboutUs from "./pages/AboutUs/AboutUs.jsx";
 
 export const router = createBrowserRouter(
@@ -30,7 +30,7 @@ export const router = createBrowserRouter(
         <Route path="/about" element={<AboutUs />} />
         <Route path="/destinations" element={<Destinations />} />
         <Route path="packages" element={<Packages />} />
-        <Route path="experiences" element={<Experiences />} />
+        <Route path="/tools" element={<Tools />} />
         <Route path="/addoffer" element={<AddOffers/>} />
         <Route path="/offerdetails/:id" element={<OffersDetails/>}/>
       </Route>

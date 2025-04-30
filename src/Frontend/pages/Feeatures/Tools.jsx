@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function Experiences() {
+export default function Tools () {
     const [formData, setFormData] = useState({
         vuelo: '',
         hospedaje: '',

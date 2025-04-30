@@ -30,10 +30,11 @@ export const Navbar = () => {
                 <div
                     className="collapse navbar-collapse navbar-interno"
                     id="navbarSupportedContent"
+
                 >
-                    <ul className="nav-list navbar-nav mb-2 mb-lg-0">
-                        <li className="item-nav nav-item">
-                            <Link className="link-nav nav-link" to="/destinations">
+                    <ul className="nav-list navbar-nav me-auto mb-2 mb-lg-0">
+                    <li className="item-nav nav-item">
+                            <Link className="link-nav nav-link" to="destinations">
                                 Destinations
                             </Link>
                         </li>
@@ -42,7 +43,7 @@ export const Navbar = () => {
                                 Travel Tips
                             </Link>
                         </li>
-                        <li className="item-nav nav-item">
+                       {/* <li className="item-nav nav-item">
                             <Link className="link-nav nav-link" to="#">
                                 Gallery
                             </Link>
@@ -77,7 +78,7 @@ export const Navbar = () => {
                                     </Link>
                                 </li>
                             </ul>
-                        </li>
+                        </li>*/}
                     </ul>
                     <div>
                         <button id="btn-nav-login" onClick={() => navigate("/signup")}>
@@ -87,7 +88,7 @@ export const Navbar = () => {
                                 className="img-nav-login"
                             />
                         </button>
-                        <button className="btn-nav-exp">Explore</button>
+                       {/* <button className="btn-nav-exp">Explore</button> */}
                     </div>
                 </div>
             </div>

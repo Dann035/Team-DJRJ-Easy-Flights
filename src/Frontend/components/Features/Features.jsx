@@ -25,8 +25,8 @@ function Features() {
                     <p>Experience the world with packages designed for you.</p>
                 </Link>
 
-                {/* Box Feature 3: Experiences */}
-                <Link to="/experiences" className="box-feature feature-3">
+                {/* Box Feature 3: Tools */}
+                <Link to="/tools" className="box-feature feature-3">
                  <i></i>
                  <h3>Planifica tu Viaje y Divide los Gastos</h3>
                  <p>Calcula tu presupuesto, reparte gastos entre amigos y organiza cada detalle fácilmente.</p>

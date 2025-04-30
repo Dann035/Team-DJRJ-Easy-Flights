@@ -101,7 +101,7 @@ export default function TravelTips() {
                     <div id="collapseFive" className="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#travelTipsAccordion">
                         <div className="accordion-body">
                             <ul>
-                                <li>Lleva un registro de gastos diario, puedes consultar el apartado <a href="/experiences" >Planificador</a>.</li>
+                                <li>Lleva un registro de gastos diario, puedes consultar el apartado <a href="/tools" >Planificador</a>.</li>
                                 <li>No olvides una batería externa.</li>
                                 <li>Consulta apps útiles de clima y transporte.</li>
                                 <li>Haz fotos de tus pertenencias y tickets.</li>
