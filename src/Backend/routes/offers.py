@@ -5,10 +5,6 @@ from Backend.models.Offers import Offers
 offers_bp = Blueprint('offers', __name__)
 
 
-@offers_bp.route('/offers/', methods=['GET'])
-def hello():
-    return jsonify({"msg": "Hello from the offers"}), 200
-
 #Enpoint de crear ofertas
 @offers_bp.route('/offers', methods=['POST'])
 def create_offer():
@@ -18,7 +14,8 @@ def create_offer():
         type_offert = request.json.get('type_offert', None)
         image_url = request.json.get('image_url', None)
         location = request.json.get('location', None)
-        duration = request.json.get('duration', None)   
+        duration = request.json.get('duration', None) 
+        tags = request.json.get('tags', None)
 
         if not title:
             return jsonify({"msg": "Missing title"}), 400
@@ -34,6 +31,8 @@ def create_offer():
             return jsonify({"msg": "Missing location"}), 400
         if not duration:
             return jsonify({"msg": "Missing duration"}), 400
+        if not tags:
+            return jsonify({"msg": "Missing tags"}), 400
 
     
 
@@ -89,6 +88,7 @@ def update_offer(offer_id):
     image_url = request.json.get('image_url', None)
     location = request.json.get('location', None)
     duration = request.json.get('duration', None)
+    tags = request.json.get('tags', None)
 
     if title:
         offer.title = title
@@ -104,6 +104,8 @@ def update_offer(offer_id):
         offer.location = location
     if duration:
         offer.duration = duration    
+    if tags:
+        offer.tags = tags 
 
     db.session.commit()
 
