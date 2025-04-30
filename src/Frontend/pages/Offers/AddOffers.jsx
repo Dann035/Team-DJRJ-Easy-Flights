@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import useGlobalReducer from "../../hooks/useGlobalReducer";
 import { Link, useNavigate } from "react-router-dom";
+import "./AddOffers.css"
 const url = import.meta.env.VITE_BACKEND_URL
 
 
@@ -15,7 +16,8 @@ export const AddOffers = () => {
     type_offert: "",
     image_url: "",
     location: "",
-    duration: ""
+    duration: "",
+    tags:""
   });
 
   
@@ -46,40 +48,46 @@ export const AddOffers = () => {
   };
 
   return (
-    <div className="container-fluid">
-        <div className="card p-5" id="cardaddoffer">
-            <h1>Añadir una oferta: </h1>
+    <div className="container">
+         <div className="card p-5 mt-5 d-flex align-items-center justify-content-center" >
+         <h1>Añadir una oferta: </h1>
+          <div className="row ">
+            <div className="col-12">
+                <label htmlFor="title" className="text-white">:Titulo de la oferta</label>
+                <input type="text" className="input1" id="title" name="title" placeholder="Escribe el titulo de su oferta"  onChange={saveChange}></input>
 
-            <label htmlFor="title" className="text-white">:Titulo de la oferta</label>
-            <input type="text" id="title" name="title" placeholder="Escribe el titulo de su oferta" onChange={saveChange}></input>
+                <label htmlFor="description" className="text-white">Detalles de la oferta:</label>
+                <input type="text" className="input1" id="description" name="description" placeholder="Describe los detalles de su oferta" onChange={saveChange}></input>
 
-            <label htmlFor="description" className="text-white">Detalles de la oferta:</label>
-            <input type="text" id="description" name="description" placeholder="Describe los detalles de su oferta" onChange={saveChange}></input>
+                <label htmlFor="type_offert" className="text-white">Detalles de la oferta:</label>
+                <input type="text" className="input1" id="type_offert" name="type_offert" placeholder="Tipo de oferta" onChange={saveChange}></input>
 
-            <label htmlFor="type_offert" className="text-white">Detalles de la oferta:</label>
-            <input type="text" id="type_offert" name="type_offert" placeholder="Tipo de oferta" onChange={saveChange}></input>
+                <label htmlFor="duration" className="text-white">Detalles de la oferta:</label>
+                <input type="text" className="input1" id="duration" name="duration" placeholder="Duración de la oferta" onChange={saveChange}></input>
 
-            {/* <label htmlFor="type_offert">:Tipo de oferta: </label>
-            <select name="type_offert" id="type_offert">
-                <option value="Viaje en avion">Viaje en avion</option>
-                <option value="Viaje en crucero">Viaje en crucero</option>
-            </select> */}
-            <label htmlFor="duration" className="text-white">Detalles de la oferta:</label>
-            <input type="text" id="duration" name="duration" placeholder="Duración de la oferta" onChange={saveChange}></input>
+                <label htmlFor="location" className="text-white">Detalles de la oferta:</label>
+                <input type="text" className="input1" id="location" name="location" placeholder="Lugar de la oferta" onChange={saveChange}></input>
 
-            <label htmlFor="location" className="text-white">Detalles de la oferta:</label>
-            <input type="text" id="location" name="location" placeholder="Lugar de la oferta" onChange={saveChange}></input>
+                <label htmlFor="tags" className="text-white">Etiquetas de la oferta:</label>
+                <input type="text" className="input1" id="tags" name="tags" placeholder="Etiqueta de la oferta" onChange={saveChange}></input>
 
-            <label htmlFor="price" className="text-white">Precio de la oferta: </label>
-            <input type="number" id="price" name="price" placeholder="Detalla el precio de su oferta" onChange={saveChange}></input>
+                <label htmlFor="price" className="text-white">Precio de la oferta: </label>
+                <input type="number" className="input1" id="price" name="price" placeholder="Detalla el precio de su oferta" onChange={saveChange}></input>
 
-            <label htmlFor="image_url" className="text-white">Imagen de la oferta: </label>
-            <input type="url" id="image_url" name="image_url" placeholder="Importa la url de la imagen de su oferta" onChange={saveChange}></input>
+                <label htmlFor="image_url" className="text-white">Imagen de la oferta: </label>
+                <input type="url" className="input1" id="image_url" name="image_url" placeholder="Importa la url de la imagen de su oferta" onChange={saveChange}></input>
 
-            <label htmlFor="created_at" className="text-white">Fecha de creacion</label>
-            <input type="datetime-local" id="created_at" name="created_at" placeholder="" onChange={saveChange}></input>
+                <label htmlFor="created_at" className="text-white">Fecha de creacion</label>
+                <input type="datetime-local" className="input1" id="created_at" name="created_at" placeholder="" onChange={saveChange}></input>
+            </div>
 
-        </div>
+            
+          </div>
+            
+
+            
+
+        </div> 
 
         {/* VISTA PREVIA DE LA OFERTA */}
         <div className="card mt-4 p-4 " id="cardaddoffer">
@@ -107,13 +115,6 @@ export const AddOffers = () => {
 
 
         </div>
-
-        
-
-        
-
-        
-
 
     </div>
   );

@@ -102,18 +102,13 @@ export const OffersCard = ({offert}) => {
               <MapPin/><span>{offert.location}</span>
             </div>
             <div className="flex items-center text-gray-600 mb-2">
-              
-                  <Calendar className="w-4 h-4 mr-1" /><span>{offert.duration}</span><br/>
-              
-          
-              
+                <Calendar className="w-4 h-4 mr-1" /><span>{offert.duration}</span><br/>
             </div>
-            
+          
           </div>
           
         </div>
         <div className="flip-card-back">
-          <p className="title"><p>{offert.title}</p></p>
           <Link to={"/offerdetails/" + offert.id}>
                   <button className="custom-btn btn-2">+ INFO</button>
                   <div>

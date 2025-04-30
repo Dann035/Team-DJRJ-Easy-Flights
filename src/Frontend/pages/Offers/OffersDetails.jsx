@@ -52,17 +52,14 @@ export const OffersDetails = () =>{
                   alt="1"
                 />
                 <img
-                  src="https://images.unsplash.com/photo-1576397753762-206624e9a2cc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGhha29uZXxlbnwwfHwwfHx8MA%3D%3D"
+                  src="https://images.unsplash.com/photo-1468818438311-4bab781ab9b8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8dmlhamV8ZW58MHx8MHx8fDA%3D"
                   alt="1"
                 />
                 <img
-                  src="https://images.unsplash.com/photo-1576397753762-206624e9a2cc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGhha29uZXxlbnwwfHwwfHx8MA%3D%3D"
+                  src="https://images.unsplash.com/photo-1473625247510-8ceb1760943f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHZpYWplfGVufDB8fDB8fHww"
                   alt="1"
                 />
-                <img
-                  src="https://images.unsplash.com/photo-1576397753762-206624e9a2cc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGhha29uZXxlbnwwfHwwfHx8MA%3D%3D"
-                  alt="1"
-                />
+                
               </section>
 
               {/* <div className="d-flex align-items-center justify-content-center container-fluid" >
@@ -92,19 +89,17 @@ export const OffersDetails = () =>{
 
                         <h3>¿Qué incluye?</h3>
                             <ul className="included">
-                                <li><span className="text-success">✔</span> </li>
-                                <li><span className="text-success">✔</span> Airport transfers</li>
-                                <li><span className="text-success">✔</span> Spa treatment</li>
-                                <li><span className="text-success">✔</span> All meals included</li>
-                                <li><span className="text-success">✔</span> Daily activities</li>
+                                <li><span className="text-success">✔</span> Transporte</li>
+                                <li><span className="text-success">✔</span> Spa </li>
+                                <li><span className="text-success">✔</span> Todo la comida incluida</li>
+                                <li><span className="text-success">✔</span> Actividades diarias</li>
                             </ul>
 
-                        <h3>Amenities</h3>
+                        <h3>Tags</h3>
                         <div className="tags">
-                                <span>Private Beach</span>
+                                <span>Rural</span>
                                 <span>Spa</span>
-                                <span>Water Sports</span>
-                                <span>Fine Dining</span>
+                                <span>Cena</span>
                         </div>
                   </div>
                   
