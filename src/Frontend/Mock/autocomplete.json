@@ -1,0 +1,142 @@
+[
+    {
+        "class": "City",
+        "entityId": "27542715",
+        "entityName": "Las Vegas",
+        "entityType": "city",
+        "hierarchy": "Clark County|Nevada|United States",
+        "highlight": {
+            "entityName": "",
+            "hierarchy": ""
+        },
+        "location": "36.1684484459, -115.2308964814",
+        "pois": null,
+        "score": 0
+    },
+    {
+        "class": "City",
+        "entityId": "27537542",
+        "entityName": "New York",
+        "entityType": "city",
+        "hierarchy": "New York|United States",
+        "highlight": {
+            "entityName": "",
+            "hierarchy": ""
+        },
+        "location": "40.6940959901, -73.9282670243",
+        "pois": null,
+        "score": 0
+    },
+    {
+        "class": "City",
+        "entityId": "27542089",
+        "entityName": "Tokyo",
+        "entityType": "city",
+        "hierarchy": "Tokyo|Japan",
+        "highlight": {
+            "entityName": "",
+            "hierarchy": ""
+        },
+        "location": "29.992220724554866, 140.76724260851924",
+        "pois": null,
+        "score": 0
+    },
+    {
+        "class": "City",
+        "entityId": "27536644",
+        "entityName": "Miami",
+        "entityType": "city",
+        "hierarchy": "Miami-Dade|Florida|United States",
+        "highlight": {
+            "entityName": "",
+            "hierarchy": ""
+        },
+        "location": "25.775337343897853, -80.2098170861841",
+        "pois": null,
+        "score": 0
+    },
+    {
+        "class": "City",
+        "entityId": "27544008",
+        "entityName": "London",
+        "entityType": "city",
+        "hierarchy": "England|United Kingdom",
+        "highlight": {
+            "entityName": "",
+            "hierarchy": ""
+        },
+        "location": "51.5041174139, -0.0943465343",
+        "pois": null,
+        "score": 0
+    },
+    {
+        "class": "City",
+        "entityId": "27540602",
+        "entityName": "Cancun",
+        "entityType": "city",
+        "hierarchy": "Quintana Roo|Mexico",
+        "highlight": {
+            "entityName": "",
+            "hierarchy": ""
+        },
+        "location": "21.140230192533792, -86.86960602788567",
+        "pois": null,
+        "score": 0
+    },
+    {
+        "class": "City",
+        "entityId": "27542899",
+        "entityName": "Orlando",
+        "entityType": "city",
+        "hierarchy": "Orange County|Florida|United States",
+        "highlight": {
+            "entityName": "",
+            "hierarchy": ""
+        },
+        "location": "28.479954876954967, -81.34454668903375",
+        "pois": null,
+        "score": 0
+    },
+    {
+        "class": "City",
+        "entityId": "27546347",
+        "entityName": "San Juan",
+        "entityType": "city",
+        "hierarchy": "San Juan|Puerto Rico",
+        "highlight": {
+            "entityName": "",
+            "hierarchy": ""
+        },
+        "location": "18.386913150925082, -66.06072817653188",
+        "pois": null,
+        "score": 0
+    },
+    {
+        "class": "City",
+        "entityId": "27544891",
+        "entityName": "Chicago",
+        "entityType": "city",
+        "hierarchy": "Cook County|Illinois|United States",
+        "highlight": {
+            "entityName": "",
+            "hierarchy": ""
+        },
+        "location": "41.83825789091468, -87.68580861660885",
+        "pois": null,
+        "score": 0
+    },
+    {
+        "class": "City",
+        "entityId": "27539733",
+        "entityName": "Paris",
+        "entityType": "city",
+        "hierarchy": "Île-de-France|France",
+        "highlight": {
+            "entityName": "",
+            "hierarchy": ""
+        },
+        "location": "48.85662237511698, 2.3428759930239886",
+        "pois": null,
+        "score": 0
+    }
+]

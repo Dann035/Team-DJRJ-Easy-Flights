@@ -18,6 +18,7 @@ import Destinations from "./pages/Feeatures/Destinations.jsx";
 import Packages from "./pages/Feeatures/Packages.jsx";
 import Tools from "./pages/Feeatures/Tools.jsx";
 import AboutUs from "./pages/AboutUs/AboutUs.jsx";
+import {OffersList } from "./pages/Offers/OffersList.jsx";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -33,6 +34,7 @@ export const router = createBrowserRouter(
         <Route path="/tools" element={<Tools />} />
         <Route path="/addoffer" element={<AddOffers/>} />
         <Route path="/offerdetails/:id" element={<OffersDetails/>}/>
+        <Route path="/offerslist" element={<OffersList/>}/>
       </Route>
     ),
     {

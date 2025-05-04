@@ -2,6 +2,9 @@ export const initialStore=()=>{
   return{
     message: null,
     offers:[],
+    origen:null,
+    destino:null,  
+    offersAPI:[]
   }
 }
 
@@ -20,6 +23,13 @@ export default function storeReducer(store, action = {type:""}) {
         ...store,
         offers: action.payload,
       };
+
+    case "get_offersAPI":
+        return {
+          ...store,
+          offersAPI: action.payload,
+        };
+    
     
     case "add_offer":
       return{
