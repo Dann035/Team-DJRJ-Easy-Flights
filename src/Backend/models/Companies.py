@@ -23,6 +23,7 @@ class Companies(db.Model):
     logo_url: Mapped[str] = mapped_column(String(255),nullable=False)
     slug: Mapped[str] = mapped_column(String(50),nullable=False)
     status: Mapped[str] = mapped_column(String(50),nullable=False)
+    role: Mapped[str] = mapped_column(String(50),nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc))
     logo_url: Mapped[str] = mapped_column(String(255),nullable=False)
     owner_id: Mapped[int] = mapped_column(ForeignKey('users.id'),nullable=True)

@@ -2,20 +2,13 @@ export const initialStore=()=>{
   return{
     message: null,
     offers:[],
-    origen:null,
-    destino:null,  
     offersAPI:[]
   }
 }
 
 export default function storeReducer(store, action = {type:""}) {
   switch (action.type) {
-    case "set_hello":
-      return {
-        ...store,
-        message: action.payload,
-      };
-
+    
     //OFERTAS
 
     case "get_offers":

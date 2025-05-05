@@ -1,30 +1,28 @@
-import "react-datepicker/dist/react-datepicker.css";
-import DatePicker from "react-datepicker";
-import { useEffect, useState } from "react";
-import "./Tagline.css";
 import useGlobalReducer from "../../hooks/useGlobalReducer";
 import { OffersCard } from "../../pages/Offers/OffersCard";
-import Modal from "../Modal/Modal";
 import autocomplete from "../../Mock/autocomplete.json"
+import "react-datepicker/dist/react-datepicker.css";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import DatePicker from "react-datepicker";
+import "./Tagline.css";
 
 function Tagline() {
     const { store, dispatch } = useGlobalReducer();
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [personas, setPersonas] = useState(1);
+    const [origen, setOrigen] = useState("");
     const [destino, setDestino] = useState("");
     const [showModal, setShowModal] = useState(false);
-    const API_KEY = "5f9b8dee36msh09331b9ab9a4fbbp1b81efjsne60799c1c2e1"
-    const origin = store.origen
-    const destination = store.destino
+
+    const navigate = useNavigate();
+
+    const API_KEY = "3df7b5ea34msh823b5e336152f23p145132jsn0be3c1afda1b"
 
     const [filteredOffers, setFilteredOffers] = useState([]);
 
-     
-   // const url = `https://skyscanner89.p.rapidapi.com/flights/roundtrip/list?${origin}`
-    
-
-    //const URL = `https://skyscanner89.p.rapidapi.com/flights/roundtrip/list?originId=27542715&destinationId=27537542`;
+    const URL = `https://skyscanner89.p.rapidapi.com/flights/roundtrip/list?`;
     const options = {
         
     headers: {
@@ -34,52 +32,27 @@ function Tagline() {
     };
 
     const showData = async () =>{
+        if (!origen || !destino) {
+            alert("Selecciona origen y destino");
+            return;
+        }
+        try {
+            const response = await fetch(URL + `originId=${origen}&destinationId=${destino}`, options);
+            const data = await response.json();
+            const results = data?.data?.flightQuotes?.results || [];
+            dispatch({type:"get_offersAPI", payload: results});
 
-        
-    try {
-        const response = await fetch(URL, options);
-        const result = await response.json();
-        console.log(result.data.flightQuotes.results)
-      
-        dispatch({type:"get_offersAPI", payload:result.data.flightQuotes.results})
-    
-    } catch (error) {
-        console.error("Error la offerAPI",error.message)
+        }catch(error){
+            console.error("Error la offerAPI",error.message)
+            dispatch({type:"get_offersAPI", payload:[]})
+        }
     }
-    }
-
-    useEffect(()=>{
-        
-    showData()
-    },[])
-    
-  
-
-
-
-    const handleBuscar = async () => {
-        // if (!destino || !startDate || !endDate) {
-        //     alert("Selecciona destino y fechas");
-        //     return;
-        // }
-
-        const res = store.offers.filter((oferta) => oferta.title === destino);
-        setFilteredOffers(res);
-        setShowModal(true);
-        // Llama a tu API para obtener ofertas filtradas
-        // const res = await fetch(
-        //     `/api/offers?destino=${destino}&start=${startDate.toISOString()}&end=${endDate.toISOString()}`
-        // );
-        // const data = await res.json();
-        // setFilteredOffers(data.offers || []);
-        // setShowModal(true);
-    };
 
     return (
         <section className="tg-container mt-3">
             <video
                 className="tg-video"
-                src="video-viajes-escala.mp4"
+                src="tg-video-official.mp4"
                 style={{
                     width: "100%",
                     height: "800px",
@@ -101,30 +74,29 @@ function Tagline() {
                 Let us guide you to unforgettable experiences and hidden gems
                 around the globe.
             </p>
-            <button className="tg-btn-explore">Explore</button>
+            <button className="tg-btn-explore" onClick={() => navigate('/login')}>Explore</button>
             <button className="tg-btn-LearnMore">Learn More</button>
             <div className="search-tvl-container">
                 <section className="tvl-section-box d-flex">
-                    <fieldset className="box-tvl-destination d-flex flex-column">
+                <fieldset className="box-tvl-destination d-flex flex-column">
                         <label>Origen:</label>
                         <select
                             name="origen"
                             id="select-origen"
-                            onChange={(e) => setDestino(e.target.value)}
-                            value={destino}
+                            onChange={(e) => setOrigen(e.target.value)}
+                            value={origen}
                         >
                             <option value="" defaultChecked hidden>
-                                Elige el origen
+                                Elige el destino
                             </option>
-                            <option value="entityid">Barcelona</option>
-                            <option value="New York">New York</option>
-                            <option value="Tokio">Tokio</option>
-                            <option value="Francia">Francia</option>
-                            <option value="Dubai">Dubai</option>
-                            <option value="Australia">Australia</option>
-                            <option value="Peru">Peru</option>
-                            <option value="Nassau">Nassau</option>
-                            <option value="Rome">Rome</option>
+                            <option value="27542715">Las Vegas</option>
+                            <option value="27537542">New York</option>
+                            <option value="27542089">Tokio</option>
+                            <option value="27536644">Miami</option>
+                            <option value="27544008">London</option>
+                            <option value="27540602">México</option>
+                            <option value="27546347">Puerto Rico</option>
+                            <option value="27539733">París</option>
                         </select>
                     </fieldset>
                     <fieldset className="box-tvl-destination d-flex flex-column">
@@ -138,15 +110,14 @@ function Tagline() {
                             <option value="" defaultChecked hidden>
                                 Elige el destino
                             </option>
-                            <option value="Barcelona">Barcelona</option>
-                            <option value="New York">New York</option>
-                            <option value="Tokio">Tokio</option>
-                            <option value="Francia">Francia</option>
-                            <option value="Dubai">Dubai</option>
-                            <option value="Australia">Australia</option>
-                            <option value="Peru">Peru</option>
-                            <option value="Nassau">Nassau</option>
-                            <option value="Rome">Rome</option>
+                            <option value="27542715">Las Vegas</option>
+                            <option value="27537542">New York</option>
+                            <option value="27542089">Tokio</option>
+                            <option value="27536644">Miami</option>
+                            <option value="27544008">London</option>
+                            <option value="27540602">México</option>
+                            <option value="27546347">Puerto Rico</option>
+                            <option value="27539733">París</option>
                         </select>
                     </fieldset>
                     <fieldset className="box-tvl-dates d-flex flex-column">
@@ -183,40 +154,13 @@ function Tagline() {
                             />
                         </section>
                     </fieldset>
-                    <button className="tvl-btn-explore" onClick={handleBuscar}>
+                    <button 
+                        className="tvl-btn-explore"
+                        onClick={showData}>
                         Buscar ofertas
                     </button>
                 </section>
             </div>
-            <div>
-                    {store?.offersAPI.map((offer,index)=>{
-                  
-                    
-                    <div key={index}>
-                        <p>Precio
-                            {offer.price}
-                        </p>
-                    </div>
-                
-                    })}
-
-            </div>
-            {showModal && (
-                <Modal onClose={() => setShowModal(false)}>
-                    <h2>Ofertas disponibles</h2>
-                    {filteredOffers.length === 0 ? (
-                        <p>No hay ofertas para los criterios seleccionados.</p>
-                    ) : (
-                        <ul>
-                            {store.offers.filter(offert => offert.title === destino).map(oferta => (
-                                <li key={oferta.id} className="offer-item">
-                                    <OffersCard offert={oferta} />
-                                </li>
-                            ))};
-                        </ul>
-                    )}
-                </Modal>
-            )}
         </section>
     );
 }

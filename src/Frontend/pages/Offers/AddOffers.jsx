@@ -21,11 +21,11 @@ export const AddOffers = () => {
     tags:""
   });
 
-  // useEffect(() => {
-  //   if (!hasRole(['COMPANY_ADMIN'])) {
-  //     navigate('/')
-  //   }
-  // },);
+  useEffect(() => {
+    if (!hasRole(['COMPANY'])) {
+      navigate('/')
+    }
+  },);
 
   const saveChange = (e) => {
     SetOffer({
@@ -113,7 +113,7 @@ export const AddOffers = () => {
 
         <div className=" mt-4 d-flex align-items-center justify-content-center gap-3">
           <div>
-              <button  className="createaddbtn" onClick={newOffert}>Crear Oferta</button>
+              <button  className="createaddbtn btn btn-light" onClick={() => newOffert}>Crear Oferta</button>
           </div>
 
           <div>
