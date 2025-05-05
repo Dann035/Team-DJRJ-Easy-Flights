@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import './tools.css';
 
-export default function Tools () {
+export default function Tools() {
     const [vista, setVista] = useState('menu');
     const [formData, setFormData] = useState({
         vuelo: '',
@@ -18,12 +19,41 @@ export default function Tools () {
     const [gastosPersonales, setGastosPersonales] = useState([]);
     const [nuevoGastoPersonal, setNuevoGastoPersonal] = useState({ persona: '', descripcion: '', monto: '' });
     const [resumenPersonas, setResumenPersonas] = useState([]);
+    const [deudas, setDeudas] = useState([]);
+    const [nombreDivision, setNombreDivision] = useState('');  // Aquí agregamos el nombre de la división
 
     const simbolosMoneda = {
         USD: '$',
         EUR: '€',
         GBP: '£',
         JPY: '¥',
+    };
+
+    // Guardar los datos de la división de gastos en el almacenamiento local
+    const guardarDivisionEnPerfil = () => {
+        if (!nombreDivision.trim()) {
+            alert("Por favor, ingresa un nombre para la división de gastos.");
+            return;
+        }
+
+        const division = {
+            nombre: nombreDivision,
+            gastos: gastosPersonales,
+            deudas: deudas,
+            total,
+            moneda,
+            comentario
+        };
+
+        // Obtenemos las divisiones de gastos previas (si existen) y las agregamos
+        const divisionesGuardadas = JSON.parse(localStorage.getItem('divisionesDeGastos') || '[]');
+        divisionesGuardadas.push(division);
+
+        // Guardamos las divisiones de gastos en el almacenamiento local
+        localStorage.setItem('divisionesDeGastos', JSON.stringify(divisionesGuardadas));
+
+        alert('¡División de gastos guardada correctamente en tu perfil!');
+        setVista('menu');  // Volver al menú principal
     };
 
     const handleChange = (e) => {
@@ -77,10 +107,32 @@ export default function Tools () {
         const resultados = personasUnicas.map(p => ({
             persona: p,
             pagado: pagosPorPersona[p],
-            debe: igualPorPersona - pagosPorPersona[p]
+            debe: pagosPorPersona[p] - igualPorPersona,
         }));
 
+        const deudasTemp = [];
+
+        const deudores = resultados.filter(r => r.debe < 0);
+        const acreedores = resultados.filter(r => r.debe > 0);
+
+        deudores.forEach(deudor => {
+            acreedores.forEach(acreedor => {
+                if (deudor.debe < 0 && acreedor.debe > 0) {
+                    const montoADebitar = Math.min(Math.abs(deudor.debe), acreedor.debe);
+                    deudasTemp.push({
+                        deudor: deudor.persona,
+                        acreedor: acreedor.persona,
+                        monto: montoADebitar,
+                    });
+
+                    deudor.debe += montoADebitar;
+                    acreedor.debe -= montoADebitar;
+                }
+            });
+        });
+
         setResumenPersonas(resultados);
+        setDeudas(deudasTemp);
     };
 
     return (
@@ -90,7 +142,7 @@ export default function Tools () {
                     <h1 className="mb-4">🧳 Herramientas de Viaje</h1>
                     <div className="col-md-6 mb-4">
                         <div
-                            className="shadow-sm p-4"
+                            className="shadow-sm p-4 tools-card"
                             role="button"
                             onClick={() => setVista('planificador')}
                             style={{ border: '1px solid #ddd', borderRadius: '8px', cursor: 'pointer' }}
@@ -100,13 +152,13 @@ export default function Tools () {
                                 className="img-fluid"
                                 alt="Planificador"
                             />
-                            <h5 className="mt-3">Planificador de Viaje</h5>
+                            <h5 className="mt-3 ">Planificador de Viaje</h5>
                             <p>Presupuesta tu viaje fácilmente.</p>
                         </div>
                     </div>
                     <div className="col-md-6 mb-4">
                         <div
-                            className="shadow-sm p-4"
+                            className="shadow-sm p-4 tools-card"
                             role="button"
                             onClick={() => setVista('divisor')}
                             style={{ border: '1px solid #ddd', borderRadius: '8px', cursor: 'pointer' }}
@@ -125,133 +177,52 @@ export default function Tools () {
 
             {(vista === 'planificador' || vista === 'divisor') && (
                 <div className="mb-4">
-                    <button className="btn btn-secondary" onClick={() => setVista('menu')}>🔙 Volver al menú</button>
-                </div>
-            )}
-
-            {vista === 'planificador' && (
-                <div className="p-4 shadow-sm mb-5">
-                    <h2 className="mb-4 text-center">✈️ Planificador de Viaje</h2>
-                    <div className="mb-3">
-                        <label className="form-label">Selecciona moneda</label>
-                        <select
-                            className="form-select"
-                            value={moneda}
-                            onChange={(e) => setMoneda(e.target.value)}
-                        >
-                            <option value="USD">Dólares ($)</option>
-                            <option value="EUR">Euros (€)</option>
-                            <option value="GBP">Libras (£)</option>
-                            <option value="JPY">Yenes (¥)</option>
-                        </select>
-                    </div>
-
-                    {Object.entries(formData).map(([key, val]) => (
-                        <div className="mb-3" key={key}>
-                            <label className="form-label text-capitalize">Gasto en {key}</label>
-                            <input
-                                type="number"
-                                className="form-control"
-                                name={key}
-                                value={val}
-                                onChange={handleChange}
-                            />
-                        </div>
-                    ))}
-
-                    <hr />
-                    <h5>➕ Añadir otro gasto</h5>
-                    <div className="row g-2 mb-3">
-                        <div className="col-md-6">
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder="Nombre del gasto"
-                                value={nuevoGastoNombre}
-                                onChange={(e) => setNuevoGastoNombre(e.target.value)}
-                            />
-                        </div>
-                        <div className="col-md-4">
-                            <input
-                                type="number"
-                                className="form-control"
-                                placeholder="Valor"
-                                value={nuevoGastoValor}
-                                onChange={(e) => setNuevoGastoValor(e.target.value)}
-                            />
-                        </div>
-                        <div className="col-md-2">
-                            <button className="btn btn-success w-100" onClick={handleAddCustomGasto}>Añadir</button>
-                        </div>
-                    </div>
-
-                    {customGastos.length > 0 && (
-                        <ul className="list-group mb-3">
-                            {customGastos.map((item, idx) => (
-                                <li className="list-group-item d-flex justify-content-between" key={idx}>
-                                    <span>{item.nombre}</span>
-                                    <span>{simbolosMoneda[moneda]}{item.valor.toFixed(2)}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    )}
-
-                    <div className="mb-3">
-                        <label className="form-label">Comentarios o notas</label>
-                        <textarea
-                            className="form-control"
-                            rows="3"
-                            value={comentario}
-                            onChange={(e) => setComentario(e.target.value)}
-                        />
-                    </div>
-
-                    <button className="btn btn-primary w-100" onClick={calcularTotal}>Calcular Presupuesto</button>
-
-                    {total !== null && (
-                        <div className="alert alert-success mt-4">
-                            <h5 className="text-center">🧾 Presupuesto Detallado</h5>
-                            <ul className="list-group list-group-flush">
-                                {Object.entries(formData).map(([key, val]) => (
-                                    <li className="list-group-item d-flex justify-content-between" key={key}>
-                                        <span>{key}</span>
-                                        <span>{simbolosMoneda[moneda]}{parseFloat(val || 0).toFixed(2)}</span>
-                                    </li>
-                                ))}
-                                {customGastos.map((item, idx) => (
-                                    <li className="list-group-item d-flex justify-content-between" key={idx}>
-                                        <span>{item.nombre}</span>
-                                        <span>{simbolosMoneda[moneda]}{item.valor.toFixed(2)}</span>
-                                    </li>
-                                ))}
-                                <li className="list-group-item fw-bold d-flex justify-content-between">
-                                    Total
-                                    <span>{simbolosMoneda[moneda]}{total.toFixed(2)}</span>
-                                </li>
-                            </ul>
-                            {comentario && <p className="mt-3 fst-italic">📝 {comentario}</p>}
-                        </div>
-                    )}
+                    <button className="btn btn-secondary" onClick={() => setVista('menu')}> 🔙 Volver a Herramientas</button>
                 </div>
             )}
 
             {vista === 'divisor' && (
                 <div className="p-4 shadow-sm bg-light mb-5">
                     <h2 className="mb-3 text-center">👥 División de Gastos por Personas</h2>
+
+                    <div className="mb-4">
+                        <label className="form-label">Nombre de la división de gastos</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Ej. Vacaciones 2025"
+                            value={nombreDivision}
+                            onChange={(e) => setNombreDivision(e.target.value)}
+                        />
+                    </div>
+
+                    {/* Selector de moneda */}
+                    <div className="mb-4">
+                        <label className="form-label">Selecciona la moneda</label>
+                        <select className="form-select" value={moneda} onChange={(e) => setMoneda(e.target.value)}>
+                            <option value="USD">USD - Dólar estadounidense</option>
+                            <option value="EUR">EUR - Euro</option>
+                            <option value="GBP">GBP - Libra esterlina</option>
+                            <option value="JPY">JPY - Yen japonés</option>
+                        </select>
+                    </div>
+
                     <div className="row g-2 mb-3">
                         <div className="col-md-4">
                             <input
                                 className="form-control"
                                 placeholder="Nombre"
                                 value={nuevoGastoPersonal.persona}
-                                onChange={(e) => setNuevoGastoPersonal(prev => ({ ...prev, persona: e.target.value }))} />
+                                onChange={(e) => setNuevoGastoPersonal(prev => ({ ...prev, persona: e.target.value }))}
+                            />
                         </div>
                         <div className="col-md-4">
                             <input
                                 className="form-control"
                                 placeholder="Descripción"
                                 value={nuevoGastoPersonal.descripcion}
-                                onChange={(e) => setNuevoGastoPersonal(prev => ({ ...prev, descripcion: e.target.value }))} />
+                                onChange={(e) => setNuevoGastoPersonal(prev => ({ ...prev, descripcion: e.target.value }))}
+                            />
                         </div>
                         <div className="col-md-2">
                             <input
@@ -259,7 +230,8 @@ export default function Tools () {
                                 className="form-control"
                                 placeholder="Monto"
                                 value={nuevoGastoPersonal.monto}
-                                onChange={(e) => setNuevoGastoPersonal(prev => ({ ...prev, monto: e.target.value }))} />
+                                onChange={(e) => setNuevoGastoPersonal(prev => ({ ...prev, monto: e.target.value }))}
+                            />
                         </div>
                         <div className="col-md-2">
                             <button className="btn btn-info w-100" onClick={handleAddGastoPersonal}>Añadir</button>
@@ -280,45 +252,22 @@ export default function Tools () {
                         </>
                     )}
 
-                    {resumenPersonas.length > 0 && (
+                    {deudas.length > 0 && (
                         <div className="mt-4">
-                            <h5 className="mb-3">💳 Resultado por persona:</h5>
-                            {resumenPersonas.map((r, idx) => {
-                                const pagos = gastosPersonales.filter(g => g.persona === r.persona);
-                                const claseAlerta = r.debe === 0
-                                    ? 'alert-success'
-                                    : r.debe > 0
-                                        ? 'alert-warning'
-                                        : 'alert-info';
-
-                                return (
-                                    <div className="mb-4" key={idx}>
-                                        <h6 className="fw-bold">{r.persona}</h6>
-                                        <ul className="list-group mb-2">
-                                            {pagos.map((g, i) => (
-                                                <li className="list-group-item d-flex justify-content-between" key={i}>
-                                                    <span>{g.descripcion}</span>
-                                                    <span>{simbolosMoneda[moneda]}{g.monto.toFixed(2)}</span>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                        <div className="alert alert-secondary d-flex justify-content-between">
-                                            <span>Total pagado</span>
-                                            <span>{simbolosMoneda[moneda]}{r.pagado.toFixed(2)}</span>
-                                        </div>
-                                        <div className={`alert ${claseAlerta}`}>
-                                            {r.debe === 0
-                                                ? '✅ Ha pagado lo justo.'
-                                                : r.debe > 0
-                                                    ? `⚠️ Debe pagar ${simbolosMoneda[moneda]}${r.debe.toFixed(2)}`
-                                                    : `🤑 Le deben ${simbolosMoneda[moneda]}${Math.abs(r.debe).toFixed(2)}`
-                                            }
-                                        </div>
-                                    </div>
-                                );
-                            })}
+                            <h5 className="mb-3">💸 Deudas entre personas:</h5>
+                            {deudas.map((d, idx) => (
+                                <div key={idx} className="alert alert-info">
+                                    <strong>{d.deudor}</strong> debe <strong>{simbolosMoneda[moneda]}{d.monto.toFixed(2)}</strong> a <strong>{d.acreedor}</strong>
+                                </div>
+                            ))}
                         </div>
                     )}
+
+                    <div className="mt-4">
+                        <button className="btn btn-success w-100" onClick={guardarDivisionEnPerfil}>
+                            Guardar esta división en tu perfil
+                        </button>
+                    </div>
                 </div>
             )}
         </div>

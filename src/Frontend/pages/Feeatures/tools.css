@@ -1,0 +1,38 @@
+/* Contenedor general de herramientas */
+.tools-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    background-color: #fff;
+}
+
+.tools-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Imagen de la tarjeta */
+.tools-card img {
+    border-radius: 4px;
+    max-height: 200px;
+    object-fit: cover;
+    width: 100%;
+}
+
+/* Título de herramienta */
+.tools-card h5 {
+    font-weight: 600;
+    margin-top: 15px;
+}
+
+/* Descripción */
+.tools-card p {
+    color: #555;
+    font-size: 0.95rem;
+}
+
+/* Botón volver */
+.btn-secondary {
+    margin-bottom: 1rem;
+}
