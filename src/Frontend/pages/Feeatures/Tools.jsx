@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 export default function Tools () {
+    const [vista, setVista] = useState('menu');
     const [formData, setFormData] = useState({
         vuelo: '',
         hospedaje: '',
@@ -14,7 +15,6 @@ export default function Tools () {
     const [moneda, setMoneda] = useState('USD');
     const [comentario, setComentario] = useState('');
     const [total, setTotal] = useState(null);
-
     const [gastosPersonales, setGastosPersonales] = useState([]);
     const [nuevoGastoPersonal, setNuevoGastoPersonal] = useState({ persona: '', descripcion: '', monto: '' });
     const [resumenPersonas, setResumenPersonas] = useState([]);
@@ -84,195 +84,243 @@ export default function Tools () {
     };
 
     return (
-        <div className="container my-5">
-            <h1 className="text-center mb-4">✈️ Planificador de Viaje</h1>
-            <p className="text-center">Estima tu presupuesto, añade tus propios gastos y guarda tus ideas.</p>
-
-            <div className="card p-4 shadow-sm mb-5">
-                <div className="mb-3">
-                    <label className="form-label">Selecciona moneda</label>
-                    <select
-                        className="form-select"
-                        value={moneda}
-                        onChange={(e) => setMoneda(e.target.value)}
-                    >
-                        <option value="USD">Dólares ($)</option>
-                        <option value="EUR">Euros (€)</option>
-                        <option value="GBP">Libras (£)</option>
-                        <option value="JPY">Yenes (¥)</option>
-                    </select>
-                </div>
-
-                {Object.entries(formData).map(([key, val]) => (
-                    <div className="mb-3" key={key}>
-                        <label className="form-label text-capitalize">Gasto en {key}</label>
-                        <input
-                            type="number"
-                            className="form-control"
-                            name={key}
-                            value={val}
-                            onChange={handleChange}
-                        />
+        <div className="container my-5 px-3" style={{ maxWidth: '960px' }}>
+            {vista === 'menu' && (
+                <div className="row text-center">
+                    <h1 className="mb-4">🧳 Herramientas de Viaje</h1>
+                    <div className="col-md-6 mb-4">
+                        <div
+                            className="shadow-sm p-4"
+                            role="button"
+                            onClick={() => setVista('planificador')}
+                            style={{ border: '1px solid #ddd', borderRadius: '8px', cursor: 'pointer' }}
+                        >
+                            <img
+                                src="https://previews.123rf.com/images/firstblood/firstblood1307/firstblood130700513/20653892-c%C3%A1lculo-del-presupuesto-de-la-casa-la-calculadora-una-pluma-el-diagrama.jpg"
+                                className="img-fluid"
+                                alt="Planificador"
+                            />
+                            <h5 className="mt-3">Planificador de Viaje</h5>
+                            <p>Presupuesta tu viaje fácilmente.</p>
+                        </div>
                     </div>
-                ))}
-
-                <hr />
-                <h5>➕ Añadir otro gasto</h5>
-                <div className="row g-2 mb-3">
-                    <div className="col-md-6">
-                        <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Nombre del gasto"
-                            value={nuevoGastoNombre}
-                            onChange={(e) => setNuevoGastoNombre(e.target.value)}
-                        />
-                    </div>
-                    <div className="col-md-4">
-                        <input
-                            type="number"
-                            className="form-control"
-                            placeholder="Valor"
-                            value={nuevoGastoValor}
-                            onChange={(e) => setNuevoGastoValor(e.target.value)}
-                        />
-                    </div>
-                    <div className="col-md-2">
-                        <button className="btn btn-success w-100" onClick={handleAddCustomGasto}>Añadir</button>
+                    <div className="col-md-6 mb-4">
+                        <div
+                            className="shadow-sm p-4"
+                            role="button"
+                            onClick={() => setVista('divisor')}
+                            style={{ border: '1px solid #ddd', borderRadius: '8px', cursor: 'pointer' }}
+                        >
+                            <img
+                                src="https://www.togetherprice.com/es/static/b7afeb3174d09b9322080c90f4cb1ab1/c61e6/dividir_gastos_entre_amigos.jpg"
+                                className="img-fluid"
+                                alt="Divisor de gastos"
+                            />
+                            <h5 className="mt-3">División de Gastos</h5>
+                            <p>Reparte los gastos entre todos.</p>
+                        </div>
                     </div>
                 </div>
+            )}
 
-                {customGastos.length > 0 && (
-                    <ul className="list-group mb-3">
-                        {customGastos.map((item, idx) => (
-                            <li className="list-group-item d-flex justify-content-between" key={idx}>
-                                <span>{item.nombre}</span>
-                                <span>{simbolosMoneda[moneda]}{item.valor.toFixed(2)}</span>
-                            </li>
-                        ))}
-                    </ul>
-                )}
-
-                <div className="mb-3">
-                    <label className="form-label">Comentarios o notas</label>
-                    <textarea
-                        className="form-control"
-                        rows="3"
-                        value={comentario}
-                        onChange={(e) => setComentario(e.target.value)}
-                    />
+            {(vista === 'planificador' || vista === 'divisor') && (
+                <div className="mb-4">
+                    <button className="btn btn-secondary" onClick={() => setVista('menu')}>🔙 Volver al menú</button>
                 </div>
+            )}
 
-                <button className="btn btn-primary w-100" onClick={calcularTotal}>Calcular Presupuesto</button>
+            {vista === 'planificador' && (
+                <div className="p-4 shadow-sm mb-5">
+                    <h2 className="mb-4 text-center">✈️ Planificador de Viaje</h2>
+                    <div className="mb-3">
+                        <label className="form-label">Selecciona moneda</label>
+                        <select
+                            className="form-select"
+                            value={moneda}
+                            onChange={(e) => setMoneda(e.target.value)}
+                        >
+                            <option value="USD">Dólares ($)</option>
+                            <option value="EUR">Euros (€)</option>
+                            <option value="GBP">Libras (£)</option>
+                            <option value="JPY">Yenes (¥)</option>
+                        </select>
+                    </div>
 
-                {total !== null && (
-                    <div className="alert alert-success mt-4">
-                        <h5 className="text-center">🧾 Presupuesto Detallado</h5>
-                        <ul className="list-group list-group-flush">
-                            {Object.entries(formData).map(([key, val]) => (
-                                <li className="list-group-item d-flex justify-content-between" key={key}>
-                                    <span>{key}</span>
-                                    <span>{simbolosMoneda[moneda]}{parseFloat(val || 0).toFixed(2)}</span>
-                                </li>
-                            ))}
+                    {Object.entries(formData).map(([key, val]) => (
+                        <div className="mb-3" key={key}>
+                            <label className="form-label text-capitalize">Gasto en {key}</label>
+                            <input
+                                type="number"
+                                className="form-control"
+                                name={key}
+                                value={val}
+                                onChange={handleChange}
+                            />
+                        </div>
+                    ))}
+
+                    <hr />
+                    <h5>➕ Añadir otro gasto</h5>
+                    <div className="row g-2 mb-3">
+                        <div className="col-md-6">
+                            <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Nombre del gasto"
+                                value={nuevoGastoNombre}
+                                onChange={(e) => setNuevoGastoNombre(e.target.value)}
+                            />
+                        </div>
+                        <div className="col-md-4">
+                            <input
+                                type="number"
+                                className="form-control"
+                                placeholder="Valor"
+                                value={nuevoGastoValor}
+                                onChange={(e) => setNuevoGastoValor(e.target.value)}
+                            />
+                        </div>
+                        <div className="col-md-2">
+                            <button className="btn btn-success w-100" onClick={handleAddCustomGasto}>Añadir</button>
+                        </div>
+                    </div>
+
+                    {customGastos.length > 0 && (
+                        <ul className="list-group mb-3">
                             {customGastos.map((item, idx) => (
                                 <li className="list-group-item d-flex justify-content-between" key={idx}>
                                     <span>{item.nombre}</span>
                                     <span>{simbolosMoneda[moneda]}{item.valor.toFixed(2)}</span>
                                 </li>
                             ))}
-                            <li className="list-group-item fw-bold d-flex justify-content-between">
-                                Total
-                                <span>{simbolosMoneda[moneda]}{total.toFixed(2)}</span>
-                            </li>
                         </ul>
-                        {comentario && <p className="mt-3 fst-italic">📝 {comentario}</p>}
-                    </div>
-                )}
-            </div>
+                    )}
 
-            {/* CALCULADORA DE GASTOS PERSONALES */}
-            <div className="card p-4 shadow-sm">
-                <h2 className="mb-3">👥 División de Gastos por Personas</h2>
-                <div className="row g-2 mb-3">
-                    <div className="col-md-4">
-                        <input
+                    <div className="mb-3">
+                        <label className="form-label">Comentarios o notas</label>
+                        <textarea
                             className="form-control"
-                            placeholder="Nombre"
-                            value={nuevoGastoPersonal.persona}
-                            onChange={(e) => setNuevoGastoPersonal(prev => ({ ...prev, persona: e.target.value }))}
+                            rows="3"
+                            value={comentario}
+                            onChange={(e) => setComentario(e.target.value)}
                         />
                     </div>
-                    <div className="col-md-4">
-                        <input
-                            className="form-control"
-                            placeholder="Descripción"
-                            value={nuevoGastoPersonal.descripcion}
-                            onChange={(e) => setNuevoGastoPersonal(prev => ({ ...prev, descripcion: e.target.value }))}
-                        />
-                    </div>
-                    <div className="col-md-2">
-                        <input
-                            type="number"
-                            className="form-control"
-                            placeholder="Monto"
-                            value={nuevoGastoPersonal.monto}
-                            onChange={(e) => setNuevoGastoPersonal(prev => ({ ...prev, monto: e.target.value }))}
-                        />
-                    </div>
-                    <div className="col-md-2">
-                        <button className="btn btn-info w-100" onClick={handleAddGastoPersonal}>Añadir</button>
-                    </div>
-                </div>
 
-                {gastosPersonales.length > 0 && (
-                    <>
-                        <ul className="list-group mb-3">
-                            {gastosPersonales.map((g, idx) => (
-                                <li className="list-group-item d-flex justify-content-between" key={idx}>
-                                    <span>{g.persona} - {g.descripcion}</span>
-                                    <span>{simbolosMoneda[moneda]}{g.monto.toFixed(2)}</span>
+                    <button className="btn btn-primary w-100" onClick={calcularTotal}>Calcular Presupuesto</button>
+
+                    {total !== null && (
+                        <div className="alert alert-success mt-4">
+                            <h5 className="text-center">🧾 Presupuesto Detallado</h5>
+                            <ul className="list-group list-group-flush">
+                                {Object.entries(formData).map(([key, val]) => (
+                                    <li className="list-group-item d-flex justify-content-between" key={key}>
+                                        <span>{key}</span>
+                                        <span>{simbolosMoneda[moneda]}{parseFloat(val || 0).toFixed(2)}</span>
+                                    </li>
+                                ))}
+                                {customGastos.map((item, idx) => (
+                                    <li className="list-group-item d-flex justify-content-between" key={idx}>
+                                        <span>{item.nombre}</span>
+                                        <span>{simbolosMoneda[moneda]}{item.valor.toFixed(2)}</span>
+                                    </li>
+                                ))}
+                                <li className="list-group-item fw-bold d-flex justify-content-between">
+                                    Total
+                                    <span>{simbolosMoneda[moneda]}{total.toFixed(2)}</span>
                                 </li>
-                            ))}
-                        </ul>
-                        <button className="btn btn-dark w-100" onClick={calcularDivisiones}>Calcular división entre todos</button>
-                    </>
-                )}
+                            </ul>
+                            {comentario && <p className="mt-3 fst-italic">📝 {comentario}</p>}
+                        </div>
+                    )}
+                </div>
+            )}
 
-                {resumenPersonas.length > 0 && (
-                    <div className="mt-4">
-                        <h5 className="mb-3">💳 Resultado por persona:</h5>
-                        {resumenPersonas.map((r, idx) => {
-                            const pagos = gastosPersonales.filter(g => g.persona === r.persona);
-                            return (
-                                <div className="mb-4" key={idx}>
-                                    <h6 className="fw-bold">{r.persona}</h6>
-                                    <ul className="list-group mb-2">
-                                        {pagos.map((g, i) => (
-                                            <li className="list-group-item d-flex justify-content-between" key={i}>
-                                                <span>{g.descripcion}</span>
-                                                <span>{simbolosMoneda[moneda]}{g.monto.toFixed(2)}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                    <div className="alert alert-secondary d-flex justify-content-between">
-                                        <span>Total pagado</span>
-                                        <span>{simbolosMoneda[moneda]}{r.pagado.toFixed(2)}</span>
-                                    </div>
-                                    <div className={`alert ${r.debe === 0 ? 'alert-success' : r.debe > 0 ? 'alert-warning' : 'alert-info'}`}>
-                                        {r.debe === 0
-                                            ? '✅ Ha pagado lo justo.'
-                                            : r.debe > 0
-                                                ? `⚠️ Debe pagar ${simbolosMoneda[moneda]}${r.debe.toFixed(2)}`
-                                                : `🤑 Le deben ${simbolosMoneda[moneda]}${Math.abs(r.debe).toFixed(2)}`
-                                        }
-                                    </div>
-                                </div>
-                            );
-                        })}
+            {vista === 'divisor' && (
+                <div className="p-4 shadow-sm bg-light mb-5">
+                    <h2 className="mb-3 text-center">👥 División de Gastos por Personas</h2>
+                    <div className="row g-2 mb-3">
+                        <div className="col-md-4">
+                            <input
+                                className="form-control"
+                                placeholder="Nombre"
+                                value={nuevoGastoPersonal.persona}
+                                onChange={(e) => setNuevoGastoPersonal(prev => ({ ...prev, persona: e.target.value }))} />
+                        </div>
+                        <div className="col-md-4">
+                            <input
+                                className="form-control"
+                                placeholder="Descripción"
+                                value={nuevoGastoPersonal.descripcion}
+                                onChange={(e) => setNuevoGastoPersonal(prev => ({ ...prev, descripcion: e.target.value }))} />
+                        </div>
+                        <div className="col-md-2">
+                            <input
+                                type="number"
+                                className="form-control"
+                                placeholder="Monto"
+                                value={nuevoGastoPersonal.monto}
+                                onChange={(e) => setNuevoGastoPersonal(prev => ({ ...prev, monto: e.target.value }))} />
+                        </div>
+                        <div className="col-md-2">
+                            <button className="btn btn-info w-100" onClick={handleAddGastoPersonal}>Añadir</button>
+                        </div>
                     </div>
-                )}
-            </div>
+
+                    {gastosPersonales.length > 0 && (
+                        <>
+                            <ul className="list-group mb-3">
+                                {gastosPersonales.map((g, idx) => (
+                                    <li className="list-group-item d-flex justify-content-between" key={idx}>
+                                        <span>{g.persona} - {g.descripcion}</span>
+                                        <span>{simbolosMoneda[moneda]}{g.monto.toFixed(2)}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                            <button className="btn btn-dark w-100" onClick={calcularDivisiones}>Calcular división entre todos</button>
+                        </>
+                    )}
+
+                    {resumenPersonas.length > 0 && (
+                        <div className="mt-4">
+                            <h5 className="mb-3">💳 Resultado por persona:</h5>
+                            {resumenPersonas.map((r, idx) => {
+                                const pagos = gastosPersonales.filter(g => g.persona === r.persona);
+                                const claseAlerta = r.debe === 0
+                                    ? 'alert-success'
+                                    : r.debe > 0
+                                        ? 'alert-warning'
+                                        : 'alert-info';
+
+                                return (
+                                    <div className="mb-4" key={idx}>
+                                        <h6 className="fw-bold">{r.persona}</h6>
+                                        <ul className="list-group mb-2">
+                                            {pagos.map((g, i) => (
+                                                <li className="list-group-item d-flex justify-content-between" key={i}>
+                                                    <span>{g.descripcion}</span>
+                                                    <span>{simbolosMoneda[moneda]}{g.monto.toFixed(2)}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                        <div className="alert alert-secondary d-flex justify-content-between">
+                                            <span>Total pagado</span>
+                                            <span>{simbolosMoneda[moneda]}{r.pagado.toFixed(2)}</span>
+                                        </div>
+                                        <div className={`alert ${claseAlerta}`}>
+                                            {r.debe === 0
+                                                ? '✅ Ha pagado lo justo.'
+                                                : r.debe > 0
+                                                    ? `⚠️ Debe pagar ${simbolosMoneda[moneda]}${r.debe.toFixed(2)}`
+                                                    : `🤑 Le deben ${simbolosMoneda[moneda]}${Math.abs(r.debe).toFixed(2)}`
+                                            }
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    )}
+                </div>
+            )}
         </div>
     );
 }

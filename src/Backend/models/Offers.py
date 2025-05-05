@@ -26,7 +26,7 @@ class Offers(db.Model):
     #relations
     comments = relationship('Comments',back_populates='offert')
     company = relationship('Companies',back_populates='offert')
-    payments = relationship('Payments',back_populates='offert')
+    payments = relationship('Payments',back_populates='offer')
 
     #serialize
     def serialize(self):
