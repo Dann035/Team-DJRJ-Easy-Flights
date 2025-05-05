@@ -21,6 +21,7 @@ class Offers(db.Model):
     company_id: Mapped[int] = mapped_column(ForeignKey('companies.id'), nullable=True)
     duration: Mapped[str] = mapped_column(String(120),nullable=True)
     location: Mapped[str] = mapped_column(String(120),nullable=True)
+    tags: Mapped[str] = mapped_column(String(120),nullable=True)
 
     #relations
     comments = relationship('Comments',back_populates='offert')
@@ -38,5 +39,6 @@ class Offers(db.Model):
             "created_at": self.created_at,
             "type_offert": self.type_offert,
             "duration":self.duration,
-            "location":self.location
+            "location":self.location,
+            "tags":self.tags,
         }
