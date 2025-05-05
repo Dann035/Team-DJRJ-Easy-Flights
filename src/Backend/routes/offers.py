@@ -6,15 +6,12 @@ from Backend.auth_decorators import role_required
 offers_bp = Blueprint('offers', __name__)
 
 
-@offers_bp.route('/offers/', methods=['GET'])
-def hello():
-    return jsonify({"msg": "Hello from the offers"}), 200
-
 #Enpoint de crear ofertas
 @offers_bp.route('/offers', methods=['POST'])
 @jwt_required()
 @role_required('COMPANY_ADMIN')
 def create_offer():
+
         data = request.get_json()
 
         if not all(field in data for field in ['title', 'description', 'price', 'type_offert', 'image_url', 'location', 'duration']):
@@ -29,6 +26,7 @@ def create_offer():
             location=data['location'], 
             duration=data['duration']
         )
+        
         db.session.add(new_offer)
         db.session.commit()
 
@@ -79,6 +77,7 @@ def update_offer(offer_id):
     image_url = request.json.get('image_url', None)
     location = request.json.get('location', None)
     duration = request.json.get('duration', None)
+    tags = request.json.get('tags', None)
 
     if title:
         offer.title = title
@@ -94,6 +93,8 @@ def update_offer(offer_id):
         offer.location = location
     if duration:
         offer.duration = duration    
+    if tags:
+        offer.tags = tags 
 
     db.session.commit()
 

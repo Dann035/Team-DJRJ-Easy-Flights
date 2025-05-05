@@ -17,7 +17,7 @@ export const Footer = () => (
 			<section>
 				<h5>Quick Links</h5>
 				<ul className="list-unstyled">
-					<li><a href="#">About Us</a></li>
+					<li><a href="/about">About Us</a></li>
 					<li><a href="mailto:example@gmail.com">Contact Us</a></li>
 					<li><a href="#">Blog Posts</a></li>
 					<li><a href="#">FAQs</a></li>
@@ -50,7 +50,7 @@ export const Footer = () => (
 
 		<div className="d-flex justify-content-between flex-wrap text-center">
 			<section>
-				<span>Copyright © 2022 Easy-Flights. All rights reserved.</span>
+				<span>Copyright © 2025 Easy-Flights. All rights reserved.</span>
 			</section>
 			<section>
 				<ul className="d-flex gap-3 list-unstyled justify-content-center">

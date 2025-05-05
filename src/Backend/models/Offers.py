@@ -40,5 +40,5 @@ class Offers(db.Model):
             "type_offert": self.type_offert,
             "duration":self.duration,
             "location":self.location,
-            "tags":self.tags,
+            "tags":self.tags
         }

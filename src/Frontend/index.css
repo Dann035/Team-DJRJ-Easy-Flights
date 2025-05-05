@@ -66,15 +66,3 @@
     to { opacity: 1; translate: 0 0; }
 }
 
-
-#imag1{
-    position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* 🔥 Esto es la clave */
-  z-index: 0;
-
-}
-
