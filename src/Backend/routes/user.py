@@ -14,14 +14,26 @@ def signup_user():
     data = request.get_json()
     user_type = data.get('role')  # 'USER' o 'COMPANY'
     
+    # Verifica en ambas tablas
+    company = Companies.query.filter_by(email=data['email']).first()
+    user = User.query.filter_by(email=data['email']).first()
+    if company or user:
+        return jsonify({'message': 'Email ya registrado'}), 409
+
     try:
         if user_type == 'COMPANY':
             company = Companies(
-                company_name=data['company_name'],
-                nit=data['nit'],
-                address=data['address'],
+                name=data['name'],
+                password=generate_password_hash(str(data['password'])),
+                description=data['description'],
                 email=data['email'],
-                password=str(generate_password_hash(data['password']))
+                phone=data['phone'],
+                website=data['website'],
+                country=data['country'],
+                logo_url=data['logo_url'],
+                slug=data['slug'],
+                status=data['status'],
+                role=user_type
             )
             db.session.add(company)
             db.session.commit()
@@ -30,8 +42,9 @@ def signup_user():
             user = User(
                 name=data['name'],
                 email=data['email'],
-                password=str(generate_password_hash(data['password'])),
-                companies=[company]
+                password=generate_password_hash(str(data['password'])),
+                companies=[company],
+                role=user_type
             )
             db.session.add(user)
             db.session.commit()
@@ -50,10 +63,11 @@ def signup_user():
             if User.query.filter_by(email=data['email']).first():
                 return jsonify({'message': 'Email ya registrado'}), 409
             
+            strUPassword = str(data['password'])
             user = User(
                 name=data['name'],
                 email=data['email'],
-                password=str(generate_password_hash(data['password'])),
+                password=generate_password_hash(strUPassword),
                 role=user_type
             )
             db.session.add(user)
