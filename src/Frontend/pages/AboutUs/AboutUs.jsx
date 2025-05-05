@@ -56,13 +56,13 @@ Además, te invitamos a conocer al equipo detrás del proyecto: Daniel, Javier, 
 
       <section className="team">
         {teamMembers.map((member, index) => (
-          <div className="flip-card" key={index}>
+          <div className="flip-card-au" key={index}>
             <div className="flip-card-inner">
-              <div className="flip-card-front">
+              <div className="flip-card-front-au">
                 <img src={member.image} alt={member.name} />
                 <h3>{member.name}</h3>
               </div>
-              <div className="flip-card-back">
+              <div className="flip-card-back-au">
                 <img src={member.smallImage} alt={`Mini ${member.name}`} />
                 <p>{member.description}</p>
                 <a href={member.github} target="_blank" rel="noopener noreferrer">GitHub</a> |
