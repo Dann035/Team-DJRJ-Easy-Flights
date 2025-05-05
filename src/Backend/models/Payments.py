@@ -15,14 +15,8 @@ class Payments(db.Model):
     payment_method: Mapped[str] = mapped_column(String(120))
     created_at: Mapped[str] = mapped_column(String(120))
     status:Mapped[str] = mapped_column(String(120))
-    user_id: Mapped[int] = mapped_column(ForeignKey('user.id'))
+    user_id: Mapped[int] = mapped_column(ForeignKey('users.id'))
     offer_id: Mapped[int] = mapped_column(ForeignKey('offers.id'))
-    payment_method: Mapped[str] = mapped_column(String(120),nullable=True)
-    created_at: Mapped[str] = mapped_column(String(120),nullable=True)
-    status:Mapped[str] = mapped_column(String(120),nullable=True)
-    user_id: Mapped[int] = mapped_column(ForeignKey('user.id'),nullable=True)
-    offer_id: Mapped[int] = mapped_column(ForeignKey('offers.id'),nullable=True)
-
 
     #relations
     user = relationship('User',back_populates='payments')

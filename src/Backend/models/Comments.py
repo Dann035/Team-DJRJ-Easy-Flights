@@ -15,7 +15,7 @@ class Comments(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     content: Mapped[str] = mapped_column(String(520))
     created_at: Mapped[str] = mapped_column(String(100),nullable=True)
-    user_id: Mapped[int] = mapped_column(ForeignKey('user.id'),nullable=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey('users.id'),nullable=True)
     offer_id: Mapped[int] = mapped_column(ForeignKey('offers.id'),nullable=True)
     company_id: Mapped[int] = mapped_column(ForeignKey('companies.id'),nullable=True)
 

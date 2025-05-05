@@ -8,6 +8,7 @@ if TYPE_CHECKING:
     from .Roles import Roles
     from .Comments import Comments
     from .Offers import Offers
+    from .UserRole import UserRole
 
 class Companies(db.Model):
     __tablename__ = 'companies'
@@ -20,16 +21,16 @@ class Companies(db.Model):
     website: Mapped[str] = mapped_column(String(120),nullable=False)
     country: Mapped[str] = mapped_column(String(50),nullable=False)
     logo_url: Mapped[str] = mapped_column(String(255),nullable=False)
-    rating: Mapped[float] = mapped_column(Float,nullable=False)
     slug: Mapped[str] = mapped_column(String(50),nullable=False)
     status: Mapped[str] = mapped_column(String(50),nullable=False)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc))
     logo_url: Mapped[str] = mapped_column(String(255),nullable=False)
-    role_id: Mapped[int] = mapped_column(ForeignKey('roles.id'),nullable=True, default=3)
+    owner_id: Mapped[int] = mapped_column(ForeignKey('users.id'),nullable=True)
 
     #relations
+    owner = relationship('User',back_populates='companies')
     comments = relationship('Comments',back_populates='company')
-    role = relationship('Roles',back_populates='company')
+    company_roles = relationship('UserRole',back_populates='company')
     offert = relationship('Offers',back_populates='company')
 
     #serialize
@@ -43,7 +44,6 @@ class Companies(db.Model):
             "website": self.website,
             "country": self.country,
             "logo_url": self.logo_url,
-            "rating": self.rating,
             "slug": self.slug,
             "status": self.status
         }

@@ -1,42 +1,32 @@
 from flask import request, jsonify, Blueprint
-from Backend.models.base import db
-from Backend.models.Offers import Offers
+from Backend.models import db, Offers
+from flask_jwt_extended import jwt_required
+from Backend.auth_decorators import role_required
 
 offers_bp = Blueprint('offers', __name__)
 
 
 #Enpoint de crear ofertas
 @offers_bp.route('/offers', methods=['POST'])
+@jwt_required()
+@role_required('COMPANY_ADMIN')
 def create_offer():
-        title = request.json.get('title', None)
-        description = request.json.get('description', None)
-        price = request.json.get('price', None)
-        type_offert = request.json.get('type_offert', None)
-        image_url = request.json.get('image_url', None)
-        location = request.json.get('location', None)
-        duration = request.json.get('duration', None) 
-        tags = request.json.get('tags', None)
 
-        if not title:
-            return jsonify({"msg": "Missing title"}), 400
-        if not description:
-            return jsonify({"msg": "Missing description"}), 400
-        if not price:
-            return jsonify({"msg": "Missing price"}), 400
-        if not type_offert: 
-            return jsonify({"msg": "Missing type_offert"}), 400
-        if not image_url:
-            return jsonify({"msg": "Missing image_url"}), 400
-        if not location:
-            return jsonify({"msg": "Missing location"}), 400
-        if not duration:
-            return jsonify({"msg": "Missing duration"}), 400
-        if not tags:
-            return jsonify({"msg": "Missing tags"}), 400
+        data = request.get_json()
 
-    
+        if not all(field in data for field in ['title', 'description', 'price', 'type_offert', 'image_url', 'location', 'duration']):
+            return jsonify({'message': 'Missing fields'}), 400
 
-        new_offer = Offers(title=title, description=description, price=price, type_offert=type_offert, image_url=image_url, location=location, duration=duration)
+        new_offer = Offers(
+            title=data['title'], 
+            description=data['description'], 
+            price=data['price'], 
+            type_offert=data['type_offert'], 
+            image_url=data['image_url'], 
+            location=data['location'], 
+            duration=data['duration']
+        )
+        
         db.session.add(new_offer)
         db.session.commit()
 
@@ -44,7 +34,7 @@ def create_offer():
             "msg": "Offer created successfully",
             "offer": new_offer.serialize()
         }), 201
-  
+
 #Enpoint de obtener ofertas
 @offers_bp.route('/offers', methods=['GET'])
 def get_offers():
@@ -72,7 +62,6 @@ def get_offer(offer_id):
         "offer": offer.serialize()
     }), 200
 
-     
 
 #Enpoint de modificar ofertas
 @offers_bp.route('/offers/<int:offer_id>', methods=['PUT'])

@@ -9,7 +9,7 @@ function Signup() {
         name: "",
         email: "",
         password: "",
-        role: "user"
+        role: "USER"
     });
 
     const handleChange = (e) => {
@@ -50,18 +50,18 @@ function Signup() {
                     </div>
                     <div className="form-information">
                         <div className="form-information-childs">
-                            <span onClick={() => navigate('/')} className="btn-cancelar"><i class="fa-solid fa-xmark"></i></span>
+                            <span onClick={() => navigate('/')} className="btn-cancelar"><i className="fa-solid fa-xmark"></i></span>
                             <h2>Registrarse</h2>
                             <div className="icons">
-                                <i class="fa-brands fa-google"></i>
-                                <i class="fa-brands fa-facebook"></i>
-                                <i class="fa-brands fa-linkedin"></i>
-                                <i class="fa-brands fa-apple"></i>
+                                <i className="fa-brands fa-google"></i>
+                                <i className="fa-brands fa-facebook"></i>
+                                <i className="fa-brands fa-linkedin"></i>
+                                <i className="fa-brands fa-apple"></i>
                             </div>
                             <p>O registrate con una cuenta</p>
                             <form onSubmit={handleSubmit}>
                                 <label>
-                                    <i class="fa-solid fa-user"></i>
+                                    <i className="fa-solid fa-user"></i>
                                     <input
                                         onChange={handleChange}
                                         value={formData.name}
@@ -72,7 +72,7 @@ function Signup() {
                                     />
                                 </label>
                                 <label>
-                                    <i class="fa-solid fa-envelope"></i>
+                                    <i className="fa-solid fa-envelope"></i>
                                     <input
                                         onChange={handleChange}
                                         value={formData.email}
@@ -83,7 +83,7 @@ function Signup() {
                                     />
                                 </label>
                                 <label>
-                                    <i class="fa-solid fa-lock"></i>
+                                    <i className="fa-solid fa-lock"></i>
                                     <input
                                         onChange={handleChange}
                                         value={formData.password}

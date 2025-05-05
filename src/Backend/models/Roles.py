@@ -6,6 +6,7 @@ from .base import db
 if TYPE_CHECKING:
     from .User import User
     from .Companies import Companies
+    from .UserRole import UserRole
 
 
 class Roles(db.Model):
@@ -14,8 +15,8 @@ class Roles(db.Model):
     name: Mapped[str] = mapped_column(String(120),unique=True,nullable=False)
 
     #relations
-    user = relationship('User',back_populates='role',cascade="all, delete-orphan")
-    company = relationship('Companies',back_populates='role',cascade="all, delete-orphan")
+    user_roles = relationship('UserRole',back_populates='role')
+    # company = relationship('Companies',back_populates='role',cascade="all, delete-orphan")
 
     def serialize(self):
         return {
