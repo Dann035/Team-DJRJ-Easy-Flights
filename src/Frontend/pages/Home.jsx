@@ -7,6 +7,7 @@ import Features from "../components/Features/Features.jsx";
 import { Offers } from "./Offers/Offers.jsx";
 import { AuthProvider } from "../hooks/useAuthContext.jsx";
 
+
 export const Home = () => {
     return (
         <div className="container">

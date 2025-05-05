@@ -11,7 +11,7 @@ from flask_cors import CORS
 
 # Allow CORS requests to this API
 api = Blueprint('api', __name__)
-CORS(api, origins="*")
+#CORS(api, supports_credentials=True, origins="*")
 
 # Registra los blueprints de cada módulo
 api.register_blueprint(user_bp)
