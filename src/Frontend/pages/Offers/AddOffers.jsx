@@ -1,4 +1,4 @@
-import React, { use, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import useGlobalReducer from "../../hooks/useGlobalReducer";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuthContext";
@@ -10,11 +10,6 @@ export const AddOffers = () => {
   const {dispatch } = useGlobalReducer();
   const navigate = useNavigate()
   const {user, hasRole} = useAuth()
-  const [offerData, setOfferData] = useState({
-    destination: '',
-    price: '',
-    description: ''
-  });
   const [offer, SetOffer] = useState({
     title: "",
     description: "",
@@ -26,11 +21,11 @@ export const AddOffers = () => {
     tags:""
   });
 
-  useEffect(() => {
-    if (!hasRole(['COMPANY_ADMIN'])) {
-      navigate('/')
-    }
-  },);
+  // useEffect(() => {
+  //   if (!hasRole(['COMPANY_ADMIN'])) {
+  //     navigate('/')
+  //   }
+  // },);
 
   const saveChange = (e) => {
     SetOffer({
@@ -61,8 +56,8 @@ export const AddOffers = () => {
   };
 
   return (
-    <div className="container">
-         <div className="card p-5 mt-5 d-flex align-items-center justify-content-center" >
+    <div className="container d-flex align-items-center justify-content-center">
+         <div className="p-5 mt-5" >
          <h1>Añadir una oferta: </h1>
           <div className="row ">
             <div className="col-12">
@@ -103,7 +98,8 @@ export const AddOffers = () => {
         </div> 
 
         {/* VISTA PREVIA DE LA OFERTA */}
-        <div className="card mt-4 p-4 " id="cardaddoffer">
+        <div>
+        <div className="card mt-4 p-4  " id="cardaddoffer">
           <h2>Vista previa de la oferta:</h2>
           <div className="text-center">
             {offer.image_url && (<img src={offer.image_url} alt="Vista previa" style={{maxWidth:"100%", maxHeight: "200px"}}/>)}
@@ -112,20 +108,26 @@ export const AddOffers = () => {
             <p className="text-white"><strong className="text-white">Tipo:</strong> {offer.type_offert || "Tipo de oferta"}</p>
             <p className="text-white"><strong>Tipo:</strong> {offer.price || "0.00"}</p> */}
           </div>
+          
         </div>
 
-
-        <div className=" mt-4 d-flex align-items-center justify-content-center">
+        <div className=" mt-4 d-flex align-items-center justify-content-center gap-3">
           <div>
-              <button  className=" btn btn-light" onClick={newOffert}>Crear Oferta</button>
+              <button  className="createaddbtn" onClick={newOffert}>Crear Oferta</button>
           </div>
 
           <div>
             <Link to="/">
-                <button className="btn btn-light">Ofertas</button>
+                <button className="createaddbtn">Ofertas</button>
             </Link>
           </div>
         </div>
+        </div>
+        
+        
+        
+
+
 
     </div>
   );

@@ -58,14 +58,14 @@ export const Offers = () =>{
             
             
 
-            <div>
+            {/* <div>
 				<button className={`botonAdd ${!isCompany ? "d-none" : ""}`} onClick={moveToAddOffer}>New Offer</button>
-			</div>
-            <div className="row mt-5">
+			</div> */}
+            <div className="row mt-5 of-listcard">
                 {store.offers?.length === 0 ? (
                     <p ><strong className="text-info">Aún no hay ofertas</strong></p>
                 ) : (store.offers?.map((offert, index) => (
-                    <div className="col-md-3 mb-3" key={index}>
+                    <div className=" col-md-3 mb-3" key={index}>
                         <OffersCard offert={offert} />
                     </div>
                 )))}

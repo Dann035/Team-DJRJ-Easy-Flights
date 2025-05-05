@@ -38,14 +38,21 @@
       inset 4px 4px 6px 0 rgba(0, 0, 0, .4);
   }
    
+  #flipcardimg{
+    border-radius: 10px;
+    height: 80%;
+    width: 80%;
+
+  }
    
 
    .flip-card {
     background-color: transparent;
-    width: 295px;
-    height: 350px;
+    width: 300px;
+    height: 370px;
     perspective: 1000px;
     font-family: sans-serif;
+    border-radius: 12px;
     
     
   }

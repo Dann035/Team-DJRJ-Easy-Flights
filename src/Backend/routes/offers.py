@@ -8,8 +8,8 @@ offers_bp = Blueprint('offers', __name__)
 
 #Enpoint de crear ofertas
 @offers_bp.route('/offers', methods=['POST'])
-@jwt_required()
-@role_required('COMPANY_ADMIN')
+#@jwt_required()
+# @role_required('COMPANY')
 def create_offer():
 
         data = request.get_json()
