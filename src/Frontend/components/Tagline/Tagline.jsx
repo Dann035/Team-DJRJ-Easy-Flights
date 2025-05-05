@@ -1,10 +1,11 @@
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
-import { use, useState } from "react";
+import { useEffect, useState } from "react";
 import "./Tagline.css";
 import useGlobalReducer from "../../hooks/useGlobalReducer";
 import { OffersCard } from "../../pages/Offers/OffersCard";
 import Modal from "../Modal/Modal";
+import autocomplete from "../../Mock/autocomplete.json"
 
 function Tagline() {
     const { store, dispatch } = useGlobalReducer();
@@ -13,13 +14,54 @@ function Tagline() {
     const [personas, setPersonas] = useState(1);
     const [destino, setDestino] = useState("");
     const [showModal, setShowModal] = useState(false);
-    // const [filteredOffers, setFilteredOffers] = useState([]);
+    const API_KEY = "5f9b8dee36msh09331b9ab9a4fbbp1b81efjsne60799c1c2e1"
+    const origin = store.origen
+    const destination = store.destino
+
+    const [filteredOffers, setFilteredOffers] = useState([]);
+
+     
+   // const url = `https://skyscanner89.p.rapidapi.com/flights/roundtrip/list?${origin}`
+    
+
+    const URL = `https://skyscanner89.p.rapidapi.com/flights/roundtrip/list?originId=27542715&destinationId=27537542`;
+    const options = {
+        
+    headers: {
+    'x-rapidapi-key': API_KEY,
+    'x-rapidapi-host': 'skyscanner89.p.rapidapi.com'
+    }
+    };
+
+    const showData = async () =>{
+
+        
+    try {
+        const response = await fetch(URL, options);
+        const result = await response.json();
+        console.log(result.data.flightQuotes.results)
+      
+        dispatch({type:"get_offersAPI", payload:result.data.flightQuotes.results})
+    
+    } catch (error) {
+        console.error("Error la offerAPI",error.message)
+    }
+    }
+
+    useEffect(()=>{
+        
+    showData()
+    },[])
+    
+  
+
+
 
     const handleBuscar = async () => {
-        if (!destino || !startDate || !endDate) {
-            alert("Selecciona destino y fechas");
-            return;
-        }
+        // if (!destino || !startDate || !endDate) {
+        //     alert("Selecciona destino y fechas");
+        //     return;
+        // }
 
         const res = store.offers.filter((oferta) => oferta.title === destino);
         setFilteredOffers(res);
@@ -63,6 +105,28 @@ function Tagline() {
             <button className="tg-btn-LearnMore">Learn More</button>
             <div className="search-tvl-container">
                 <section className="tvl-section-box d-flex">
+                    <fieldset className="box-tvl-destination d-flex flex-column">
+                        <label>Origen:</label>
+                        <select
+                            name="origen"
+                            id="select-origen"
+                            onChange={(e) => setDestino(e.target.value)}
+                            value={destino}
+                        >
+                            <option value="" defaultChecked hidden>
+                                Elige el origen
+                            </option>
+                            <option value="entityid">Barcelona</option>
+                            <option value="New York">New York</option>
+                            <option value="Tokio">Tokio</option>
+                            <option value="Francia">Francia</option>
+                            <option value="Dubai">Dubai</option>
+                            <option value="Australia">Australia</option>
+                            <option value="Peru">Peru</option>
+                            <option value="Nassau">Nassau</option>
+                            <option value="Rome">Rome</option>
+                        </select>
+                    </fieldset>
                     <fieldset className="box-tvl-destination d-flex flex-column">
                         <label>Destino:</label>
                         <select
@@ -123,6 +187,19 @@ function Tagline() {
                         Buscar ofertas
                     </button>
                 </section>
+            </div>
+            <div>
+                    {store?.offersAPI.map((offer,index)=>{
+                  
+                    
+                    <div key={index}>
+                        <p>Precio
+                            {offer.price}
+                        </p>
+                    </div>
+                
+                    })}
+
             </div>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>

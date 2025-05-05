@@ -19,6 +19,10 @@ export const Offers = () =>{
         navigate("/addoffer")
     }
 
+    const moveToOffersList = () => {
+        navigate("/offerslist")
+    }
+
     useEffect(()=>{
         fetch(`${url}/api/offers`,{
             method:"GET",
@@ -36,7 +40,24 @@ export const Offers = () =>{
     return (
             
         <div className="container-fluid box-offers">
+            
             <h1 className="text-center">Ofertas de viajes</h1>
+
+            
+            <div className="d-flex justify-content-between">
+                <div>
+				    <button className="botonAdd" onClick={moveToAddOffer}>Crear Oferta</button>
+			    </div>
+
+                <div className="justify-content-end">
+				    <button className="botonAdd" onClick={moveToOffersList}>Ofertas</button>
+			    </div>
+
+            </div>
+            
+            
+            
+
             <div>
 				<button className={`botonAdd ${!isCompany ? "d-none" : ""}`} onClick={moveToAddOffer}>New Offer</button>
 			</div>
