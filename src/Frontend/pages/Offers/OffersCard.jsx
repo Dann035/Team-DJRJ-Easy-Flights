@@ -77,8 +77,6 @@ export const OffersCard = ({offert}) => {
     //           <p>{offert.type_offert}</p>
     //           <p>{offert.price}€</p>
 
-             
-
     //           <button onClick={()=>deleteOffer()}>❌</button>
     //           <button onClick={()=> setShowModal(true)}>✏️</button>
     //         </div>
@@ -113,7 +111,7 @@ export const OffersCard = ({offert}) => {
           
         </div>
         <div className="flip-card-back">
-          <p className="title"><p>{offert.title}</p></p>
+          <p className="title">{offert.title}</p>
           <Link to={"/offerdetails/" + offert.id}>
                   <button className="custom-btn btn-2">+ INFO</button>
                   <div>
