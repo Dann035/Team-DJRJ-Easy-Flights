@@ -21,4 +21,7 @@
     border: 2px solid rgb(0, 47, 255);
   }
 
-  
+  .of-listcard{
+    overflow: scroll;
+    height: 400px;
+  }

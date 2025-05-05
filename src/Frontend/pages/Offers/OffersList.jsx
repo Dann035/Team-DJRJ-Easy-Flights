@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { OffersListCards } from "./OffersListCards";
 import useGlobalReducer from "../../hooks/useGlobalReducer";
 import { MapPin,Calendar } from "lucide-react";
-
+import { Link } from "react-router-dom";
 
 const url = import.meta.env.VITE_BACKEND_URL
 export const OffersList = () => {
@@ -78,54 +78,18 @@ export const OffersList = () => {
           <input value={search} onChange={searcher} type="text" placeholder="SEARCH" className="form-control"/>
           <h1 className="text-center">OFERTAS</h1>
            
-             <div  id="contenedor">
-            <div className="row ">
-                <div className="col-md-3 " >
-                {resultado.map((offert,index)=>(
-                  <div key={index}>
-                      <div className="card">
-                        <div className="card-image">
-                            <img src={offert.image_url} alt="1" className="w-100 h-100 object-cover rounded-top img-fluid"/>
-                        </div>
-                        <div className="category"> 
-                            <h3>{offert.title}</h3>
-                        </div>
-                        <div className="heading"> 
-                            <div className="flex items-start mb-2">
-                                <MapPin/><span>{offert.location}</span>
-                            </div>
-                            <div className="flex items-center mb-2">
-                                <Calendar className="w-4 h-4 mr-1" /><span>{offert.duration}</span><br/>
-                            </div>
-                        </div>
-                    </div>
-                  </div>
-                ))}
-                </div>
-              </div>
-              </div> 
            
-          <table className="table table-striped table-hover mt-5 shadow-lg">
-              <thead>
-                  <tr className="bg-curso text-white">
-                    <th>TITULO</th>
-                    <th>LUGAR</th>
-
-                  </tr>
-
-              </thead>
-
-              <tbody>
-                {resultado.map((offer,index)=>(
-                  <tr key={index}>
-                    <td>{offer.title}</td>
-                    <td>{offer.location}</td>
-                  </tr>
+            <div className="row mt-5 of-list">
+                
+                {resultado.map((offert,index)=>(
+                    <div className="col-md-3 mb-5" key={index}>
+                          <OffersListCards offert={offert}/>
+                    </div>
                 ))}
-
-              </tbody>
-
-           </table>
+                
+              </div>
+              
+          
 
 
         </div>

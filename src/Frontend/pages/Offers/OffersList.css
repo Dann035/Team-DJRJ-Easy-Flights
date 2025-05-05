@@ -1,12 +1,14 @@
 
 
-#contenedor{
- flex-direction: column;
- display: flex;
-}
 
 .imagecontainer img{
     object-fit: cover;
+}
+
+.of-list{
+  display: grid !important; 
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap: 1rem;
 }
 
 .card {

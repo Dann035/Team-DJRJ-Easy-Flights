@@ -91,7 +91,7 @@ export const OffersCard = ({offert}) => {
       <div className="flip-card-inner">
         <div className="flip-card-front">
           <div className="h-100 relative" id="containerimg">
-            <img src={offert.image_url} className="w-100 h-100 object-cover rounded-top img-fluid"/>
+            <img src={offert.image_url} className=" w-100 h-100 img-fluid " id="flipcardimg"/>
             <span className="priceover ">{offert.price}&nbsp;€</span>
           </div>
           <div className="p-6 h-75">
