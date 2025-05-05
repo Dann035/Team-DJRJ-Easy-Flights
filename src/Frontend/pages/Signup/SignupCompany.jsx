@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { signupCompany } from "../../services/signup";
-
+import './SignupCompany.css'
 
 
 function SignupCompany() {

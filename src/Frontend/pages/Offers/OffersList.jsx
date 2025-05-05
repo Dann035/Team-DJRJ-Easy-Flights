@@ -77,8 +77,7 @@ export const OffersList = () => {
           <h2 className="text-center">Busqueda</h2>
           <input value={search} onChange={searcher} type="text" placeholder="SEARCH" className="form-control"/>
           <h1 className="text-center">OFERTAS</h1>
-           
-           
+
             <div className="row mt-5 of-list">
                 
                 {resultado.map((offert,index)=>(
@@ -86,11 +85,8 @@ export const OffersList = () => {
                           <OffersListCards offert={offert}/>
                     </div>
                 ))}
-                
-              </div>
-              
-          
 
+              </div>
 
         </div>
     )

@@ -45,8 +45,8 @@ function OffersAPI() {
                         </div>
                     ))
                 ) : (
-                    <p className="text-center">
-                        No se encontraron ofertas disponibles.
+                    <p className="text-center alert alert-info">
+                        Elige origen y detino para buscar ofertas
                     </p>
                 )}
             </div>
