@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 export default function Tools () {
     const [vista, setVista] = useState('menu');
-
     const [formData, setFormData] = useState({
         vuelo: '',
         hospedaje: '',
@@ -16,7 +15,6 @@ export default function Tools () {
     const [moneda, setMoneda] = useState('USD');
     const [comentario, setComentario] = useState('');
     const [total, setTotal] = useState(null);
-
     const [gastosPersonales, setGastosPersonales] = useState([]);
     const [nuevoGastoPersonal, setNuevoGastoPersonal] = useState({ persona: '', descripcion: '', monto: '' });
     const [resumenPersonas, setResumenPersonas] = useState([]);
@@ -91,21 +89,35 @@ export default function Tools () {
                 <div className="row text-center">
                     <h1 className="mb-4">🧳 Herramientas de Viaje</h1>
                     <div className="col-md-6 mb-4">
-                        <div className="card h-100 shadow-sm" role="button" onClick={() => setVista('planificador')}>
-                            <img src="https://previews.123rf.com/images/firstblood/firstblood1307/firstblood130700513/20653892-c%C3%A1lculo-del-presupuesto-de-la-casa-la-calculadora-una-pluma-el-diagrama.jpg" className="card-img-top" alt="Planificador" />
-                            <div className="card-body">
-                                <h5 className="card-title">Planificador de Viaje</h5>
-                                <p className="card-text">Presupuesta tu viaje fácilmente.</p>
-                            </div>
+                        <div
+                            className="shadow-sm p-4"
+                            role="button"
+                            onClick={() => setVista('planificador')}
+                            style={{ border: '1px solid #ddd', borderRadius: '8px', cursor: 'pointer' }}
+                        >
+                            <img
+                                src="https://previews.123rf.com/images/firstblood/firstblood1307/firstblood130700513/20653892-c%C3%A1lculo-del-presupuesto-de-la-casa-la-calculadora-una-pluma-el-diagrama.jpg"
+                                className="img-fluid"
+                                alt="Planificador"
+                            />
+                            <h5 className="mt-3">Planificador de Viaje</h5>
+                            <p>Presupuesta tu viaje fácilmente.</p>
                         </div>
                     </div>
                     <div className="col-md-6 mb-4">
-                        <div className="card h-100 shadow-sm" role="button" onClick={() => setVista('divisor')}>
-                            <img src="https://www.togetherprice.com/es/static/b7afeb3174d09b9322080c90f4cb1ab1/c61e6/dividir_gastos_entre_amigos.jpg" className="card-img-top" alt="Divisor de gastos" />
-                            <div className="card-body">
-                                <h5 className="card-title">División de Gastos</h5>
-                                <p className="card-text">Reparte los gastos entre todos.</p>
-                            </div>
+                        <div
+                            className="shadow-sm p-4"
+                            role="button"
+                            onClick={() => setVista('divisor')}
+                            style={{ border: '1px solid #ddd', borderRadius: '8px', cursor: 'pointer' }}
+                        >
+                            <img
+                                src="https://www.togetherprice.com/es/static/b7afeb3174d09b9322080c90f4cb1ab1/c61e6/dividir_gastos_entre_amigos.jpg"
+                                className="img-fluid"
+                                alt="Divisor de gastos"
+                            />
+                            <h5 className="mt-3">División de Gastos</h5>
+                            <p>Reparte los gastos entre todos.</p>
                         </div>
                     </div>
                 </div>
@@ -118,14 +130,7 @@ export default function Tools () {
             )}
 
             {vista === 'planificador' && (
-                <div
-                className="card p-4 shadow-sm mb-5"
-                style={{
-                  overflow: 'visible',
-                  maxWidth: '100%',
-                  marginBottom: '100px',
-                }}
-              >
+                <div className="p-4 shadow-sm mb-5">
                     <h2 className="mb-4 text-center">✈️ Planificador de Viaje</h2>
                     <div className="mb-3">
                         <label className="form-label">Selecciona moneda</label>
@@ -231,7 +236,7 @@ export default function Tools () {
             )}
 
             {vista === 'divisor' && (
-                <div className="card p-4 shadow-sm bg-light mb-5">
+                <div className="p-4 shadow-sm bg-light mb-5">
                     <h2 className="mb-3 text-center">👥 División de Gastos por Personas</h2>
                     <div className="row g-2 mb-3">
                         <div className="col-md-4">
@@ -239,16 +244,14 @@ export default function Tools () {
                                 className="form-control"
                                 placeholder="Nombre"
                                 value={nuevoGastoPersonal.persona}
-                                onChange={(e) => setNuevoGastoPersonal(prev => ({ ...prev, persona: e.target.value }))}
-                            />
+                                onChange={(e) => setNuevoGastoPersonal(prev => ({ ...prev, persona: e.target.value }))} />
                         </div>
                         <div className="col-md-4">
                             <input
                                 className="form-control"
                                 placeholder="Descripción"
                                 value={nuevoGastoPersonal.descripcion}
-                                onChange={(e) => setNuevoGastoPersonal(prev => ({ ...prev, descripcion: e.target.value }))}
-                            />
+                                onChange={(e) => setNuevoGastoPersonal(prev => ({ ...prev, descripcion: e.target.value }))} />
                         </div>
                         <div className="col-md-2">
                             <input
@@ -256,8 +259,7 @@ export default function Tools () {
                                 className="form-control"
                                 placeholder="Monto"
                                 value={nuevoGastoPersonal.monto}
-                                onChange={(e) => setNuevoGastoPersonal(prev => ({ ...prev, monto: e.target.value }))}
-                            />
+                                onChange={(e) => setNuevoGastoPersonal(prev => ({ ...prev, monto: e.target.value }))} />
                         </div>
                         <div className="col-md-2">
                             <button className="btn btn-info w-100" onClick={handleAddGastoPersonal}>Añadir</button>
