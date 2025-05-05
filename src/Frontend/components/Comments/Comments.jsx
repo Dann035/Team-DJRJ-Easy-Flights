@@ -9,7 +9,7 @@ function Comments() {
   const [comments, setComments] = useState([]);
   /*const offer_id = 47;*/
   //GET COMMENT FROM OFFER
-  const {id}=useParams();
+  const { id } = useParams();
   console.log(id);
   const getComments = () => {
     fetch(`${url}/api/offers/${id}/comments`)
@@ -57,15 +57,15 @@ function Comments() {
       console.error("Comment ID is undefined, cannot delete.");
       return;
     }
-  
+
     fetch(`${url}/api/comments/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json"
-        
+
       },
-      credentials: "include"
-    
+      /*credentials: "include"*/
+
     })
       .then((resp) => {
         if (!resp.ok) {
@@ -80,73 +80,64 @@ function Comments() {
         console.error("Error when deleting your comment:", error)
       );
   };
-  
-useEffect(()=>{
-  getComments();
-},[])
+
+  useEffect(() => {
+    getComments();
+  }, [])
 
 
   return (
 
     <section className="cm-container d-flex justify-content-center my-5">
       <div
-        className="text-center p-4 shadow rounded bg-white"
+        className="p-4 shadow rounded bg-white"
         style={{ maxWidth: "700px", width: "100%" }}
       >
         <h1 className="mb-3">Reseñas de la oferta</h1>
         <span style={{ fontSize: "1.5rem" }}>⭐️⭐️⭐️⭐️⭐️</span>
+
+        <hr className="my-4" />
+
         {comments.length === 0 ? (
           <p>No existe ninguna reseña todavía</p>
         ) : (
           comments.map((c) => (
-            <div key={c.id} className="mb-4 border-bottom pb-3">
-              <p className="fst-italic mt-3">"{c.content}"</p>
-              <button>Editar reseña</button>
-              <small className="text-muted">Comment ID: {c.id}</small>
-              <button onClick={() => deleteComment(c.id)} className="btn btn-danger btn-sm">
-                Borrar
-              </button>
+            <div key={c.id} className="d-flex mb-4 text-start align-items-start gap-3">
+              {/* Left: Avatar */}
+              <img
+                className="me-3"
+                src="https://randomuser.me/api/portraits/men/24.jpg"
+                alt="Reviewer"
+                style={{
+                  width: "30px",
+                  height: "90px",
+                  objectFit: "contain",
+                }}
+              />
+
+              {/* Right: Comment content */}
+              <div className="flex-grow-1 border-bottom pb-3">
+                <h5 className="mb-1">John Doe</h5>
+                <small className="text-muted">Travel Blogger</small>
+                <p className="fst-italic mt-2">"{c.content}"</p>
+                <small className="text-muted d-block mb-2">Comentario número {c.id}</small>
+                <button className="btn btn-secondary btn-sm me-2">Editar</button>
+                <button
+                  onClick={() => deleteComment(c.id)}
+                  className="btn btn-danger btn-sm"
+                >
+                  Borrar
+                </button>
+              </div>
             </div>
           ))
         )}
 
-        <hr className="my-4" />
-
-        <div className="mt-4">
-          <input
-            type="text"
-            className="form-control"
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-            placeholder="Escriba su reseña..."
-          />
-        </div>
-        <div className="d-flex justify-content-between align-items-center flex-wrap text-start">
-          <div className="d-flex align-items-center gap-3">
-            <img
-              className="rounded-circle"
-              src="https://randomuser.me/api/portraits/men/24.jpg"
-              alt="Reviewer"
-              style={{
-                width: "70px",
-                height: "70px",
-                objectFit: "cover",
-              }}
-            />
-            <div>
-              <h5 className="mb-1">John Doe</h5>
-              <small className="text-muted">Travel Blogger</small>
-            </div>
+        <div className="text-end mt-4">
+          <div className="text-muted" style={{ fontSize: "0.85rem" }}>
+            (Logo)
           </div>
-          <div className="text-end mt-3 mt-md-0">
-            <div
-              className="text-muted"
-              style={{ fontSize: "0.85rem" }}
-            >
-              (Logo)
-            </div>
-            <strong>Air-France</strong>
-          </div>
+          <strong>Air-France</strong>
         </div>
       </div>
     </section>
