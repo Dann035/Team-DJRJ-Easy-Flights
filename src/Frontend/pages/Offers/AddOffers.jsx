@@ -1,14 +1,20 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import useGlobalReducer from "../../hooks/useGlobalReducer";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuthContext";
+const URL = import.meta.env.VITE_BACKEND_URL
 import "./AddOffers.css"
-const url = import.meta.env.VITE_BACKEND_URL
 
 
 export const AddOffers = () => {
   const {dispatch } = useGlobalReducer();
   const navigate = useNavigate()
-
+  const {user, hasRole} = useAuth()
+  const [offerData, setOfferData] = useState({
+    destination: '',
+    price: '',
+    description: ''
+  });
   const [offer, SetOffer] = useState({
     title: "",
     description: "",
@@ -20,7 +26,11 @@ export const AddOffers = () => {
     tags:""
   });
 
-  
+  useEffect(() => {
+    if (!hasRole(['COMPANY_ADMIN'])) {
+      navigate('/')
+    }
+  },);
 
   const saveChange = (e) => {
     SetOffer({
@@ -29,22 +39,25 @@ export const AddOffers = () => {
     });
   };
 
-  const newOffert = () => {
-    fetch(
-      `${url}/api/offers`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(offer),
-      }
-    )
-      .then((resp) => resp.json())
-      .then((data) => {
-        dispatch({ type: "add_offer", payload: data })
-        navigate("/")
-      });
+  const newOffert = async () => {
+    try {
+      const response = await fetch(`${URL}/api/offers`,{
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(offer),
+        }
+      )
+
+      if (!response.ok) throw new Error('Error al crear la oferta');
+
+      const data = await response.json()
+      dispatch({ type: "add_offer", payload: data })
+      navigate("/")
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -112,8 +125,6 @@ export const AddOffers = () => {
                 <button className="btn btn-light">Ofertas</button>
             </Link>
           </div>
-
-
         </div>
 
     </div>

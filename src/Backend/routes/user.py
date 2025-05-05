@@ -1,42 +1,158 @@
 from flask import Blueprint, request, jsonify
-from Backend.models.base import db
-from Backend.models.User import User
-from Backend.models.Companies import Companies
+from Backend.models import db, User,Companies, Roles, UserRole
+from sqlalchemy.exc import IntegrityError
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity, get_jwt
 from werkzeug.security import generate_password_hash, check_password_hash
+from Backend.auth_decorators import role_required
+from datetime import datetime, timedelta
+
 
 user_bp = Blueprint('user_bp', __name__)
 
 @user_bp.route('/signup', methods=['POST'])
 def signup_user():
+    data = request.get_json()
+    user_type = data.get('role')  # 'USER' o 'COMPANY'
+    
     try:
-        user_name = request.json.get('name', None)
-        user_email = request.json.get('email', None)
-        user_password = str(request.json.get('password', None))
+        if user_type == 'COMPANY':
+            company = Companies(
+                company_name=data['company_name'],
+                nit=data['nit'],
+                address=data['address'],
+                email=data['email'],
+                password=str(generate_password_hash(data['password']))
+            )
+            db.session.add(company)
+            db.session.commit()
+            
+            # Crear usuario administrador de la empresa
+            user = User(
+                name=data['name'],
+                email=data['email'],
+                password=str(generate_password_hash(data['password'])),
+                companies=[company]
+            )
+            db.session.add(user)
+            db.session.commit()
+            
+            # Asignar rol de administrador de empresa
+            company_role = Roles.query.filter_by(name='COMPANY').first()
+            user_role = UserRole(
+                user_id=user.id,
+                company_id=company.id,
+                role_id=company_role.id
+            )
+            db.session.add(user_role)
+            db.session.commit()
+            
+        else:
+            if User.query.filter_by(email=data['email']).first():
+                return jsonify({'message': 'Email ya registrado'}), 409
+            
+            user = User(
+                name=data['name'],
+                email=data['email'],
+                password=str(generate_password_hash(data['password'])),
+                role=user_type
+            )
+            db.session.add(user)
+            db.session.commit()
+            
+            # Asignar rol de usuario normal
+            role_name = "USER"
+            role = Roles.query.filter_by(name=role_name).first()
+            if not role:
+                role = Roles(name=role_name)
+                db.session.add(role)
+                db.session.commit()
 
-        if not user_name:
-            return jsonify({"msg": "Missing name"}), 400
-        if not user_email:
-            return jsonify({"msg": "Missing email"}), 400
-        if not user_password:
-            return jsonify({"msg": "Missing password"}), 400
+            user_role = UserRole(
+                user_id=user.id,
+                role_id=role.id
+            )
+            db.session.add(user_role)
+            db.session.commit()
         
-        user = User.query.filter_by(email=user_email).first()
-        if user:
-            return jsonify({"msg": "User already exists"}), 409
-
-        password_hash = generate_password_hash(user_password)
-        new_user = User(name=user_name, email=user_email, password=password_hash)
-        db.session.add(new_user)
-        db.session.commit()
         return jsonify({
-            "msg": "User created",
-            "status": 'OK'}), 201 
+            'message': 'Registro exitoso',
+            'user_type': user_type
+        }), 201
+    
     except Exception as e:
+        db.session.rollback()
+        return jsonify({'message': str(e)}), 500
+
+
+@user_bp.route('/login', methods=['POST'])
+def login():
+    try:
+        data = request.get_json()
+        
+        # Validación básica
+        if not data.get('email') or not data.get('password'):
+            return jsonify({'message': 'Email y contraseña son requeridos'}), 400
+        
+        # Buscar usuario
+        
+        user = User.query.filter_by(email=data['email']).first()
+        
+        if not user:
+            return jsonify({'message': 'Usuario no encontrado'}), 404
+        
+        if not check_password_hash(user.password, data['password']):
+            return jsonify({'message': 'Usuario o contraseña inválidos'}), 401
+        
+        current_user_role = None
+        if user.roles and len(user.roles) > 0:
+            current_user_role = user.roles[0] # Si tiene varios roles, toma el primero
+            
+
+
+        # Generar token JWT con los roles
+        roles_list = []
+        for role in user.roles:
+            if hasattr(role, "name"):
+                roles_list.append(role.name)
+            else:
+                roles_list.append(str(role))
+        token = create_access_token(identity=user.id, expires_delta=False, additional_claims={
+            'exp': datetime.utcnow() + timedelta(days=1),
+            'iat': datetime.utcnow(),
+            'sub': user.id,
+            'roles': roles_list
+        })
+        
         return jsonify({
-            "msg": "Error creating user",
-            "Error": str(e)
-        }), 400
+            'token': token,
+            'user': user.serialize(),
+            'roles': user.roles
+        })
+    except Exception as e:
+        return jsonify({"msg": "Error login", "Error": str(e)}), 400
+
+@user_bp.route('/auth/me', methods=['POST'])
+@jwt_required()
+def secret():
+    try:
+        current_user = get_jwt_identity()
+        claims = get_jwt()
+        
+        if not current_user:
+            return jsonify({"msg": "Missing user" , "Error": str(e)}), 400
+        
+        user = User.query.filter_by(email=current_user).first()
+        if not user:
+            return jsonify({"msg": "User not found"}), 404
+        
+        return jsonify({
+            "msg": "Access Allowed",
+            "user": user.serialize(),
+            'roles': [role.name for role in user.roles]
+        }), 200
+    except Exception as e:
+        return jsonify({"msg": "Missing data", "Error": str(e)}), 400
+    
 
 @user_bp.route('/user/<int:user_id>', methods=['PUT'])
 @jwt_required()
@@ -65,62 +181,3 @@ def get_user(user_id):
 
     except Exception as e:
         return jsonify({"msg": "Missing user" , "Error": str(e)}), 400
-
-@user_bp.route('/login', methods=['POST'])
-def login():
-    try:
-        current_user_email = request.json.get('email', None)
-        current_user_password = str(request.json.get('password', None))
-        current_role = request.json.get('role', None)
-
-        if not current_role:
-            return jsonify({"msg": "You must enter your role"}), 400
-        if not current_user_email:
-            return jsonify({"msg": "You must enter your email"}), 400
-        if not current_user_password:
-            return jsonify({"msg": "You must enter your password"}), 400
-
-        if current_role == 'user':
-            user = User.query.filter_by(email=current_user_email).first()
-            if not user:
-                return jsonify({"msg": "User not found"}), 404
-        elif current_role == 'company':
-            company = Companies.query.filter_by(email=current_user_email).first()
-            if not company:
-                return jsonify({"msg": "Company not found"}), 404
-
-        if check_password_hash(user.password, current_user_password):
-            access_token = create_access_token(
-                identity=current_user_email,
-                additional_claims={
-                    "role": current_role,
-                    "user": user.id
-                }   
-            )
-            return jsonify({
-                "msg": "Login successful", "token": access_token}), 200
-        else:
-            return jsonify({"msg": "User or Company not exist"}), 401
-    except Exception as e:
-        return jsonify({"msg": "Error login", "Error": str(e)}), 400
-
-@user_bp.route('/protected', methods=['POST'])
-@jwt_required()
-def secret():
-    try:
-        current_user = get_jwt_identity()
-        claims = get_jwt()
-        
-        if not current_user:
-            return jsonify({"msg": "Missing user" , "Error": str(e)}), 400
-        
-        user = User.query.filter_by(email=current_user).first()
-        if not user:
-            return jsonify({"msg": "User not found"}), 404
-        
-        return jsonify({
-            "msg": "Access Allowed",
-            "user": user.serialize(),
-        }), 200
-    except Exception as e:
-        return jsonify({"msg": "Missing data", "Error": str(e)}), 400

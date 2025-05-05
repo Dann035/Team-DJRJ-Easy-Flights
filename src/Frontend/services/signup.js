@@ -8,12 +8,12 @@ export async function signupUser(formData){
         },
         body: JSON.stringify(formData)
     })
-    const data = await res.json();
-    
-    if(data.status !== 'OK'){
+    if(!res.ok){
         throw new Error('Error al regisrtrar el usuario');
         console.error(res.statusText);
+        return;
     }
+    const data = await res.json();
     alert('Usuario creado correctamente');
         return;
 }

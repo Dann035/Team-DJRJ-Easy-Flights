@@ -5,16 +5,16 @@ import TravelShow from "../components/TravelShowCase/TravelShow.jsx";
 import Comments from "../components/Comments/Comments.jsx";
 import Features from "../components/Features/Features.jsx";
 import { Offers } from "./Offers/Offers.jsx";
+import { AuthProvider } from "../hooks/useAuthContext.jsx";
 
 export const Home = () => {
-
     return (
         <div className="container">
-			<Tagline />
+            <Tagline />
             <Offers/>
             <TravelShow />
             <Comments />
             <Features />
-		</div>
+        </div>
     );
 };
