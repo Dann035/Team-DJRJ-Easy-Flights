@@ -1,7 +1,7 @@
 import "./Footer.css"
 
 export const Footer = () => (
-	<footer className="footer mt-auto py-3 text-center">
+	<footer className="footer mt-auto py-4 bg-light text-center">
 		<div className="d-flex mb-5 flex-wrap justify-content-around text-start">
 			<section>
 				<h5>Easy-Flights</h5>
