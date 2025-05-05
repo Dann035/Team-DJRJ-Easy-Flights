@@ -3,6 +3,7 @@ import useGlobalReducer from "../../hooks/useGlobalReducer";
 import { useAuth } from "../../hooks/useAuthContext";
 import { OffersCard } from "./OffersCard";
 import { Link, useNavigate } from "react-router-dom";
+import "./Offers.css"
 
 const url = import.meta.env.VITE_BACKEND_URL
 
