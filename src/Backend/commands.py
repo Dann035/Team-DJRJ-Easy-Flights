@@ -1,7 +1,7 @@
 
 import click
-from Backend.models.base import db
-from Backend.models.User import User
+from src.Backend.models.base import db
+from src.Backend.models.User import User
 
 """
 In this file, you can add as many commands as you want using the @app.cli.command decorator
