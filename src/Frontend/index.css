@@ -34,7 +34,9 @@
     box-sizing: border-box;
     color: var(--clr-black);
 }
-
+body{
+    background-color: var(--clr-black);
+}
 .list{
     list-style: none;
     padding: 5px;

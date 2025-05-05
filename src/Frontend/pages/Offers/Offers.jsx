@@ -12,7 +12,7 @@ export const Offers = () => {
     const { store, dispatch } = useGlobalReducer();
     const navigate = useNavigate();
 
-    const isCompany = user && user.roles && user.roles.includes("company");
+    const isCompany = user && Array.isArray(user.roles) && user.roles.includes("COMPANY");
 
     const moveToAddOffer = () => {
         navigate("/addoffer");

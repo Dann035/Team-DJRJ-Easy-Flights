@@ -1,13 +1,30 @@
+import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./Navbar.css";
+import { useAuth } from "../hooks/useAuthContext";
 
 export const Navbar = () => {
     const navigate = useNavigate();
+    const {user, logout, setUser} = useAuth();
+
+    useEffect(() => {
+        const token = localStorage.getItem("access_token");
+        const userData = localStorage.getItem("user");
+        if (token && userData) {
+            setUser(JSON.parse(userData));
+        } else {
+            setUser(null);
+        }
+    }, []);
+
+    const handleLogout = () => {
+        logout();
+        navigate("/");
+    };
 
     return (
         <nav className="nav-container navbar navbar-expand-lg">
             <div className="container-fluid">
-                {/* He modificado el logo porque no llevaba al inicio de la página */}
                 <img
                     src="logo-easy-flights.webp"
                     alt="Logo Easy-Flights"
@@ -43,52 +60,40 @@ export const Navbar = () => {
                                 Travel Tips
                             </Link>
                         </li>
-                       {/* <li className="item-nav nav-item">
-                            <Link className="link-nav nav-link" to="#">
-                                Gallery
-                            </Link>
-                        </li>
-                        <li className="item-nav nav-item dropdown">
-                            <a
-                                className="link-nav nav-link dropdown-toggle"
-                                href="#"
-                                role="button"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                            >
-                                More Info
-                            </a>
-                            <ul className="item-nav-drdown dropdown-menu">
-                                <li>
-                                    <Link className="dropdown-item" to="#">
-                                        Action
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link className="dropdown-item" to="#">
-                                        Another action
-                                    </Link>
-                                </li>
-                                <li>
-                                    <hr className="dropdown-divider" />
-                                </li>
-                                <li>
-                                    <Link className="dropdown-item" to="#">
-                                        Something else here
-                                    </Link>
-                                </li>
-                            </ul>
-                        </li>*/}
                     </ul>
                     <div>
-                        <button id="btn-nav-login" onClick={() => navigate("/signup")}>
-                            <img
-                                src="./user-profile.gif"
-                                alt="login"
-                                className="img-nav-login"
-                            />
-                        </button>
-                       {/* <button className="btn-nav-exp">Explore</button> */}
+                    {user ? (
+                            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                                <div
+                                    style={{
+                                        width: "40px",
+                                        height: "40px",
+                                        borderRadius: "50%",
+                                        background: "#eee",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        fontWeight: "bold",
+                                        fontSize: "1.2rem",
+                                        color: "#333"
+                                    }}
+                                    title={user.name}
+                                >
+                                    {user.name ? user.name.charAt(0).toUpperCase() : "U"}
+                                </div>
+                                <button className="btn btn-outline-danger" onClick={handleLogout}>
+                                    Cerrar sesión
+                                </button>
+                            </div>
+                        ) : (
+                            <button id="btn-nav-login" onClick={() => navigate("/signup")}>
+                                <img
+                                    src="./user-profile.gif"
+                                    alt="login"
+                                    className="img-nav-login"
+                                />
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-import React, { use, useState } from "react";
+import React, { use, useState, useEffect } from "react";
 import useGlobalReducer from "../../hooks/useGlobalReducer";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuthContext";
@@ -22,7 +22,7 @@ export const AddOffers = () => {
   });
 
   useEffect(() => {
-    if (!hasRole(['COMPANY_ADMIN'])) {
+    if (!hasRole(['COMPANY'])) {
       navigate('/')
     }
   },);
@@ -112,7 +112,7 @@ export const AddOffers = () => {
 
         <div className=" mt-4 d-flex align-items-center justify-content-center">
           <div>
-              <button  className=" btn btn-light" onClick={newOffert}>Crear Oferta</button>
+              <button  className=" btn btn-light" onClick={() => newOffert}>Crear Oferta</button>
           </div>
 
           <div>
