@@ -10,11 +10,6 @@ export const AddOffers = () => {
   const {dispatch } = useGlobalReducer();
   const navigate = useNavigate()
   const {user, hasRole} = useAuth()
-  const [offerData, setOfferData] = useState({
-    destination: '',
-    price: '',
-    description: ''
-  });
   const [offer, SetOffer] = useState({
     title: "",
     description: "",

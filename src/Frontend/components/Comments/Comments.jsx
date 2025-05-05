@@ -5,15 +5,15 @@ import "./Comments.css";
 function Comments() {
     const [comments, setComments] = useState([]);
   
-    useEffect(() => {
-      fetch(`${url}/api/offers/37/comments`)
-        .then(res => res.json())
-        .then(data => {
-          console.log("Fetched comments:", data);
-          setComments(data);
-        })
-        .catch(err => console.error("Error fetching comments", err));
-    }, []);
+    // useEffect(() => {
+    //   fetch(`${url}/api/offers/37/comments`)
+    //     .then(res => res.json())
+    //     .then(data => {
+    //       console.log("Fetched comments:", data);
+    //       setComments(data);
+    //     })
+    //     .catch(err => console.error("Error fetching comments", err));
+    // }, []);
   
     return (
       

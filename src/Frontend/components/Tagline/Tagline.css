@@ -80,7 +80,8 @@
     }
 }
 
-#select-destino {
+#select-destino,
+#select-origen {
     border: none;
     outline: 1px solid var(--clr-primary700-blue);
     background-color: transparent;
