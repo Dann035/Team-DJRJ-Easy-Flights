@@ -2,7 +2,6 @@
     display: flex;
     justify-content: space-between;
     background-color: transparent;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
     animation: drop-nav 2s ease both;
 }
 
@@ -12,25 +11,11 @@
 
 #btn-nav-login {
     border-radius: 100vmax;
-    margin-right: 10px;
+    margin-right: 40px;
     background-color: transparent;
-    border: none;
+    border: 2px solid var(--clr-light400-blue);
+    box-shadow: 0 0 10px rgba(29, 233, 248, 0.521), 0 0 9px 3px rgba(27, 170, 253, 0.1);
     cursor: pointer;;
-}
-.btn-nav-exp{
-    background-color: #09f;
-    color: #fff;
-    border: none;
-    border-radius: 100vmax;
-    padding: 10px 20px;
-    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-
-    &:hover{
-        background-color: var(--clr-white);
-        color: var(--clr-primary700-blue);
-        text-shadow: none;
-    }
 }
 
 .item-nav{
@@ -40,16 +25,18 @@
 }
 .link-nav{
     border-radius: 100vmax;
+    border: 1px solid var(--clr-light400-blue);
     color: var(--clr-white);
     font-weight: 800;
     position: relative;
     text-shadow: 0 2px 5px rgba(0,0,0,0.5);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 10px rgba(29, 233, 248, 0.521), 0 0 9px 3px rgba(27, 170, 253, 0.1);
     transition: background-color 0.3s, color 0.3s, text-shadow 0.3s, box-shadow 0.3s;
 
     &:hover{
-        background-color: var(--clr-white);
-        color: var(--clr-primary700-blue);
+        background-color: var(--clr-light400-blue);
+        color: var(--clr-white);
         text-shadow: none;
     }
 }
@@ -60,7 +47,7 @@
     display: block;
     width: 0;
     height: 2px;
-    background-color: var(--clr-primary700-blue);
+    background-color: var(--clr-white);
     transition: width .3s ease;
     position: absolute;
     left: 15px;
@@ -77,11 +64,13 @@
 }
 
 .img-nav{
-    background-color: var(--clr-white);
+    border: 1px solid var(--clr-light400-blue);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     height: 90px;
-    
+    margin-right: 170px;
+    margin-left: 30px;
+    box-shadow: 0 0 10px rgba(29, 233, 248, 0.521), 0 0 9px 3px rgba(27, 170, 253, 0.1);
 }
 
 @keyframes drop-nav {

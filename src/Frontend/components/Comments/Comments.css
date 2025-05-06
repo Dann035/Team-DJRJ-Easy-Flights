@@ -4,3 +4,11 @@
     animation-range-start: entry 20%;
     animation-range-end: cover 30%;
 } */
+
+.cm-box{
+    background-color: var(--clr-secundary-black);
+    animation: fadeIn linear both;
+    animation-timeline: view();
+    animation-range-start: entry 20%;
+    animation-range-end: cover 30%;
+}
