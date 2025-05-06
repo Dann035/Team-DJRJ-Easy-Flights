@@ -37,7 +37,7 @@ export const Offers = () => {
 
     return (
         <div className="container-fluid box-offers">
-            <h1 className="text-center">Ofertas de viajes</h1>
+            <h1 className="title-offers text-center">Ofertas de viajes</h1>
 
             <div className="d-flex justify-content-between">
                 <div>

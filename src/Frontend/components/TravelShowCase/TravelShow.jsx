@@ -4,7 +4,7 @@ import React from "react";
 function TravelShow() {
     return (
         <section className="travelS text-center my-5">
-            <h1>Travel Showcase</h1>
+            <h1 className="title-tshow">Travel Showcase</h1>
             <p>
                 Explore breathtaking destinations through our stunning
                 photography.

@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { signupCompany } from "../../services/signup";
-import './SignupCompany.css'
-
+import "./SignupCompany.css";
 
 function SignupCompany() {
     // const [dataForm, setDataForm] = useState(null);
@@ -12,72 +11,156 @@ function SignupCompany() {
         e.preventDefault();
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData.entries());
-        data.role = 'COMPANY';
+        data.role = "COMPANY";
         signupCompany(data);
-        navigate('/');
-    }
+        navigate("/login");
+    };
 
-    return (
+            return (
         <>
-            <h1>Signup Company</h1>
-            <form onSubmit={handleSubmit}>
-                <section className="row">
-                    <fieldset className="col-4">
-                        <label >Name</label>
-                        <input type="text" name="name" required/>
-                    </fieldset>
-                    <fieldset className="col-4">
-                        <label >Password</label>
-                        <input type="password" name="password" required/>
-                    </fieldset>
-                    <fieldset className="col-4">
-                        <label >Email</label>
-                        <input type="email" name="email" required/>
-                    </fieldset>
-                </section>
-                <section className="row">
-                    <fieldset className="col-4">
-                        <label >Phone</label>
-                        <input type="tel" name="phone" required/>
-                    </fieldset>
-                    <fieldset className="col-4">
-                        <label >Website</label>
-                        <input type="url" name="website" required/>
-                    </fieldset>
-                    <fieldset className="col-4">
-                        <label >Country</label>
-                        <input type="text" name="country" required/>
-                    </fieldset>
-                </section>
-                <section className="row">
-                    <fieldset className="col-4">
-                        <label >Logo URL</label>
-                        <input type="url" name="logo_url" required/>
-                    </fieldset>
-                    <fieldset className="col-4">
-                        <label >Slug</label>
-                        <input type="text" name="slug" required/>
-                    </fieldset>
-                    <fieldset className="col-4">
-                        <label >Status</label>
-                        <input type="text" name="status" required/>
-                    </fieldset>
-                </section>
-                <section className="row">
-                    <fieldset className="col-2">
-                        <label >Rating</label>
-                        <input type="text" name="rating" required/>
-                    </fieldset>
-                    <fieldset className="col-10">
-                        <label >Description</label>
-                        <textarea type="text" name="description" required></textarea>
-                    </fieldset>
-                </section>
-                <button type="submit">Signup Company</button>
-                <button onClick={()=> navigate('/')} type="button">Ir a Login</button>
-            </form>
+            <div className="form-body">
+                <div className="container-form-Sc">
+                    <div className="information">
+                        <div className="info-childs">
+                            <h2>Bienvenido</h2>
+                            <p>
+                                Registrate y reserva ya tus merecidas vacaciones
+                            </p>
+                            <input
+                            onClick={() => navigate('/login')}
+                            type="button" 
+                            value="Iniciar Sesión" 
+                            />
+                        </div>
+                    </div>
+                    <div className="form-information">
+                        <div className="form-information-childs">
+                            <span onClick={() => navigate('/')} className="btn-cancelar"><i className="fa-solid fa-xmark"></i></span>
+                            <h2>Registrarse</h2>
+                            <div className="icons">
+                                <i className="fa-brands fa-google"></i>
+                                <i className="fa-brands fa-facebook"></i>
+                                <i className="fa-brands fa-linkedin"></i>
+                                <i className="fa-brands fa-apple"></i>
+                            </div>
+                            <a href="/signupCompany" className="forgot-pass">O registrate como empresa</a>
+                            <form onSubmit={handleSubmit}>
+                                <fieldset className="d-flex gap-2">
+                                    <label>
+                                        <i className="fa-solid fa-user"></i>
+                                        <input
+                                            type="text"
+                                            name="name"
+                                            placeholder="Nombres Completo"
+                                            required
+                                        />
+                                    </label>
+                                    <label>
+                                        <i className="fa-solid fa-lock"></i>
+                                        <input
+                                            type="password"
+                                            name="password"
+                                            placeholder="Contraseña"
+                                            required
+                                        />
+                                    </label>
+                                    <label>
+                                        <i className="fa-solid fa-envelope"></i>
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            placeholder="Correo Electronico"
+                                            required
+                                        />
+                                    </label>
+                                </fieldset>
+                                <fieldset className="d-flex gap-2">
+                                    <label>
+                                        <i className="fa-solid fa-phone"></i>
+                                        <input
+                                            type="phone"
+                                            name="phone"
+                                            placeholder="Phone"
+                                            required
+                                        />
+                                    </label>
+                                    <label>
+                                        <i className="fa-solid fa-flag"></i>
+                                        <input
+                                            type="slug"
+                                            name="slug"
+                                            placeholder="Slug"
+                                            required
+                                        />
+                                    </label>
+                                    <label>
+                                        <i className="fa-solid fa-earth"></i>
+                                        <input
+                                            type="country"
+                                            name="country"
+                                            placeholder="Country"
+                                            required
+                                        />
+                                    </label>
+                                </fieldset>
+                                <fieldset className="d-flex gap-2">
+                                    <label>
+                                        <i className="fa-solid fa-globe"></i>
+                                        <input
+                                            type="website"
+                                            name="website"
+                                            placeholder="Website"
+                                            required
+                                        />
+                                    </label>
+                                    <label>
+                                        <i className="fa-solid fa-star"></i>
+                                        <input
+                                            type="status"
+                                            name="status"
+                                            placeholder="Status"
+                                            required
+                                        />
+                                    </label>
+                                    <label>
+                                        <i className="fa-solid fa-flag"></i>
+                                        <input
+                                            type="logo-url"
+                                            name="logo-url"
+                                            placeholder="Logo URL"
+                                            required
+                                        />
+                                    </label>
+                                </fieldset>
+                                <label>
+                                    <i className="fa-solid fa-book"></i>
+                                    <input
+                                        type="description"
+                                        name="description"
+                                        placeholder="Description"
+                                        required
+                                    />
+                                </label>
+                                <br />
+                                <input
+                                    className="btn-register"
+                                    type="submit"
+                                    value="Registrarse"
+                                />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </>
     );
+        //         <button type="submit">Signup Company</button>
+        //         <button onClick={() => navigate("/")} type="button">
+        //             Ir a Login
+        //         </button>
+        //     </form>
+        // </>
+        // );
 }
 
 export default SignupCompany;

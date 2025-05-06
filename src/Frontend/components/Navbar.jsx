@@ -60,6 +60,11 @@ export const Navbar = () => {
                                 Travel Tips
                             </Link>
                         </li>
+                        <li className="item-nav nav-item">
+                            <Link className="link-nav nav-link" to="tools">
+                                Travel Tools
+                            </Link>
+                        </li>
                     </ul>
                     <div>
                     {user ? (

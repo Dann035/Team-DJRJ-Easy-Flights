@@ -58,7 +58,7 @@ function Signup() {
                                 <i className="fa-brands fa-linkedin"></i>
                                 <i className="fa-brands fa-apple"></i>
                             </div>
-                            <p>O registrate con una cuenta</p>
+                            <a href="/signupCompany" className="forgot-pass">O registrate como empresa</a>
                             <form onSubmit={handleSubmit}>
                                 <label>
                                     <i className="fa-solid fa-user"></i>

@@ -7,7 +7,7 @@ function Features() {
         <section className="ft-container container text-center">
             <div>
                 <p>Explore</p>
-                <h1 className="fw-bold">Discover Your Next Adventure with Us</h1>
+                <h1 className="title-features">Discover Your Next Adventure with Us</h1>
                 <p>Uncover breathtaking destinations that inspire wanderlust. Our curated travel packages offer unique experiences tailored just for you.</p>
             </div>
             <div className="d-flex justify-content-between p-3 gap-3">

@@ -7,7 +7,7 @@ function OffersAPI() {
     const data = store.offersAPI || [];
     return (
         <div className="container">
-            <h1 className="text-center my-4">Ofertas de Vuelos</h1>
+            <h1 className="title-vuelos text-center my-4">Ofertas de Vuelos</h1>
             <div className="row">
                 {Array.isArray(data) && data.length > 0 ? (
                     data.map((offer, index) => (
