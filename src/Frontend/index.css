@@ -117,8 +117,8 @@ html {
 }
 
 body,
-Footer {
-    background-color: var(--clr-black) !important;
+Footer{
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%) !important;
     width: 100vw !important;
     overflow-x: hidden;
     line-height: 1.6;
@@ -176,6 +176,27 @@ Footer {
     opacity: 0;
     transition: opacity 0.3s ease;
 }
+.home-container{
+    padding: 0 10rem;
+}
+.particles-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+.particle {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: rgba(29, 233, 248, 0.5);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(29, 233, 248, 0.8);
+    pointer-events: none;
+    opacity: 0.4;
+    animation: floatParticle 10s linear infinite;
+}
 
 .btn-futuristic:hover::before {
     opacity: 0.8;
@@ -223,7 +244,6 @@ Footer {
 .ft-container,
 .tg-container,
 .cm-container {
-    background-color: var(--clr-black);
     animation: fadeIn linear both;
     animation-timeline: view();
     animation-range-start: entry 20%;

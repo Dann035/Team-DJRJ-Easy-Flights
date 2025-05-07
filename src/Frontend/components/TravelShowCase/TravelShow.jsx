@@ -35,7 +35,7 @@ function TravelShow() {
                 />
                 <img
                     className="ts-img"
-                    src="https://image.urlaubspiraten.de/1x1/image/upload/v1628092143/mediavault_images/AdobeStock_103587221_or1mfx.jpg"
+                    src="eiffel.webp"
                     alt={texts.travelShowImgAlt}
                     style={{
                         width: "200px",
