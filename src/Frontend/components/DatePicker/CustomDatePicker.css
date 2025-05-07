@@ -1,0 +1,351 @@
+/* CustomDatePicker.css - Estilos para el componente de selección de fechas personalizado */
+
+/* Variables de color - Misma paleta que Tagline.css */
+:root {
+  /* Paleta de colores */
+  --turquoise-bright: #00d3d3;
+  --petroleum-blue: #0d5268;
+  --intense-fuchsia: #ff2e92;
+  --dark-blue: #0d2330;
+  --deep-teal: #007b7e;
+  --dark-teal: #014a4f;
+  --pure-white: #ffffff;
+  --medium-cyan: #008a94;
+  --light-pink: #ff6aad;
+  --sky-blue-green: #009ba5;
+
+  /* Gradientes */
+  --primary-gradient: linear-gradient(135deg, var(--turquoise-bright) 0%, var(--sky-blue-green) 100%);
+  --secondary-gradient: linear-gradient(135deg, var(--intense-fuchsia) 0%, var(--light-pink) 100%);
+  --dark-gradient: linear-gradient(135deg, var(--dark-blue) 0%, var(--petroleum-blue) 100%);
+  
+  /* Sombras */
+  --shadow-sm: 0 2px 8px rgba(13, 35, 48, 0.15);
+  --shadow-md: 0 4px 16px rgba(13, 35, 48, 0.2);
+  --shadow-lg: 0 8px 30px rgba(13, 35, 48, 0.25);
+  
+  /* Transiciones */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Contenedor principal del DatePicker */
+.custom-datepicker-container {
+  position: relative;
+  width: 100%;
+}
+
+/* Etiqueta del campo */
+.date-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  color: var(--turquoise-bright);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* Input personalizado */
+.custom-date-input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 8px;
+  border: 2px solid rgba(0, 211, 211, 0.3);
+  background-color: rgba(13, 35, 48, 0.5);
+  color: var(--pure-white);
+  font-size: 1rem;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.custom-date-input:hover {
+  border-color: rgba(0, 211, 211, 0.5);
+}
+
+.custom-date-input:focus-within {
+  outline: none;
+  border-color: var(--turquoise-bright);
+  box-shadow: 0 0 0 3px rgba(0, 211, 211, 0.2);
+}
+
+/* Placeholder del input */
+.date-placeholder {
+  color: var(--pure-white);
+  opacity: 0.7;
+  transition: opacity var(--transition-fast);
+}
+
+.date-placeholder.has-value {
+  opacity: 1;
+}
+
+/* Icono de calendario */
+.calendar-icon {
+  color: var(--intense-fuchsia);
+  font-size: 1.2rem;
+  transition: transform var(--transition-fast);
+}
+
+.custom-date-input:hover .calendar-icon {
+  transform: scale(1.1);
+}
+
+/* Estilos para el calendario emergente */
+.custom-calendar {
+  background-color: var(--dark-blue) !important;
+  border: none !important;
+  border-radius: 12px !important;
+  box-shadow: var(--shadow-lg) !important;
+  padding: 16px !important;
+  font-family: 'Montserrat', sans-serif !important;
+  color: var(--pure-white) !important;
+  border: 1px solid rgba(0, 211, 211, 0.2) !important;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Cabecera personalizada */
+.custom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(0, 211, 211, 0.2);
+}
+
+.month-year-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--pure-white);
+}
+
+.month-year-display span:first-child {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--turquoise-bright);
+}
+
+.month-year-display span:last-child {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* Botones de navegación de mes */
+.month-nav-button {
+  background: transparent;
+  border: none;
+  color: var(--turquoise-bright);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.month-nav-button:hover {
+  background-color: rgba(0, 211, 211, 0.1);
+  transform: scale(1.1);
+}
+
+.month-nav-button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Estilos para los días de la semana */
+.react-datepicker__day-name {
+  color: var(--intense-fuchsia) !important;
+  font-weight: 600;
+  width: 36px !important;
+  margin: 5px !important;
+}
+
+/* Estilos para los días */
+.react-datepicker__day {
+  color: var(--pure-white) !important;
+  width: 36px !important;
+  height: 36px !important;
+  line-height: 36px !important;
+  margin: 5px !important;
+  border-radius: 50% !important;
+  transition: all var(--transition-fast);
+}
+
+.react-datepicker__day:hover {
+  background-color: rgba(0, 211, 211, 0.2) !important;
+  color: var(--pure-white) !important;
+}
+
+/* Día seleccionado */
+.react-datepicker__day--selected {
+  background: var(--primary-gradient) !important;
+  color: var(--pure-white) !important;
+  font-weight: 600 !important;
+  position: relative;
+}
+
+.react-datepicker__day--selected::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  bottom: -2px;
+  left: -2px;
+  border-radius: 50%;
+  border: 2px solid var(--turquoise-bright);
+  animation: pulse 2s infinite;
+}
+
+/* Días en el rango seleccionado */
+.react-datepicker__day--in-range,
+.react-datepicker__day--in-selecting-range {
+  background-color: rgba(0, 211, 211, 0.2) !important;
+  color: var(--pure-white) !important;
+}
+
+.react-datepicker__day--range-start,
+.react-datepicker__day--range-end,
+.react-datepicker__day--selecting-range-start,
+.react-datepicker__day--selecting-range-end {
+  background: var(--primary-gradient) !important;
+  color: var(--pure-white) !important;
+  font-weight: 600 !important;
+}
+
+/* Días del fin de semana */
+.weekend-day {
+  color: var(--light-pink) !important;
+}
+
+/* Días fuera del mes actual */
+.react-datepicker__day--outside-month {
+  color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Día actual */
+.react-datepicker__day--today {
+  position: relative;
+  font-weight: bold;
+}
+
+.react-datepicker__day--today::after {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--intense-fuchsia);
+}
+
+/* Días deshabilitados */
+.react-datepicker__day--disabled {
+  color: rgba(255, 255, 255, 0.2) !important;
+  cursor: not-allowed !important;
+}
+
+.react-datepicker__day--disabled:hover {
+  background-color: transparent !important;
+}
+
+/* Contenedor del mes */
+.react-datepicker__month-container {
+  background-color: var(--dark-blue);
+  border-radius: 10px;
+}
+
+/* Cabecera del mes */
+.react-datepicker__header {
+  background-color: transparent !important;
+  border-bottom: none !important;
+  padding-top: 0 !important;
+}
+
+/* Fondo semi-transparente cuando el calendario está abierto */
+.datepicker-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(13, 35, 48, 0.5);
+  z-index: 1;
+  backdrop-filter: blur(3px);
+}
+
+/* Contenedor del popper */
+.custom-popper {
+  z-index: 10 !important;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .react-datepicker__day,
+  .react-datepicker__day-name {
+    width: 32px !important;
+    height: 32px !important;
+    line-height: 32px !important;
+    margin: 3px !important;
+  }
+  
+  .custom-calendar {
+    padding: 10px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .react-datepicker__day,
+  .react-datepicker__day-name {
+    width: 28px !important;
+    height: 28px !important;
+    line-height: 28px !important;
+    margin: 2px !important;
+    font-size: 0.8rem !important;
+  }
+  
+  .month-year-display span:first-child {
+    font-size: 1rem;
+  }
+  
+  .month-year-display span:last-child {
+    font-size: 0.8rem;
+  }
+}
