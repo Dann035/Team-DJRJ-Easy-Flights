@@ -79,7 +79,7 @@ export const Offers = () => {
                                     className="botonAdd" 
                                     onClick={showAllOffers}
                                 >
-                                    {texts.viewAllOffers}
+                                    {texts.viewMoreOffers}
                                 </button>
                             </div>
                         )}
