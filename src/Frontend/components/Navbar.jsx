@@ -13,21 +13,6 @@ export const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     
-    // Detect scroll to change navbar appearance
-    useEffect(() => {
-        const handleScroll = () => {
-            const isScrolled = window.scrollY > 10;
-            if (isScrolled !== scrolled) {
-                setScrolled(isScrolled);
-            }
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, [scrolled]);
-    
     // Load user data from localStorage
     useEffect(() => {
         const token = localStorage.getItem("access_token");
