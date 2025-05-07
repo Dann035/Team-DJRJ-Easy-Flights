@@ -13,6 +13,7 @@ import Signup from "./pages/Signup/Signup.jsx";
 import { AddOffers } from "./pages/Offers/AddOffers.jsx";
 import { OffersDetails } from "./pages/Offers/OffersDetails.jsx";
 
+import UserProfile from "./components/UserProfile/UserProfile.jsx";
 import TravelTips from "./pages/TravelTips/TravelTips.jsx";
 import Destinations from "./pages/Feeatures/Destinations.jsx";
 import Packages from "./pages/Feeatures/Packages.jsx";
@@ -28,6 +29,7 @@ export const router = createBrowserRouter(
       <Route path="/" element={<Layout />} errorElement={<h1>Not found!</h1>} >
         <Route path= "/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<UserProfile />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signupCompany" element={<SignupCompany />} />
         <Route path="/travel-tips" element={<TravelTips />} />
