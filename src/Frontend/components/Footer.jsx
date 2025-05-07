@@ -18,20 +18,8 @@ export const Footer = () => (
 				<h5>Quick Links</h5>
 				<ul className="list-unstyled">
 					<li><a href="/about">About Us</a></li>
-					<li><a href="mailto:example@gmail.com">Contact Us</a></li>
-					<li><a href="#">Blog Posts</a></li>
 					<li><a href="#">FAQs</a></li>
 					<li><a href="#">Support Center</a></li>
-				</ul>
-			</section>
-			<section>
-				<h5>Connect With Us</h5>
-				<ul className="list-unstyled">
-					<li><a href="#">Newsletter</a></li>
-					<li><a href="#">Events</a></li>
-					<li><a href="#">Partnerships</a></li>
-					<li><a href="#">Careers</a></li>
-					<li><a href="#">Testimonials</a></li>
 				</ul>
 			</section>
 			<section>

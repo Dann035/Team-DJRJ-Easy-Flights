@@ -1,11 +1,13 @@
-import useGlobalReducer from "../../hooks/useGlobalReducer";
-import { OffersCard } from "../../pages/Offers/OffersCard";
-import autocomplete from "../../Mock/autocomplete.json"
-import "react-datepicker/dist/react-datepicker.css";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
+import { motion, AnimatePresence } from "framer-motion";
+import  useGlobalReducer  from "../../hooks/useGlobalReducer";
 import "./Tagline.css";
+import "react-datepicker/dist/react-datepicker.css";
+
+// Icons
+import { FaPlane, FaMapMarkerAlt, FaCalendarAlt, FaUsers, FaSearch, FaInfoCircle } from "react-icons/fa";
 
 function Tagline() {
     const { store, dispatch } = useGlobalReducer();
@@ -15,153 +17,297 @@ function Tagline() {
     const [origen, setOrigen] = useState("");
     const [destino, setDestino] = useState("");
     const [showModal, setShowModal] = useState(false);
+    const [isSearching, setIsSearching] = useState(false);
+    const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
     const navigate = useNavigate();
 
-    const API_KEY = "3df7b5ea34msh823b5e336152f23p145132jsn0be3c1afda1b"
-
-    const [filteredOffers, setFilteredOffers] = useState([]);
+    const API_KEY = "3df7b5ea34msh823b5e336152f23p145132jsn0be3c1afda1b";
 
     const URL = `https://skyscanner89.p.rapidapi.com/flights/roundtrip/list?`;
     const options = {
-        
-    headers: {
-    'x-rapidapi-key': API_KEY,
-    'x-rapidapi-host': 'skyscanner89.p.rapidapi.com'
-    }
+        headers: {
+            'x-rapidapi-key': API_KEY,
+            'x-rapidapi-host': 'skyscanner89.p.rapidapi.com'
+        }
     };
 
-    const showData = async () =>{
+    const showData = async () => {
         if (!origen || !destino) {
-            alert("Selecciona origen y destino");
+            // Use a more elegant notification instead of alert
+            setShowModal(true);
+            setTimeout(() => setShowModal(false), 3000);
             return;
         }
+
+        setIsSearching(true);
+        
         try {
             const response = await fetch(URL + `originId=${origen}&destinationId=${destino}`, options);
             const data = await response.json();
-            const results = data?.data?.flightQuotes?.results || [];
-            dispatch({type:"get_offersAPI", payload: results});
+            const results = await data?.data?.flightQuotes?.results || [];
+            dispatch({ type: "get_offersAPI", payload: results });
 
-        }catch(error){
-            console.error("Error la offerAPI",error.message)
-            dispatch({type:"get_offersAPI", payload:[]})
+
+        } catch (error) {
+            console.error("Error la offerAPI", error.message);
+            dispatch({ type: "get_offersAPI", payload: [] });
+            setShowModal(true);
+            setTimeout(() => setShowModal(false), 3000);
+        } finally {
+            setIsSearching(false);
         }
-    }
+    };
+
+    const handleVideoLoad = () => {
+        setIsVideoLoaded(true);
+    };
+
+    // Destinations data with images and descriptions
+    const destinations = [
+        { id: "27542715", name: "Las Vegas", image: "/images/destinations/las-vegas.jpg", desc: "La ciudad que nunca duerme" },
+        { id: "27537542", name: "New York", image: "/images/destinations/new-york.jpg", desc: "La Gran Manzana" },
+        { id: "27542089", name: "Tokio", image: "/images/destinations/tokyo.jpg", desc: "Tradición y modernidad" },
+        { id: "27536644", name: "Miami", image: "/images/destinations/miami.jpg", desc: "Playas y vida nocturna" },
+        { id: "27544008", name: "London", image: "/images/destinations/london.jpg", desc: "Historia y cultura" },
+        { id: "27540602", name: "México", image: "/images/destinations/mexico.jpg", desc: "Gastronomía y color" },
+        { id: "27546347", name: "Puerto Rico", image: "/images/destinations/puerto-rico.jpg", desc: "Paraíso caribeño" },
+        { id: "27539733", name: "París", image: "/images/destinations/paris.jpg", desc: "La ciudad del amor" }
+    ];
 
     return (
-        <section className="tg-container mt-3">
-            <video
-                className="tg-video"
-                src="tg-video-official.mp4"
-                style={{
-                    width: "100%",
-                    height: "800px",
-                    borderRadius: "10px",
-                    position: "relative",
-                    zIndex: "0",
-                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-                    objectFit: "cover",
-                }}
-                autoPlay
-                loop
-                muted
-            ></video>
-            <h1 className="tg-tittle">
-                Discover Your Next <br /> Adventure Awaits You
-            </h1>
-            <p className="tg-texts">
-                Explore breathtaking destinations that ignite your wanderlust.
-                Let us guide you to unforgettable experiences and hidden gems
-                around the globe.
-            </p>
-            <button className="tg-btn-explore" onClick={() => navigate('/login')}>Explore</button>
-            <button className="tg-btn-LearnMore">Learn More</button>
-            <div className="search-tvl-container">
-                <section className="tvl-section-box d-flex">
-                <fieldset className="box-tvl-destination d-flex flex-column">
-                        <label>Origen:</label>
-                        <select
-                            name="origen"
-                            id="select-origen"
-                            onChange={(e) => setOrigen(e.target.value)}
-                            value={origen}
+        <div className="tagline-wrapper">
+            {/* Hero Section with Video Background */}
+            <section className="hero-section">
+                <div className="video-container">
+                    <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: isVideoLoaded ? 1 : 0 }}
+                        transition={{ duration: 1.5 }}
+                        className="video-overlay"
+                    ></motion.div>
+                    <video
+                        className="background-video"
+                        src="tg-video-official.mp4"
+                        autoPlay
+                        loop
+                        muted
+                        onLoadedData={handleVideoLoad}
+                    ></video>
+                </div>
+
+                <motion.div 
+                    className="hero-content"
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: .8, delay: 0.5 }}
+                >
+                    <h1 className="hero-title">
+                        Descubre Tu Próxima <br /> 
+                        <span className="highlight-text">Aventura</span>
+                    </h1>
+                    <p className="hero-description">
+                        Explora destinos impresionantes que despiertan tu deseo de viajar.
+                        Déjanos guiarte hacia experiencias inolvidables y joyas ocultas
+                        alrededor del mundo.
+                    </p>
+                    <div className="hero-buttons">
+                        <motion.button 
+                            className="btn-explore"
+                            onClick={() => navigate('/login')}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
                         >
-                            <option value="" defaultChecked hidden>
-                                Elige el destino
-                            </option>
-                            <option value="27542715">Las Vegas</option>
-                            <option value="27537542">New York</option>
-                            <option value="27542089">Tokio</option>
-                            <option value="27536644">Miami</option>
-                            <option value="27544008">London</option>
-                            <option value="27540602">México</option>
-                            <option value="27546347">Puerto Rico</option>
-                            <option value="27539733">París</option>
-                        </select>
-                    </fieldset>
-                    <fieldset className="box-tvl-destination d-flex flex-column">
-                        <label>Destino:</label>
-                        <select
-                            name="destino"
-                            id="select-destino"
-                            onChange={(e) => setDestino(e.target.value)}
-                            value={destino}
+                            Explorar
+                        </motion.button>
+                        <motion.button 
+                            className="btn-learn-more"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
                         >
-                            <option value="" defaultChecked hidden>
-                                Elige el destino
-                            </option>
-                            <option value="27542715">Las Vegas</option>
-                            <option value="27537542">New York</option>
-                            <option value="27542089">Tokio</option>
-                            <option value="27536644">Miami</option>
-                            <option value="27544008">London</option>
-                            <option value="27540602">México</option>
-                            <option value="27546347">Puerto Rico</option>
-                            <option value="27539733">París</option>
-                        </select>
-                    </fieldset>
-                    <fieldset className="box-tvl-dates d-flex flex-column">
-                        <label>Fechas:</label>
-                        <section>
-                            <DatePicker
-                                className="start-end-date"
-                                selected={startDate}
-                                onChange={(date) => setStartDate(date)}
-                                selectsStart
-                                startDate={startDate}
-                                endDate={endDate}
-                                placeholderText="Fecha de salida"
-                                dateFormat="dd/MM/yyyy"
-                                popperPlacement="bottom-start"
-                                popperClassName="custom-datepicker"
-                                portalId="root-portal"
-                                // popperContainer={document.getElementById('root-portal')}
-                            />
-                            <DatePicker
-                                className="start-end-date"
-                                selected={endDate}
-                                onChange={(date) => setEndDate(date)}
-                                selectsEnd
-                                startDate={startDate}
-                                endDate={endDate}
-                                minDate={startDate}
-                                placeholderText="Fecha de regreso"
-                                dateFormat="dd/MM/yyyy"
-                                popperPlacement="bottom-start"
-                                popperClassName="custom-datepicker"
-                                portalId="root-portal"
-                                // popperContainer={document.getElementById('root-portal')}
-                            />
-                        </section>
-                    </fieldset>
-                    <button 
-                        className="tvl-btn-explore"
-                        onClick={showData}>
-                        Buscar ofertas
-                    </button>
-                </section>
-            </div>
-        </section>
+                            Saber Más
+                        </motion.button>
+                    </div>
+                </motion.div>
+            </section>
+
+            {/* Search Flight Section */}
+            <motion.section 
+                className="search-flight-section"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+            >
+                <div className="search-container">
+                    <h2 className="search-title">Encuentra tu vuelo ideal</h2>
+                    
+                    <div className="search-form">
+                        <div className="form-row">
+                            <div className="form-group origin">
+                                <label><FaPlane className="icon icon-takeoff" /> Origen</label>
+                                <select
+                                    name="origen"
+                                    id="select-origen"
+                                    onChange={(e) => setOrigen(e.target.value)}
+                                    value={origen}
+                                    className="styled-select"
+                                >
+                                    <option value="" defaultChecked hidden>
+                                        Selecciona origen
+                                    </option>
+                                    {destinations.map(dest => (
+                                        <option key={`origin-${dest.id}`} value={dest.id}>
+                                            {dest.name}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            <div className="form-group destination">
+                                <label><FaMapMarkerAlt className="icon" /> Destino</label>
+                                <select
+                                    name="destino"
+                                    id="select-destino"
+                                    onChange={(e) => setDestino(e.target.value)}
+                                    value={destino}
+                                    className="styled-select"
+                                >
+                                    <option value="" defaultChecked hidden>
+                                        Selecciona destino
+                                    </option>
+                                    {destinations.map(dest => (
+                                        <option key={`dest-${dest.id}`} value={dest.id}>
+                                            {dest.name}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div className="form-row">
+                            <div className="form-group dates">
+                                <label><FaCalendarAlt className="icon" /> Fechas</label>
+                                <div className="date-pickers">
+                                    <DatePicker
+                                        className="date-input"
+                                        selected={startDate}
+                                        onChange={(date) => setStartDate(date)}
+                                        selectsStart
+                                        startDate={startDate}
+                                        endDate={endDate}
+                                        placeholderText="Fecha de salida"
+                                        dateFormat="dd/MM/yyyy"
+                                        minDate={new Date()}
+                                    />
+                                    <DatePicker
+                                        className="date-input"
+                                        selected={endDate}
+                                        onChange={(date) => setEndDate(date)}
+                                        selectsEnd
+                                        startDate={startDate}
+                                        endDate={endDate}
+                                        minDate={startDate}
+                                        placeholderText="Fecha de regreso"
+                                        dateFormat="dd/MM/yyyy"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="form-group passengers">
+                                <label><FaUsers className="icon" /> Pasajeros</label>
+                                <div className="passenger-selector">
+                                    <button 
+                                        className="passenger-btn"
+                                        onClick={() => setPersonas(Math.max(1, personas - 1))}
+                                        disabled={personas <= 1}
+                                    >
+                                        -
+                                    </button>
+                                    <span className="passenger-count">{personas}</span>
+                                    <button 
+                                        className="passenger-btn"
+                                        onClick={() => setPersonas(Math.min(10, personas + 1))}
+                                        disabled={personas >= 10}
+                                    >
+                                        +
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <motion.button 
+                            className="search-button"
+                            onClick={showData}
+                            disabled={isSearching}
+                            whileHover={{ scale: 1.03 }}
+                            whileTap={{ scale: 0.97 }}
+                        >
+                            {isSearching ? (
+                                <div className="loading-spinner"></div>
+                            ) : (
+                                <>
+                                    <FaSearch className="search-icon" /> Buscar Vuelos
+                                </>
+                            )}
+                        </motion.button>
+                    </div>
+                </div>
+            </motion.section>
+
+            {/* Popular Destinations Section */}
+            {/* <section className="popular-destinations">
+                <h2 className="section-title">Destinos Populares</h2>
+                <p className="section-subtitle">Descubre nuestros destinos más buscados</p>
+                
+                <div className="destinations-grid">
+                    {destinations.slice(0, 4).map((dest, index) => (
+                        <motion.div 
+                            className="destination-card"
+                            key={dest.id}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.1 * index }}
+                            whileHover={{ 
+                                y: -10,
+                                boxShadow: "0 15px 30px rgba(0,0,0,0.2)"
+                            }}
+                        >
+                            <div className="destination-image">
+                                <img src={dest.image || `https://source.unsplash.com/300x200/?${dest.name}`} alt={dest.name} />
+                            </div>
+                            <div className="destination-info">
+                                <h3>{dest.name}</h3>
+                                <p>{dest.desc}</p>
+                                <button className="btn-view-deals">Ver Ofertas</button>
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
+                
+                <motion.button 
+                    className="btn-view-all"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                >
+                    Ver Todos los Destinos
+                </motion.button>
+            </section> */}
+
+            {/* Notification Modal */}
+            <AnimatePresence>
+                {showModal && (
+                    <motion.div 
+                        className="notification-modal"
+                        initial={{ opacity: 0, y: -50 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -50 }}
+                    >
+                        <FaInfoCircle className="info-icon" />
+                        <p>Por favor selecciona origen y destino para continuar</p>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </div>
     );
 }
 

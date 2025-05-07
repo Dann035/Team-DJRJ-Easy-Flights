@@ -6,7 +6,7 @@ import { router } from "./routes";  // Import the router configuration
 import { StoreProvider } from './hooks/useGlobalReducer'; 
 import { AuthProvider } from './hooks/useAuthContext'; // Import the StoreProvider for global state management
 import { BackendURL } from './components/BackendURL';
-
+import { LanguageProvider } from './context/LanguageContext';
 const Main = () => {
     
     if(! import.meta.env.VITE_BACKEND_URL ||  import.meta.env.VITE_BACKEND_URL == "") return (
@@ -17,12 +17,14 @@ const Main = () => {
     return (
         <React.StrictMode>  
             {/* Provide global state to all components */}
-            <AuthProvider>                
+            <AuthProvider>
+                <LanguageProvider>                
                 <StoreProvider> 
                     {/* Set up routing for the application */} 
                     <RouterProvider router={router}>
                     </RouterProvider>
                 </StoreProvider>
+                </LanguageProvider>
             </AuthProvider>
         </React.StrictMode>
     );
