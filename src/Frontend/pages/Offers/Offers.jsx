@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useGlobalReducer from "../../hooks/useGlobalReducer";
+import { useLanguage } from "../../context/LanguageContext";
 import { useAuth } from "../../hooks/useAuthContext";
 import { OffersCard } from "./OffersCard";
 import {OfCard2} from "./OfCard2/OfCard2";
@@ -9,6 +10,7 @@ import "./Offers.css";
 const url = import.meta.env.VITE_BACKEND_URL;
 
 export const Offers = () => {
+    const { texts } = useLanguage();
     const { user } = useAuth();
     const { store, dispatch } = useGlobalReducer();
     const navigate = useNavigate();
@@ -47,7 +49,7 @@ export const Offers = () => {
 
     return (
         <div className="container-fluid box-offers">
-            <h1 className="title-offers text-center">Ofertas de viajes</h1>
+            <h1 className="title-offers text-center">{texts.travelOffers}</h1>
 
             <div className="d-flex justify-content-between">
                 <div>
@@ -55,14 +57,14 @@ export const Offers = () => {
                         className={`botonAdd ${!isCompany ? "d-none" : ""}`}
                         onClick={moveToAddOffer}
                     >
-                        Crear Oferta
+                        {texts.createOffer}
                     </button>
                 </div>
             </div>
             
             <div className="row mt-5 of-listcard">
                 {!store.offers || store.offers.length === 0 ? (
-                    <p><strong className="text-info">Aún no hay ofertas</strong></p>
+                    <p><strong className="text-info">{texts.noOffers}</strong></p>
                 ) : (
                     <>
                         {limitedOffers.map((offert, index) => (
@@ -77,7 +79,7 @@ export const Offers = () => {
                                     className="botonAdd" 
                                     onClick={showAllOffers}
                                 >
-                                    Ver más ofertas
+                                    {texts.viewAllOffers}
                                 </button>
                             </div>
                         )}
