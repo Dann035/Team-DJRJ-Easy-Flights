@@ -44,7 +44,8 @@ const translations = {
     allRightsReserved: "All Rights Reserved",
 
     // Tagline / Hero
-    discoverAdventure: "Discover Your Next Adventure",
+    discoverAdventure: "Discover Your Next",
+    aventure: "Adventure",
     heroDescription: "Explore stunning destinations that awaken your wanderlust. Let us guide you to unforgettable experiences and hidden gems around the world.",
     explore: "Explore",
     learnMore: "Learn More",
@@ -175,7 +176,8 @@ const translations = {
     allRightsReserved: "Todos los Derechos Reservados",
 
     // Tagline / Hero
-    discoverAdventure: "Descubre Tu Próxima Aventura",
+    discoverAdventure: "Descubre Tu Próxima",
+    aventure: "Aventura",
     heroDescription: "Explora destinos impresionantes que despiertan tu deseo de viajar. Déjanos guiarte hacia experiencias inolvidables y joyas ocultas alrededor del mundo.",
     explore: "Explorar",
     learnMore: "Saber Más",
