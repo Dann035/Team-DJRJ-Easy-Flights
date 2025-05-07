@@ -1,0 +1,9 @@
+.accordion-button{
+    color: white;
+    background-color: var(--clr-black) !important;
+}
+
+.accordion-body{
+    background-color: var(--clr-black) !important;
+    color: white;
+}

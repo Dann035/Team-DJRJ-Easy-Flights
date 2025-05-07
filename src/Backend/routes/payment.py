@@ -5,100 +5,95 @@ from datetime import datetime
 
 payment_bp = Blueprint('payment', __name__)
 
+
 # Crear un nuevo pago
-@payment_bp.route('/api/payments', methods=['POST'])
+@payment_bp.route('/payments', methods=['POST'])
 @jwt_required()
 def create_payment():
-    user_id = get_jwt_identity()
-    user = User.query.get(user_id)
+    try:
+        user_id = get_jwt_identity()
+        user = User.query.get(user_id)
 
-    if not user or user.role != 'cliente':
-        return jsonify({"message": "Solo los clientes pueden hacer pagos"}), 403
+        if not user or user.role != 'cliente':
+            return jsonify({"msg": "Solo los clientes pueden hacer pagos"}), 403
 
-    data = request.get_json()
-    payer_name = data.get('payerName')
-    amount = data.get('amount')
-    order_id = data.get('orderID')
-    offer_id = data.get('offerID')
+        data = request.get_json()
+        amount = data.get('amount')
+        offer_id = data.get('offer_id')
+        payment_method = data.get('payment_method', 'Paypal')
+        status = data.get('status', 'completed')
 
-    if not all([payer_name, amount, order_id, offer_id]):
-        return jsonify({"message": "Faltan datos obligatorios"}), 400
+        if not all([amount, offer_id]):
+            return jsonify({"msg": "Faltan datos obligatorios"}), 400
 
-    offer = Offers.query.get(offer_id)
-    if not offer:
-        return jsonify({"message": "Oferta no encontrada"}), 404
+        offer = Offers.query.get(offer_id)
+        if not offer:
+            return jsonify({"msg": "Oferta no encontrada"}), 404
 
-    payment = Payments(
-        amount=amount,
-        payment_method="Paypal",
-        status="completed",
-        user_id=user.id,
-        offer_id=offer.id,
-        created_at=datetime.utcnow()
-    )
+        payment = Payments(
+            amount=amount,
+            offer_id=offer.id,
+            user_id=user.id,
+            payment_method=payment_method,
+            status=status,
+            created_at=datetime.utcnow()
+        )
 
-    db.session.add(payment)
-    db.session.commit()
+        db.session.add(payment)
+        db.session.commit()
 
-    return jsonify({"message": "Pago registrado con éxito", "payment": payment.serialize()}), 201
+        return jsonify({"msg": "Pago creado con éxito", "payment": payment.serialize()}), 201
+
+    except Exception as e:
+        return jsonify({"msg": "Error creando el pago", "error": str(e)}), 400
 
 
-# Obtener todos los pagos (solo admin)
-@payment_bp.route('/api/payments', methods=['GET'])
+# Obtener todos los pagos (admin)
+@payment_bp.route('/payments', methods=['GET'])
 @jwt_required()
 def get_all_payments():
-    user_id = get_jwt_identity()
-    user = User.query.get(user_id)
-
+    user = User.query.get(get_jwt_identity())
     if not user or user.role != 'admin':
-        return jsonify({"message": "Acceso restringido a administradores"}), 403
+        return jsonify({"msg": "Acceso restringido a administradores"}), 403
 
     payments = Payments.query.all()
     return jsonify([p.serialize() for p in payments]), 200
 
 
-# Obtener pagos del cliente autenticado
-@payment_bp.route('/api/payments/mine', methods=['GET'])
+# Obtener pagos propios (cliente)
+@payment_bp.route('/payments/mine', methods=['GET'])
 @jwt_required()
 def get_my_payments():
-    user_id = get_jwt_identity()
-    user = User.query.get(user_id)
-
+    user = User.query.get(get_jwt_identity())
     if not user or user.role != 'cliente':
-        return jsonify({"message": "Solo los clientes pueden ver sus pagos"}), 403
+        return jsonify({"msg": "Solo los clientes pueden ver sus pagos"}), 403
 
     payments = Payments.query.filter_by(user_id=user.id).all()
-    result = [payment.serialize() for payment in payments]
-
-    return jsonify(result), 200
+    return jsonify([p.serialize() for p in payments]), 200
 
 
-# Obtener un solo pago por ID (admin o dueño)
-@payment_bp.route('/api/payments/<int:id>', methods=['GET'])
+# Obtener pago por ID (admin o dueño)
+@payment_bp.route('/payments/<int:id>', methods=['GET'])
 @jwt_required()
 def get_payment(id):
-    user_id = get_jwt_identity()
-    user = User.query.get(user_id)
-
+    user = User.query.get(get_jwt_identity())
     payment = Payments.query.get_or_404(id)
 
     if user.role != 'admin' and payment.user_id != user.id:
-        return jsonify({"message": "No autorizado"}), 403
+        return jsonify({"msg": "No autorizado"}), 403
 
     return jsonify(payment.serialize()), 200
 
 
-# Actualizar un pago existente
-@payment_bp.route('/api/payments/<int:id>', methods=['PUT'])
+# Actualizar pago (admin o dueño)
+@payment_bp.route('/payments/<int:id>', methods=['PUT'])
 @jwt_required()
 def update_payment(id):
-    user_id = get_jwt_identity()
-    user = User.query.get(user_id)
-
+    user = User.query.get(get_jwt_identity())
     payment = Payments.query.get_or_404(id)
 
     if user.role != 'admin' and payment.user_id != user.id:
-        return jsonify({"message": "No autorizado"}), 403
+        return jsonify({"msg": "No autorizado"}), 403
 
     data = request.get_json()
     payment.amount = data.get('amount', payment.amount)
@@ -106,21 +101,19 @@ def update_payment(id):
     payment.status = data.get('status', payment.status)
 
     db.session.commit()
-    return jsonify({"message": "Pago actualizado", "payment": payment.serialize()}), 200
+    return jsonify({"msg": "Pago actualizado", "payment": payment.serialize()}), 200
 
 
-# Eliminar un pago
-@payment_bp.route('/api/payments/<int:id>', methods=['DELETE'])
+# Eliminar pago (admin o dueño)
+@payment_bp.route('/payments/<int:id>', methods=['DELETE'])
 @jwt_required()
 def delete_payment(id):
-    user_id = get_jwt_identity()
-    user = User.query.get(user_id)
-
+    user = User.query.get(get_jwt_identity())
     payment = Payments.query.get_or_404(id)
 
     if user.role != 'admin' and payment.user_id != user.id:
-        return jsonify({"message": "No autorizado"}), 403
+        return jsonify({"msg": "No autorizado"}), 403
 
     db.session.delete(payment)
     db.session.commit()
-    return jsonify({"message": f"Pago con ID {id} eliminado"}), 200
+    return jsonify({"msg": f"Pago con ID {id} eliminado"}), 200
