@@ -240,12 +240,12 @@ Footer {
 .title-vuelos,
 .title-features {
     font-size: 2.7rem;
+    text-align: center;
     font-weight: bold;
-    text-shadow: 0 0 8px rgba(29, 233, 248, .5);
+    text-shadow: 0 0 8px rgba(19, 151, 160, 0.5);
     color: var(--clr-white);
     margin-bottom: var(--spacing-md);
     position: relative;
-    display: inline-block;
 }
 
 .title-comments::after,
@@ -256,11 +256,12 @@ Footer {
     content: "";
     position: absolute;
     bottom: -10px;
-    left: 0;
+    left: 50%;
+    transform: translate(-50%);
     width: 60%;
     height: 3px;
-    background: linear-gradient(90deg, var(--clr-light500-blue), transparent);
-    border-radius: 3px;
+    background: var(--combine-gradient);
+    animation: pulse 2s infinite;
 }
 
 /* Tarjetas con efecto hover */

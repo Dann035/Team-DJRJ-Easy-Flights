@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { signupCompany } from "../../services/signup";
+import NotificationModal from "../../components/NotificationModal/NotificationModal";
 import "./SignupCompany.css";
 
 function SignupCompany() {
-    // const [dataForm, setDataForm] = useState(null);
+    const [showError, setShowError] = useState(false);
+    const [showSuccess, setShowSuccess] = useState(false);
+    const [showSocialAuth, setShowSocialAuth] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
@@ -16,8 +20,41 @@ function SignupCompany() {
         navigate("/login");
     };
 
-            return (
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+    return (
         <>
+            {showSuccess && (
+                <NotificationModal
+                    text="Registro exitoso"
+                    show={showSuccess}
+                    onClose={() => setShowSuccess(false)}
+                    type="success"
+                    duration={3000}
+                    position="top-center"
+                />
+            )}
+            {showError && (
+                <NotificationModal
+                    text="Error al registrar el usuario"
+                    show={showError}
+                    onClose={() => setShowError(false)}
+                    type="error"
+                    duration={5000}
+                    position="top-center"
+                />
+            )}
+            {showSocialAuth && (
+                <NotificationModal
+                    text="Error al Iniciar Sesión con Cuentas de Redes Sociales"
+                    show={showSocialAuth}
+                    onClose={() => setShowSocialAuth(false)}
+                    type="info"
+                    duration={3000}
+                    position="top-center"
+                />
+            )}
             <div className="form-body">
                 <div className="container-form-Sc">
                     <div className="information">
@@ -43,7 +80,7 @@ function SignupCompany() {
                                 <i className="fa-brands fa-linkedin"></i>
                                 <i className="fa-brands fa-apple"></i>
                             </div>
-                            <a href="/signupCompany" className="forgot-pass">O registrate como empresa</a>
+                            <a href="/signup" className="forgot-pass">O registrate como usuario</a>
                             <form onSubmit={handleSubmit}>
                                 <fieldset className="d-flex gap-2">
                                     <label>
@@ -58,11 +95,16 @@ function SignupCompany() {
                                     <label>
                                         <i className="fa-solid fa-lock"></i>
                                         <input
-                                            type="password"
+                                            type={showPassword ? "text" : "password"}
                                             name="password"
                                             placeholder="Contraseña"
                                             required
                                         />
+                                        <i 
+                                        className={`password-toggle fa-solid ${showPassword ? "fa-eye" : "fa-eye-slash"}`} 
+                                        onClick={togglePasswordVisibility}
+                                        title={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+                                        ></i>
                                     </label>
                                     <label>
                                         <i className="fa-solid fa-envelope"></i>
