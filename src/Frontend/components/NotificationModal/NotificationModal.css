@@ -1,0 +1,149 @@
+.notification-modal {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 300px;
+  max-width: 450px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  color: #f8fafc;
+  z-index: 9999;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Posicionamiento */
+.notification-modal.top-right {
+  top: 20px;
+  right: 20px;
+}
+
+.notification-modal.top-center {
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.notification-modal.top-left {
+  top: 20px;
+  left: 20px;
+}
+
+.notification-modal.bottom-right {
+  bottom: 20px;
+  right: 20px;
+}
+
+.notification-modal.bottom-center {
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.notification-modal.bottom-left {
+  bottom: 20px;
+  left: 20px;
+}
+
+/* Tipos de notificación */
+.notification-modal.info {
+  border-left: 4px solid #0ea5e9;
+}
+
+.notification-modal.success {
+  border-left: 4px solid #10b981;
+}
+
+.notification-modal.warning {
+  border-left: 4px solid #f59e0b;
+}
+
+.notification-modal.error {
+  border-left: 4px solid #ef4444;
+}
+
+.notification-content {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.notification-icon {
+  font-size: 20px;
+  margin-right: 12px;
+}
+
+.notification-icon.info {
+  color: #0ea5e9;
+}
+
+.notification-icon.success {
+  color: #10b981;
+}
+
+.notification-icon.warning {
+  color: #f59e0b;
+}
+
+.notification-icon.error {
+  color: #ef4444;
+}
+
+.notification-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.notification-close {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 15px;
+  transition: color 0.2s;
+  line-height: 1;
+}
+
+.notification-close:hover {
+  color: #f8fafc;
+}
+
+/* Efecto de brillo en los bordes */
+.notification-modal::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+}
+
+/* Efecto de hover */
+.notification-modal:hover {
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.3s ease;
+}
+
+/* Animación de pulso para notificaciones importantes */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
+.notification-modal.error .notification-icon {
+  animation: pulse 2s infinite;
+}

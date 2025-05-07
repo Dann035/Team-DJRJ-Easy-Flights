@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import NotificationModal from "../../components/NotificationModal/NotificationModal";
 import "./Login.css";
 
 const URL = import.meta.env.VITE_BACKEND_URL;
 
 function Login() {
     const navigate = useNavigate();
+    const [showNotification, setShowNotification] = useState(false);
+    const [showSuccess, setShowSuccess] = useState(false);
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -36,18 +39,39 @@ function Login() {
             }
             localStorage.setItem("access_token", data.token);
             localStorage.setItem("user", JSON.stringify(data.user));
+            setShowSuccess(true);
             navigate("/");
             return;
         } catch (err) {
             console.error(err);
-            alert("Error al hacer login");
+            setShowNotification(true);
             navigate("/login");
             return;
         }
     };
 
     return (
-        <>
+        <>  
+            {showSuccess && (
+                <NotificationModal
+                    text="Registro exitoso"
+                    show={showSuccess}
+                    onClose={() => setShowSuccess(false)}
+                    type="success"
+                    duration={3000}
+                    position="top-center"
+                />
+            )}
+            {showNotification && (
+                <NotificationModal
+                    text="Error al hacer login"
+                    show={showNotification}
+                    onClose={() => setShowNotification(false)}
+                    type="error"
+                    duration={5000}
+                    position="top-center"
+                />
+            )}
             <div className="form-body">
                 <div className="container-form">
                     <div className="information">

@@ -1,0 +1,78 @@
+/* Signup page styles */
+
+/* Password validation styles */
+.password-error {
+    border: 2px solid #ff3333 !important;
+    background-color: rgba(255, 51, 51, 0.05) !important;
+}
+
+.password-match {
+    border: 2px solid #4CAF50 !important;
+    background-color: rgba(76, 175, 80, 0.05) !important;
+}
+
+/* Password field icons */
+.password-validation-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.password-validation-icon.fa-check {
+    color: #4CAF50;
+}
+
+.password-validation-icon.fa-times {
+    color: #ff3333;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 35px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #666;
+}
+
+/* Adjust position when no validation icon is present */
+label:not(:has(.password-validation-icon)) .password-toggle {
+    right: 10px;
+}
+
+/* Relative positioning for password labels */
+form label {
+    position: relative;
+}
+
+/* Hover effects */
+.password-toggle:hover,
+.password-validation-icon:hover {
+    opacity: 0.8;
+}
+
+/* Password requirements list */
+.password-requirements {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 5px;
+}
+
+.password-requirements ul {
+    padding-left: 20px;
+    margin: 5px 0;
+}
+
+.password-requirements li {
+    margin-bottom: 3px;
+}
+
+.requirement-met {
+    color: #4CAF50;
+}
+
+.requirement-unmet {
+    color: #ff3333;
+}

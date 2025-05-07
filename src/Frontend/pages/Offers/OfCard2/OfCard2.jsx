@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { MapPin, Calendar } from "lucide-react";
 import "./OfCard2.css";
 
-export const OffersCard = ({ offert }) => {
+export const OfCard2 = ({ offert }) => {
     return (
         <div className="offer-card">
             <div className="offer-card-inner">

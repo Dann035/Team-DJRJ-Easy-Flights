@@ -1,13 +1,19 @@
 import React from "react";
-import "./Modal.css";
 
-const Modal = ({ children, onClose }) => (
-    <div className="modal-backdrop">
-        <div className="modal-content">
-            <button className="modal-close" onClick={onClose}>X</button>
-            {children}
-        </div>
-    </div>
+const Modal = ({ text }) => (
+    <AnimatePresence>
+                {showModal && (
+                    <motion.div 
+                        className="notification-modal"
+                        initial={{ opacity: 0, y: -50 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -50 }}
+                    >
+                        <FaInfoCircle className="info-icon" />
+                        <p>{text}</p>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 );
 
 export default Modal;
