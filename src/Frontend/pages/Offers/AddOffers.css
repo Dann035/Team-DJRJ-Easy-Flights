@@ -2,13 +2,13 @@
   display: flex;
     width: 750px;
     padding: 12px;
-    border: 2px solid #1cbbec;
+    border: 2px solid rgba(29, 233, 248, 0.5);
     border-radius: 8px;
     outline: none;
     font-size: 18px;
     transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
-    background-color: #fff;
-    color: #333;
+    background-color: transparent;
+    color: #d1d1d1;
     box-sizing: border-box;
   }
 
@@ -20,17 +20,18 @@
 
   /* Placeholder Styling */
   .input1::placeholder {
-    color: #aaa;
+    color: #d1d1d1;
     font-style: italic;
   }
 
   /* Hover Effect */
   .input1:hover {
-    background-color: #f0f8ff;
+    background-color: transparent;
   }
 
   #cardaddoffer{
-    border: 2px solid #1cbbec;
+    border: none;
+    background-color: transparent;
   }
 
   .createaddbtn {
@@ -46,7 +47,6 @@
     line-height: 1.4em;
     border: 2px solid rgb(0, 204, 255);
     background: linear-gradient(to right, rgba(27, 200, 253, 0.1) 1%, transparent 40%,transparent 60% , rgba(27, 163, 253, 0.1) 100%);
-    color: var(--blue);
     box-shadow: inset 0 0 10px rgba(29, 233, 248, 0.521), 0 0 9px 3px rgba(27, 170, 253, 0.1);
   }
 
