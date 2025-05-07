@@ -9,18 +9,33 @@ import { motion } from "framer-motion";
 import OffersAPI from "./Offers/OffersAPI/OffersAPI.jsx";
 import { AuthProvider } from "../hooks/useAuthContext.jsx";
 
-const particles = Array.from({ length: 20 }).map((_, i) => (
-    <div 
-        key={i} 
-        className="particle"
-        style={{
-            top: `${Math.random() * 100}%`,
-            left: `${Math.random() * 100}%`,
-            animationDelay: `${Math.random() * 5}s`,
-            animationDuration: `${5 + Math.random() * 10}s`
-        }}
-    />
-));
+// Increased particle count for better distribution across the entire page
+const numberOfParticles = 60;
+
+// Function to generate particles with more uniform distribution
+const generateParticles = (count) => {
+    return Array.from({ length: count }).map((_, i) => (
+        <div 
+            key={i} 
+            className="particle"
+            style={{
+                // More uniform distribution across the page
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                // Varied sizes for enhanced visual effect
+                width: `${3 + Math.random() * 4}px`,
+                height: `${3 + Math.random() * 4}px`,
+                // Varied opacity for depth effect
+                opacity: `${0.2 + Math.random() * 0.5}`,
+                // Varied animation timing for more natural movement
+                animationDelay: `${Math.random() * 8}s`,
+                animationDuration: `${8 + Math.random() * 15}s`
+            }}
+        />
+    ));
+};
+
+const particles = generateParticles(numberOfParticles);
 
 export const Home = () => {
     return (

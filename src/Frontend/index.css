@@ -176,26 +176,35 @@ Footer{
     opacity: 0;
     transition: opacity 0.3s ease;
 }
+/* Asegurar que el contenido principal esté por encima de las partículas */
 .home-container{
     padding: 0 10rem;
+    position: relative;
+    z-index: 1;
 }
+/* Estilos mejorados para el contenedor de partículas */
 .particles-container {
-    position: absolute;
+    position: fixed; /* Fijo en relación a la ventana del navegador */
+    top: var(--navbar-height); /* Comienza justo debajo del navbar */
+    left: 0;
     width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
+    height: calc(100vh - var(--navbar-height)); /* Altura total menos el navbar */
+    pointer-events: none; /* Permite interactuar con elementos debajo */
+    z-index: 0; /* Detrás del contenido principal pero visible */
+    overflow: hidden; /* Evita desbordamiento */
 }
+
+/* Estilos mejorados para las partículas individuales */
 .particle {
     position: absolute;
     width: 5px;
     height: 5px;
-    background-color: rgba(29, 233, 248, 0.5);
+    background-color: rgba(29, 233, 248, 0.5); /* Color base de las partículas */
     border-radius: 50%;
-    box-shadow: 0 0 10px rgba(29, 233, 248, 0.8);
+    box-shadow: 0 0 10px rgba(29, 233, 248, 0.8); /* Efecto de brillo */
     pointer-events: none;
     opacity: 0.4;
-    animation: floatParticle 10s linear infinite;
+    animation: floatParticle 5s linear infinite;
 }
 
 .btn-futuristic:hover::before {
@@ -393,6 +402,25 @@ Footer{
     100% { top: 100%; }
 }
 
+/* Animación mejorada para el movimiento de partículas */
+@keyframes floatParticle {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+        transform: translate(10px, 10px) rotate(90deg);
+    }
+    50% {
+        transform: translate(0, 20px) rotate(180deg);
+    }
+    75% {
+        transform: translate(-10px, 10px) rotate(270deg);
+    }
+    100% {
+        transform: translate(0, 0) rotate(360deg);
+    }
+}
+
 @keyframes drop-nav {
     from {
         opacity: 0;
@@ -467,6 +495,16 @@ Footer{
 }
 
 @media (max-width: 768px) {
+    .particles-container {
+        top: var(--navbar-scrolled-height); /* Ajuste para navbar más pequeño en móviles */
+        height: calc(100vh - var(--navbar-scrolled-height));
+    }
+    
+    .particle {
+        /* Partículas ligeramente más pequeñas en dispositivos móviles */
+        box-shadow: 0 0 8px rgba(29, 233, 248, 0.7);
+    }
+    
     .nav-container {
         padding: 10px 4%;
         height: 80px;
