@@ -5,7 +5,6 @@
     backdrop-filter: blur(15px);
     border-bottom: 1px solid var(--primary-color-transparent);
     padding: 12px 5%;
-    position: sticky;
     top: 0;
     margin-bottom: 20px;
     z-index: 1000;

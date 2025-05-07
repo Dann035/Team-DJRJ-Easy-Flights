@@ -2,12 +2,21 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import { motion, AnimatePresence } from "framer-motion";
-import  useGlobalReducer  from "../../hooks/useGlobalReducer";
+import useGlobalReducer from "../../hooks/useGlobalReducer";
+import { useLanguage } from "../../context/LanguageContext";
 import "./Tagline.css";
 import "react-datepicker/dist/react-datepicker.css";
 
 // Icons
-import { FaPlane, FaMapMarkerAlt, FaCalendarAlt, FaUsers, FaSearch, FaInfoCircle } from "react-icons/fa";
+import {
+    FaPlane,
+    FaMapMarkerAlt,
+    FaCalendarAlt,
+    FaUsers,
+    FaSearch,
+    FaInfoCircle,
+} from "react-icons/fa";
+import { te } from "date-fns/locale";
 
 function Tagline() {
     const { store, dispatch } = useGlobalReducer();
@@ -15,6 +24,7 @@ function Tagline() {
     const [endDate, setEndDate] = useState(null);
     const [personas, setPersonas] = useState(1);
     const [origen, setOrigen] = useState("");
+    const { texts } = useLanguage();
     const [destino, setDestino] = useState("");
     const [showModal, setShowModal] = useState(false);
     const [isSearching, setIsSearching] = useState(false);
@@ -27,9 +37,9 @@ function Tagline() {
     const URL = `https://skyscanner89.p.rapidapi.com/flights/roundtrip/list?`;
     const options = {
         headers: {
-            'x-rapidapi-key': API_KEY,
-            'x-rapidapi-host': 'skyscanner89.p.rapidapi.com'
-        }
+            "x-rapidapi-key": API_KEY,
+            "x-rapidapi-host": "skyscanner89.p.rapidapi.com",
+        },
     };
 
     const showData = async () => {
@@ -41,17 +51,19 @@ function Tagline() {
         }
 
         setIsSearching(true);
-        
+
         try {
-            const response = await fetch(URL + `originId=${origen}&destinationId=${destino}`, options);
+            const response = await fetch(
+                URL + `originId=${origen}&destinationId=${destino}`,
+                options
+            );
             const data = await response.json();
-            const results = await data?.data?.flightQuotes?.results || [];
-            dispatch({ type: "get_offersAPI", payload: results });
-
-
+            const results = (await data?.data?.flightQuotes?.results) || [];
+            dispatch({ type: "clear_offersAPI"});
+            dispatch({ type: "set_offersAPI", payload: results });
         } catch (error) {
             console.error("Error la offerAPI", error.message);
-            dispatch({ type: "get_offersAPI", payload: [] });
+            dispatch({ type: "clear_offersAPI"});
             setShowModal(true);
             setTimeout(() => setShowModal(false), 3000);
         } finally {
@@ -65,14 +77,54 @@ function Tagline() {
 
     // Destinations data with images and descriptions
     const destinations = [
-        { id: "27542715", name: "Las Vegas", image: "/images/destinations/las-vegas.jpg", desc: "La ciudad que nunca duerme" },
-        { id: "27537542", name: "New York", image: "/images/destinations/new-york.jpg", desc: "La Gran Manzana" },
-        { id: "27542089", name: "Tokio", image: "/images/destinations/tokyo.jpg", desc: "Tradición y modernidad" },
-        { id: "27536644", name: "Miami", image: "/images/destinations/miami.jpg", desc: "Playas y vida nocturna" },
-        { id: "27544008", name: "London", image: "/images/destinations/london.jpg", desc: "Historia y cultura" },
-        { id: "27540602", name: "México", image: "/images/destinations/mexico.jpg", desc: "Gastronomía y color" },
-        { id: "27546347", name: "Puerto Rico", image: "/images/destinations/puerto-rico.jpg", desc: "Paraíso caribeño" },
-        { id: "27539733", name: "París", image: "/images/destinations/paris.jpg", desc: "La ciudad del amor" }
+        {
+            id: "27542715",
+            name: texts.lasVegas,
+            image: "/images/destinations/las-vegas.jpg",
+            desc: "La ciudad que nunca duerme",
+        },
+        {
+            id: "27537542",
+            name: texts.newYork,
+            image: "/images/destinations/new-york.jpg",
+            desc: "La Gran Manzana",
+        },
+        {
+            id: "27542089",
+            name: texts.tokyo,
+            image: "/images/destinations/tokyo.jpg",
+            desc: "Tradición y modernidad",
+        },
+        {
+            id: "27536644",
+            name: texts.miami,
+            image: "/images/destinations/miami.jpg",
+            desc: "Playas y vida nocturna",
+        },
+        {
+            id: "27544008",
+            name: texts.london,
+            image: "/images/destinations/london.jpg",
+            desc: "Historia y cultura",
+        },
+        {
+            id: "27540602",
+            name: texts.mexico,
+            image: "/images/destinations/mexico.jpg",
+            desc: "Gastronomía y color",
+        },
+        {
+            id: "27546347",
+            name: texts.puertoRico,
+            image: "/images/destinations/puerto-rico.jpg",
+            desc: "Paraíso caribeño",
+        },
+        {
+            id: "27539733",
+            name: texts.paris,
+            image: "/images/destinations/paris.jpg",
+            desc: "La ciudad del amor",
+        },
     ];
 
     return (
@@ -80,7 +132,7 @@ function Tagline() {
             {/* Hero Section with Video Background */}
             <section className="hero-section">
                 <div className="video-container">
-                    <motion.div 
+                    <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: isVideoLoaded ? 1 : 0 }}
                         transition={{ duration: 1.5 }}
@@ -96,55 +148,55 @@ function Tagline() {
                     ></video>
                 </div>
 
-                <motion.div 
+                <motion.div
                     className="hero-content"
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: .8, delay: 0.5 }}
+                    transition={{ duration: 0.8, delay: 0.5 }}
                 >
                     <h1 className="hero-title">
-                        Descubre Tu Próxima <br /> 
-                        <span className="highlight-text">Aventura</span>
+                        {texts.discoverAdventure}
+                        <br />
+                        <span className="highlight-text">{texts.aventure}</span>
                     </h1>
-                    <p className="hero-description">
-                        Explora destinos impresionantes que despiertan tu deseo de viajar.
-                        Déjanos guiarte hacia experiencias inolvidables y joyas ocultas
-                        alrededor del mundo.
-                    </p>
+                    <p className="hero-description">{texts.heroDescription}</p>
                     <div className="hero-buttons">
-                        <motion.button 
+                        <motion.button
                             className="btn-explore"
-                            onClick={() => navigate('/login')}
+                            onClick={() => navigate("/login")}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >
-                            Explorar
+                            {texts.explore}
                         </motion.button>
-                        <motion.button 
+                        <motion.button
                             className="btn-learn-more"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >
-                            Saber Más
+                            {texts.learnMore}
                         </motion.button>
                     </div>
                 </motion.div>
             </section>
 
             {/* Search Flight Section */}
-            <motion.section 
+            <motion.section
                 className="search-flight-section"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.8 }}
             >
                 <div className="search-container">
-                    <h2 className="search-title">Encuentra tu vuelo ideal</h2>
-                    
+                    <h2 className="search-title">{texts.findIdealFlight}</h2>
+
                     <div className="search-form">
                         <div className="form-row">
                             <div className="form-group origin">
-                                <label><FaPlane className="icon icon-takeoff" /> Origen</label>
+                                <label>
+                                    <FaPlane className="icon icon-takeoff" />
+                                    {texts.origin}
+                                </label>
                                 <select
                                     name="origen"
                                     id="select-origen"
@@ -153,10 +205,13 @@ function Tagline() {
                                     className="styled-select"
                                 >
                                     <option value="" defaultChecked hidden>
-                                        Selecciona origen
+                                        {texts.selectOrigin}
                                     </option>
-                                    {destinations.map(dest => (
-                                        <option key={`origin-${dest.id}`} value={dest.id}>
+                                    {destinations.map((dest) => (
+                                        <option
+                                            key={`origin-${dest.id}`}
+                                            value={dest.id}
+                                        >
                                             {dest.name}
                                         </option>
                                     ))}
@@ -164,7 +219,10 @@ function Tagline() {
                             </div>
 
                             <div className="form-group destination">
-                                <label><FaMapMarkerAlt className="icon" /> Destino</label>
+                                <label>
+                                    <FaMapMarkerAlt className="icon" />
+                                    {texts.destination}
+                                </label>
                                 <select
                                     name="destino"
                                     id="select-destino"
@@ -173,10 +231,13 @@ function Tagline() {
                                     className="styled-select"
                                 >
                                     <option value="" defaultChecked hidden>
-                                        Selecciona destino
+                                        {texts.selectDestination}
                                     </option>
-                                    {destinations.map(dest => (
-                                        <option key={`dest-${dest.id}`} value={dest.id}>
+                                    {destinations.map((dest) => (
+                                        <option
+                                            key={`dest-${dest.id}`}
+                                            value={dest.id}
+                                        >
                                             {dest.name}
                                         </option>
                                     ))}
@@ -186,7 +247,10 @@ function Tagline() {
 
                         <div className="form-row">
                             <div className="form-group dates">
-                                <label><FaCalendarAlt className="icon" /> Fechas</label>
+                                <label>
+                                    <FaCalendarAlt className="icon" />
+                                    {texts.dates}
+                                </label>
                                 <div className="date-pickers">
                                     <DatePicker
                                         className="date-input"
@@ -195,7 +259,9 @@ function Tagline() {
                                         selectsStart
                                         startDate={startDate}
                                         endDate={endDate}
-                                        placeholderText="Fecha de salida"
+                                        placeholderText={
+                                            texts.departurePlaceholder
+                                        }
                                         dateFormat="dd/MM/yyyy"
                                         minDate={new Date()}
                                     />
@@ -207,26 +273,41 @@ function Tagline() {
                                         startDate={startDate}
                                         endDate={endDate}
                                         minDate={startDate}
-                                        placeholderText="Fecha de regreso"
+                                        placeholderText={
+                                            texts.returnPlaceholder
+                                        }
                                         dateFormat="dd/MM/yyyy"
                                     />
                                 </div>
                             </div>
 
                             <div className="form-group passengers">
-                                <label><FaUsers className="icon" /> Pasajeros</label>
+                                <label>
+                                    <FaUsers className="icon" />
+                                    {texts.passengersLabel}
+                                </label>
                                 <div className="passenger-selector">
-                                    <button 
+                                    <button
                                         className="passenger-btn"
-                                        onClick={() => setPersonas(Math.max(1, personas - 1))}
+                                        onClick={() =>
+                                            setPersonas(
+                                                Math.max(1, personas - 1)
+                                            )
+                                        }
                                         disabled={personas <= 1}
                                     >
                                         -
                                     </button>
-                                    <span className="passenger-count">{personas}</span>
-                                    <button 
+                                    <span className="passenger-count">
+                                        {personas}
+                                    </span>
+                                    <button
                                         className="passenger-btn"
-                                        onClick={() => setPersonas(Math.min(10, personas + 1))}
+                                        onClick={() =>
+                                            setPersonas(
+                                                Math.min(10, personas + 1)
+                                            )
+                                        }
                                         disabled={personas >= 10}
                                     >
                                         +
@@ -235,7 +316,7 @@ function Tagline() {
                             </div>
                         </div>
 
-                        <motion.button 
+                        <motion.button
                             className="search-button"
                             onClick={showData}
                             disabled={isSearching}
@@ -246,7 +327,8 @@ function Tagline() {
                                 <div className="loading-spinner"></div>
                             ) : (
                                 <>
-                                    <FaSearch className="search-icon" /> Buscar Vuelos
+                                    <FaSearch className="search-icon" />{" "}
+                                    {texts.searchFlightsBtn}
                                 </>
                             )}
                         </motion.button>
@@ -296,14 +378,14 @@ function Tagline() {
             {/* Notification Modal */}
             <AnimatePresence>
                 {showModal && (
-                    <motion.div 
+                    <motion.div
                         className="notification-modal"
                         initial={{ opacity: 0, y: -50 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -50 }}
                     >
                         <FaInfoCircle className="info-icon" />
-                        <p>Por favor selecciona origen y destino para continuar</p>
+                        <p>{texts.pleaseSelectOriginDest}</p>
                     </motion.div>
                 )}
             </AnimatePresence>
