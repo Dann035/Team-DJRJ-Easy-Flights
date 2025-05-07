@@ -60,12 +60,6 @@ export const Offers = () => {
                 </div>
             </div>
             
-            
-            
-
-            {/* <div>
-				<button className={`botonAdd ${!isCompany ? "d-none" : ""}`} onClick={moveToAddOffer}>New Offer</button>
-			</div> */}
             <div className="row mt-5 of-listcard">
                 {!store.offers || store.offers.length === 0 ? (
                     <p><strong className="text-info">Aún no hay ofertas</strong></p>

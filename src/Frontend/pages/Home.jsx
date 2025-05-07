@@ -10,7 +10,7 @@ import { AuthProvider } from "../hooks/useAuthContext.jsx";
 
 export const Home = () => {
     return (
-        <div className="container">
+        <div className="px-5">
             <Tagline />
             <OffersAPI />
             <Offers/>

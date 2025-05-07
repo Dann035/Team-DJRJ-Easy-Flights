@@ -7,6 +7,7 @@
     padding: 12px 5%;
     position: sticky;
     top: 0;
+    margin-bottom: 20px;
     z-index: 1000;
     height: var(--navbar-height);
     transition: height 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
@@ -30,7 +31,7 @@
 }
 
 #btn-nav-login {
-    background: var(--combine-gradient);
+    background: linear-gradient(90deg, transparent, rgba(29, 233, 248, 0.5), transparent);
     border: none;
     color: var(--pure-white);
     font-weight: 600;
@@ -51,9 +52,9 @@
 }
 
 #btn-nav-login:hover {
-    background: var(--combine-gradient);
+    background: linear-gradient(90deg, transparent, rgba(29, 233, 248, 0.5), transparent);
     color: var(--pure-white);
-    box-shadow: var(--box-shadow-gradient);
+    box-shadow: var(--box-shadow-sm);
     transform: translateY(-2px);
 }
 
@@ -64,7 +65,7 @@
     left: -50%;
     width: 200%;
     height: 200%;
-    background: var(--combine-gradient);
+    background: linear-gradient(90deg, transparent, rgba(29, 233, 248, 0.8), transparent);
     opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -125,8 +126,7 @@
     border-radius: var(--border-radius-pill);
     position: relative;
     text-shadow: 0 0 5px rgba(0, 211, 211, 0.5);
-    box-shadow: 0 0 5px var(--turquoise),
-        0 0 10px var(--fuchsia);
+    box-shadow: var(--box-shadow-sm);
     overflow: hidden;
     display: inline-flex;
     align-items: center;
@@ -135,11 +135,11 @@
 }
 
 .link-nav:hover {
-    background: var(--combine-gradient);
-    border: 2px solid var(--accent-color);
+    background: linear-gradient(90deg, transparent, rgba(29, 233, 248, 0.5), transparent);
+    border: none;
     color: var(--pure-white);
     text-shadow: none;
-    box-shadow: var(--box-shadow-gradient);
+    box-shadow: var(--box-shadow-sm);
     transform: translateY(-2px);
 }
 
