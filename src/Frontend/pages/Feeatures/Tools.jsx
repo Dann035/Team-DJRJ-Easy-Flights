@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './tools.css';
 
+
 export default function Tools() {
     const [vista, setVista] = useState('menu');
     const [formData, setFormData] = useState({
@@ -181,8 +182,173 @@ export default function Tools() {
                 </div>
             )}
 
+            {/* PLANIFICADOR DE VIAJE/PRESUPUESTOS*/}
+            {vista === 'planificador' && (
+            <div className=" d-flex justify-content-center my-5 planifier">
+                <div className="p-4 shadow bg-light rounded " style={{ width: '100%', maxWidth: '600px' }}>
+                <h2 className="mb-4 text-center">📊 Planificador de Viaje</h2>
+
+                {/* Selector de moneda */}
+                <div className="mb-4">
+                    <label className="form-label">Selecciona la moneda</label>
+                    <select className="form-select selectorcoin" value={moneda} onChange={(e) => setMoneda(e.target.value)}>
+                    <option value="USD">USD - Dólar estadounidense</option>
+                    <option value="EUR">EUR - Euro</option>
+                    <option value="GBP">GBP - Libra esterlina</option>
+                    <option value="JPY">JPY - Yen japonés</option>
+                    </select>
+                </div>
+
+                {/* Formulario para ingresar gastos, hacemos una lista predeterminada de gastos que se hacen en un viaje */}
+                <div className="mb-3">
+                    <label className="form-label">Vuelo</label>
+                    <input
+                    type="number"
+                    className="form-control"
+                    name="vuelo"
+                    value={formData.vuelo}
+                    onChange={handleChange}
+                    placeholder="Costo de vuelo"
+                    />
+                </div>
+
+                <div className="mb-3">
+                    <label className="form-label">Hospedaje</label>
+                    <input
+                    type="number"
+                    className="form-control"
+                    name="hospedaje"
+                    value={formData.hospedaje}
+                    onChange={handleChange}
+                    placeholder="Costo de hospedaje"
+                    />
+                </div>
+
+                <div className="mb-3">
+                    <label className="form-label">Comida</label>
+                    <input
+                    type="number"
+                    className="form-control"
+                    name="comida"
+                    value={formData.comida}
+                    onChange={handleChange}
+                    placeholder="Costo de comida"
+                    />
+                </div>
+
+                <div className="mb-3">
+                    <label className="form-label">Entretenimiento</label>
+                    <input
+                    type="number"
+                    className="form-control"
+                    name="entretenimiento"
+                    value={formData.entretenimiento}
+                    onChange={handleChange}
+                    placeholder="Costo de entretenimiento"
+                    />
+                </div>
+
+                <div className="mb-4">
+                    <label className="form-label">Souvenirs</label>
+                    <input
+                    type="number"
+                    className="form-control"
+                    name="souvenirs"
+                    value={formData.souvenirs}
+                    onChange={handleChange}
+                    placeholder="Costo de souvenirs"
+                    />
+                </div>
+
+                {/* Otros gastos personalizados */}
+                <div className="mb-3">
+                    <h5>Otros gastos personalizados</h5>
+                    <div className="d-flex gap-2">
+                    <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Nombre del gasto"
+                        value={nuevoGastoNombre}
+                        onChange={(e) => setNuevoGastoNombre(e.target.value)}
+                    />
+                    <input
+                        type="number"
+                        className="form-control"
+                        placeholder="Valor"
+                        value={nuevoGastoValor}
+                        onChange={(e) => setNuevoGastoValor(e.target.value)}
+                    />
+                    <button className="btn btn-info" onClick={handleAddCustomGasto}>Añadir</button>
+                    </div>
+                </div>
+
+                {customGastos.length > 0 && (
+                    <ul className="list-group mb-3">
+                    {customGastos.map((g, idx) => (
+                        <li key={idx} className="list-group-item d-flex justify-content-between">
+                        <span>{g.nombre}</span>
+                        <span>{simbolosMoneda[moneda]}{g.valor.toFixed(2)}</span>
+                        </li>
+                    ))}
+                    </ul>
+                )}
+
+                <div className="d-grid">
+                    <button className="btn btn-primary" onClick={calcularTotal}>Calcular Total del Viaje</button>
+                </div>
+
+                {/* Mostrar lista de resultados detallados */}
+                {total !== null && (
+                    <>
+                    <h5 className="mt-4 alert alert-success mt-4 text-center">Resumen de Gastos:</h5>
+                    <ul className="list-group mb-3">
+                        <li className="list-group-item d-flex justify-content-between">
+                        <span>Vuelo</span>
+                        <span>{simbolosMoneda[moneda]}{formData.vuelo || 0}</span>
+                        </li>
+                        <li className="list-group-item d-flex justify-content-between">
+                        <span>Hospedaje</span>
+                        <span>{simbolosMoneda[moneda]}{formData.hospedaje || 0}</span>
+                        </li>
+                        <li className="list-group-item d-flex justify-content-between">
+                        <span>Comida</span>
+                        <span>{simbolosMoneda[moneda]}{formData.comida || 0}</span>
+                        </li>
+                        <li className="list-group-item d-flex justify-content-between">
+                        <span>Entretenimiento</span>
+                        <span>{simbolosMoneda[moneda]}{formData.entretenimiento || 0}</span>
+                        </li>
+                        <li className="list-group-item d-flex justify-content-between">
+                        <span>Souvenirs</span>
+                        <span>{simbolosMoneda[moneda]}{formData.souvenirs || 0}</span>
+                        </li>
+                        {customGastos.length > 0 && customGastos.map((g, idx) => (
+                        <li key={idx} className="list-group-item d-flex justify-content-between">
+                            <span>{g.nombre}</span>
+                            <span>{simbolosMoneda[moneda]}{g.valor.toFixed(2)}</span>
+                        </li>
+                        ))}
+                        <li className="list-group-item d-flex justify-content-between font-weight-bold">
+                        <span>Total Estimado</span>
+                        <span>{simbolosMoneda[moneda]}{total.toFixed(2)}</span>
+                        </li>
+                    </ul>
+
+                    {/* Botón para guardar el presupuesto */}
+                    <div className="mt-4">
+                        <button className="btn btn-success w-100" onClick={guardarDivisionEnPerfil}>
+                        Guardar este presupuesto en tu perfil
+                        </button>
+                    </div>
+                    </>
+                )}
+                </div>
+            </div>
+            )}
+
+        {/* DIVISOR DE GASTOS POR PERSONAS */}
             {vista === 'divisor' && (
-                <div className="p-4 shadow-sm bg-light mb-5">
+                <div  className="p-4 shadow bg-white rounded split" >
                     <h2 className="mb-3 text-center">👥 División de Gastos por Personas</h2>
 
                     <div className="mb-4">
@@ -199,7 +365,7 @@ export default function Tools() {
                     {/* Selector de moneda */}
                     <div className="mb-4">
                         <label className="form-label">Selecciona la moneda</label>
-                        <select className="form-select" value={moneda} onChange={(e) => setMoneda(e.target.value)}>
+                        <select className="form-select selectorcoin" value={moneda} onChange={(e) => setMoneda(e.target.value)}>
                             <option value="USD">USD - Dólar estadounidense</option>
                             <option value="EUR">EUR - Euro</option>
                             <option value="GBP">GBP - Libra esterlina</option>

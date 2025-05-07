@@ -54,9 +54,9 @@ export const Footer = () => (
 			</section>
 			<section>
 				<ul className="d-flex gap-3 list-unstyled justify-content-center">
-					<li><a href="#">Terms of Service</a></li>
-					<li><a href="#">Privacy Policy</a></li>
-					<li><a href="#">Cookie Policy</a></li>
+					<li><a href="/terms-of-service">Terms of Service</a></li>
+					<li><a href="/privacy-policy">Privacy Policy</a></li>
+					<li><a href="/cookies-policy">Cookie Policy</a></li>
 				</ul>
 			</section>
 		</div>

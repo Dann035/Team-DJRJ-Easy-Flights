@@ -1,8 +1,9 @@
 import React from 'react';
+import "./TravelTips.css";
 
 export default function TravelTips() {
     return (
-        <div className="container py-5">
+        <div className="container py-5 ">
             <h1 className="mb-4 text-center">✈️ Travel Tips </h1>
             <p>Antes de planificar tus proximas vacaciones o escapada echale un vistazo a estos tips</p>
             <div className="accordion" id="travelTipsAccordion">
