@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import useGlobalReducer from "../../../hooks/useGlobalReducer";
 import "./OffersAPI.css";
 import { FaMapMarkerAlt, FaClock, FaPlane } from "react-icons/fa";
@@ -6,12 +6,20 @@ import { FaMapMarkerAlt, FaClock, FaPlane } from "react-icons/fa";
 function OffersAPI() {
     const { store } = useGlobalReducer();
     const data = store.offersAPI || [];
+    const [displayCount, setDisplayCount] = useState(3);
+
+    const show4More = (displayCount) => {
+        setDisplayCount(displayCount+3);
+    };
+    const limitedOffers = data.slice(0, displayCount);
+
+
     return (
         <div className="container mt-3">
             <h1 className="title-offers text-center">Ofertas de Vuelos</h1>
             <div className="flights-container">
                 {Array.isArray(data) && data.length > 0 ? (
-                    data.map((offer) => (
+                    limitedOffers.map((offer) => (
                         <div className="flight-offer-card" key={offer?.content?.id}>
                             <div className="flight-offer-inner">
                                 <div className="flight-offer-front">
@@ -71,13 +79,23 @@ function OffersAPI() {
                                     </a>
                                 </div>
                             </div>
+                            
                         </div>
+                        
                     ))
                 ) : (
                     <p className="flights-message">
                         Elige origen y destino para buscar ofertas
                     </p>
                 )}
+                <div>
+                    <button
+                    className="botonAdd"
+                    onClick={() => show4More(displayCount)}
+                    >
+                        Ver más ofertas
+                    </button>
+                </div>
             </div>
         </div>
     );

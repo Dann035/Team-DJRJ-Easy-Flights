@@ -59,10 +59,11 @@ function Tagline() {
             );
             const data = await response.json();
             const results = (await data?.data?.flightQuotes?.results) || [];
-            dispatch({ type: "get_offersAPI", payload: results });
+            dispatch({ type: "clear_offersAPI"});
+            dispatch({ type: "set_offersAPI", payload: results });
         } catch (error) {
             console.error("Error la offerAPI", error.message);
-            dispatch({ type: "get_offersAPI", payload: [] });
+            dispatch({ type: "clear_offersAPI"});
             setShowModal(true);
             setTimeout(() => setShowModal(false), 3000);
         } finally {
