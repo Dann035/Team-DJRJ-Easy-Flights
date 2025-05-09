@@ -102,15 +102,14 @@ function Comments() {
           <p>No existe ninguna reseña todavía</p>
         ) : (
           comments.map((c) => (
-            <div key={c.id} className="d-flex mb-4 text-start align-items-start gap-3">
+            <div key={c.id} className="d-flex mb-4 align-items-start gap-2">
               {/* Left: Avatar */}
               <img
                 className="me-3"
                 src="https://randomuser.me/api/portraits/men/24.jpg"
                 alt="Reviewer"
                 style={{
-                  width: "30px",
-                  height: "90px",
+                  height: "70px",
                   objectFit: "contain",
                 }}
               />
@@ -121,7 +120,9 @@ function Comments() {
                 <small className="text-muted">Travel Blogger</small>
                 <p className="fst-italic mt-2">"{c.content}"</p>
                 <small className="text-muted d-block mb-2">Comentario número {c.id}</small>
-                <button className="btn btn-secondary btn-sm me-2">Editar</button>
+                <button 
+                //onClick={()=> editComment(c.id)}
+                className="btn btn-secondary btn-sm me-2">Editar</button>
                 <button
                   onClick={() => deleteComment(c.id)}
                   className="btn btn-danger btn-sm"
