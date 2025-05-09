@@ -1,18 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import useGlobalReducer from "../../../hooks/useGlobalReducer";
+import { useLanguage } from "../../../context/LanguageContext";
 import "./OffersAPI.css";
 import { FaMapMarkerAlt, FaClock, FaPlane } from "react-icons/fa";
 
 function OffersAPI() {
+    const { texts } = useLanguage();
     const { store } = useGlobalReducer();
     const data = store.offersAPI || [];
+    const [displayCount, setDisplayCount] = useState(3);
+
+    const show4More = (displayCount) => {
+        setDisplayCount(displayCount + 3);
+    };
+    const limitedOffers = data.slice(0, displayCount);
+
     return (
         <div className="container mt-3">
-            <h1 className="title-offers text-center">Ofertas de Vuelos</h1>
+            <h1 className="title-offers text-center">{texts.flightsOffers}</h1>
             <div className="flights-container">
                 {Array.isArray(data) && data.length > 0 ? (
-                    data.map((offer) => (
-                        <div className="flight-offer-card" key={offer?.content?.id}>
+                    limitedOffers.map((offer) => (
+                        <div
+                            className="flight-offer-card"
+                            key={offer?.content?.id}
+                        >
                             <div className="flight-offer-inner">
                                 <div className="flight-offer-front">
                                     <div className="flight-image-container">
@@ -27,36 +39,46 @@ function OffersAPI() {
                                     </div>
                                     <div className="flight-details">
                                         <div>
-                                            <h3 className="flight-title">Vuelo Especial</h3>
+                                            <h3 className="flight-title">
+                                                {texts.specialOffers}
+                                            </h3>
                                             <div className="flight-origin">
                                                 <FaPlane />
                                                 <span>
                                                     <strong>Origen:</strong>{" "}
-                                                    {offer?.content?.inboundLeg?.destinationAirport?.name || "N/A"}
+                                                    {offer?.content?.inboundLeg
+                                                        ?.destinationAirport
+                                                        ?.name || "N/A"}
                                                 </span>
                                             </div>
                                             <div className="flight-destination">
                                                 <FaMapMarkerAlt />
                                                 <span>
                                                     <strong>Destino:</strong>{" "}
-                                                    {offer?.content?.inboundLeg?.originAirport?.name || "N/A"}
+                                                    {offer?.content?.inboundLeg
+                                                        ?.originAirport?.name ||
+                                                        "N/A"}
                                                 </span>
                                             </div>
                                             <div className="flight-duration">
                                                 <FaClock />
                                                 <span>
                                                     <strong>Duración:</strong>{" "}
-                                                    {offer?.content?.tripDuration || "N/A"}
+                                                    {offer?.content
+                                                        ?.tripDuration || "N/A"}
                                                 </span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="flight-offer-back">
-                                    <h3 className="flight-back-title">Detalles del Vuelo</h3>
+                                    <h3 className="flight-back-title">
+                                        Detalles del Vuelo
+                                    </h3>
                                     <p>
                                         <strong>Fecha de Salida:</strong>{" "}
-                                        {offer?.content?.inboundLeg?.localDepartureDate || "N/A"}
+                                        {offer?.content?.inboundLeg
+                                            ?.localDepartureDate || "N/A"}
                                     </p>
                                     <p>
                                         <strong>Duración:</strong>{" "}
@@ -67,16 +89,24 @@ function OffersAPI() {
                                         {offer?.content?.price || "N/A"}
                                     </p>
                                     <a href="#" className="flight-link">
-                                        Reservar Ahora
+                                        {texts.reserveNow}
                                     </a>
                                 </div>
                             </div>
                         </div>
                     ))
                 ) : (
-                    <p className="flights-message">
-                        Elige origen y destino para buscar ofertas
-                    </p>
+                    <p className="flights-message">{texts.alertsearchOffers}</p>
+                )}
+                {data.length > 0 && (
+                    <div>
+                        <button
+                            className="botonAdd"
+                            onClick={() => show4More(displayCount)}
+                        >
+                            {texts.viewMoreOffers}
+                        </button>
+                    </div>
                 )}
             </div>
         </div>
@@ -120,4 +150,3 @@ export default OffersAPI;
 //     </div>
 //   </div>
 // );
-

@@ -6,7 +6,7 @@
 } */
 
 .cm-box{
-    background-color: var(--clr-secundary-black);
+    background-color: var(--dark-bg);
     animation: fadeIn linear both;
     animation-timeline: view();
     animation-range-start: entry 20%;

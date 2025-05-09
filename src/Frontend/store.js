@@ -16,8 +16,12 @@ export default function storeReducer(store, action = {type:""}) {
         ...store,
         offers: action.payload,
       };
-
-    case "get_offersAPI":
+    case "clear_offersAPI":
+        return {
+          ...store,
+          offersAPI: [],
+        };
+    case "set_offersAPI":
         return {
           ...store,
           offersAPI: action.payload,

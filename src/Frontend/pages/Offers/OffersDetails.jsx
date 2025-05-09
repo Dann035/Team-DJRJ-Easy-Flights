@@ -15,6 +15,7 @@ export const OffersDetails = () => {
   const { id } = useParams();
   const [offer, setOffer] = useState({})
   const [newComment, setNewComment] = useState("");
+  const [selectedRating, setsSelectedRating] =useState("");
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();
@@ -22,6 +23,7 @@ export const OffersDetails = () => {
     const payload = {
       offer_id: parseInt(id), // backend check
       content: newComment,
+      rating: selectedRating,
     };
 
     console.log("Sending comment payload:", JSON.stringify(payload, null, 2));

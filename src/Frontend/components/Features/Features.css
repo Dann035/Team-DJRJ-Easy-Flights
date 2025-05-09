@@ -22,7 +22,7 @@
 /* imagen de background para los box features*/
 .box-feature {
     position: relative;
-    background-color: var(--clr-secundary-black); /* fondo por defecto */
+    background-color: var(--dark-bg); /* fondo por defecto */
     overflow: hidden;
     padding: 2rem;
     border-radius: 8px;

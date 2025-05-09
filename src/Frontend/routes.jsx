@@ -19,8 +19,8 @@ import Packages from "./pages/Feeatures/Packages.jsx";
 import Tools from "./pages/Feeatures/Tools.jsx";
 import AboutUs from "./pages/AboutUs/AboutUs.jsx";
 import TermsofService from "./pages/Termsofservice/TermsofService.jsx";
-import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy.jsx";
-import CookiesPolicy from "./pages/CookiesPolicy/CookiesPolicy.jsx";
+import PrivacyPolicy from "./pages/PrivacyPolicy/PolicyInfo.jsx";
+import CookiesPolicy from "./pages/CookiesPolicy/UserConsent.jsx";
 import {OffersList } from "./pages/Offers/OffersList.jsx";
 
 export const router = createBrowserRouter(
