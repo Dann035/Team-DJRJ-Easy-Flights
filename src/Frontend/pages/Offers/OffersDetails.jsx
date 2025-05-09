@@ -113,27 +113,29 @@ export const OffersDetails = () => {
                 src="https://images.unsplash.com/photo-1473625247510-8ceb1760943f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHZpYWplfGVufDB8fDB8fHww"
                 alt="1"
               />
+            {/* {offer.imagedetails1 && <img src={offer.imagedetails1} alt="1" />}
+            {offer.imagedetails2 && <img src={offer.imagedetails2} alt="1" />}
+            {offer.imagedetails3 && <img src={offer.imagedetails3} alt="1" />}
+            {offer.imagedetails4 && <img src={offer.imagedetails4} alt="1" />}
+            
+              <img
+                src={offer.imagedetails1}
+                alt="1"
+              />
+              <img
+                src={offer.imagedetails2}
+                alt="1"
+              />
+              <img
+                src={offer.imagedetails3}
+                alt="1"
+              />
+              <img
+                src={offer.imagedetails4}
+                alt="1"
+              /> */}
 
             </section>
-
-            {/* <div className="d-flex align-items-center justify-content-center container-fluid" >
-                
-                  <Calendar/> <span>{offer.duration}</span>
-               
-                
-                  <Calendar/> <span>{offer.duration}</span>
-                
-              
-                  <Calendar/> <span>{offer.duration}</span>
-                
-              </div> */}
-
-            <p>
-
-
-            </p>
-
-
 
             <section className="details">
               <div className="info">
@@ -151,9 +153,7 @@ export const OffersDetails = () => {
                   
                   <h3>Tags</h3>
                   <div className="tags">
-                    <span>Rural</span>
-                    <span>Spa</span>
-                    <span>Cena</span>
+                    <span>{offer.tags}</span>
                   </div>
                   <Comments offer_id={id} />
                 </div>

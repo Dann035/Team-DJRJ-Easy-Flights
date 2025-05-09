@@ -22,8 +22,11 @@ class Offers(db.Model):
     duration: Mapped[str] = mapped_column(String(120),nullable=True)
     location: Mapped[str] = mapped_column(String(120),nullable=True)
     tags: Mapped[str] = mapped_column(String(120),nullable=True)
+    imagedetails1: Mapped[str] = mapped_column(Text, nullable=True)
+    imagedetails2: Mapped[str] = mapped_column(Text, nullable=True)
+    imagedetails3: Mapped[str] = mapped_column(Text, nullable=True)
+    imagedetails4: Mapped[str] = mapped_column(Text, nullable=True)
     rating: Mapped[float] = mapped_column(Float, nullable=True)
-
     #relations
     comments = relationship('Comments',back_populates='offert')
     company = relationship('Companies',back_populates='offert')
@@ -42,5 +45,9 @@ class Offers(db.Model):
             "duration":self.duration,
             "location":self.location,
             "tags":self.tags,
+            "imagedetails1":self.imagedetails1,
+            "imagedetails2":self.imagedetails2,
+            "imagedetails3":self.imagedetails3,
+            "imagedetails4":self.imagedetails4,
             "rating":self.rating
         }
