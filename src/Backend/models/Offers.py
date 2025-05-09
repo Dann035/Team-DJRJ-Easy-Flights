@@ -22,6 +22,7 @@ class Offers(db.Model):
     duration: Mapped[str] = mapped_column(String(120),nullable=True)
     location: Mapped[str] = mapped_column(String(120),nullable=True)
     tags: Mapped[str] = mapped_column(String(120),nullable=True)
+    rating: Mapped[float] = mapped_column(Float, nullable=True)
 
     #relations
     comments = relationship('Comments',back_populates='offert')
@@ -40,5 +41,6 @@ class Offers(db.Model):
             "type_offert": self.type_offert,
             "duration":self.duration,
             "location":self.location,
-            "tags":self.tags
+            "tags":self.tags,
+            "rating":self.rating
         }
