@@ -1,127 +1,131 @@
 import React, { useState } from "react";
+
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./PaymentPage.css";
 
 function PaymentPage() {
   const [form, setForm] = useState({
     cardNumber: "",
-    name: "",
-    expiry: "",
+    cardholderName: "",
     cvv: "",
-    paymentMethod: "visa",
+    expirationDate: "",
+    paymentMethods: [], // Ahora es un array para manejar varios métodos
   });
 
+  const [errors, setErrors] = useState({});
+
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleCheckboxChange = (e) => {
+    const { value, checked } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      paymentMethods: checked
+        ? [...prev.paymentMethods, value]
+        : prev.paymentMethods.filter((method) => method !== value),
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("¡Pago procesado con éxito!");
-    // Aquí podrías hacer fetch a una API o redirigir
+    let formErrors = {};
+
+    if (!form.cardNumber) formErrors.cardNumber = "El número de tarjeta es obligatorio.";
+    if (!form.cardholderName) formErrors.cardholderName = "El nombre del titular es obligatorio.";
+    if (!form.cvv) formErrors.cvv = "El CVV es obligatorio.";
+    if (!form.expirationDate) formErrors.expirationDate = "La fecha de expiración es obligatoria.";
+    if (form.paymentMethods.length === 0)
+      formErrors.paymentMethods = "Debes seleccionar al menos un método de pago.";
+
+    setErrors(formErrors);
+
+    if (Object.keys(formErrors).length === 0) {
+      alert("Pago procesado correctamente");
+    }
   };
 
   return (
     <div className="payment-container">
-      <h2>Detalles de pago</h2>
+      <h2>Formulario de Pago</h2>
       <form className="payment-form" onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="cardNumber">Número de tarjeta</label>
+          <input
+            id="cardNumber"
+            type="text"
+            name="cardNumber"
+            value={form.cardNumber}
+            onChange={handleChange}
+            placeholder="1234 5678 9876 5432"
+            className="form-control"
+          />
+          {errors.cardNumber && <span className="error-text">{errors.cardNumber}</span>}
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="cardholderName">Nombre del titular</label>
+          <input
+            id="cardholderName"
+            type="text"
+            name="cardholderName"
+            value={form.cardholderName}
+            onChange={handleChange}
+            placeholder="Nombre del titular"
+            className="form-control"
+          />
+          {errors.cardholderName && <span className="error-text">{errors.cardholderName}</span>}
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="cvv">CVV</label>
+          <input
+            id="cvv"
+            type="password"
+            name="cvv"
+            value={form.cvv}
+            onChange={handleChange}
+            placeholder="CVV"
+            className="form-control"
+          />
+          {errors.cvv && <span className="error-text">{errors.cvv}</span>}
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="expirationDate">Fecha de expiración</label>
+          <input
+            id="expirationDate"
+            type="text"
+            name="expirationDate"
+            value={form.expirationDate}
+            onChange={handleChange}
+            maxLength="5"  // Limitar a 5 caracteres (MM/YY)
+            placeholder="MM/YY"
+            className="form-control"
+          />
+          {errors.expirationDate && <span className="error-text">{errors.expirationDate}</span>}
+        </div>
+
+        {/* Métodos de pago: iconos alineados horizontalmente */}
         <div className="payment-methods">
-          <label>Selecciona método de pago</label>
-          <div className="payment-icons">
-            <input
-              type="radio"
-              id="visa"
-              name="paymentMethod"
-              value="visa"
-              checked={form.paymentMethod === "visa"}
-              onChange={handleChange}
-            />
-            <label htmlFor="visa">
-              <i className="payment-icon visa"></i>
-            </label>
-
-            <input
-              type="radio"
-              id="mastercard"
-              name="paymentMethod"
-              value="mastercard"
-              checked={form.paymentMethod === "mastercard"}
-              onChange={handleChange}
-            />
-            <label htmlFor="mastercard">
-              <i className="payment-icon mastercard"></i>
-            </label>
-
-            <input
-              type="radio"
-              id="applepay"
-              name="paymentMethod"
-              value="applepay"
-              checked={form.paymentMethod === "applepay"}
-              onChange={handleChange}
-            />
-            <label htmlFor="applepay">
-              <i className="payment-icon applepay"></i>
-            </label>
-
-            <input
-              type="radio"
-              id="googlepay"
-              name="paymentMethod"
-              value="googlepay"
-              checked={form.paymentMethod === "googlepay"}
-              onChange={handleChange}
-            />
-            <label htmlFor="googlepay">
-              <i className="payment-icon googlepay"></i>
-            </label>
+          <div className="payment-icon" title="Visa">
+            <i className="fab fa-cc-visa"></i>
+          </div>
+          <div className="payment-icon" title="Mastercard">
+            <i className="fab fa-cc-mastercard"></i>
+          </div>
+          <div className="payment-icon" title="Apple Pay">
+            <i className="fab fa-apple"></i>
+          </div>
+          <div className="payment-icon" title="Google Pay">
+            <i className="fab fa-google-pay"></i>
           </div>
         </div>
 
-        <div>
-          <label>Número de tarjeta</label>
-          <input
-            type="text"
-            name="cardNumber"
-            maxLength={16}
-            value={form.cardNumber}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Nombre del titular</label>
-          <input
-            type="text"
-            name="name"
-            value={form.name}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Fecha de expiración</label>
-          <input
-            type="text"
-            name="expiry"
-            placeholder="MM/AA"
-            value={form.expiry}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>CVV</label>
-          <input
-            type="password"
-            name="cvv"
-            maxLength={4}
-            value={form.cvv}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button type="submit" className="pay-button">
-          Pagar
+        <button type="submit" className="btn btn-primary w-100">
+          Procesar pago
         </button>
       </form>
     </div>
