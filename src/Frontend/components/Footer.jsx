@@ -1,7 +1,7 @@
 import "./Footer.css"
 
 export const Footer = () => (
-	<footer className="footer mt-auto py-3 text-center">
+	<footer className="footer mt-auto py-4 text-center">
 		<div className="d-flex mb-5 flex-wrap justify-content-around text-start">
 			<section>
 				<h5>Easy-Flights</h5>
@@ -18,20 +18,8 @@ export const Footer = () => (
 				<h5>Quick Links</h5>
 				<ul className="list-unstyled">
 					<li><a href="/about">About Us</a></li>
-					<li><a href="mailto:example@gmail.com">Contact Us</a></li>
-					<li><a href="#">Blog Posts</a></li>
 					<li><a href="#">FAQs</a></li>
 					<li><a href="#">Support Center</a></li>
-				</ul>
-			</section>
-			<section>
-				<h5>Connect With Us</h5>
-				<ul className="list-unstyled">
-					<li><a href="#">Newsletter</a></li>
-					<li><a href="#">Events</a></li>
-					<li><a href="#">Partnerships</a></li>
-					<li><a href="#">Careers</a></li>
-					<li><a href="#">Testimonials</a></li>
 				</ul>
 			</section>
 			<section>
@@ -54,9 +42,9 @@ export const Footer = () => (
 			</section>
 			<section>
 				<ul className="d-flex gap-3 list-unstyled justify-content-center">
-					<li><a href="#">Terms of Service</a></li>
-					<li><a href="#">Privacy Policy</a></li>
-					<li><a href="#">Cookie Policy</a></li>
+					<li><a href="/terms-of-service">Terms of Service</a></li>
+					<li><a href="/privacy-policy">Privacy Policy</a></li>
+					<li><a href="/cookies-policy">Cookie Policy</a></li>
 				</ul>
 			</section>
 		</div>

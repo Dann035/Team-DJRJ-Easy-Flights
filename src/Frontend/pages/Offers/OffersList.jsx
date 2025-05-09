@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { OffersListCards } from "./OffersListCards";
+import { OfCard2 } from "./OfCard2/OfCard2";
 import useGlobalReducer from "../../hooks/useGlobalReducer";
 import { MapPin,Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -73,24 +74,20 @@ export const OffersList = () => {
         //     </div>
         // </div>
 
-        <div className="container-fluid">
-          <h2 className="text-center">Busqueda</h2>
-          <input value={search} onChange={searcher} type="text" placeholder="SEARCH" className="form-control"/>
-          <h1 className="text-center">OFERTAS</h1>
-           
-           
+        <div className="container-fluid d-flex flex-column align-items-center justify-content-center">
+          <h2 className="text-center mb-2">Búsqueda</h2>
+          <input value={search} onChange={searcher} type="text" placeholder="Paris..." className="form-control w-25 text-center mb-3"/>
+          <h1 className="text-center title-offers">OFERTAS</h1>
+
             <div className="row mt-5 of-list">
                 
                 {resultado.map((offert,index)=>(
                     <div className="col-md-3 mb-5" key={index}>
-                          <OffersListCards offert={offert}/>
+                          <OfCard2 offert={offert} />
                     </div>
                 ))}
-                
-              </div>
-              
-          
 
+              </div>
 
         </div>
     )

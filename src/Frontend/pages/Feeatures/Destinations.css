@@ -1,52 +1,61 @@
-.postcard {
-    font-family: 'Special Elite', monospace;
-    background: #fffaf0; 
-    border: 2px solid #e0c097;
-    border-radius: 15px;
-    box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.1);
-    padding: 1.5rem;
-    transition: transform 0.2s ease;
-    position: relative;
-    
-  }
-  
-  .postcard:hover {
-    transform: scale(1.02);
-  }
-  
-  .postcard img {
-    border-radius: 10px;
-    margin-bottom: 1rem;
-    max-height: 200px;
-    object-fit: cover;
-  }
-  
-  .postcard-title {
-    font-family: 'Shadows Into Light', cursive;
-    font-size: 3rem;
-    color: #d2691e;
-  }
-  
-  .titlecountry {
-    font-family: 'Shadows Into Light', cursive;
-    font-size: 2rem;
-    color: #d2691e;
-  }
+/* Postales generales */
+.postcard-title {
+  font-family: 'Shadows Into Light', cursive;
+  font-size: 3rem;
+  color: #d2691e;
+}
 
+.titlecountry {
+  font-family: 'Shadows Into Light', cursive;
+  font-size: 2rem;
+  color: #d2691e;
+}
 
-  .postcard-description {
-    font-size: 1rem;
-    color: #444;
-  }
-  
-  .travel-link {
-    display: inline-block;
-    margin-top: 1rem;
-    font-weight: bold;
-    color: #008080;
-    text-decoration: none;
-  }
-  
-  .travel-link:hover {
-    text-decoration: underline;
-  }
+/* Tarjetas de destino */
+.card {
+  font-family: 'Special Elite', monospace;
+  background-color: transparent;
+  border: 2px solid #e0c097;
+  border-radius: 15px;
+  box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: scale(1.09);
+}
+
+/* Imagen dentro de la tarjeta */
+.card-img-top {
+  border-top-left-radius: 13px;
+  border-top-right-radius: 13px;
+  max-height: 200px;
+  object-fit: cover;
+}
+
+/* Contenido interno */
+.card-title {
+  font-family: 'Shadows Into Light', cursive;
+  color: #d2691e;
+  font-size: 1.5rem;
+}
+
+.card-text {
+  font-size: 0.95rem;
+  color: #444;
+}
+
+/* Botón de enlace */
+.btn-primary {
+  background-color: #d2691e;
+  border-color: #d2691e;
+}
+
+.btn-primary:hover {
+  background-color: #b2581c;
+  border-color: #b2581c;
+}
+.textblack p{
+  color: black;
+}

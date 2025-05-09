@@ -22,7 +22,7 @@
 /* imagen de background para los box features*/
 .box-feature {
     position: relative;
-    background-color: #f8f8f8; /* fondo por defecto */
+    background-color: var(--dark-bg); /* fondo por defecto */
     overflow: hidden;
     padding: 2rem;
     border-radius: 8px;
@@ -34,7 +34,7 @@
     transition: all 0.3s ease-in-out;
     text-align: center;
     text-decoration: none;
-    color: inherit;
+    color: grey;
 }
 
 /* Oculta el contenido al hacer hover */
@@ -80,4 +80,11 @@
     z-index: 1;
     position: relative;
     transition: all 0.3s ease;
+}
+
+.title-features{
+    font-size: 2.7rem;
+    font-weight: bold;
+    text-shadow: 0 0 8px rgba(29, 233, 248, .5);
+    color: var(--clr-white);
 }

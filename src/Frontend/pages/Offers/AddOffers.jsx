@@ -4,10 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuthContext";
 const URL = import.meta.env.VITE_BACKEND_URL
 import "./AddOffers.css"
+import { OfCard2 } from "./OfCard2/OfCard2";
+import { CardPreview } from "./CardPreview/CardPreview";
 
 
 export const AddOffers = () => {
-  const {dispatch } = useGlobalReducer();
+  const {store,dispatch } = useGlobalReducer();
   const navigate = useNavigate()
   const {user, hasRole} = useAuth()
   const [offer, SetOffer] = useState({
@@ -61,7 +63,7 @@ export const AddOffers = () => {
          <h1>Añadir una oferta: </h1>
           <div className="row ">
             <div className="col-12">
-                <label htmlFor="title" className="text-white">:Titulo de la oferta</label>
+                <label htmlFor="title" className="text-white">Titulo de la oferta:</label>
                 <input type="text" className="input1" id="title" name="title" placeholder="Escribe el titulo de su oferta"  onChange={saveChange}></input>
 
                 <label htmlFor="description" className="text-white">Detalles de la oferta:</label>
@@ -99,21 +101,14 @@ export const AddOffers = () => {
 
         {/* VISTA PREVIA DE LA OFERTA */}
         <div>
-        <div className="card mt-4 p-4  " id="cardaddoffer">
+        <div className="mt-4 p-4 me-4 align-items-center" id="cardaddoffer">
           <h2>Vista previa de la oferta:</h2>
-          <div className="text-center">
-            {offer.image_url && (<img src={offer.image_url} alt="Vista previa" style={{maxWidth:"100%", maxHeight: "200px"}}/>)}
-            {/* <h3>{offer.title || "Título de la oferta"}</h3>
-            <p className="text-white">{offer.description || "Descripción de la oferta"}</p>
-            <p className="text-white"><strong className="text-white">Tipo:</strong> {offer.type_offert || "Tipo de oferta"}</p>
-            <p className="text-white"><strong>Tipo:</strong> {offer.price || "0.00"}</p> */}
-          </div>
-          
+          <CardPreview offer={offer}/>
         </div>
 
         <div className=" mt-4 d-flex align-items-center justify-content-center gap-3">
           <div>
-              <button  className="createaddbtn btn btn-light" onClick={() => newOffert}>Crear Oferta</button>
+              <button  className="createaddbtn" onClick={() => newOffert}>Crear Oferta</button>
           </div>
 
           <div>

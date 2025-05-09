@@ -95,12 +95,12 @@ export const OffersCard = ({offert}) => {
             <span className="priceover ">{offert.price}&nbsp;€</span>
           </div>
           <div className="p-6 h-75">
-            <h4 className="text-xl font-semibold mb-2 mt-3">{offert.title}</h4>
+            <h4 className="of-title font-semibold mb-2 mt-3">{offert.title}</h4>
             <div className="flex items-start text-gray-600 mb-2">
-              <MapPin/><span>{offert.location}</span>
+              <MapPin/><span className="of-location">{offert.location}</span>
             </div>
             <div className="flex items-center text-gray-600 mb-2">
-                <Calendar className="w-4 h-4 mr-1" /><span>{offert.duration}</span><br/>
+                <Calendar className="w-4 h-3 mr-1" /><span className="of-duration">{offert.duration}</span><br/>
             </div>
           
           </div>
