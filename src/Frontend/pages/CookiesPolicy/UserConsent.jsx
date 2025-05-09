@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function CookiesPolicy() {
+export default function UserConsent() {
   return (
     <div className="container my-5 px-3" style={{ maxWidth: '800px' }}>
       <h1 className="mb-4 text-center">Política de Cookies</h1>

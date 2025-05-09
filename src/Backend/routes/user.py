@@ -133,7 +133,8 @@ def login():
         token = create_access_token(identity=user.id, expires_delta=False, additional_claims={
             'exp': datetime.utcnow() + timedelta(days=1),
             'iat': datetime.utcnow(),
-            'sub': user.id,
+            #'sub': user.id,
+            'sub': str(user.id),
             'roles': roles_list
         })
         

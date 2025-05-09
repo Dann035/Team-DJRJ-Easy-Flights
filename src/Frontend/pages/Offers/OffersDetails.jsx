@@ -168,7 +168,7 @@ export const OffersDetails = () => {
                       <p><Calendar />{offer.duration}</p>
 
                     </div>
-                    <a href="#" className="book-btn">Book Now</a>
+                    <a href="/pago" className="book-btn">Book Now</a>
                     <div className="rating text-center">
                       <input defaultValue={5} name="rating" id="star5" type="radio" />
                       <label htmlFor="star5" />

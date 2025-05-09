@@ -20,10 +20,11 @@ import Packages from "./pages/Feeatures/Packages.jsx";
 import Tools from "./pages/Feeatures/Tools.jsx";
 import AboutUs from "./pages/AboutUs/AboutUs.jsx";
 import TermsofService from "./pages/Termsofservice/TermsofService.jsx";
-import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy.jsx";
-import CookiesPolicy from "./pages/CookiesPolicy/CookiesPolicy.jsx";
+import PrivacyPolicy from "./pages/PrivacyPolicy/PolicyInfo.jsx";
+import CookiesPolicy from "./pages/CookiesPolicy/UserConsent.jsx";
 import {OffersList } from "./pages/Offers/OffersList.jsx";
 import ProfilePage from "./components/Profilepage/ProfilePage.jsx";
+import PaymentPage from "./pages/PaymentPage/PaymentPage.jsx";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -41,6 +42,7 @@ export const router = createBrowserRouter(
         <Route path="/addoffer" element={<AddOffers/>} />
         <Route path="/offerdetails/:id" element={<OffersDetails/>}/>
         <Route path="/offerslist" element={<OffersList/>}/>
+        <Route path="/pago" element={<PaymentPage />} />
         <Route path="/terms-of-service" element={<TermsofService />} />
         <Route path="/cookies-policy" element={<CookiesPolicy />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />

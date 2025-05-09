@@ -1,0 +1,94 @@
+.payment-container {
+  max-width: 500px;
+  margin: 60px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  font-family: 'Arial', sans-serif;
+}
+
+.payment-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #4a90e2;
+}
+
+.payment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.payment-form label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.payment-form input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.payment-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.payment-icons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.payment-icons input[type="radio"] {
+  display: none;
+}
+
+.payment-icons label {
+  cursor: pointer;
+  width: 40px;
+  height: 25px;
+  display: inline-block;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.payment-icons input:checked + label {
+  border: 2px solid #4a90e2;
+  border-radius: 5px;
+}
+
+.payment-icon.visa {
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/4b/Visa_Logo.png');
+}
+
+.payment-icon.mastercard {
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/5/53/Mastercard_logo.svg');
+}
+
+.payment-icon.applepay {
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/1/1f/Apple_Pay_logo.svg');
+}
+
+.payment-icon.googlepay {
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/5/53/Google_Pay_logo.svg');
+}
+
+.pay-button {
+  background-color: #4a90e2;
+  color: white;
+  font-size: 16px;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pay-button:hover {
+  background-color: #357ab7;
+}
