@@ -14,7 +14,7 @@ def create_offer():
 
         data = request.get_json()
 
-        if not all(field in data for field in ['title', 'description', 'price', 'type_offert', 'image_url', 'location', 'duration']):
+        if not all(field in data for field in ['title', 'description', 'price', 'type_offert', 'image_url', 'location', 'duration', 'tags']):
             return jsonify({'message': 'Missing fields'}), 400
 
         new_offer = Offers(
@@ -24,7 +24,8 @@ def create_offer():
             type_offert=data['type_offert'], 
             image_url=data['image_url'], 
             location=data['location'], 
-            duration=data['duration']
+            duration=data['duration'],
+            tags=data['tags']
         )
         
         db.session.add(new_offer)
