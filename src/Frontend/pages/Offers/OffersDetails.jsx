@@ -98,27 +98,6 @@ export const OffersDetails = () => {
             <section className="object-cover w-100 h-100 imgsection" id="img-offer">
 
               <img
-                src="https://images.unsplash.com/photo-1576397753762-206624e9a2cc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGhha29uZXxlbnwwfHwwfHx8MA%3D%3D"
-                alt="1"
-              />
-              <img
-                src="https://images.unsplash.com/photo-1583901342520-0ce87c2750a8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGhha29uZXxlbnwwfHwwfHx8MA%3D%3D"
-                alt="1"
-              />
-              <img
-                src="https://images.unsplash.com/photo-1468818438311-4bab781ab9b8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8dmlhamV8ZW58MHx8MHx8fDA%3D"
-                alt="1"
-              />
-              <img
-                src="https://images.unsplash.com/photo-1473625247510-8ceb1760943f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHZpYWplfGVufDB8fDB8fHww"
-                alt="1"
-              />
-            {/* {offer.imagedetails1 && <img src={offer.imagedetails1} alt="1" />}
-            {offer.imagedetails2 && <img src={offer.imagedetails2} alt="1" />}
-            {offer.imagedetails3 && <img src={offer.imagedetails3} alt="1" />}
-            {offer.imagedetails4 && <img src={offer.imagedetails4} alt="1" />}
-            
-              <img
                 src={offer.imagedetails1}
                 alt="1"
               />
@@ -133,8 +112,7 @@ export const OffersDetails = () => {
               <img
                 src={offer.imagedetails4}
                 alt="1"
-              /> */}
-
+              />
             </section>
 
             <section className="details">
@@ -158,7 +136,7 @@ export const OffersDetails = () => {
                   <Comments offer_id={id} />
                 </div>
 
-                <div className="">
+                <div>
 
 
                   <div className="sidebar">

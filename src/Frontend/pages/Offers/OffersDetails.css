@@ -125,14 +125,15 @@
   }
   
   .sidebar {
-    background: #f1f5ff;
+    background: #0d09471f;
     border-radius: 0px;
     padding: 1.5rem;
-    right: 5%;
+    right: 20%;
     text-align: center;
     align-items: center;
     min-width: 280px;
     height: 300px;
+    border-radius: 10px;
     
   }
   

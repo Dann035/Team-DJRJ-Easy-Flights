@@ -19,11 +19,11 @@ export const AddOffers = () => {
     image_url: "",
     location: "",
     duration: "",
-    tags:""
-    // imagedetails1: "",
-    // imagedetails2: "",
-    // imagedetails3: "",
-    // imagedetails4: ""
+    tags:"",
+    imagedetails1: "",
+    imagedetails2: "",
+    imagedetails3: "",
+    imagedetails4: ""
   });
 
   useEffect(() => {
@@ -65,7 +65,7 @@ export const AddOffers = () => {
          <div className="p-5 mt-5" >
          <h1>Añadir una oferta: </h1>
           <div className="row ">
-            <div className="col-12">
+            <div className="col-6">
                 <label htmlFor="title" className="text-white mt-4">Titulo de la oferta:</label>
                 <input type="text" className="input1 mt-2" id="title" name="title" placeholder="Escribe el titulo de su oferta"  onChange={saveChange}></input>
 
@@ -93,7 +93,7 @@ export const AddOffers = () => {
                 <label htmlFor="created_at" className="text-white mt-4">Fecha de creacion</label>
                 <input type="datetime-local" className="input1 mt-2" id="created_at" name="created_at" placeholder="" onChange={saveChange}></input>
 
-                {/* <h3 className="mt-5">Añadir imagenes en los detalles de la oferta</h3>
+                <h3 className="mt-5">Añadir imagenes en los detalles de la oferta</h3>
 
                 <label htmlFor="imagedetails1" className="text-white">Primera imagen: </label>
                 <input type="url" className="input1" id="imagedetails1" name="imagedetails1" placeholder="Importa la url de la imagen" onChange={saveChange}></input>
@@ -105,7 +105,7 @@ export const AddOffers = () => {
                 <input type="url" className="input1" id="imagedetails3" name="imagedetails3" placeholder="Importa la url de la imagen" onChange={saveChange}></input>
 
                 <label htmlFor="imagedetails4" className="text-white">Cuarta imagen: </label>
-                <input type="url" className="input1" id="imagedetails4" name="imagedetails4" placeholder="Importa la url de la imagen" onChange={saveChange}></input> */}
+                <input type="url" className="input1" id="imagedetails4" name="imagedetails4" placeholder="Importa la url de la imagen" onChange={saveChange}></input>
             </div>
             
           </div>
@@ -114,7 +114,7 @@ export const AddOffers = () => {
 
         {/* VISTA PREVIA DE LA OFERTA */}
         <div>
-        <div className="mt-4 p-4 me-4 align-items-center" id="cardaddoffer">
+        <div className=" p-4 me-4 align-items-center" id="cardaddoffer">
           <h2>Vista previa de la oferta:</h2>
           <CardPreview offer={offer}/>
         </div>
