@@ -49,8 +49,6 @@ def create_offer():
 def get_offers():
         offers = Offers.query.all()
         
-    
-        
         offers_serialized = [offer.serialize() for offer in offers]
         return jsonify({
             "msg": "Offers retrieved",
