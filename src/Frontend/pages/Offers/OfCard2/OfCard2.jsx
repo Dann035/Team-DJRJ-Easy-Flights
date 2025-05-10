@@ -15,7 +15,7 @@ export const OfCard2 = ({ offert }) => {
                             className="offer-image"
                         />
                         <span className="offer-price">
-                            Desde {offert.price}&nbsp;€
+                            Desde {offert.price}&nbsp;€ pp
                         </span>
                     </div>
                     <div className="offer-details">
