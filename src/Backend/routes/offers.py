@@ -14,7 +14,8 @@ def create_offer():
 
         data = request.get_json()
 
-        if not all(field in data for field in ['title', 'description', 'price', 'type_offert', 'image_url', 'location', 'duration', 'tags','imagedetails1','imagedetails2','imagedetails3','imagedetails4']):
+        if not all(field in data for field in ['title', 'description', 'price', 'type_offert', 'image_url', 'location', 'duration', 'tags',
+                                               'imagedetails1','imagedetails2','imagedetails3','imagedetails4','start_date','end_date']):
             return jsonify({'message': 'Missing fields'}), 400
 
         new_offer = Offers(
@@ -29,7 +30,9 @@ def create_offer():
             imagedetails1=data['imagedetails1'],
             imagedetails2=data['imagedetails2'],
             imagedetails3=data['imagedetails3'],
-            imagedetails4=data['imagedetails4']
+            imagedetails4=data['imagedetails4'],
+            start_date=data['start_date'],
+            end_date=data['end_date']
 
         )
         
@@ -84,6 +87,12 @@ def update_offer(offer_id):
     location = request.json.get('location', None)
     duration = request.json.get('duration', None)
     tags = request.json.get('tags', None)
+    imagedetails1 = request.json.get('imagedetails1', None)
+    imagedetails2 = request.json.get('imagedetails2', None)
+    imagedetails3 = request.json.get('imagedetails3', None)
+    imagedetails4 = request.json.get('imagedetails4', None)
+    start_date = request.json.get('start_date', None)
+    end_date = request.json.get('end_date', None)
 
     if title:
         offer.title = title
@@ -101,6 +110,18 @@ def update_offer(offer_id):
         offer.duration = duration    
     if tags:
         offer.tags = tags 
+    if imagedetails1:
+        offer.imagedetails1 = imagedetails1
+    if imagedetails2:
+        offer.imagedetails2 = imagedetails2
+    if imagedetails3:
+        offer.imagedetails3 = imagedetails3
+    if imagedetails4:
+        offer.imagedetails4 = imagedetails4
+    if start_date:
+        offer.start_date = start_date
+    if end_date:
+        offer.end_date = end_date
 
     db.session.commit()
 
