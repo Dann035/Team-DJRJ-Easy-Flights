@@ -15,7 +15,7 @@ export const CardPreview = ({ offer }) => {
                             className="offer-image"
                         />
                         <span className="offer-price">
-                            Desde {offer.price}&nbsp;€
+                            Desde {offer.price}&nbsp;€ pp
                         </span>
                     </div>
                     <div className="offer-details">

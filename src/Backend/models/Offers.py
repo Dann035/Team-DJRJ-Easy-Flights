@@ -18,6 +18,8 @@ class Offers(db.Model):
     type_offert:Mapped[str] = mapped_column(String(120),nullable=True)
     image_url: Mapped[str] = mapped_column(Text, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc), nullable=True)
+    start_date: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc), nullable=True)
+    end_date: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc), nullable=True)
     company_id: Mapped[int] = mapped_column(ForeignKey('companies.id'), nullable=True)
     duration: Mapped[str] = mapped_column(String(120),nullable=True)
     location: Mapped[str] = mapped_column(String(120),nullable=True)
@@ -49,5 +51,7 @@ class Offers(db.Model):
             "imagedetails2":self.imagedetails2,
             "imagedetails3":self.imagedetails3,
             "imagedetails4":self.imagedetails4,
-            "rating":self.rating
+            "rating":self.rating,
+            "start_date": self.start_date,
+            "end_date": self.end_date
         }
