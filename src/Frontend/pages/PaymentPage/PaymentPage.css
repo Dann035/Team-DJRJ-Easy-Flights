@@ -1,4 +1,4 @@
-.payment-container {
+/*.payment-container {
   max-width: 600px;
   margin: 60px auto;
   padding: 30px;
@@ -58,4 +58,211 @@
   color: rgb(201, 37, 37);
   font-size: 0.9em;
   margin-top: 5px;
+}*/
+
+
+/*
+.payment-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.payment-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #4e9bdf;
+  background-color: #fff;
+}
+
+.payment-methods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.payment-method {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 120px;
+  padding: 10px;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.payment-method input {
+  display: none;
+}
+
+.payment-method label {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.payment-method label i {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.payment-method input:checked + label {
+  border-color: #4e9bdf;
+  background-color: #e0f3fe;
+}
+
+.payment-method:hover label {
+  background-color: #f4f4f4;
+}
+
+.error-text {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+button {
+  padding: 15px;
+  font-size: 16px;
+  background-color: #4e9bdf;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #2c7fbb;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}*/
+
+.payment-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  color: black;
+}
+
+.payment-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-weight: bold;
+}
+
+.form-control {
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.error-text {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.payment-methods {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.payment-method {
+  display: flex;
+  align-items: center;
+}
+
+.payment-method input {
+  display: none;
+}
+
+.payment-method label {
+  display: block;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.payment-method input:checked + label {
+  background-color: #f0f8ff;
+}
+
+.payment-method label i {
+  font-size: 24px;
+  margin-right: 8px;
+}
+
+button {
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
 }

@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 from Backend.models import db, User
 import os
 
@@ -37,13 +37,21 @@ def edit_profile():
 
         data = request.get_json()
 
-        # Actualiza los campos si están presentes
         user.name = data.get('name', user.name)
         user.email = data.get('email', user.email)
 
-        # Cambiar contraseña solo si se envía
         new_password = data.get('password')
+        current_password = data.get('currentPassword')
+
         if new_password:
+            if not current_password:
+                return jsonify({"msg": "Debes proporcionar la contraseña actual para cambiar la contraseña."}), 400
+
+            # Validar la contraseña actual
+            if not check_password_hash(user.password, current_password):
+                return jsonify({"msg": "Contraseña actual incorrecta"}), 400
+
+            # Si pasa la validación, actualiza la contraseña
             user.password = generate_password_hash(new_password)
 
         db.session.commit()
@@ -56,7 +64,8 @@ def edit_profile():
     except Exception as e:
         return jsonify({"msg": "Error al actualizar perfil", "error": str(e)}), 500
 
-# 🌐 Obtener URL pública del perfil del usuario
+# 🌐 Obtener URL pública del perfil del usuario esto seria para poder compartir el enlace y 
+#  a futuro poder crear una comunidad es decir que puedan compartir su perfil para qu epuedan ver una informacion de ellos mismos
 @profile_bp.route('/profile-url', methods=['GET'])
 @jwt_required()
 def get_profile_url():

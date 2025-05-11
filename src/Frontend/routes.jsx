@@ -25,6 +25,7 @@ import CookiesPolicy from "./pages/CookiesPolicy/UserConsent.jsx";
 import {OffersList } from "./pages/Offers/OffersList.jsx";
 import ProfilePage from "./components/Profilepage/ProfilePage.jsx";
 import PaymentPage from "./pages/PaymentPage/PaymentPage.jsx";
+import BillPage from "./pages/PaymentPage/BillPage.jsx";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -42,7 +43,8 @@ export const router = createBrowserRouter(
         <Route path="/addoffer" element={<AddOffers/>} />
         <Route path="/offerdetails/:id" element={<OffersDetails/>}/>
         <Route path="/offerslist" element={<OffersList/>}/>
-        <Route path="/pago" element={<PaymentPage />} />
+        <Route path="/offerdetails/:id/pago" element={<PaymentPage />} /> 
+        <Route path="/bill/:id/:paymentId" element={<BillPage />} />       
         <Route path="/terms-of-service" element={<TermsofService />} />
         <Route path="/cookies-policy" element={<CookiesPolicy />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />

@@ -124,6 +124,7 @@
     
   }
   
+  
   .sidebar {
     background: #f1f5ff;
     border-radius: 0px;
@@ -133,6 +134,7 @@
     align-items: center;
     min-width: 280px;
     height: 300px;
+    color: #6f00ff;
     
   }
   

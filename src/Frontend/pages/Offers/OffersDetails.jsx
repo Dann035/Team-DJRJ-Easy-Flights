@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Calendar, MapPin, Star, StarsIcon } from "lucide-react";
 import "./OffersDetails.css"
 import Comments from "../../components/Comments/Comments";
@@ -168,7 +168,7 @@ export const OffersDetails = () => {
                       <p><Calendar />{offer.duration}</p>
 
                     </div>
-                    <a href="/pago" className="book-btn">Book Now</a>
+                    <a href={`/offerdetails/${id}/pago`} className="book-btn">Book Now</a>
                     <div className="rating text-center">
                       <input defaultValue={5} name="rating" id="star5" type="radio" />
                       <label htmlFor="star5" />
