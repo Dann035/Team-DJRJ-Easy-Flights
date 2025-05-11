@@ -1,0 +1,123 @@
+/* Estilos específicos para ForgetPass */
+
+.forget-pass-container {
+    max-height: 700px;
+}
+
+.forget-pass-container .info-childs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+.forget-pass-container .form-information-childs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+.forget-pass-container h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+}
+
+.forget-pass-container .info-text {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.forget-pass-container .btn-login {
+    width: 80%;
+    height: 40px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(to right, #1a2980, #26d0ce);
+    color: #fff;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+}
+
+.forget-pass-container .btn-login:hover {
+    background: linear-gradient(to right, #26d0ce, #1a2980);
+}
+
+.forget-pass-container .actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.forget-pass-container .btn-secondary {
+    flex: 1;
+    height: 40px;
+    border: 1px solid #1a2980;
+    border-radius: 50px;
+    background: transparent;
+    color: #1a2980;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.forget-pass-container .btn-secondary:hover {
+    background: rgba(26, 41, 128, 0.1);
+}
+
+.forget-pass-container .btn-submit {
+    flex: 1;
+    height: 40px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(to right, #1a2980, #26d0ce);
+    color: #fff;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.forget-pass-container .btn-submit:hover {
+    background: linear-gradient(to right, #26d0ce, #1a2980);
+}
+
+.forget-pass-container .btn-submit:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+}
+
+.forget-pass-container .verification-code {
+    letter-spacing: 4px;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .forget-pass-container {
+        flex-direction: column;
+        max-height: none;
+    }
+    
+    .forget-pass-container .information,
+    .forget-pass-container .form-information {
+        width: 100%;
+        height: auto;
+    }
+    
+    .forget-pass-container .information {
+        border-radius: 10px 10px 0 0;
+        padding: 30px 20px;
+    }
+    
+    .forget-pass-container .form-information {
+        border-radius: 0 0 10px 10px;
+    }
+}

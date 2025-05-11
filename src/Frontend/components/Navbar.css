@@ -161,7 +161,7 @@
     transition: transform 0.3s ease, filter 0.3s ease;
     filter: contrast(1.2) brightness(0.9);
     -webkit-filter: contrast(1.2) brightness(0.9);
-    animation: float 4s ease-in-out infinite;
+    animation: float 4s ease-in-out infinite !important;
 }
 
 .img-nav:hover {

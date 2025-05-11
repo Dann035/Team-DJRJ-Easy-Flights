@@ -23,6 +23,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy/PolicyInfo.jsx";
 import CookiesPolicy from "./pages/CookiesPolicy/UserConsent.jsx";
 import {OffersList } from "./pages/Offers/OffersList.jsx";
 import AboutUser from "./pages/AboutUser/AboutUser.jsx";
+import ForgetPass from "./pages/ForgetPass/ForgetPass.jsx";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -43,6 +44,8 @@ export const router = createBrowserRouter(
         <Route path="/cookies-policy" element={<CookiesPolicy />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/about-user/:userId" element={<AboutUser />} />
+        <Route path="/forgotPass" element={<ForgetPass />} />
+
       </Route>
     ),
     {
