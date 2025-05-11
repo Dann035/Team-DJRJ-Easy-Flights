@@ -141,7 +141,8 @@ def login():
         token = create_access_token(identity=user.email, expires_delta=False, additional_claims={
             'exp': datetime.utcnow() + timedelta(days=1),
             'iat': datetime.utcnow(),
-            'sub': user.id,
+            #'sub': user.id,
+            'sub': str(user.id),
             'roles': roles_list
         })
         
@@ -163,7 +164,7 @@ def secret():
         if not current_user:
             return jsonify({"msg": "Missing user" , "Error": str(e)}), 400
         
-        user = User.query.filter_by(email=current_user).first()
+        user = User.query.get(current_user) #linea cambiada porque quiero tenerlo a partir del id no del email esta es la linea que habia -> user = User.query.filter_by(email=current_user).first()
         if not user:
             return jsonify({"msg": "User not found"}), 404
         
@@ -204,7 +205,25 @@ def get_user(user_id):
 
     except Exception as e:
         return jsonify({"msg": "Missing user" , "Error": str(e)}), 400
-    
+
+#profile    
+@user_bp.route('/user/me', methods=['GET'])
+@jwt_required()
+def get_user_profile():
+    try:
+        user_id = get_jwt_identity()
+        user = User.query.get(user_id)
+        if not user:
+            return jsonify({"msg": "Usuario no encontrado"}), 404
+        return jsonify({
+            "user": user.serialize(),
+            "roles": [role.name for role in user.roles]
+        }), 200
+    except Exception as e:
+        print(f"Error al obtener perfil: {str(e)}")
+        return jsonify({"msg": "Error al obtener el perfil", "error": str(e)}), 500
+
+      
 @user_bp.route('/user/<int:user_id>/avatar/upload', methods=['PATCH'])
 @jwt_required()
 def upload_avatar(user_id):

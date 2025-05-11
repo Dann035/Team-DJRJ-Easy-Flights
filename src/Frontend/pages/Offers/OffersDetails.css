@@ -124,6 +124,7 @@
     
   }
   
+  
   .sidebar {
     background: var(--dark-bg);
     border-radius: 0px;
@@ -132,9 +133,9 @@
     text-align: center;
     align-items: center;
     min-width: 280px;
+    color: #6f00ff;
     height: 350px;
     border-radius: 10px;
-    
   }
   
   .sidebar h2 {

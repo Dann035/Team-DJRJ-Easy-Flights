@@ -119,19 +119,26 @@ export const Navbar = () => {
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.2 }}
                         >
+                            
                             {user ? (
                                 <motion.div 
                                     className="user-profile-container"
                                     whileHover={{ scale: 1.05 }}
                                 >
                                     <motion.div
+                                    
                                         className="user-avatar"
                                         onClick={() => navigate("/about-user/" + userId)}
                                         title={user.name}
                                         whileHover={{ 
                                             boxShadow: "0 0 15px rgba(0, 211, 211, 0.8)",
                                         }}
+                                        
+                                        onClick={() => navigate("/profile")}
+                                         
                                     >
+                                        {/*onClick={() => navigate("/profile")} usamos onclick para añadirle la funcion que nos lleve a nuestro perfil */}
+
                                         {user.name ? user.name.charAt(0).toUpperCase() : "U"}
                                     </motion.div>
                                     <motion.button 
@@ -156,6 +163,7 @@ export const Navbar = () => {
                                         alt="User profile"
                                         className="img-nav-login"
                                     />
+                                    
                                     <span className="login-text">{texts.login || "Login"}</span>
                                 </motion.button>
                             )}
