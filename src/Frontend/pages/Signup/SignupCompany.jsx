@@ -5,19 +5,40 @@ import NotificationModal from "../../components/NotificationModal/NotificationMo
 import "./SignupCompany.css";
 
 function SignupCompany() {
+    const [notification, setNotification] = useState({
+        show: false,
+        text: "",
+        type: "error",
+        duration: 5000
+    });
     const [showError, setShowError] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
     const [showSocialAuth, setShowSocialAuth] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData.entries());
         data.role = "COMPANY";
-        signupCompany(data);
-        navigate("/login");
+        const result = await signupCompany(data);
+        if (result.status === 'OK') {
+            setNotification({
+                show: true,
+                text: result.message,
+                type: "success",
+                duration: 3000
+            });
+            setTimeout(() => navigate('/login'), 1500);
+        } else  {
+            setNotification({
+                show: true,
+                text: result.message,
+                type: "error",
+                duration: 5000
+            })
+        }
     };
 
     const togglePasswordVisibility = () => {
@@ -25,36 +46,14 @@ function SignupCompany() {
     };
     return (
         <>
-            {showSuccess && (
-                <NotificationModal
-                    text="Registro exitoso"
-                    show={showSuccess}
-                    onClose={() => setShowSuccess(false)}
-                    type="success"
-                    duration={3000}
-                    position="top-center"
+            <NotificationModal
+                text={notification.text}
+                show={notification.show}
+                onClose={() => setNotification({...notification, show: false})}
+                type={notification.type}
+                duration={notification.duration}
+                position="top-center"
                 />
-            )}
-            {showError && (
-                <NotificationModal
-                    text="Error al registrar el usuario"
-                    show={showError}
-                    onClose={() => setShowError(false)}
-                    type="error"
-                    duration={5000}
-                    position="top-center"
-                />
-            )}
-            {showSocialAuth && (
-                <NotificationModal
-                    text="Error al Iniciar Sesión con Cuentas de Redes Sociales"
-                    show={showSocialAuth}
-                    onClose={() => setShowSocialAuth(false)}
-                    type="info"
-                    duration={3000}
-                    position="top-center"
-                />
-            )}
             <div className="form-body">
                 <div className="container-form-Sc">
                     <div className="information">
@@ -167,8 +166,8 @@ function SignupCompany() {
                                     <label>
                                         <i className="fa-solid fa-flag"></i>
                                         <input
-                                            type="logo-url"
-                                            name="logo-url"
+                                            type="logo_url"
+                                            name="logo_url"
                                             placeholder="Logo URL"
                                             required
                                         />

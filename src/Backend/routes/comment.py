@@ -8,10 +8,10 @@ comments_bp = Blueprint('comments', __name__)
 
 # endpoint para crear un comentario   
 @comments_bp.route('/comments', methods=['POST'])
-#@jwt_required() #necesario tener usuario si qres hacer comentario
+@jwt_required() #necesario tener usuario si qres hacer comentario
 def create_comments():
     #commentario extrae el contenido, el id de la oferta y el id del usuario
-    #user_id= get_jwt_identity #funcion extrae id dekl user
+    user_id= get_jwt_identity #funcion extrae id dekl user
     data= request.get_json()#extrae todos los datos del request en json
     content=data.get("content", None)#extrae contenido de data
     offer_id=data.get("offer_id", None)#extrae el id de la oferta de data
@@ -21,11 +21,11 @@ def create_comments():
         return jsonify({"error": "Missing content"}), 400 #comentario no puede estar vacío
     #objeto de comentario
     comment= Comments(
-        #user_id=15,
+        user_id=user_id,
         created_at="a",
         content=content,
         offer_id=offer_id,
-        #rating=int(rating),
+        rating=int(rating),
     )
     db.session.add(comment)
     db.session.commit()

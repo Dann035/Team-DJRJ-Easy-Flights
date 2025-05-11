@@ -49,7 +49,6 @@ def signup_company():
         company_website = request.json.get('website', None)
         company_country = request.json.get('country', None)
         company_logo_url = request.json.get('logo_url', None)
-        company_rating = request.json.get('rating', None)
         company_slug = request.json.get('slug', None)
         company_status = request.json.get('status', None)
         company_role = request.json.get('role', None)
@@ -70,8 +69,6 @@ def signup_company():
             return jsonify({"msg": "Missing company country"}), 400
         if not company_logo_url:
             return jsonify({"msg": "Missing company logo_url"}), 400
-        if not company_rating:
-            return jsonify({"msg": "Missing company rating"}), 400
         if not company_slug:
             return jsonify({"msg": "Missing company slug"}), 400
         if not company_status:
@@ -81,7 +78,7 @@ def signup_company():
 
         company = Companies.query.filter_by(email=company_email).first()
         if company:
-            return jsonify({"msg": "Company already exists"}), 409
+            return jsonify({"msg": "Compañia ya registrada"}), 409
 
         password_hash = generate_password_hash(company_password)
         new_company = Companies(
@@ -93,7 +90,6 @@ def signup_company():
             website=company_website,
             country=company_country,
             logo_url=company_logo_url,
-            rating=company_rating,
             slug=company_slug,
             status=company_status,
             role = company_role

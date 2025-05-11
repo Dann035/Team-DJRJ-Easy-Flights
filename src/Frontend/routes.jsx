@@ -26,6 +26,8 @@ import {OffersList } from "./pages/Offers/OffersList.jsx";
 import ProfilePage from "./components/Profilepage/ProfilePage.jsx";
 import PaymentPage from "./pages/PaymentPage/PaymentPage.jsx";
 import BillPage from "./pages/PaymentPage/BillPage.jsx";
+import AboutUser from "./pages/AboutUser/AboutUser.jsx";
+
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -48,6 +50,7 @@ export const router = createBrowserRouter(
         <Route path="/terms-of-service" element={<TermsofService />} />
         <Route path="/cookies-policy" element={<CookiesPolicy />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/about-user/:userId" element={<AboutUser />} />
       </Route>
     ),
     {

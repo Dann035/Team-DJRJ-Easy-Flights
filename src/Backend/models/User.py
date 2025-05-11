@@ -16,6 +16,8 @@ class User(db.Model):
     name: Mapped[str] = mapped_column(String(120), nullable=False)
     email: Mapped[str] = mapped_column(String(120), unique=True, nullable=False)
     password: Mapped[str] = mapped_column(String(255),nullable=False)
+    suscription: Mapped[str] = mapped_column(String(120),nullable=True,default="FREE")
+    avatar: Mapped[str] = mapped_column(String(120),nullable=True)
     is_active: Mapped[bool] = mapped_column(Boolean(), nullable=False, default=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc))
     role: Mapped[str] = mapped_column(String(120),nullable=False)
@@ -24,7 +26,7 @@ class User(db.Model):
     #relations
     comments = relationship('Comments',back_populates='user',cascade="all, delete-orphan")
     payments = relationship('Payments',back_populates='user',cascade="all, delete-orphan")
-    user_roles = relationship('UserRole',back_populates='user')
+    user_roles = relationship('UserRole',back_populates='user',cascade="all, delete-orphan")
     companies = relationship('Companies',back_populates='owner',cascade="all, delete-orphan")
 
     @property
@@ -37,5 +39,7 @@ class User(db.Model):
             "id": self.id,
             "name": self.name,
             "email": self.email,
+            "suscription": self.suscription,
+            "avatar": self.avatar,
             "roles": self.roles
         }

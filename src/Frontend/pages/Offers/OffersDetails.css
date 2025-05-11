@@ -126,16 +126,16 @@
   
   
   .sidebar {
-    background: #f1f5ff;
+    background: var(--dark-bg);
     border-radius: 0px;
     padding: 1.5rem;
-    right: 5%;
+    right: 20%;
     text-align: center;
     align-items: center;
     min-width: 280px;
-    height: 300px;
     color: #6f00ff;
-    
+    height: 350px;
+    border-radius: 10px;
   }
   
   .sidebar h2 {
@@ -160,7 +160,7 @@
   .book-btn {
     display: inline-block;
     margin-top: 1rem;
-    background: linear-gradient(to right, #4f46e5, #6366f1);
+    background: #031d46;
     color: white;
     padding: 0.8rem 1.5rem;
     border-radius: 8px;
@@ -170,7 +170,7 @@
   }
   
   .book-btn:hover {
-    background: linear-gradient(to right, #4338ca, #4f46e5);
+    background: #2563eb;
   }
 
   .rating {

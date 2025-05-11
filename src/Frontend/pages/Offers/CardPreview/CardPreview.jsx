@@ -10,12 +10,12 @@ export const CardPreview = ({ offer }) => {
                 <div className="offer-card-front">
                     <div className="offer-image-container">
                         <img
-                            src={offer.image_url}
+                            src={offer.image_url || null}
                             alt={offer.title}
                             className="offer-image"
                         />
                         <span className="offer-price">
-                            {offer.price}&nbsp;€
+                            Desde {offer.price}&nbsp;€ pp
                         </span>
                     </div>
                     <div className="offer-details">

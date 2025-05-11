@@ -1,6 +1,6 @@
 from typing import TYPE_CHECKING
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy import String, ForeignKey, DateTime, Integer
+from sqlalchemy import String, ForeignKey, DateTime, Integer, Float
 from .base import db
 from datetime import datetime, timezone
 
@@ -18,7 +18,7 @@ class Comments(db.Model):
     user_id: Mapped[int] = mapped_column(ForeignKey('users.id'),nullable=True)
     offer_id: Mapped[int] = mapped_column(ForeignKey('offers.id'),nullable=True)
     company_id: Mapped[int] = mapped_column(ForeignKey('companies.id'),nullable=True)
-    #rating: Mapped[int] = mapped_column(Integer, nullable=False, default=5)
+    rating: Mapped[float] = mapped_column(Float, nullable=True)
 
 
 
@@ -33,5 +33,5 @@ class Comments(db.Model):
             "id": self.id,
             "content": self.content,
             "user_id": self.user_id,
-            #"rating": self.rating,
+            "rating": self.rating,
         }
