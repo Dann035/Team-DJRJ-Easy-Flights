@@ -10,6 +10,7 @@ import Contact from './pages/Contact';
 import Login from './pages/Login';
 import Footer from './components/Footer';
 import './index.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';//fontawesome//
 
 function App() {
   // Estado para manejar la autenticación (ejemplo simplificado)
