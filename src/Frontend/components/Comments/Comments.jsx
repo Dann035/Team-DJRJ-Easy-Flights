@@ -20,31 +20,31 @@ function Comments() {
   //POST
   const [newComment, setNewComment] = useState("");
 
-  // const addNewComment = () => {
-  //   if (newComment.trim() === "") return;
-  //   fetch(`${url}/api/comments`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json"
-  //     },
-  //     credentials: "include",
-  //     body: JSON.stringify({
-  //       content: newComment,
-  //       offer_id: offer_id
-  //     })
-  //   })
-  //     .then(res => {
-  //       if (!res.ok) throw new Error("Failed to add comment");
-  //       return res.json();
-  //     })
-  //     .then(data => {
-  //       setNewComment(""); // vacia input
-  //       getComments(); // vuelve a llamar al get
-  //     })
-  //     .catch(err => {
-  //       console.error("Error posting comment", err);
-  //     });
-  // };
+  const addNewComment = () => {
+    if (newComment.trim() === "") return;
+    fetch(`${url}/api/comments`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        content: newComment,
+        offer_id: offer_id
+      })
+    })
+      .then(res => {
+        if (!res.ok) throw new Error("Failed to add comment");
+        return res.json();
+      })
+      .then(data => {
+        setNewComment(""); // vacia input
+        getComments(); // vuelve a llamar al get
+      })
+      .catch(err => {
+        console.error("Error posting comment", err);
+      });
+  };
 
   //DELETE COMMENT
   const deleteComment = (id) => {
@@ -85,7 +85,7 @@ function Comments() {
         style={{ maxWidth: "700px", width: "100%" }}
       >
         <h1 className="title-comments mb-3">{texts.offerReviews}</h1>
-        <span style={{ fontSize: "1.5rem" }}>⭐️⭐️⭐️⭐️⭐️</span>
+        <span style={{ fontSize: "1.5rem" }}></span>
 
         <hr className="my-4" />
 
@@ -96,24 +96,26 @@ function Comments() {
             <div key={c.id} className="d-flex mb-4 align-items-start gap-2">
               {/* Left: Avatar */}
               <img
-                className="me-3"
+                className="imagen-avatar"
                 src="https://randomuser.me/api/portraits/men/24.jpg"
                 alt={texts.reviewer}
                 style={{
                   height: "70px",
-                  objectFit: "contain",
+                  objectFit: "contain"
                 }}
               />
 
               {/* Right: Comment content */}
               <div className="flex-grow-1 border-bottom pb-3">
                 <h5 className="mb-1">John Doe</h5>
-                <small className="text-muted">{texts.travelBlogger}</small>
+                <p className="fst-italic mt-2">⭐️{c.rating}</p>
+
+                {/* <small className="text-muted">{texts.travelBlogger}</small> */}
                 <p className="fst-italic mt-2">"{c.content}"</p>
-                <small className="text-muted d-block mb-2">Comentario número {c.id}</small>
+                {/* <small className="text-muted d-block mb-2">Comentario número {c.id}</small> */}
                 <button 
                 //onClick={()=> editComment(c.id)}
-                className="btn btn-secondary btn-sm me-2">Editar</button>
+                className="btn btn-secondary btn-sm mt-3 me-2">Editar</button>
                 <button
                   onClick={() => deleteComment(c.id)}
                   className="btn btn-danger btn-sm"
