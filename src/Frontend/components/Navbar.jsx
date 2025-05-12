@@ -51,9 +51,10 @@ export const Navbar = () => {
                     className="logo-container"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                >
+
+                >{/*/Icono-Posible.png se añadio una barra al principio porque el logo se rompia dependiendo la ruta en la que estes*/}
                     <img
-                        src="Icono-Posible.png"
+                        src="/Icono-Posible.png"
                         alt="Logo Easy-Flights"
                         className="img-nav navbar-brand"
                         onClick={() => navigate("/")}
@@ -134,7 +135,7 @@ export const Navbar = () => {
                                             boxShadow: "0 0 15px rgba(0, 211, 211, 0.8)",
                                         }}
                                         
-                                        onClick={() => navigate("/profile")}
+                                        
                                          
                                     >
                                         {/*onClick={() => navigate("/profile")} usamos onclick para añadirle la funcion que nos lleve a nuestro perfil */}

@@ -1,25 +1,20 @@
 .bill-container h2{
-  color: #000000;
-}
-.bill-details h3{
-  color: #000000;
-}
-.bill-details p{
-  color: #000000;
-}
-.bill-details strong{
-  color: #000000;
+color: #39c4eebe;
 }
 
 .bill-container {
   max-width: 800px;
   margin: 50px auto;
   padding: 20px;
-  background-color: #fff; 
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
   font-family: Arial, sans-serif;
- /* background-color: transparent;*/
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  color: white;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(29, 233, 248, 0.03) 0%, transparent 20%),
+    radial-gradient(circle at 90% 80%, rgba(54, 74, 255, 0.03) 0%, transparent 20%);
 }
 
 
@@ -27,7 +22,7 @@
   display: block;
   width: 100%;
   padding: 12px;
-  background-color: #007bff;
+  background-color: transparent;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -38,7 +33,7 @@
 }
 
 .print:hover {
-  background-color: #0056b3;
+  background-color: #00b38ca8;
 }
 
 .print:focus {
@@ -54,17 +49,6 @@
     font-size: 1em;
   }
 }
-.calendary{
-  color: #000000;
-}
-
-
-
-.of-duration{
-  color: #000000;
-}
-
-
 @media print {
   /* Ocultar todo lo que no sea relevante para la factura */
   body * {
@@ -96,8 +80,12 @@
   }
 
   /* Ajustar la fuente y el tamaño de los elementos para la impresión */
-  h2, h3, p {
+  h2, h3, p, strong {
     font-size: 12pt;
+    color: #000000;
+  }
+  .bill-container h2{
+    color: #000000;
   }
 
   .print {
