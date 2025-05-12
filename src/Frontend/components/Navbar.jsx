@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuthContext";
 import { useLanguage } from "../context/LanguageContext";
 import LanguageSelector from "./LanguageSelector/LanguageSelector";
 import { motion, AnimatePresence } from "framer-motion";
 import "./Navbar.css";
+
 
 export const Navbar = () => {
     const navigate = useNavigate();
@@ -12,6 +13,7 @@ export const Navbar = () => {
     const { texts } = useLanguage();
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
     
     // Load user data from localStorage
     useEffect(() => {
@@ -32,6 +34,9 @@ export const Navbar = () => {
         logout();
         navigate("/");
     };
+
+    const userLs = localStorage.getItem("user");
+    const userId = userLs ? JSON.parse(userLs).id : null;
 
     return (
         <motion.nav 
@@ -114,18 +119,26 @@ export const Navbar = () => {
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.2 }}
                         >
+                            
                             {user ? (
                                 <motion.div 
                                     className="user-profile-container"
                                     whileHover={{ scale: 1.05 }}
                                 >
                                     <motion.div
+                                    
                                         className="user-avatar"
+                                        onClick={() => navigate("/about-user/" + userId)}
                                         title={user.name}
                                         whileHover={{ 
                                             boxShadow: "0 0 15px rgba(0, 211, 211, 0.8)",
                                         }}
+                                        
+                                        onClick={() => navigate("/profile")}
+                                         
                                     >
+                                        {/*onClick={() => navigate("/profile")} usamos onclick para añadirle la funcion que nos lleve a nuestro perfil */}
+
                                         {user.name ? user.name.charAt(0).toUpperCase() : "U"}
                                     </motion.div>
                                     <motion.button 
@@ -150,6 +163,7 @@ export const Navbar = () => {
                                         alt="User profile"
                                         className="img-nav-login"
                                     />
+                                    
                                     <span className="login-text">{texts.login || "Login"}</span>
                                 </motion.button>
                             )}

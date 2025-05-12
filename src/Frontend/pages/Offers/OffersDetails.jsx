@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Calendar, MapPin, Star, StarsIcon } from "lucide-react";
 import "./OffersDetails.css"
 import Comments from "../../components/Comments/Comments";
@@ -204,11 +204,9 @@ export const OffersDetails = () => {
                         {offer.duration}
                       </p>
                     </div>
-                    <a href="#" className="book-btn">
-                      Book Now
-                    </a>
-                    {/* hacer la media de rating de los comenatrios de la oferta */}
 
+                     <a href={`/offerdetails/${id}/pago`} className="book-btn">Book Now</a>
+           
                     <div className="rating-media">
                       <p className="text-lg mb-4">
                            Valoración ⭐️ : <strong>{averageRating} / 5</strong>

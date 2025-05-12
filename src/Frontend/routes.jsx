@@ -13,6 +13,7 @@ import Signup from "./pages/Signup/Signup.jsx";
 import { AddOffers } from "./pages/Offers/AddOffers.jsx";
 import { OffersDetails } from "./pages/Offers/OffersDetails.jsx";
 
+
 import TravelTips from "./pages/TravelTips/TravelTips.jsx";
 import Destinations from "./pages/Feeatures/Destinations.jsx";
 import Packages from "./pages/Feeatures/Packages.jsx";
@@ -22,12 +23,18 @@ import TermsofService from "./pages/Termsofservice/TermsofService.jsx";
 import PrivacyPolicy from "./pages/PrivacyPolicy/PolicyInfo.jsx";
 import CookiesPolicy from "./pages/CookiesPolicy/UserConsent.jsx";
 import {OffersList } from "./pages/Offers/OffersList.jsx";
+import ProfilePage from "./components/Profilepage/ProfilePage.jsx";
+import PaymentPage from "./pages/PaymentPage/PaymentPage.jsx";
+import BillPage from "./pages/PaymentPage/BillPage.jsx";
+import AboutUser from "./pages/AboutUser/AboutUser.jsx";
+
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Layout />} errorElement={<h1>Not found!</h1>} >
         <Route path= "/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signupCompany" element={<SignupCompany />} />
         <Route path="/travel-tips" element={<TravelTips />} />
@@ -38,9 +45,12 @@ export const router = createBrowserRouter(
         <Route path="/addoffer" element={<AddOffers/>} />
         <Route path="/offerdetails/:id" element={<OffersDetails/>}/>
         <Route path="/offerslist" element={<OffersList/>}/>
+        <Route path="/offerdetails/:id/pago" element={<PaymentPage />} /> 
+        <Route path="/bill/:id/:paymentId" element={<BillPage />} />       
         <Route path="/terms-of-service" element={<TermsofService />} />
         <Route path="/cookies-policy" element={<CookiesPolicy />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/about-user/:userId" element={<AboutUser />} />
       </Route>
     ),
     {

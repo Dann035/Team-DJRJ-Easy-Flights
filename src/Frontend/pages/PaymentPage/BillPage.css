@@ -1,0 +1,141 @@
+.bill-container h2{
+  color: #000000;
+}
+.bill-details h3{
+  color: #000000;
+}
+.bill-details p{
+  color: #000000;
+}
+.bill-details strong{
+  color: #000000;
+}
+
+.bill-container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff; 
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  font-family: Arial, sans-serif;
+ /* background-color: transparent;*/
+}
+
+
+.print {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1.2em;
+  margin-top: 20px;
+}
+
+.print:hover {
+  background-color: #0056b3;
+}
+
+.print:focus {
+  outline: none;
+}
+
+@media (max-width: 600px) {
+  .bill-container {
+    padding: 15px;
+  }
+
+  .print {
+    font-size: 1em;
+  }
+}
+.calendary{
+  color: #000000;
+}
+
+
+
+.of-duration{
+  color: #000000;
+}
+
+
+@media print {
+  /* Ocultar todo lo que no sea relevante para la factura */
+  body * {
+    visibility: hidden;
+  }
+
+  /* Mostrar solo el contenedor de la factura y el logotipo */
+  .bill-container,
+  .bill-container *,
+  .logo-container,
+  .logo-container * {
+    visibility: visible;
+  }
+
+  /* Ajustar la visualización de la factura para que se ajuste al tamaño de la página */
+  .bill-container {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    background-color: #fff;
+  }
+
+  /* Evitar márgenes de página */
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  /* Ajustar la fuente y el tamaño de los elementos para la impresión */
+  h2, h3, p {
+    font-size: 12pt;
+  }
+
+  .print {
+    display: none; /* Ocultar el botón de impresión */
+  }
+
+  /* Asegurarse de que las imágenes no sean demasiado grandes en la impresión */
+  .offer-img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Asegurarse de que los detalles de la oferta se muestren correctamente */
+  .offer-card {
+    display: block; /* Organizar todo en un solo bloque */
+    margin-bottom: 20px;
+  }
+
+  /* Evitar que las imágenes se estiren o distorsionen */
+  .offer-img-container {
+    width: auto;
+  }
+
+  .offer-text {
+    word-wrap: break-word;
+  }
+
+  /* Opcional: Agregar borde alrededor de la factura */
+  .bill-container {
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+
+  /* Asegurarse de que el logotipo se imprima */
+  .logo-container img {
+    width: 100px; /* Ajusta el tamaño del logo si es necesario */
+    height: auto;
+    display: block; /* Asegurarse de que el logo no quede flotando */
+    margin: 0 auto 20px auto; /* Centrar el logo y agregar espacio */
+  }
+}
