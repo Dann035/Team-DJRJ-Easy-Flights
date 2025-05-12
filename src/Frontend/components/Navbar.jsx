@@ -133,9 +133,6 @@ export const Navbar = () => {
                                         whileHover={{ 
                                             boxShadow: "0 0 15px rgba(0, 211, 211, 0.8)",
                                         }}
-                                        
-                                        onClick={() => navigate("/profile")}
-                                         
                                     >
                                         {/*onClick={() => navigate("/profile")} usamos onclick para añadirle la funcion que nos lleve a nuestro perfil */}
 
