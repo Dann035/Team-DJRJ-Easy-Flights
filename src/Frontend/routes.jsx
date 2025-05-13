@@ -18,16 +18,22 @@ import TravelTips from "./pages/TravelTips/TravelTips.jsx";
 import Destinations from "./pages/Feeatures/Destinations.jsx";
 import Packages from "./pages/Feeatures/Packages.jsx";
 import Tools from "./pages/Feeatures/Tools.jsx";
-import AboutUs from "./pages/AboutUs/AboutUs.jsx";
-import TermsofService from "./pages/Termsofservice/TermsofService.jsx";
-import PrivacyPolicy from "./pages/PrivacyPolicy/PolicyInfo.jsx";
-import CookiesPolicy from "./pages/CookiesPolicy/UserConsent.jsx";
+import AboutUs from "./pages/QuickLinks/AboutUs.jsx";
+import TermsofService from "./pages/Policy/TermsofService.jsx";
+import PrivacyPolicy from "./pages/Policy/PolicyInfo.jsx";
+import CookiesPolicy from "./pages/Policy/UserConsent.jsx";
 import {OffersList } from "./pages/Offers/OffersList.jsx";
 import ProfilePage from "./components/Profilepage/ProfilePage.jsx";
 import PaymentPage from "./pages/PaymentPage/PaymentPage.jsx";
 import BillPage from "./pages/PaymentPage/BillPage.jsx";
 import AboutUser from "./pages/AboutUser/AboutUser.jsx";
+import FAQS from "./pages/QuickLinks/Faqs.jsx";
+import SupportCenter from "./pages/QuickLinks/SupportCenter.jsx";
+import Instagram from "./pages/FollowUs/Instagram.jsx";
+import Facebook from "./pages/FollowUs/Facebook.jsx";
+import TravelQuiz from "./pages/Feeatures/TravelQuiz.jsx";
 import ForgetPass from "./pages/ForgetPass/ForgetPass.jsx";
+
 
 
 export const router = createBrowserRouter(
@@ -42,6 +48,7 @@ export const router = createBrowserRouter(
         <Route path="/about" element={<AboutUs />} />
         <Route path="/destinations" element={<Destinations />} />
         <Route path="packages" element={<Packages />} />
+        <Route path="/quiz" element={<TravelQuiz />} />
         <Route path="/tools" element={<Tools />} />
         <Route path="/addoffer" element={<AddOffers/>} />
         <Route path="/offerdetails/:id" element={<OffersDetails/>}/>
@@ -52,8 +59,11 @@ export const router = createBrowserRouter(
         <Route path="/cookies-policy" element={<CookiesPolicy />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/about-user/:userId" element={<AboutUser />} />
+        <Route path="/faqs" element={<FAQS />} />
+        <Route path="/support" element={<SupportCenter />} />
+        <Route path="/instagram" element={<Instagram />} />
+        <Route path="/facebook" element={<Facebook />} />
         <Route path="/forgotPass" element={<ForgetPass />} />
-
       </Route>
     ),
     {

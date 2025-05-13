@@ -1,4 +1,4 @@
-/* Contenedor general de la tarjeta */
+/* Contenedor general de la tarjeta 
 .profile-container {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: #f9f9f9;
@@ -13,7 +13,7 @@
   background-size: 100% 100%;
 }
 
-/* Encabezado del perfil */
+Encabezado del perfil 
 .profile-header h2 {
   text-align: center;
   color: #003366;
@@ -22,7 +22,7 @@
   margin-bottom: 30px;
 }
 
-/* Información mostrada del usuario */
+Información mostrada del usuario 
 .user-profile-info {
   background: #ffffff;
   padding: 20px 30px;
@@ -30,7 +30,7 @@
   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
 }
 
-/* Etiquetas */
+/* Etiquetas 
 .user-profile-info label {
   font-weight: bold;
   color: #444;
@@ -38,14 +38,14 @@
   margin-top: 15px;
 }
 
-/* Párrafos de datos */
+/* Párrafos de datos 
 .user-profile-info p {
   margin: 5px 0;
   font-size: 17px;
   color: #222;
 }
 
-/* Estilos para formularios */
+/* Estilos para formularios 
 .profile-form {
   background: #ffffff;
   padding: 25px 30px;
@@ -55,7 +55,7 @@
   gap: 15px;
 }
 
-/* Inputs */
+/* Inputs 
 input {
   width: 100%;
   padding: 10px 12px;
@@ -77,7 +77,7 @@ input:focus {
     background-color: #09eb4d;
 }
 
-/* Botones generales */
+/* Botones generales 
 button {
   padding: 10px 18px;
   font-size: 15px;
@@ -90,7 +90,7 @@ button {
 
 
 
-/* Mensajes de error */
+/* Mensajes de error 
 .error-text,
 .error-message {
   color: #d32f2f;
@@ -102,9 +102,9 @@ button {
 
 
 
-/* Botón editar información */
+/* Botón editar información 
 button.edit {
-  background-color: #4CAF50; /* Verde */
+  background-color: #4CAF50; /* Verde 
   color: white;
   border: none;
   padding: 10px 16px;
@@ -117,9 +117,9 @@ button.edit:hover {
   background-color: #388e3c;
 }
 
-/* Botón de cambiar contraseña */
+/* Botón de cambiar contraseña 
 button.toggle-password-button {
-  background-color: #ff9800; /* Naranja */
+  background-color: #ff9800; /* Naranja 
   color: white;
   border: none;
   padding: 10px 16px;
@@ -133,9 +133,9 @@ button.toggle-password-button:hover {
   background-color: #ef6c00;
 }
 
-/* Botón actualizar perfil */
+/* Botón actualizar perfil 
 button[type="submit"] {
-  background-color: #2196F3; /* Azul */
+  background-color: #2196F3; /* Azul 
   color: white;
   border: none;
   padding: 10px 18px;
@@ -149,9 +149,9 @@ button[type="submit"]:hover {
   background-color: #1976d2;
 }
 
-/* Botón cancelar */
+/* Botón cancelar 
 button.cancel-button {
-  background-color: #f44336; /* Rojo */
+  background-color: #f44336; /* Rojo 
   color: white;
   border: none;
   padding: 10px 18px;

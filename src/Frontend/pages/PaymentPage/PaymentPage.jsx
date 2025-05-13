@@ -26,7 +26,15 @@ const PaymentPage = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === "expirationDate") {
+    if (name === "cardNumber") {
+      // Eliminar cualquier carácter no numérico
+      let formattedValue = value.replace(/\D/g, "");
+
+      // Dividir el número de tarjeta en bloques de 4 dígitos
+      formattedValue = formattedValue.replace(/(.{4})(?=.)/g, "$1 ");
+
+      setForm((prev) => ({ ...prev, [name]: formattedValue }));
+    } else if (name === "expirationDate") {
       let formatted = value.replace(/\D/g, "");
       if (formatted.length >= 3) {
         formatted = `${formatted.slice(0, 2)}/${formatted.slice(2, 4)}`;
@@ -63,6 +71,7 @@ const PaymentPage = () => {
     <div className="payment-container">
       <h2>Formulario de Pago</h2>
       <form className="payment-form" onSubmit={handleSubmit}>
+        <label> Seleccionar metodo de pago</label>
         {/* Selección de método de pago */}
         <div className="payment-methods">
           <div className="payment-method">
@@ -142,7 +151,7 @@ const PaymentPage = () => {
             name="cardNumber"
             value={form.cardNumber}
             onChange={handleChange}
-            maxLength="16"
+            maxLength="19" // 16 dígitos + 3 espacios
             placeholder="1234 5678 9012 3456"
             className="form-control"
           />
@@ -176,11 +185,11 @@ const PaymentPage = () => {
           {errors.cvv && <span className="error-text">{errors.cvv}</span>}
         </div>
 
-        <button type="submit" className="btn btn-primary w-100">Procesar pago</button>
-        <Link to={`/offerdetails/${id}`} className="btn btn-secondary w-100 mt-2">Cancelar</Link>
+        <button type="submit" className="btn processingpayment w-100">Procesar pago</button>
+        <Link to={`/offerdetails/${id}`} className="btn w-100 mt-2 cancelbutton">Cancelar</Link>
       </form>
     </div>
   );
 };
 
-export default PaymentPage; 
+export default PaymentPage;

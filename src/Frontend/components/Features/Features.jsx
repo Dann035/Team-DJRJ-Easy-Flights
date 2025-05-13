@@ -27,7 +27,7 @@ function Features() {
                 </Link>
 
                 {/* Box Feature 2: Packages */}
-                <Link to="/packages" className="box-feature feature-2">
+                <Link to="/quiz" className="box-feature feature-2">
                     <i></i>
                     <h3>{texts.feature2Title}</h3>
                     <p>{texts.feature2Desc}</p>

@@ -1,0 +1,73 @@
+.ig-profile-container {
+  max-width: 935px;
+  margin: auto;
+  font-family: 'Arial', sans-serif;
+  color: #262626;
+  background-color: rgb(0, 0, 0);
+}
+
+.ig-header {
+  display: flex;
+  padding: 2rem;
+}
+
+.ig-avatar img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.ig-user-info {
+  margin-left: 2rem;
+  flex: 1;
+}
+
+.ig-username-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ig-username-section h2 {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.ig-follow-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #0095f6;
+  color: white;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.ig-follow-button:hover {
+  background-color: #007dc1;
+}
+
+.ig-stats {
+  display: flex;
+  gap: 2rem;
+  margin: 1rem 0;
+}
+
+.ig-description {
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.ig-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+  padding: 1rem;
+}
+
+.ig-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
