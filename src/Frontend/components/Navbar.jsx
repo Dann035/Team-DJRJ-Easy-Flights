@@ -177,9 +177,7 @@ export const Navbar = () => {
                                             />
                                         ) : user.name ? (
                                             user.name.charAt(0).toUpperCase()
-                                        ) : (
-                                            "U"
-                                        )}
+                                        ): "U"}
                                     </motion.div>
                                     <motion.button
                                         className="btn-logout"
