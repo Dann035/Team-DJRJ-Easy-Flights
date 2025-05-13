@@ -10,7 +10,7 @@ from datetime import datetime, timedelta
 from .password_reset import verification_codes
 
 
-UPLOAD_FOLDER = "static/avatars"  # Ajusta la ruta según tu estructura
+UPLOAD_FOLDER = "public/static/avatars"  # Ajusta la ruta según tu estructura
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 def allowed_file(filename):
