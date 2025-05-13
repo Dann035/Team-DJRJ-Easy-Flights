@@ -32,6 +32,8 @@ import SupportCenter from "./pages/QuickLinks/SupportCenter.jsx";
 import Instagram from "./pages/FollowUs/Instagram.jsx";
 import Facebook from "./pages/FollowUs/Facebook.jsx";
 import TravelQuiz from "./pages/Feeatures/TravelQuiz.jsx";
+import ForgetPass from "./pages/ForgetPass/ForgetPass.jsx";
+
 
 
 export const router = createBrowserRouter(
@@ -61,6 +63,7 @@ export const router = createBrowserRouter(
         <Route path="/support" element={<SupportCenter />} />
         <Route path="/instagram" element={<Instagram />} />
         <Route path="/facebook" element={<Facebook />} />
+        <Route path="/forgotPass" element={<ForgetPass />} />
       </Route>
     ),
     {

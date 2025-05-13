@@ -1,7 +1,7 @@
 from flask import request, jsonify, Blueprint
-from Backend.models import db, Offers
+from src.Backend.models import db, Offers
 from flask_jwt_extended import jwt_required
-from Backend.auth_decorators import role_required
+from src.Backend.auth_decorators import role_required
 
 offers_bp = Blueprint('offers', __name__)
 

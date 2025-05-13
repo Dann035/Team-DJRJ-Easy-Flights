@@ -10,7 +10,7 @@
 
   }
 
-  section img{
+  #img-offer img{
     width: 0px;
     flex-grow: 1;
     object-fit: cover;
@@ -18,8 +18,7 @@
     transition: .5s ease;
   }
 
-  section img:hover{
-    cursor: crosshair;
+  #img-offer img:hover{
     width: 400px;
     opacity: 1;
     filter: contrast(120%);
@@ -203,4 +202,62 @@
     color: #6f00ff;
     transition: color 0.3s;
   }
-  
+
+  .card-modal{
+    background: var(--dark-bg);
+  }
+
+  .button-close{
+    display: inline-block;
+    margin-top: 1rem;
+    border: none;
+    background: #ff0000;
+    color: white;
+    padding: 6px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+
+  .button-close:hover{
+    background: #fff;
+    color: red;
+  }
+
+  .button-submit {
+    display: inline-block;
+    margin-top: 1rem;
+    border: none;
+    background: #031d46;
+    color: white;
+    padding: 6px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+
+  .button-submit:hover {
+    background: #ffffff;
+    color:rgb(0, 74, 170);
+  }
+
+  .button-save {
+    display: inline-block;
+    margin-top: 1rem;
+    border: none;
+    background: #031d46;
+    color: white;
+    padding: 6px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+
+  .button-save:hover {
+    background: #ffffff;
+    color:rgb(0, 74, 170);
+  }
+   
