@@ -22,10 +22,6 @@ export const Offers = () => {
         navigate("/addoffer");
     };
 
-    const moveToOffersList = () => {
-        navigate("/offerslist");
-    };
-
     // Función para mostrar todas las ofertas
     const showAllOffers = () => {
         navigate("/offerslist");

@@ -3,6 +3,8 @@ import { useParams, Link } from "react-router-dom";
 import { Calendar, MapPin, Star, StarsIcon } from "lucide-react";
 import "./OffersDetails.css"
 import Comments from "../../components/Comments/Comments";
+import { useAuth } from "../../hooks/useAuthContext";
+import useGlobalReducer from "../../hooks/useGlobalReducer";
 
 /*import { Modal } from 'bootstrap';*/
 
@@ -12,10 +14,22 @@ const url = import.meta.env.VITE_BACKEND_URL
 
 export const OffersDetails = () => {
 
+  const { store, dispatch } = useGlobalReducer();
+  const comments = store.comments;
   const { id } = useParams();
   const [offer, setOffer] = useState({})
   const [newComment, setNewComment] = useState("");
-  const [selectedRating, setsSelectedRating] =useState("");
+  const [selectedRating, setsSelectedRating] = useState("");
+  //const [comments, setComments] = useState([]);
+
+  const getComments = () => {
+    fetch(`${url}/api/offers/${id}/comments`)
+      .then(res => res.json())
+      .then(data => {
+        dispatch({ type: "SET_COMMENTS", payload: data });
+      })
+      .catch(err => console.error("Error fetching comments", err));
+  };
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();
@@ -42,14 +56,32 @@ export const OffersDetails = () => {
       .then((data) => {
         console.log("Comment posted:", data);
         setNewComment("");
-        document.getElementById("exampleModal").classList.remove("show"); // optional: close modal manually
-        document.body.classList.remove("modal-open");                     // cleanup
-        document.querySelector(".modal-backdrop")?.remove();             // remove backdrop
+        document.getElementById("exampleModal").classList.remove("show"); 
+        document.body.classList.remove("modal-open");                     
+        setsSelectedRating("");
+        getComments();
+
+        const modalEl = document.getElementById("exampleModal");
+        if (modalEl && window.bootstrap) {
+          const modalInstance = window.bootstrap.Modal.getInstance(modalEl);
+          modalInstance?.hide();
+        }
       })
       .catch((err) => {
         console.error("Error posting comment:", err);
       });
   };
+
+  const handleRatingChange = (e) => {
+    const rating = e.target.value;
+    setsSelectedRating(rating);
+    console.log("Selected rating:", rating);
+  };
+
+
+  useEffect(() => {
+    getComments();
+  }, [id]);
 
 
   useEffect(() => {
@@ -85,6 +117,10 @@ export const OffersDetails = () => {
 
     return () => clearTimeout(timeout);
   }, []);
+
+  const averageRating = comments.length
+    ? (comments.reduce((sum, comment) => sum + comment.rating, 0) / comments.length).toFixed(1)
+    : null;
 
 
   return (
@@ -139,6 +175,7 @@ export const OffersDetails = () => {
                     <span>Viaje</span>
                     <span>Cultura</span>
                   </div>
+
                   <Comments offer_id={id} />
                 </div>
 
@@ -154,43 +191,14 @@ export const OffersDetails = () => {
                     </div>
 
                     <a href={`/offerdetails/${id}/pago`} className="book-btn">Book Now</a>
-                    <div className="rating text-center">
-                      <input
-                        defaultValue={5}
-                        name="rating"
-                        id="star5"
-                        type="radio"
-                      />
-                      <label htmlFor="star5" />
-                      <input
-                        defaultValue={4}
-                        name="rating"
-                        id="star4"
-                        type="radio"
-                      />
-                      <label htmlFor="star4" />
-                      <input
-                        defaultValue={3}
-                        name="rating"
-                        id="star3"
-                        type="radio"
-                      />
-                      <label htmlFor="star3" />
-                      <input
-                        defaultValue={2}
-                        name="rating"
-                        id="star2"
-                        type="radio"
-                      />
-                      <label htmlFor="star2" />
-                      <input
-                        defaultValue={1}
-                        name="rating"
-                        id="star1"
-                        type="radio"
-                      />
-                      <label htmlFor="star1" />
+
+                    <div className="rating-media">
+                      <p className="text-lg mb-4">
+                        Valoración ⭐️ : <strong>{averageRating} / 5</strong>
+                      </p>
+
                     </div>
+
                     {/*button trigger modal*/}
                     <button
                       type="button"
@@ -215,8 +223,8 @@ export const OffersDetails = () => {
                       aria-labelledby="exampleModalLabel"
                       aria-hidden="true"
                     >
-                      <div className="modal-dialog" role="document">
-                        <div className="modal-content">
+                      <div className="modal-dialog" role="document" >
+                        <div className="modal-content card-modal">
                           <div className="modal-header">
                             <h5 className="modal-title" id="exampleModalLabel">
                               Nueva Reseña
@@ -233,6 +241,7 @@ export const OffersDetails = () => {
                             <form
                               id="commentForm"
                               onSubmit={handleCommentSubmit}
+
                             >
                               <div className="mb-3">
                                 <label
@@ -251,8 +260,58 @@ export const OffersDetails = () => {
                                   }
                                   required
                                 ></textarea>
+                                <label
+                                  htmlFor="rating"
+                                  className="form-label mt-3"
+                                >
+                                  Seleccione su puntuación:
+                                </label>
+
+                                <div className="rating text-center">
+                                  <input
+                                    defaultValue={5}
+                                    name="rating"
+                                    id="star5"
+                                    type="radio"
+                                    onChange={handleRatingChange}
+                                  />
+                                  <label htmlFor="star5" />
+                                  <input
+                                    defaultValue={4}
+                                    name="rating"
+                                    id="star4"
+                                    type="radio"
+                                    onChange={handleRatingChange}
+                                  />
+                                  <label htmlFor="star4" />
+                                  <input
+                                    defaultValue={3}
+                                    name="rating"
+                                    id="star3"
+                                    type="radio"
+                                    onChange={handleRatingChange}
+                                  />
+                                  <label htmlFor="star3" />
+                                  <input
+                                    defaultValue={2}
+                                    name="rating"
+                                    id="star2"
+                                    type="radio"
+                                    onChange={handleRatingChange}
+                                  />
+                                  <label htmlFor="star2" />
+                                  <input
+                                    defaultValue={1}
+                                    name="rating"
+                                    id="star1"
+                                    type="radio"
+                                    onChange={handleRatingChange}
+                                  />
+                                  <label htmlFor="star1" />
+                                </div>
+
                               </div>
-                              <button type="submit" className="btn btn-primary">
+                              <button type="submit" className="button-submit" >
                                 Submit Comment
                               </button>
                             </form>
@@ -260,12 +319,12 @@ export const OffersDetails = () => {
                           <div className="modal-footer">
                             <button
                               type="button"
-                              className="btn btn-secondary"
+                              className="button-close"
                               data-bs-dismiss="modal"
                             >
                               Close
                             </button>
-                            <button type="button" className="btn btn-primary">
+                            <button type="button" className="button-save" onClick={() => addNewComment()}>
                               Save changes
                             </button>
                           </div>

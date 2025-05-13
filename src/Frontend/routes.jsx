@@ -27,6 +27,7 @@ import ProfilePage from "./components/Profilepage/ProfilePage.jsx";
 import PaymentPage from "./pages/PaymentPage/PaymentPage.jsx";
 import BillPage from "./pages/PaymentPage/BillPage.jsx";
 import AboutUser from "./pages/AboutUser/AboutUser.jsx";
+import ForgetPass from "./pages/ForgetPass/ForgetPass.jsx";
 import FAQS from "./pages/QuickLinks/Faqs.jsx";
 import SupportCenter from "./pages/QuickLinks/SupportCenter.jsx";
 import Instagram from "./pages/FollowUs/Instagram.jsx";
@@ -57,10 +58,6 @@ export const router = createBrowserRouter(
         <Route path="/cookies-policy" element={<CookiesPolicy />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/about-user/:userId" element={<AboutUser />} />
-        <Route path="/faqs" element={<FAQS />} />
-        <Route path="/support" element={<SupportCenter />} />
-        <Route path="/instagram" element={<Instagram />} />
-        <Route path="/facebook" element={<Facebook />} />
       </Route>
     ),
     {

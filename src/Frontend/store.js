@@ -1,8 +1,11 @@
+import Comments from "./components/Comments/Comments";
+
 export const initialStore=()=>{
   return{
     message: null,
     offers:[],
-    offersAPI:[]
+    offersAPI:[],
+    comments:[]
   }
 }
 
@@ -47,6 +50,9 @@ export default function storeReducer(store, action = {type:""}) {
       let indice = store.findIndex((item) => item.id === action.payload.id);
       store[indice] = action.payload;
       return [...store];
+    
+    case "SET_COMMENTS":
+      return { ...store, comments: action.payload };
 
     default:
       throw Error("Unknown action.");

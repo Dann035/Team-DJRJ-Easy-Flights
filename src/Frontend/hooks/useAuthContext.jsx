@@ -87,10 +87,20 @@ export const AuthProvider = ({ children }) => {
         return data;
     };
 
-    const logout = () => {
+    const logout = async () => {
+        const response = await fetch(URL + '/api/logout',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('access_token')}`
+            }
+        })
+        const data = await response.json();
         localStorage.removeItem('access_token');
         localStorage.removeItem('user');
         setUser(null);
+        setLoading(false);
+        return data;
     };
 
     return (

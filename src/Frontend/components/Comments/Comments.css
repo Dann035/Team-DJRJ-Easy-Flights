@@ -12,3 +12,8 @@
     animation-range-start: entry 20%;
     animation-range-end: cover 30%;
 }
+
+.imagen-avatar{
+    border-radius: 50%;
+    margin-right: 10px;
+}
