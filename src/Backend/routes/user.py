@@ -37,7 +37,8 @@ def get_user_profile():
         print(f"Error al obtener perfil: {str(e)}")
         return jsonify({"msg": "Error al obtener el perfil", "error": str(e)}), 500
     
-@user_bp.route('/user/<int:user_id>/profile/update/', methods=['PUT'])
+@user_bp.route('/user/<int:user_id>/profile/update', methods=['PUT'])
+@jwt_required()
 def update_user_profile(user_id):
     try:
         data = request.get_json()
@@ -50,13 +51,16 @@ def update_user_profile(user_id):
             return jsonify({"msg": "User not found"}), 404
         
         # Get email from JWT
-        current_user_email = get_jwt_identity()
+        jwt_data = get_jwt()
+        jwt_data_user = jwt_data.get("user")
+        current_user_email = jwt_data_user.get("email")
+        print(current_user_email)
         
         # Compare JWT email with user email
         if user.email != current_user_email:
             return jsonify({"msg": "Access denied"}), 403
             
-        # Update user fields if they exist in the request
+
         if 'name' in data:
             user.name = data['name']
         if 'subscription' in data:
