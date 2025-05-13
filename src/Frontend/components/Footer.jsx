@@ -11,23 +11,23 @@ export const Footer = () => (
 					<button className="ft-btn">Subscribe</button>
 				</form>
 				<span className="d-block mt-2 small">
-					By subscribing, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a> and consent to receive updates.
+					By subscribing, you agree to our <a href="/terms-of-service">Terms of Service</a> and <a href="/privacy-policy">Privacy Policy</a> and consent to receive updates.
 				</span>
 			</section>
 			<section>
 				<h5>Quick Links</h5>
 				<ul className="list-unstyled">
 					<li><a href="/about">About Us</a></li>
-					<li><a href="#">FAQs</a></li>
-					<li><a href="#">Support Center</a></li>
+					<li><a href="/faqs">FAQs</a></li>
+					<li><a href="/support">Support Center</a></li>
 				</ul>
 			</section>
 			<section>
 				<h5>Follow Us</h5>
 				<ul className="list-unstyled">
-					<li><a href="#">Facebook</a></li>
+					<li><a href="/facebook">Facebook</a></li>
 					<li><a href="#">Twitter</a></li>
-					<li><a href="#">Instagram</a></li>
+					<li><a href="/instagram">Instagram</a></li>
 					<li><a href="#">LinkedIn</a></li>
 					<li><a href="#">YouTube</a></li>
 				</ul>

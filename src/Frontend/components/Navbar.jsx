@@ -51,7 +51,8 @@ export const Navbar = () => {
                     className="logo-container"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                >
+
+                >{/*/Icono-Posible.png se añadio una barra al principio porque el logo se rompia dependiendo la ruta en la que estes*/}
                     <img
                         src="/Icono-Posible.png"
                         alt="Logo Easy-Flights"
@@ -167,7 +168,7 @@ export const Navbar = () => {
                                             boxShadow:
                                                 "0 0 15px rgba(0, 211, 211, 0.8)",
                                         }}
-                                    >
+
                                         {user.avatar ? (
                                             <img
                                                 src={user.avatar}

@@ -1,0 +1,33 @@
+.term-item {
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.term-question h4 {
+  cursor: pointer;
+  padding: 1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  color: rgb(17, 79, 137);
+  transition: ease-in-out 0.5s;
+}
+
+.term-question:hover h4 {
+  transform: scale(1.1);
+  color: rgb(61, 141, 216);
+}
+
+
+.term-answer {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 1s ease-in-out;
+  padding: 0 1rem;
+}
+
+.term-answer.show {
+  max-height: 500px; 
+  opacity: 1;
+  padding: 1rem;
+}

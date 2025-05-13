@@ -21,8 +21,7 @@ const BillPage = () => {
             <div className="offer-img-container">
               <img src={offer.image_url} alt={offer.title} className="offer-img" />
             </div>
-            <div className="offer-text">
-            </div>
+
           <p><strong>Título:</strong> {offer.title}</p>
           <p><strong>Descripción:</strong> {offer.description}</p>
           <p><strong>Duración:</strong> {offer.duration}</p>

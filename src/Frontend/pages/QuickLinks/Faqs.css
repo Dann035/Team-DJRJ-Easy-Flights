@@ -1,0 +1,30 @@
+.faqs-container {
+  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
+}
+
+.faq-item {
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.faq-question h3{
+  cursor: pointer;
+  padding: 1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  color: rgb(17, 79, 137);
+  transition: ease-in-out 0.5s;
+}
+
+.faq-question:hover h3{
+    transform: scale(1.1);
+    color: rgb(61, 141, 216);
+}
+
+.faq-answer {
+  padding: 1rem;
+  margin-top: 0.5rem;
+  border-radius: 5px;
+}
