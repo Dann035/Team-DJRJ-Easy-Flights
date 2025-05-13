@@ -18,11 +18,17 @@ class Offers(db.Model):
     type_offert:Mapped[str] = mapped_column(String(120),nullable=True)
     image_url: Mapped[str] = mapped_column(Text, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc), nullable=True)
+    start_date: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc), nullable=True)
+    end_date: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc), nullable=True)
     company_id: Mapped[int] = mapped_column(ForeignKey('companies.id'), nullable=True)
     duration: Mapped[str] = mapped_column(String(120),nullable=True)
     location: Mapped[str] = mapped_column(String(120),nullable=True)
     tags: Mapped[str] = mapped_column(String(120),nullable=True)
-
+    imagedetails1: Mapped[str] = mapped_column(Text, nullable=True)
+    imagedetails2: Mapped[str] = mapped_column(Text, nullable=True)
+    imagedetails3: Mapped[str] = mapped_column(Text, nullable=True)
+    imagedetails4: Mapped[str] = mapped_column(Text, nullable=True)
+    rating: Mapped[float] = mapped_column(Float, nullable=True)
     #relations
     comments = relationship('Comments',back_populates='offert')
     company = relationship('Companies',back_populates='offert')
@@ -40,5 +46,12 @@ class Offers(db.Model):
             "type_offert": self.type_offert,
             "duration":self.duration,
             "location":self.location,
-            "tags":self.tags
+            "tags":self.tags,
+            "imagedetails1":self.imagedetails1,
+            "imagedetails2":self.imagedetails2,
+            "imagedetails3":self.imagedetails3,
+            "imagedetails4":self.imagedetails4,
+            "rating":self.rating,
+            "start_date": self.start_date,
+            "end_date": self.end_date
         }

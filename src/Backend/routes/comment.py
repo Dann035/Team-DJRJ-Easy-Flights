@@ -15,17 +15,20 @@ def create_comments():
     data= request.get_json()#extrae todos los datos del request en json
     content=data.get("content", None)#extrae contenido de data
     offer_id=data.get("offer_id", None)#extrae el id de la oferta de data
-    rating = data.get("rating")
+    rating=data.get("rating", None)#extrae la valoración de data
+    
+    created_at = data.get("created_at", None)
 
     if not content:
         return jsonify({"error": "Missing content"}), 400 #comentario no puede estar vacío
     #objeto de comentario
     comment= Comments(
-        #user_id=15,
-        created_at="a",
+        #user_id=user_id,
+        created_at=created_at,
         content=content,
         offer_id=offer_id,
-        #rating=int(rating),
+        rating=rating
+       
     )
     db.session.add(comment)
     db.session.commit()

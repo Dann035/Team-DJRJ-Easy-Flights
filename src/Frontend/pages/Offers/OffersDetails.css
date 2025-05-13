@@ -10,7 +10,7 @@
 
   }
 
-  section img{
+  #img-offer img{
     width: 0px;
     flex-grow: 1;
     object-fit: cover;
@@ -18,8 +18,7 @@
     transition: .5s ease;
   }
 
-  section img:hover{
-    cursor: crosshair;
+  #img-offer img:hover{
     width: 400px;
     opacity: 1;
     filter: contrast(120%);
@@ -124,16 +123,18 @@
     
   }
   
+  
   .sidebar {
-    background: #f1f5ff;
+    background: var(--dark-bg);
     border-radius: 0px;
     padding: 1.5rem;
-    right: 5%;
+    right: 20%;
     text-align: center;
     align-items: center;
     min-width: 280px;
-    height: 300px;
-    
+    color: #6f00ff;
+    height: 350px;
+    border-radius: 10px;
   }
   
   .sidebar h2 {
@@ -158,7 +159,7 @@
   .book-btn {
     display: inline-block;
     margin-top: 1rem;
-    background: linear-gradient(to right, #4f46e5, #6366f1);
+    background: #031d46;
     color: white;
     padding: 0.8rem 1.5rem;
     border-radius: 8px;
@@ -168,7 +169,7 @@
   }
   
   .book-btn:hover {
-    background: linear-gradient(to right, #4338ca, #4f46e5);
+    background: #2563eb;
   }
 
   .rating {
@@ -201,4 +202,62 @@
     color: #6f00ff;
     transition: color 0.3s;
   }
-  
+
+  .card-modal{
+    background: var(--dark-bg);
+  }
+
+  .button-close{
+    display: inline-block;
+    margin-top: 1rem;
+    border: none;
+    background: #ff0000;
+    color: white;
+    padding: 6px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+
+  .button-close:hover{
+    background: #fff;
+    color: red;
+  }
+
+  .button-submit {
+    display: inline-block;
+    margin-top: 1rem;
+    border: none;
+    background: #031d46;
+    color: white;
+    padding: 6px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+
+  .button-submit:hover {
+    background: #ffffff;
+    color:rgb(0, 74, 170);
+  }
+
+  .button-save {
+    display: inline-block;
+    margin-top: 1rem;
+    border: none;
+    background: #031d46;
+    color: white;
+    padding: 6px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+
+  .button-save:hover {
+    background: #ffffff;
+    color:rgb(0, 74, 170);
+  }
+   

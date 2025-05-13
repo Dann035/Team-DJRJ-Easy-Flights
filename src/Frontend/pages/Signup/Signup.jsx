@@ -6,6 +6,12 @@ import "./Signup.css";
 
 function Signup() {
     const navigate = useNavigate();
+    const [notification, setNotification] = useState({
+        show: false,
+        text: "",
+        type: "error",
+        duration: 5000
+    });
     const [showError, setShowError] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
     const [showSocialAuth, setShowSocialAuth] = useState(false);
@@ -48,12 +54,26 @@ function Signup() {
         try {
             // Eliminar confirmPassword antes de enviar al servidor
             const { confirmPassword, ...dataToSubmit } = formData;
-            await signupUser(dataToSubmit);
-            setShowSuccess(true);
-            navigate('/login');
+            const result = await signupUser(dataToSubmit);
+            if (result.status === 'OK') {
+                setNotification({
+                    show: true,
+                    text: result.message,
+                    type: "success",
+                    duration: 3000
+                });
+                setTimeout(() => navigate('/login'), 1500);
+            } else  {
+                setNotification({
+                    show: true,
+                    text: result.message,
+                    type: "error",
+                    duration: 5000
+                })
+            }
+
         } catch(err) {
             console.error(err);
-            setShowError(true);
             return;
         }
     }
@@ -244,6 +264,14 @@ function Signup() {
                         </div>
                     </div>
                 </div>
+                <NotificationModal
+                text={notification.text}
+                show={notification.show}
+                onClose={() => setNotification({...notification, show: false})}
+                type={notification.type}
+                duration={notification.duration}
+                position="top-center"
+                />
             </div>
         </>
     );

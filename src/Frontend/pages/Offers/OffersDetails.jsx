@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Calendar, MapPin, Star, StarsIcon } from "lucide-react";
 import "./OffersDetails.css"
 import Comments from "../../components/Comments/Comments";
+import { useAuth } from "../../hooks/useAuthContext";
+import useGlobalReducer from "../../hooks/useGlobalReducer";
 
 /*import { Modal } from 'bootstrap';*/
 
@@ -12,9 +14,22 @@ const url = import.meta.env.VITE_BACKEND_URL
 
 export const OffersDetails = () => {
 
+  const { store, dispatch } = useGlobalReducer();
+  const comments = store.comments;
   const { id } = useParams();
   const [offer, setOffer] = useState({})
   const [newComment, setNewComment] = useState("");
+  const [selectedRating, setsSelectedRating] = useState("");
+  //const [comments, setComments] = useState([]);
+
+  const getComments = () => {
+    fetch(`${url}/api/offers/${id}/comments`)
+      .then(res => res.json())
+      .then(data => {
+        dispatch({ type: "SET_COMMENTS", payload: data });
+      })
+      .catch(err => console.error("Error fetching comments", err));
+  };
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();
@@ -22,6 +37,7 @@ export const OffersDetails = () => {
     const payload = {
       offer_id: parseInt(id), // backend check
       content: newComment,
+      rating: selectedRating,
     };
 
     console.log("Sending comment payload:", JSON.stringify(payload, null, 2));
@@ -40,14 +56,32 @@ export const OffersDetails = () => {
       .then((data) => {
         console.log("Comment posted:", data);
         setNewComment("");
-        document.getElementById("exampleModal").classList.remove("show"); // optional: close modal manually
-        document.body.classList.remove("modal-open");                     // cleanup
-        document.querySelector(".modal-backdrop")?.remove();             // remove backdrop
+        document.getElementById("exampleModal").classList.remove("show"); 
+        document.body.classList.remove("modal-open");                     
+        setsSelectedRating("");
+        getComments();
+
+        const modalEl = document.getElementById("exampleModal");
+        if (modalEl && window.bootstrap) {
+          const modalInstance = window.bootstrap.Modal.getInstance(modalEl);
+          modalInstance?.hide();
+        }
       })
       .catch((err) => {
         console.error("Error posting comment:", err);
       });
   };
+
+  const handleRatingChange = (e) => {
+    const rating = e.target.value;
+    setsSelectedRating(rating);
+    console.log("Selected rating:", rating);
+  };
+
+
+  useEffect(() => {
+    getComments();
+  }, [id]);
 
 
   useEffect(() => {
@@ -84,6 +118,10 @@ export const OffersDetails = () => {
     return () => clearTimeout(timeout);
   }, []);
 
+  const averageRating = comments.length
+    ? (comments.reduce((sum, comment) => sum + comment.rating, 0) / comments.length).toFixed(1)
+    : null;
+
 
   return (
     <div className="container-fluid">
@@ -91,96 +129,76 @@ export const OffersDetails = () => {
         {offer ? (
           <div>
             <div className="text-center my-3">
-              <h1 >{offer.title}</h1>
+              <h1>{offer.title}</h1>
             </div>
 
-
-            <section className="object-cover w-100 h-100 imgsection" id="img-offer">
-
-              <img
-                src="https://images.unsplash.com/photo-1576397753762-206624e9a2cc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGhha29uZXxlbnwwfHwwfHx8MA%3D%3D"
-                alt="1"
-              />
-              <img
-                src="https://images.unsplash.com/photo-1583901342520-0ce87c2750a8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGhha29uZXxlbnwwfHwwfHx8MA%3D%3D"
-                alt="1"
-              />
-              <img
-                src="https://images.unsplash.com/photo-1468818438311-4bab781ab9b8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8dmlhamV8ZW58MHx8MHx8fDA%3D"
-                alt="1"
-              />
-              <img
-                src="https://images.unsplash.com/photo-1473625247510-8ceb1760943f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHZpYWplfGVufDB8fDB8fHww"
-                alt="1"
-              />
-
+            <section
+              className="object-cover w-100 h-100 imgsection"
+              id="img-offer"
+            >
+              <img src={offer.imagedetails1} alt="1" />
+              <img src={offer.imagedetails2} alt="1" />
+              <img src={offer.imagedetails3} alt="1" />
+              <img src={offer.imagedetails4} alt="1" />
             </section>
-
-            {/* <div className="d-flex align-items-center justify-content-center container-fluid" >
-                
-                  <Calendar/> <span>{offer.duration}</span>
-               
-                
-                  <Calendar/> <span>{offer.duration}</span>
-                
-              
-                  <Calendar/> <span>{offer.duration}</span>
-                
-              </div> */}
-
-            <p>
-
-
-            </p>
-
-
 
             <section className="details">
               <div className="info">
                 <div className="">
+                  <h2>Fecha de la oferta</h2>
+                  <p className="mx-4">
+                    {offer.start_date} - {offer.end_date}
+                  </p>
                   <h2>Información</h2>
                   <p className="mx-4">{offer.description}</p>
 
                   <h3>¿Qué incluye?</h3>
                   <ul className="included">
-                    <li><span className="text-success">✔</span> Transporte</li>
-                    <li><span className="text-success">✔</span> Spa </li>
-                    <li><span className="text-success">✔</span> Todo la comida incluida</li>
-                    <li><span className="text-success">✔</span> Actividades diarias</li>
+                    <li>
+                      <span className="text-success me-1">✔</span> Alojamiento
+                    </li>
+                    <li>
+                      <span className="text-success me-1">✔</span> Transporte{" "}
+                    </li>
+                    <li>
+                      <span className="text-success me-1">✔</span> Comida
+                    </li>
+                    <li>
+                      <span className="text-success me-1">✔</span> Actividades
+                      diarias
+                    </li>
                   </ul>
-                  
+
                   <h3>Tags</h3>
                   <div className="tags">
-                    <span>Rural</span>
-                    <span>Spa</span>
-                    <span>Cena</span>
+                    <span>{offer.tags}</span>
+                    <span>Viaje</span>
+                    <span>Cultura</span>
                   </div>
+
                   <Comments offer_id={id} />
                 </div>
 
-                <div className="">
-
-
+                <div>
                   <div className="sidebar">
                     <h2>{offer.price}&nbsp;€</h2>
                     <p>Por persona</p>
                     <div className="details-box">
-                      <p><Calendar />{offer.duration}</p>
+                      <p>
+                        <Calendar />
+                        {offer.duration}
+                      </p>
+                    </div>
+
+                    <a href={`/offerdetails/${id}/pago`} className="book-btn">Book Now</a>
+
+                    <div className="rating-media">
+                      <p className="text-lg mb-4">
+                        Valoración ⭐️ : <strong>{averageRating} / 5</strong>
+                      </p>
 
                     </div>
-                    <a href="#" className="book-btn">Book Now</a>
-                    <div className="rating text-center">
-                      <input defaultValue={5} name="rating" id="star5" type="radio" />
-                      <label htmlFor="star5" />
-                      <input defaultValue={4} name="rating" id="star4" type="radio" />
-                      <label htmlFor="star4" />
-                      <input defaultValue={3} name="rating" id="star3" type="radio" />
-                      <label htmlFor="star3" />
-                      <input defaultValue={2} name="rating" id="star2" type="radio" />
-                      <label htmlFor="star2" />
-                      <input defaultValue={1} name="rating" id="star1" type="radio" />
-                      <label htmlFor="star1" />
-                    </div>
+
                     {/*button trigger modal*/}
                     <button
                       type="button"
@@ -197,33 +215,118 @@ export const OffersDetails = () => {
                     </button>
 
                     {/*modal*/}
-                    <div className="modal" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div className="modal-dialog" role="document">
-                        <div className="modal-content">
+                    <div
+                      className="modal"
+                      id="exampleModal"
+                      tabIndex="-1"
+                      role="dialog"
+                      aria-labelledby="exampleModalLabel"
+                      aria-hidden="true"
+                    >
+                      <div className="modal-dialog" role="document" >
+                        <div className="modal-content card-modal">
                           <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">Nueva Reseña</h5>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <h5 className="modal-title" id="exampleModalLabel">
+                              Nueva Reseña
+                            </h5>
+                            <button
+                              type="button"
+                              className="btn-close"
+                              data-bs-dismiss="modal"
+                              aria-label="Close"
+                            ></button>
                           </div>
                           <div className="modal-body">
                             {/*modal body empieza aqui*/}
-                            <form id="commentForm" onSubmit={handleCommentSubmit}>
+                            <form
+                              id="commentForm"
+                              onSubmit={handleCommentSubmit}
+
+                            >
                               <div className="mb-3">
-                                <label htmlFor="commentText" className="form-label">Escriba su reseña aquí!</label>
+                                <label
+                                  htmlFor="commentText"
+                                  className="form-label"
+                                >
+                                  Escriba su reseña aquí!
+                                </label>
                                 <textarea
                                   className="form-control"
                                   id="commentText"
                                   rows="3"
                                   value={newComment}
-                                  onChange={(e) => setNewComment(e.target.value)}
+                                  onChange={(e) =>
+                                    setNewComment(e.target.value)
+                                  }
                                   required
                                 ></textarea>
+                                <label
+                                  htmlFor="rating"
+                                  className="form-label mt-3"
+                                >
+                                  Seleccione su puntuación:
+                                </label>
+
+                                <div className="rating text-center">
+                                  <input
+                                    defaultValue={5}
+                                    name="rating"
+                                    id="star5"
+                                    type="radio"
+                                    onChange={handleRatingChange}
+                                  />
+                                  <label htmlFor="star5" />
+                                  <input
+                                    defaultValue={4}
+                                    name="rating"
+                                    id="star4"
+                                    type="radio"
+                                    onChange={handleRatingChange}
+                                  />
+                                  <label htmlFor="star4" />
+                                  <input
+                                    defaultValue={3}
+                                    name="rating"
+                                    id="star3"
+                                    type="radio"
+                                    onChange={handleRatingChange}
+                                  />
+                                  <label htmlFor="star3" />
+                                  <input
+                                    defaultValue={2}
+                                    name="rating"
+                                    id="star2"
+                                    type="radio"
+                                    onChange={handleRatingChange}
+                                  />
+                                  <label htmlFor="star2" />
+                                  <input
+                                    defaultValue={1}
+                                    name="rating"
+                                    id="star1"
+                                    type="radio"
+                                    onChange={handleRatingChange}
+                                  />
+                                  <label htmlFor="star1" />
+                                </div>
+
                               </div>
-                              <button type="submit" className="btn btn-primary">Submit Comment</button>
+                              <button type="submit" className="button-submit" >
+                                Submit Comment
+                              </button>
                             </form>
                           </div>
                           <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary">Save changes</button>
+                            <button
+                              type="button"
+                              className="button-close"
+                              data-bs-dismiss="modal"
+                            >
+                              Close
+                            </button>
+                            <button type="button" className="button-save" onClick={() => addNewComment()}>
+                              Save changes
+                            </button>
                           </div>
                         </div>
                       </div>
@@ -231,17 +334,14 @@ export const OffersDetails = () => {
                     {/*modal end*/}
                     {/*<Comments />*/}
                   </div>
-
                 </div>
               </div>
             </section>
-
           </div>
         ) : (
           <p>Cargando detalles de la oferta...</p>
-        )
-        }
-      </div >
-    </div >
+        )}
+      </div>
+    </div>
   );
 }
