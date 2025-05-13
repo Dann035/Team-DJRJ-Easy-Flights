@@ -10,7 +10,7 @@ from datetime import datetime, timedelta
 from .password_reset import verification_codes
 
 
-UPLOAD_FOLDER = "static/avatars"  # Ajusta la ruta según tu estructura
+UPLOAD_FOLDER = "public/static/avatars"  # Ajusta la ruta según tu estructura
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 def allowed_file(filename):
@@ -89,14 +89,12 @@ def upload_avatar(user_id):
         if not user:
             return jsonify({"msg": "User not found"}), 404
 
-        # Get email from JWT
         current_user_email = get_jwt_identity()
 
-        # Compare JWT email with user email
         if user.email != current_user_email:
             return jsonify({"msg": "Access denied"}), 403
 
-        # Check if the request has the file part
+        # Verificar si el directorio de carga existe
         if 'avatar' not in request.files:
             return jsonify({"msg": "No file part"}), 400
 
@@ -105,7 +103,6 @@ def upload_avatar(user_id):
             return jsonify({"msg": "No selected file"}), 400
 
         if file and allowed_file(file.filename):
-            # Crear directorio si no existe
             os.makedirs(UPLOAD_FOLDER, exist_ok=True)
             
             # Generar nombre de archivo seguro
