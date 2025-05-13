@@ -3,9 +3,12 @@ const url = import.meta.env.VITE_BACKEND_URL
 import { useLanguage } from "../../context/LanguageContext";
 import "./Comments.css";
 import { useParams } from "react-router-dom";
+import useGlobalReducer from "../../hooks/useGlobalReducer";
 
 function Comments() {
-  const [comments, setComments] = useState([]);
+  const { store, dispatch } = useGlobalReducer();
+  const comments = store.comments;
+
   const { texts } = useLanguage();
   //GET COMMENT FROM OFFER
   const { id } = useParams();
@@ -13,60 +16,31 @@ function Comments() {
     fetch(`${url}/api/offers/${id}/comments`)
       .then(res => res.json())
       .then(data => {
-        setComments(data);
+        dispatch({ type: "SET_COMMENTS", payload: data });
       })
       .catch(err => console.error("Error fetching comments", err));
   };
-  //POST
-  const [newComment, setNewComment] = useState("");
-
-  const addNewComment = () => {
-    if (newComment.trim() === "") return;
-    fetch(`${url}/api/comments`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      credentials: "include",
-      body: JSON.stringify({
-        content: newComment,
-        offer_id: offer_id
-      })
-    })
-      .then(res => {
-        if (!res.ok) throw new Error("Failed to add comment");
-        return res.json();
-      })
-      .then(data => {
-        setNewComment(""); // vacia input
-        getComments(); // vuelve a llamar al get
-      })
-      .catch(err => {
-        console.error("Error posting comment", err);
-      });
-  };
+  
 
   //DELETE COMMENT
   const deleteComment = (id) => {
-    if (!id) {
-      console.error("Comment ID is undefined, cannot delete.");
-      return;
-    }
+    if (!id) return;
+
     fetch(`${url}/api/comments/${id}`, {
       method: "DELETE",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      /*credentials: "include"*/
+      headers: { "Content-Type": "application/json" },
     })
       .then((resp) => {
-        if (!resp.ok) {
-          throw new Error(`Failed to delete comment, status: ${resp.status}`);
-        }
-        return resp.ok;
+        if (!resp.ok) throw new Error("Failed to delete comment");
+        return resp.json();
       })
       .then(() => {
-        getComments();
+        // Refresh the comments list
+        return fetch(`${url}/api/offers/${offer_id}/comments`);
+      })
+      .then(res => res.json())
+      .then(data => {
+        dispatch({ type: "SET_COMMENTS", payload: data });
       })
       .catch((error) =>
         console.error("Error when deleting your comment:", error)
@@ -113,9 +87,9 @@ function Comments() {
                 {/* <small className="text-muted">{texts.travelBlogger}</small> */}
                 <p className="fst-italic mt-2">"{c.content}"</p>
                 {/* <small className="text-muted d-block mb-2">Comentario número {c.id}</small> */}
-                <button 
-                //onClick={()=> editComment(c.id)}
-                className="btn btn-secondary btn-sm mt-3 me-2">Editar</button>
+                <button
+                  //onClick={()=> editComment(c.id)}
+                  className="btn btn-secondary btn-sm mt-3 me-2">Editar</button>
                 <button
                   onClick={() => deleteComment(c.id)}
                   className="btn btn-danger btn-sm"
