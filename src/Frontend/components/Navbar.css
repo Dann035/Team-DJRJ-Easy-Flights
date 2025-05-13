@@ -7,7 +7,6 @@
     padding: 12px 5%;
     top: 0;
     margin-bottom: 20px;
-    z-index: 1000;
     height: var(--navbar-height);
     transition: height 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
