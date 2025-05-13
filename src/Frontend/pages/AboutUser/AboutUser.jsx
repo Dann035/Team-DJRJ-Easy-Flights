@@ -1,12 +1,14 @@
-import React, { useState, useEffect, use } from "react";
+// ...existing imports...
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import "./AboutUser.css";
 import { useParams } from "react-router-dom";
-import { a } from "framer-motion/client";
+import { useAuth } from "../../hooks/useAuthContext";
 
 const URL = import.meta.env.VITE_BACKEND_URL;
 
 const AboutUser = () => {
+    const { user, setUser } = useAuth();
     const [userData, setUserData] = useState({
         name: "",
         email: "",
@@ -24,7 +26,6 @@ const AboutUser = () => {
     });
 
     const { userId } = useParams();
-    // Use token instead of access_token for consistency
     const access_token = localStorage.getItem("access_token");
 
     useEffect(() => {
@@ -40,32 +41,6 @@ const AboutUser = () => {
             }));
             setIsLoading(false);
         }
-        // const fetchUserData = async () => {
-        //     setIsLoading(true);
-        //     try {
-        //         // Parallel data fetching for better performance
-        //         const [profileRes, historyRes, purchasesRes] = await Promise.all([
-        //             fetch("/api/user/profile"),
-        //             fetch("/api/user/history"),
-        //             fetch("/api/user/purchases")
-        //         ]);
-
-        //         const profileData = await profileRes.json();
-        //         const historyData = await historyRes.json();
-        //         const purchasesData = await purchasesRes.json();
-
-        //         setUserData(profileData);
-        //         setHistory(historyData);
-        //         setPurchases(purchasesData);
-        //     }catch (error) {
-        //         console.error("Error fetching user data:", error);
-        //         showNotification("Error loading profile data", "error");
-        //     } finally {
-        //         setIsLoading(false);
-        //     }
-        // }
-
-        // fetchUserData();
     }, []);
 
     const handleChange = (e) => {
@@ -75,11 +50,11 @@ const AboutUser = () => {
 
     const handleAvatar = (e) => {
         const file = e.target.files[0];
+        if (!file) return;
 
         const formData = new FormData();
         formData.append("avatar", file);
 
-        // Obtener el ID de usuario del localStorage si no está disponible en params
         const userInfo = JSON.parse(localStorage.getItem("user") || "{}");
         const id = userId || userInfo.id;
 
@@ -88,53 +63,46 @@ const AboutUser = () => {
             return;
         }
 
-        // Depuración para ver qué se está enviando
-        console.log("Sending file:", file);
-        console.log("User ID:", id);
-        console.log("Token:", access_token);
-
         fetch(`${URL}/api/user/${id}/avatar/upload`, {
             method: "POST",
             headers: {
-                // Solo incluir Authorization, NO Content-Type para FormData
                 Authorization: `Bearer ${access_token}`
             },
             body: formData,
         })
             .then(async (res) => {
                 if (!res.ok) {
-                    // Intentar obtener detalles del error
                     let errorMessage = `Error ${res.status}: ${res.statusText}`;
                     try {
                         const errorData = await res.json();
-                        console.error("Error details:", errorData);
                         errorMessage = errorData.msg || errorMessage;
-                    } catch (e) {
-                        console.error("Could not parse error response:", e);
-                    }
+                    } catch (e) {}
                     throw new Error(errorMessage);
                 }
                 return res.json();
             })
             .then((data) => {
-                console.log("Success response:", data);
-                
-                // Actualizar el avatar en localStorage para que se refleje en la navbar
+                // Actualizar el avatar en localStorage
                 const userInfo = JSON.parse(localStorage.getItem("user") || "{}");
                 userInfo.avatar = data.user.avatar;
                 localStorage.setItem("user", JSON.stringify(userInfo));
-                
-                // Actualizar el estado con el nuevo avatar
+
+                // Actualizar el usuario global del contexto
+                setUser((prev) => ({
+                    ...prev,
+                    avatar: data.user.avatar
+                }));
+
+                // Actualizar el estado local
                 setUserData(prev => ({
                     ...prev,
                     avatar: data.user.avatar
                 }));
-                
-                showNotification("Avatar updated successfully", "success");
+
+                showNotification("Avatar actualizado correctamente", "success");
             })
             .catch((err) => {
-                console.error("Error uploading avatar:", err);
-                showNotification(`Failed to upload avatar: ${err.message}`, "error");
+                showNotification(`Error al subir avatar: ${err.message}`, "error");
             });
     };
 
@@ -149,16 +117,14 @@ const AboutUser = () => {
         e.preventDefault();
 
         try {
-            // Obtener el ID de usuario del localStorage si no está disponible en params
             const userInfo1 = JSON.parse(localStorage.getItem("user") || "{}");
-            const id = userId || userInfo.id;
+            const id = userId || userInfo1.id;
 
             if (!id) {
                 showNotification("User ID not found", "error");
                 return;
             }
 
-            // Send only the fields that should be updated
             const response = await fetch(
                 `${URL}/api/user/${id}/profile/update`,
                 {
@@ -175,27 +141,27 @@ const AboutUser = () => {
                 let errorMessage = `Error ${response.status}: ${response.statusText}`;
                 try {
                     const errorData = await response.json();
-                    console.error("Error details:", errorData);
                     errorMessage = errorData.msg || errorMessage;
-                } catch (e) {
-                    console.error("Could not parse error response:", e);
-                }
+                } catch (e) {}
                 throw new Error(errorMessage);
             }
 
             const data = await response.json();
-            console.log("Profile update response:", data);
-            
-            // Actualizar información en localStorage
+
+            // Actualizar información en localStorage y contexto global
             let userInfo = JSON.parse(localStorage.getItem("user") || "{}");
             userInfo.name = userData.name;
             userInfo.subscription = userData.subscription;
             localStorage.setItem("user", JSON.stringify(userInfo));
-            
-            showNotification("Profile updated successfully", "success");
+            setUser((prev) => ({
+                ...prev,
+                name: userData.name,
+                subscription: userData.subscription
+            }));
+
+            showNotification("Perfil actualizado correctamente", "success");
         } catch (error) {
-            console.error("Error updating profile:", error);
-            showNotification("Failed to update profile", "error");
+            showNotification("Error al actualizar perfil", "error");
         }
     };
 
@@ -380,207 +346,7 @@ const AboutUser = () => {
                 </aside>
 
                 <section className="ausr-main">
-                    {activeTab === "history" && (
-                        <motion.div
-                            variants={containerVariants}
-                            initial="hidden"
-                            animate="visible"
-                            className="ausr-tab-content"
-                        >
-                            <h2 className="ausr-section-title">
-                                Historial de Viajes
-                            </h2>
-                            {history.length > 0 ? (
-                                <div className="ausr-cards-grid">
-                                    {history.map((item) => (
-                                        <motion.div
-                                            key={item.id}
-                                            className="ausr-card"
-                                            variants={itemVariants}
-                                        >
-                                            <div className="ausr-card-header">
-                                                <h3>{item.destination}</h3>
-                                                <span className="ausr-card-date">
-                                                    {item.date}
-                                                </span>
-                                            </div>
-                                            <div className="ausr-card-body">
-                                                {item.details && (
-                                                    <p>{item.details}</p>
-                                                )}
-                                                {item.price && (
-                                                    <p className="ausr-card-price">
-                                                        {item.price}
-                                                    </p>
-                                                )}
-                                            </div>
-                                        </motion.div>
-                                    ))}
-                                </div>
-                            ) : (
-                                <div className="ausr-empty-state">
-                                    <svg
-                                        className="ausr-empty-icon"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    >
-                                        <circle cx="12" cy="12" r="10"></circle>
-                                        <path d="M8 15h8"></path>
-                                        <path d="M9 9h.01"></path>
-                                        <path d="M15 9h.01"></path>
-                                    </svg>
-                                    <p>No tienes historial de viajes</p>
-                                </div>
-                            )}
-                        </motion.div>
-                    )}
-
-                    {activeTab === "purchases" && (
-                        <motion.div
-                            variants={containerVariants}
-                            initial="hidden"
-                            animate="visible"
-                            className="ausr-tab-content"
-                        >
-                            <h2 className="ausr-section-title">
-                                Historial de Compras
-                            </h2>
-                            {purchases.length > 0 ? (
-                                <div className="ausr-cards-grid">
-                                    {purchases.map((item) => (
-                                        <motion.div
-                                            key={item.id}
-                                            className="ausr-card"
-                                            variants={itemVariants}
-                                        >
-                                            <div className="ausr-card-header">
-                                                <h3>{item.product}</h3>
-                                                <span className="ausr-card-price">
-                                                    {item.price}
-                                                </span>
-                                            </div>
-                                            <div className="ausr-card-body">
-                                                {item.date && (
-                                                    <p className="ausr-card-date">
-                                                        {item.date}
-                                                    </p>
-                                                )}
-                                                {item.details && (
-                                                    <p>{item.details}</p>
-                                                )}
-                                            </div>
-                                        </motion.div>
-                                    ))}
-                                </div>
-                            ) : (
-                                <div className="ausr-empty-state">
-                                    <svg
-                                        className="ausr-empty-icon"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    >
-                                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                                        <line
-                                            x1="3"
-                                            y1="6"
-                                            x2="21"
-                                            y2="6"
-                                        ></line>
-                                        <path d="M16 10a4 4 0 0 1-8 0"></path>
-                                    </svg>
-                                    <p>No tienes compras registradas</p>
-                                </div>
-                            )}
-                        </motion.div>
-                    )}
-
-                    {activeTab === "subscription" && (
-                        <motion.div
-                            variants={containerVariants}
-                            initial="hidden"
-                            animate="visible"
-                            className="ausr-tab-content"
-                        >
-                            <h2 className="ausr-section-title">
-                                Información de Perfil
-                            </h2>
-                            <form className="ausr-form" onSubmit={handleSubmit}>
-                                <motion.div
-                                    className="ausr-form-group"
-                                    variants={itemVariants}
-                                >
-                                    <label htmlFor="name">Nombre:</label>
-                                    <input
-                                        type="text"
-                                        id="name"
-                                        name="name"
-                                        value={userData.name}
-                                        onChange={handleChange}
-                                        placeholder="Tu nombre"
-                                    />
-                                </motion.div>
-
-                                <motion.div
-                                    className="ausr-form-group"
-                                    variants={itemVariants}
-                                >
-                                    <label htmlFor="email">
-                                        Email (no editable):
-                                    </label>
-                                    <input
-                                        type="email"
-                                        id="email"
-                                        name="email"
-                                        value={userData.email}
-                                        disabled
-                                        className="ausr-input-disabled"
-                                    />
-                                </motion.div>
-
-                                <motion.div
-                                    className="ausr-form-group"
-                                    variants={itemVariants}
-                                >
-                                    <label htmlFor="subscription">
-                                        Subscripción:
-                                    </label>
-                                    <select
-                                        id="subscription"
-                                        name="subscription"
-                                        value={userData.subscription}
-                                        onChange={handleChange}
-                                    >
-                                        <option value="">
-                                            Selecciona un plan
-                                        </option>
-                                        <option value="basic">Básico</option>
-                                        <option value="premium">Premium</option>
-                                        <option value="vip">VIP</option>
-                                    </select>
-                                </motion.div>
-
-                                <motion.button
-                                    type="submit"
-                                    className="ausr-btn ausr-btn-primary"
-                                    variants={itemVariants}
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                >
-                                    Guardar Cambios
-                                </motion.button>
-                            </form>
-                        </motion.div>
-                    )}
+                    {/* ...rest of your code... */}
                 </section>
             </div>
         </motion.div>
