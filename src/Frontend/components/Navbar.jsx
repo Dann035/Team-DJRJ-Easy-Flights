@@ -53,7 +53,7 @@ export const Navbar = () => {
                     whileTap={{ scale: 0.95 }}
                 >
                     <img
-                        src="Icono-Posible.png"
+                        src="/Icono-Posible.png"
                         alt="Logo Easy-Flights"
                         className="img-nav navbar-brand"
                         onClick={() => navigate("/")}
