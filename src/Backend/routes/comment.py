@@ -1,6 +1,6 @@
 from flask import request, jsonify, Blueprint
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from Backend.models import db, Comments, Offers
+from src.Backend.models import db, Comments, Offers
 
 
 

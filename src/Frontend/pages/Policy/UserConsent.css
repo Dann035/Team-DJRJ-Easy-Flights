@@ -1,0 +1,42 @@
+.cookie-item {
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.cookie-question h4 {
+  cursor: pointer;
+  padding: 1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  color: rgb(17, 79, 137);
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.cookie-question:hover h4 {
+  transform: scale(1.1);
+  color: rgb(61, 141, 216);
+}
+
+.cookie-answer {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  padding: 0 1rem;
+  transition: all 0.4s ease-in-out;
+}
+
+.cookie-answer.show {
+  max-height: 500px;
+  opacity: 1;
+  padding: 1rem;
+}
+
+/* Ajustes para listas */
+.cookie-answer ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.cookie-answer li {
+  margin-bottom: 0.5rem;
+}

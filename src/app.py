@@ -5,12 +5,12 @@ import os
 from flask import Flask, request, jsonify, url_for, send_from_directory
 from flask_migrate import Migrate
 from flask_swagger import swagger
-from Backend.utils import APIException, generate_sitemap
-from Backend.models.base import db
-from Backend.models import User, Roles, Companies, Payments, Comments 
-from Backend.routes import api, admin
-from Backend.admin import setup_admin
-from Backend.commands import setup_commands
+from src.Backend.utils import APIException, generate_sitemap
+from src.Backend.models.base import db
+from src.Backend.models import User, Roles, Companies, Payments, Comments 
+from src.Backend.routes import api, admin
+from src.Backend.admin import setup_admin
+from src.Backend.commands import setup_commands
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from flask_mail import Mail
@@ -20,8 +20,8 @@ from flask_mail import Mail
 # from models import Person
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
 static_file_dir = os.path.join(os.path.dirname(
-    os.path.realpath(__file__)), '../public/')
-app = Flask(__name__)
+    os.path.realpath(__file__)), '/public/')
+app = Flask(__name__, static_folder=static_file_dir, static_url_path='')
 app.url_map.strict_slashes = False
 
 
@@ -56,7 +56,7 @@ app.config['MAIL_DEFAULT_SENDER'] = os.getenv('EMAIL_FROM', 'Easy Flights <norep
 MIGRATE = Migrate(app, db, compare_type=True)
 db.init_app(app)
 
-CORS(app, origins="*", supports_credentials=True)
+CORS(app, origins=["https://team-djrj-easy-flights-frontend.onrender.com"], supports_credentials=True)
 
 # add the admin
 setup_admin(app)
