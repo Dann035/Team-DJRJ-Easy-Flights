@@ -168,6 +168,7 @@ export const Navbar = () => {
                                             boxShadow:
                                                 "0 0 15px rgba(0, 211, 211, 0.8)",
                                         }}
+
                                         
                                         
                                          
