@@ -5,7 +5,6 @@ from flask_jwt_extended import create_access_token
 import random
 import string
 import datetime
-import bcrypt
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -16,7 +15,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-auth_bp = Blueprint('auth', __name__)
+pass_bp = Blueprint('pass', __name__)
 
 # Diccionario para almacenar temporalmente los códigos de verificación
 # En producción, esto debería almacenarse en una base de datos
@@ -53,7 +52,7 @@ def send_email(to_email, subject, body_html):
         return False
 
 # Ruta para solicitar recuperación de contraseña
-@auth_bp.route('reset-password/request', methods=['POST'])
+@pass_bp.route('reset-password/request', methods=['POST'])
 def request_password_reset():
     data = request.get_json()
     email = data.get('email')
@@ -120,7 +119,7 @@ def request_password_reset():
         return jsonify({'status': 'ERROR', 'message': 'Error al enviar el correo electrónico'}), 500
 
 # Ruta para verificar código
-@auth_bp.route('/reset-password/verify', methods=['POST'])
+@pass_bp.route('/reset-password/verify', methods=['POST'])
 def verify_reset_code():
     data = request.get_json()
     email = data.get('email')
@@ -149,45 +148,45 @@ def verify_reset_code():
     return jsonify({'status': 'OK', 'message': 'Código verificado correctamente'}), 200
 
 # Ruta para cambiar la contraseña
-@auth_bp.route('/reset-password/reset', methods=['POST'])
-def reset_password():
-    data = request.get_json()
-    email = data.get('email')
-    code = data.get('code')
-    new_password = data.get('newPassword')
+# @pass_bp.route('/reset-password/reset', methods=['POST'])
+# def reset_password():
+#     data = request.get_json()
+#     email = data.get('email')
+#     code = data.get('code')
+#     new_password = data.get('newPassword')
     
-    if not email or not code or not new_password:
-        return jsonify({'status': 'ERROR', 'message': 'Faltan datos requeridos'}), 400
+#     if not email or not code or not new_password:
+#         return jsonify({'status': 'ERROR', 'message': 'Faltan datos requeridos'}), 400
     
-    # Verificar si existe un código para este email
-    if email not in verification_codes:
-        return jsonify({'status': 'ERROR', 'message': 'Código inválido o expirado'}), 400
+#     # Verificar si existe un código para este email
+#     if email not in verification_codes:
+#         return jsonify({'status': 'ERROR', 'message': 'Código inválido o expirado'}), 400
     
-    # Obtener datos del código
-    code_data = verification_codes[email]
+#     # Obtener datos del código
+#     code_data = verification_codes[email]
     
-    # Verificar si el código ha expirado
-    if datetime.datetime.now() > code_data['expires_at']:
-        del verification_codes[email]
-        return jsonify({'status': 'ERROR', 'message': 'El código ha expirado'}), 400
+#     # Verificar si el código ha expirado
+#     if datetime.datetime.now() > code_data['expires_at']:
+#         del verification_codes[email]
+#         return jsonify({'status': 'ERROR', 'message': 'El código ha expirado'}), 400
     
-    # Verificar si el código es correcto
-    if code != code_data['code']:
-        return jsonify({'status': 'ERROR', 'message': 'Código incorrecto'}), 400
+#     # Verificar si el código es correcto
+#     if code != code_data['code']:
+#         return jsonify({'status': 'ERROR', 'message': 'Código incorrecto'}), 400
     
-    # Buscar al usuario en la base de datos
-    user = User.query.filter_by(email=email).first()
-    if not user:
-        return jsonify({'status': 'ERROR', 'message': 'Usuario no encontrado'}), 404
+#     # Buscar al usuario en la base de datos
+#     user = User.query.filter_by(email=email).first()
+#     if not user:
+#         return jsonify({'status': 'ERROR', 'message': 'Usuario no encontrado'}), 404
     
-    # Actualizar la contraseña
-    hashed_password = bcrypt.hashpw(new_password.encode('utf-8'), bcrypt.gensalt())
-    user.password = hashed_password.decode('utf-8')
+#     # Actualizar la contraseña
+#     hashed_password = bcrypt.hashpw(new_password.encode('utf-8'), bcrypt.gensalt())
+#     user.password = hashed_password.decode('utf-8')
     
-    # Guardar cambios en la base de datos
-    db.session.commit()
+#     # Guardar cambios en la base de datos
+#     db.session.commit()
     
-    # Eliminar el código de verificación
-    del verification_codes[email]
+#     # Eliminar el código de verificación
+#     del verification_codes[email]
     
-    return jsonify({'status': 'OK', 'message': 'Contraseña actualizada correctamente'}), 200
+#     return jsonify({'status': 'OK', 'message': 'Contraseña actualizada correctamente'}), 200

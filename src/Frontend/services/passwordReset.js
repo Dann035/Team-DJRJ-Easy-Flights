@@ -71,7 +71,7 @@ export async function resetPassword(email, code, newPassword) {
     
     try {
         // Usar PATCH para actualizar solo la contraseña
-        const response = await fetch(`${URL}/api/users/password`, {
+        const response = await fetch(`${URL}/api/user/password`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
