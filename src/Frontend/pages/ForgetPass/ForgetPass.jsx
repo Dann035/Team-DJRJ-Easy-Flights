@@ -339,14 +339,18 @@ function ForgetPass() {
                                 onChange={(e) => setPassword({...password, newPassword: e.target.value})}
                                 required
                             />
-                            <button
-                                type="button"
-                                className="password-toggle"
-                                onClick={togglePasswordVisibility}
-                                title={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+                            <i
+                                className={`password-toggle fa-solid ${showConfirmPassword ? "fa-eye-slash" : "fa-eye"}`} 
+                                onClick={toggleConfirmPasswordVisibility}
+                                title={showConfirmPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
                             >
-                                {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
-                            </button>
+                            </i>
+                            {password.confirmPassword && (
+                                <i 
+                                    className={`password-validation-icon fa-solid ${passwordsMatch ? "fa-check" : "fa-times"}`}
+                                    title={passwordsMatch ? "Las contraseñas coinciden" : "Las contraseñas no coinciden"}
+                                ></i>
+                            )}
                         </motion.label>
 
                         <motion.label 
