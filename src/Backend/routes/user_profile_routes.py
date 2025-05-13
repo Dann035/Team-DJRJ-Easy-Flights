@@ -65,7 +65,7 @@ def edit_profile():
         return jsonify({"msg": "Error al actualizar perfil", "error": str(e)}), 500
 
 # 🌐 Obtener URL pública del perfil del usuario esto seria para poder compartir el enlace y 
-#  a futuro poder crear una comunidad es decir que puedan compartir su perfil para qu epuedan ver una informacion de ellos mismos
+#  a futuro poder crear una comunidad es decir que puedan compartir su perfil para que puedan ver una informacion de ellos mismos
 @profile_bp.route('/profile-url', methods=['GET'])
 @jwt_required()
 def get_profile_url():

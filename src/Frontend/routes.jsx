@@ -27,6 +27,7 @@ import ProfilePage from "./components/Profilepage/ProfilePage.jsx";
 import PaymentPage from "./pages/PaymentPage/PaymentPage.jsx";
 import BillPage from "./pages/PaymentPage/BillPage.jsx";
 import AboutUser from "./pages/AboutUser/AboutUser.jsx";
+import ForgetPass from "./pages/ForgetPass/ForgetPass.jsx";
 
 
 export const router = createBrowserRouter(
@@ -51,6 +52,8 @@ export const router = createBrowserRouter(
         <Route path="/cookies-policy" element={<CookiesPolicy />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/about-user/:userId" element={<AboutUser />} />
+        <Route path="/forgotPass" element={<ForgetPass />} />
+
       </Route>
     ),
     {

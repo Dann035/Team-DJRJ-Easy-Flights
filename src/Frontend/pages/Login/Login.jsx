@@ -61,7 +61,13 @@ function Login() {
             const data = await res.json();
             
             if (!data.token) {
-                throw new Error("Error al iniciar sesión");
+                setNotification({
+                show: true,
+                text: data.message,
+                type: "error",
+                duration: 3000
+                });
+                return;
             }
             
             localStorage.setItem("access_token", data.token);
