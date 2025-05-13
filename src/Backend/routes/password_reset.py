@@ -10,6 +10,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import os
 from dotenv import load_dotenv
+from flask_mail import Mail, Message, current_app
 
 # Cargar variables de entorno
 load_dotenv()
@@ -24,28 +25,14 @@ verification_codes = {}
 # Función para enviar correo electrónico
 def send_email(to_email, subject, body_html):
     try:
-        # Configuración de correo (obtener de variables de entorno)
-        email_user = os.getenv('EMAIL_USER', 'tu_correo@gmail.com')
-        email_password = os.getenv('EMAIL_PASSWORD', 'tu_password_aplicacion')
-        email_from = os.getenv('EMAIL_FROM', 'Easy Flights <noreply@easyflights.com>')
-        
-        # Crear mensaje
-        msg = MIMEMultipart('alternative')
-        msg['Subject'] = subject
-        msg['From'] = email_from
-        msg['To'] = to_email
-        
-        # Agregar contenido HTML
-        html_part = MIMEText(body_html, 'html')
-        msg.attach(html_part)
-        
-        # Enviar correo
-        server = smtplib.SMTP('smtp.gmail.com', 587)
-        server.starttls()
-        server.login(email_user, email_password)
-        server.send_message(msg)
-        server.quit()
-        
+        mail = Mail(current_app)
+        msg = Message(
+            subject=subject,
+            recipients=[to_email],
+            html=body_html,
+            sender=current_app.config.get('MAIL_DEFAULT_SENDER')
+        )
+        mail.send(msg)
         return True
     except Exception as e:
         print(f"Error al enviar correo: {e}")
@@ -148,45 +135,45 @@ def verify_reset_code():
     return jsonify({'status': 'OK', 'message': 'Código verificado correctamente'}), 200
 
 # Ruta para cambiar la contraseña
-# @pass_bp.route('/reset-password/reset', methods=['POST'])
-# def reset_password():
-#     data = request.get_json()
-#     email = data.get('email')
-#     code = data.get('code')
-#     new_password = data.get('newPassword')
+@pass_bp.route('/reset-password/reset', methods=['POST'])
+def reset_password():
+    data = request.get_json()
+    email = data.get('email')
+    code = data.get('code')
+    new_password = data.get('newPassword')
     
-#     if not email or not code or not new_password:
-#         return jsonify({'status': 'ERROR', 'message': 'Faltan datos requeridos'}), 400
+    if not email or not code or not new_password:
+        return jsonify({'status': 'ERROR', 'message': 'Faltan datos requeridos'}), 400
     
-#     # Verificar si existe un código para este email
-#     if email not in verification_codes:
-#         return jsonify({'status': 'ERROR', 'message': 'Código inválido o expirado'}), 400
+    # Verificar si existe un código para este email
+    if email not in verification_codes:
+        return jsonify({'status': 'ERROR', 'message': 'Código inválido o expirado'}), 400
     
-#     # Obtener datos del código
-#     code_data = verification_codes[email]
+    # Obtener datos del código
+    code_data = verification_codes[email]
     
-#     # Verificar si el código ha expirado
-#     if datetime.datetime.now() > code_data['expires_at']:
-#         del verification_codes[email]
-#         return jsonify({'status': 'ERROR', 'message': 'El código ha expirado'}), 400
+    # Verificar si el código ha expirado
+    if datetime.datetime.now() > code_data['expires_at']:
+        del verification_codes[email]
+        return jsonify({'status': 'ERROR', 'message': 'El código ha expirado'}), 400
     
-#     # Verificar si el código es correcto
-#     if code != code_data['code']:
-#         return jsonify({'status': 'ERROR', 'message': 'Código incorrecto'}), 400
+    # Verificar si el código es correcto
+    if code != code_data['code']:
+        return jsonify({'status': 'ERROR', 'message': 'Código incorrecto'}), 400
     
-#     # Buscar al usuario en la base de datos
-#     user = User.query.filter_by(email=email).first()
-#     if not user:
-#         return jsonify({'status': 'ERROR', 'message': 'Usuario no encontrado'}), 404
+    # Buscar al usuario en la base de datos
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        return jsonify({'status': 'ERROR', 'message': 'Usuario no encontrado'}), 404
     
-#     # Actualizar la contraseña
-#     hashed_password = bcrypt.hashpw(new_password.encode('utf-8'), bcrypt.gensalt())
-#     user.password = hashed_password.decode('utf-8')
+    # Actualizar la contraseña
+    hashed_password = bcrypt.hashpw(new_password.encode('utf-8'), bcrypt.gensalt())
+    user.password = hashed_password.decode('utf-8')
     
-#     # Guardar cambios en la base de datos
-#     db.session.commit()
+    # Guardar cambios en la base de datos
+    db.session.commit()
     
-#     # Eliminar el código de verificación
-#     del verification_codes[email]
+    # Eliminar el código de verificación
+    del verification_codes[email]
     
-#     return jsonify({'status': 'OK', 'message': 'Contraseña actualizada correctamente'}), 200
+    return jsonify({'status': 'OK', 'message': 'Contraseña actualizada correctamente'}), 200

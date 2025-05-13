@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, use } from "react";
 import { motion } from "framer-motion";
 import "./AboutUser.css";
 import { useParams } from "react-router-dom";
+import { a } from "framer-motion/client";
 
 const URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -23,7 +24,8 @@ const AboutUser = () => {
     });
 
     const { userId } = useParams();
-    const accessToken = localStorage.getItem("access_token");
+    // Use token instead of access_token for consistency
+    const access_token = localStorage.getItem("access_token");
 
     useEffect(() => {
         const userLS = localStorage.getItem("user");
@@ -73,56 +75,66 @@ const AboutUser = () => {
 
     const handleAvatar = (e) => {
         const file = e.target.files[0];
-        if (!file) return;
-
-        const validTypes = ["image/jpeg", "image/png", "image/gif"];
-        if (!validTypes.includes(file.type)) {
-            showNotification(
-                "Please select a valid image file (JPEG, PNG, GIF)",
-                "error"
-            );
-            return;
-        }
-
-        if (file.size > 5 * 1024 * 1024) {
-            showNotification("Image size should be less than 5MB", "error");
-            return;
-        }
-
-        // Vista previa con FileReader
-        const reader = new FileReader();
-        reader.onload = () => {
-            setUserData((prev) => ({
-                ...prev,
-                avatarPreview: reader.result,
-            }));
-        };
-        reader.readAsDataURL(file);
 
         const formData = new FormData();
         formData.append("avatar", file);
 
-        fetch(`${URL}/api/user/${userId}/avatar/upload`, {
-            method: "PATCH",
+        // Obtener el ID de usuario del localStorage si no está disponible en params
+        const userInfo = JSON.parse(localStorage.getItem("user") || "{}");
+        const id = userId || userInfo.id;
+
+        if (!id) {
+            showNotification("User ID not found", "error");
+            return;
+        }
+
+        // Depuración para ver qué se está enviando
+        console.log("Sending file:", file);
+        console.log("User ID:", id);
+        console.log("Token:", access_token);
+
+        fetch(`${URL}/api/user/${id}/avatar/upload`, {
+            method: "POST",
             headers: {
-                Authorization: `Bearer ${accessToken}`,
+                // Solo incluir Authorization, NO Content-Type para FormData
+                Authorization: `Bearer ${access_token}`
             },
             body: formData,
         })
             .then(async (res) => {
                 if (!res.ok) {
-                    const errorData = await res.json().catch(() => ({}));
-                    console.error("Error details:", errorData);
-                    throw new Error("Failed to upload avatar");
+                    // Intentar obtener detalles del error
+                    let errorMessage = `Error ${res.status}: ${res.statusText}`;
+                    try {
+                        const errorData = await res.json();
+                        console.error("Error details:", errorData);
+                        errorMessage = errorData.msg || errorMessage;
+                    } catch (e) {
+                        console.error("Could not parse error response:", e);
+                    }
+                    throw new Error(errorMessage);
                 }
                 return res.json();
             })
-            .then(() => {
+            .then((data) => {
+                console.log("Success response:", data);
+                
+                // Actualizar el avatar en localStorage para que se refleje en la navbar
+                const userInfo = JSON.parse(localStorage.getItem("user") || "{}");
+                userInfo.avatar = data.user.avatar;
+                localStorage.setItem("user", JSON.stringify(userInfo));
+                
+                // Actualizar el estado con el nuevo avatar
+                setUserData(prev => ({
+                    ...prev,
+                    avatar: data.user.avatar
+                }));
+                
                 showNotification("Avatar updated successfully", "success");
             })
             .catch((err) => {
-                console.error(err);
-                showNotification("Failed to upload avatar", "error");
+                console.error("Error uploading avatar:", err);
+                showNotification(`Failed to upload avatar: ${err.message}`, "error");
             });
     };
 
@@ -137,23 +149,49 @@ const AboutUser = () => {
         e.preventDefault();
 
         try {
+            // Obtener el ID de usuario del localStorage si no está disponible en params
+            const userInfo1 = JSON.parse(localStorage.getItem("user") || "{}");
+            const id = userId || userInfo.id;
+
+            if (!id) {
+                showNotification("User ID not found", "error");
+                return;
+            }
+
             // Send only the fields that should be updated
             const response = await fetch(
-                `${URL}/api/user/${userId}/profile/update`,
+                `${URL}/api/user/${id}/profile/update`,
                 {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
-                        Authorization: `Bearer ${accessToken}`,
+                        'Authorization': `Bearer ${access_token}`,
                     },
                     body: JSON.stringify(userData),
                 }
             );
 
             if (!response.ok) {
-                throw new Error("Failed to update profile");
+                let errorMessage = `Error ${response.status}: ${response.statusText}`;
+                try {
+                    const errorData = await response.json();
+                    console.error("Error details:", errorData);
+                    errorMessage = errorData.msg || errorMessage;
+                } catch (e) {
+                    console.error("Could not parse error response:", e);
+                }
+                throw new Error(errorMessage);
             }
 
+            const data = await response.json();
+            console.log("Profile update response:", data);
+            
+            // Actualizar información en localStorage
+            let userInfo = JSON.parse(localStorage.getItem("user") || "{}");
+            userInfo.name = userData.name;
+            userInfo.subscription = userData.subscription;
+            localStorage.setItem("user", JSON.stringify(userInfo));
+            
             showNotification("Profile updated successfully", "success");
         } catch (error) {
             console.error("Error updating profile:", error);

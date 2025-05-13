@@ -13,6 +13,8 @@ from Backend.admin import setup_admin
 from Backend.commands import setup_commands
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
+from flask_mail import Mail
+
 
 
 # from models import Person
@@ -41,6 +43,15 @@ else:
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = 'static/avatars'
 app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg'}
+
+
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = os.getenv('EMAIL_USER', 'landadlh603@gmail.com')
+app.config['MAIL_PASSWORD'] = os.getenv('EMAIL_PASSWORD', 'shtr kbgw jxsj emtq')
+app.config['MAIL_DEFAULT_SENDER'] = os.getenv('EMAIL_FROM', 'Easy Flights <noreply@easyflights.com>')
+
 
 MIGRATE = Migrate(app, db, compare_type=True)
 db.init_app(app)

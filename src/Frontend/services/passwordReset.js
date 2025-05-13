@@ -10,25 +10,44 @@ const isDevelopment = import.meta.env.DEV || import.meta.env.MODE === 'developme
 /**
  * Envía un correo electrónico con un código de verificación para recuperar la contraseña
  * @param {string} email - Correo electrónico del usuario
- * @returns {Promise} - Promesa que resuelve si el correo fue enviado correctamente
+ * @returns {Promise}
  */
 export async function sendVerificationEmail(email) {
-    // Siempre usar la implementación simulada para el envío de correos
-    return sendVerificationEmailMock(email);
+    if (isDevelopment) {
+        return sendVerificationEmailMock(email);
+    }
+    try {
+        const response = await fetch(`${URL}/api/reset-password/request`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message || 'Error al enviar el correo');
+        }
+
+        return data;
+    } catch (error) {
+        console.error('Error en sendVerificationEmail:', error);
+        throw error;
+    }
 }
 
 /**
  * Verifica el código enviado al correo electrónico
  * @param {string} email - Correo electrónico del usuario
  * @param {string} code - Código de verificación
- * @returns {Promise} - Promesa que resuelve si el código es válido
+ * @returns {Promise}
  */
 export async function verifyCode(email, code) {
-    // Si estamos en desarrollo, usar la implementación simulada
     if (isDevelopment) {
         return verifyCodeMock(email, code);
     }
-    
     try {
         const response = await fetch(`${URL}/api/reset-password/verify`, {
             method: 'POST',
@@ -54,32 +73,28 @@ export async function verifyCode(email, code) {
 /**
  * Restablece la contraseña del usuario
  * @param {string} email - Correo electrónico del usuario
- * @param {string} code - Código de verificación (para validación)
+ * @param {string} code - Código de verificación
  * @param {string} newPassword - Nueva contraseña
- * @returns {Promise} - Promesa que resuelve si la contraseña fue cambiada correctamente
+ * @returns {Promise}
  */
 export async function resetPassword(email, code, newPassword) {
-    // Si estamos en desarrollo, verificar el código primero
     if (isDevelopment) {
         try {
-            // Verificar el código antes de cambiar la contraseña
             await verifyCodeMock(email, code);
         } catch (error) {
             throw new Error('Código de verificación inválido');
         }
     }
-    
     try {
-        // Usar PATCH para actualizar solo la contraseña
-        const response = await fetch(`${URL}/api/user/password`, {
-            method: 'PATCH',
+        const response = await fetch(`${URL}/api/reset-password/reset`, {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({ 
                 email, 
-                newPassword,
-                verificationCode: code // Incluir el código para verificación en el backend
+                code, // El backend espera 'code'
+                newPassword // El backend espera 'newPassword'
             })
         });
 
@@ -89,7 +104,6 @@ export async function resetPassword(email, code, newPassword) {
             throw new Error(data.message || 'Error al cambiar la contraseña');
         }
 
-        // Limpiar el código de verificación después de un cambio exitoso
         if (isDevelopment) {
             verificationCodes.delete(email);
         }
@@ -103,52 +117,26 @@ export async function resetPassword(email, code, newPassword) {
 
 // Implementaciones simuladas para desarrollo
 
-/**
- * Versión simulada de envío de correo con código de verificación
- * @param {string} email - Correo electrónico del usuario
- * @returns {Promise} - Promesa simulada
- */
 async function sendVerificationEmailMock(email) {
-    // Generar código aleatorio de 6 dígitos
     const code = Math.floor(100000 + Math.random() * 900000).toString();
-    
-    // Almacenar código para verificación posterior
     verificationCodes.set(email, code);
-    
     console.log(`[DESARROLLO] Código de verificación para ${email}: ${code}`);
-    
-    // Simular delay de red
     await new Promise(resolve => setTimeout(resolve, 500));
-    
-    // Simular respuesta exitosa
     return { 
         status: 'OK',
         message: "Correo enviado correctamente (simulado)" 
     };
 }
 
-/**
- * Versión simulada de verificación de código
- * @param {string} email - Correo electrónico del usuario
- * @param {string} code - Código de verificación
- * @returns {Promise} - Promesa simulada
- */
 async function verifyCodeMock(email, code) {
-    // Simular delay de red
     await new Promise(resolve => setTimeout(resolve, 500));
-    
-    // Verificar si el código es correcto
     const storedCode = verificationCodes.get(email);
-    
     if (!storedCode) {
         throw new Error('No se ha solicitado un código para este correo');
     }
-    
     if (storedCode !== code) {
         throw new Error('Código de verificación inválido');
     }
-    
-    // Simular respuesta exitosa
     return { 
         status: 'OK',
         message: "Código verificado correctamente"

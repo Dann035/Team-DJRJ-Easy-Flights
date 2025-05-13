@@ -105,14 +105,14 @@ def login():
     try:
         data = request.get_json()
         
-        # Validación básica
         if not data.get('email') or not data.get('password'):
             return jsonify({'message': 'Email y contraseña son requeridos'}), 400
         
-        # Buscar usuario
-        
         user = User.query.filter_by(email=data['email']).first()
         
+        user.is_active = True
+        db.session.commit()
+
         if not user:
             return jsonify({'message': 'Usuario no encontrado'}), 404
         
@@ -122,9 +122,8 @@ def login():
         current_user_role = None
         if user.roles and len(user.roles) > 0:
             current_user_role = user.roles[0] # Si tiene varios roles, toma el primero
-            
 
-
+        
         # Generar token JWT con los roles
         roles_list = []
         for role in user.roles:
@@ -135,7 +134,8 @@ def login():
         token = create_access_token(identity=user.email, expires_delta=False, additional_claims={
             'exp': datetime.utcnow() + timedelta(days=1),
             'iat': datetime.utcnow(),
-            'sub': user.id,
+            'user': user.serialize(),
+            'user_id': user.id,
             'roles': roles_list
         })
         
@@ -146,6 +146,28 @@ def login():
         })
     except Exception as e:
         return jsonify({"msg": "Error login", "Error": str(e)}), 400
+    
+@auth_bp.route('/logout', methods=['POST'])
+@jwt_required()
+def logout():
+    try: 
+        jwt_data = get_jwt()
+        jwt_user = jwt_data.get('user')
+        current_user = jwt_user.get('email')
+
+        if not current_user:
+            return jsonify({"msg": "Missing user"}), 400
+        
+        user = User.query.filter_by(email=current_user).first()
+        if not user:
+            return jsonify({"msg": "User not found"}), 404
+        
+        user.is_active = False
+        db.session.commit()
+        
+        return jsonify({"msg": "Logout successful"}), 200
+    except Exception as e:
+        return jsonify({"msg": "Error logging out", "Error": str(e)}), 400
 
 @auth_bp.route('/auth/me', methods=['POST'])
 @jwt_required()

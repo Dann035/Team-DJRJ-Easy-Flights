@@ -296,7 +296,10 @@ function ForgetPass() {
                         <motion.div variants={fadeInUp} className="actions">
                             <button 
                                 type="button" 
-                                onClick={() => setStep(1)} 
+                                onClick={() => {
+                                    setStep(1);
+                                    setVerificationCode("");
+                                }} 
                                 className="btn-secondary"
                             >
                                 Volver
@@ -375,7 +378,10 @@ function ForgetPass() {
                         <motion.div variants={fadeInUp} className="actions">
                             <button 
                                 type="button" 
-                                onClick={() => setStep(2)} 
+                                onClick={() => {
+                                    setStep(2);
+                                    setVerificationCode("");
+                                }} 
                                 className="btn-secondary"
                             >
                                 Volver
