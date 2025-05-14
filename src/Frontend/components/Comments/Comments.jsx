@@ -76,7 +76,7 @@ function Comments() {
               {c.user_avatar ? (
                 <img
                   className="imagen-avatar"
-                  src={`${url}${c.user_avatar}`}
+                  src={`${c.user_avatar}`}
                   alt={c.user_name || "Usuario"}
                   style={{
                     height: "35px",
