@@ -33,6 +33,7 @@ import Instagram from "./pages/FollowUs/Instagram.jsx";
 import Facebook from "./pages/FollowUs/Facebook.jsx";
 import TravelQuiz from "./pages/Feeatures/TravelQuiz.jsx";
 import ForgetPass from "./pages/ForgetPass/ForgetPass.jsx";
+import Comments from "./components/Comments/Comments.jsx";
 
 
 
@@ -52,6 +53,7 @@ export const router = createBrowserRouter(
         <Route path="/tools" element={<Tools />} />
         <Route path="/addoffer" element={<AddOffers/>} />
         <Route path="/offerdetails/:id" element={<OffersDetails/>}/>
+        <Route path="/comments/:id1" element={<Comments/>}/>
         <Route path="/offerslist" element={<OffersList/>}/>
         <Route path="/offerdetails/:id/pago" element={<PaymentPage />} /> 
         <Route path="/bill/:id/:paymentId" element={<BillPage />} />       
