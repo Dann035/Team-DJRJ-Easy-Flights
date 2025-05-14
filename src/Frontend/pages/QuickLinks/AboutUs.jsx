@@ -73,7 +73,7 @@ const AboutUs = () => {
       </header>
 
       <section className="main-image">
-        <img src="/logo-easy-flights.webp" alt="Equipo EasyFlights" />
+        <img src="Icono-Posible.png" alt="Equipo EasyFlights" />
       </section>
 
       <section className="container">

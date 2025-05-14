@@ -1,198 +1,19 @@
-/*.payment-container {
-  max-width: 600px;
-  margin: 60px auto;
-  padding: 30px;
-  background-color: #ffffff;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-}
-
-.payment-container h2 {
-  text-align: center;
-  margin-bottom: 25px;
-  color: #4a90e2;
-}
-
-.payment-form .form-group {
-  margin-bottom: 15px;
-}
-
-.payment-form label {
-  font-weight: bold;
-  margin-bottom: 5px;
-  color: #555;
-}
-
-.payment-form input {
-  font-size: 16px;
-  padding: 10px;
-}
-
-.payment-methods {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
-}
-
-.payment-icon {
-  font-size: 30px;
-  padding: 10px;
-  border-radius: 8px;
-  border: 2px solid #ddd;
-  transition: 0.3s;
-  cursor: pointer;
-  text-align: center;
-  color: #333;
-}
-
-.payment-icon:hover {
-  background-color: #f5f5f5;
-  border-color: #4a90e2;
-}
-
-.payment-icon i {
-  font-size: 24px;
-}
-
-.error-text {
-  color: rgb(201, 37, 37);
-  font-size: 0.9em;
-  margin-top: 5px;
-}*/
-
-
-/*
-.payment-container {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
-  text-align: center;
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-.payment-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  font-size: 16px;
-  color: #333;
-  margin-bottom: 8px;
-}
-
-.form-control {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #f9f9f9;
-  box-sizing: border-box;
-}
-
-.form-control:focus {
-  outline: none;
-  border-color: #4e9bdf;
-  background-color: #fff;
-}
-
-.payment-methods {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  margin-bottom: 20px;
-}
-
-.payment-method {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  width: 100%;
-  max-width: 120px;
-  padding: 10px;
-  cursor: pointer;
-  transition: border-color 0.3s;
-}
-
-.payment-method input {
-  display: none;
-}
-
-.payment-method label {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  text-align: center;
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.payment-method label i {
-  font-size: 24px;
-  margin-bottom: 5px;
-}
-
-.payment-method input:checked + label {
-  border-color: #4e9bdf;
-  background-color: #e0f3fe;
-}
-
-.payment-method:hover label {
-  background-color: #f4f4f4;
-}
-
-.error-text {
-  color: red;
-  font-size: 14px;
-  margin-top: 5px;
-}
-
-button {
-  padding: 15px;
-  font-size: 16px;
-  background-color: #4e9bdf;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #2c7fbb;
-}
-
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}*/
-
 .payment-container {
   max-width: 500px;
-  margin: 0 auto;
+  margin: 40px auto;
   padding: 20px;
-  background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  color: black;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  color: white;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(29, 233, 248, 0.03) 0%, transparent 20%),
+    radial-gradient(circle at 90% 80%, rgba(54, 74, 255, 0.03) 0%, transparent 20%);
 }
 
+.payment-container h2{
+  color: rgba(22, 226, 226, 0.808);
+}
 .payment-form {
   display: flex;
   flex-direction: column;
@@ -215,7 +36,7 @@ button:disabled {
 }
 
 .error-text {
-  color: red;
+  color: rgb(255, 0, 0);
   font-size: 12px;
   margin-top: 5px;
 }
@@ -242,27 +63,39 @@ button:disabled {
   cursor: pointer;
   border-radius: 8px;
   transition: background-color 0.3s;
+  background-color: rgba(74, 155, 155, 0.795);
 }
 
 .payment-method input:checked + label {
-  background-color: #f0f8ff;
+  background-color: #ffffff;
 }
 
 .payment-method label i {
   font-size: 24px;
   margin-right: 8px;
+  color: #090a0f;
 }
 
-button {
+.processingpayment {
   padding: 10px;
-  background-color: #007bff;
+  background-color: #0a68cc00;
   color: #fff;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
+ 
   transition: background-color 0.3s;
 }
 
-button:hover {
-  background-color: #0056b3;
+.processingpayment:hover {
+  background-color: #00b35fe5;
+}
+
+.cancelbutton{
+  color: #fff;
+  background-color: rgba(205, 50, 50, 0);
+  transition: background-color 0.3s;
+}
+.cancelbutton:hover{
+  background-color: rgb(132, 34, 34)
+  ;
 }

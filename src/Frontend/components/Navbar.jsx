@@ -51,7 +51,8 @@ export const Navbar = () => {
                     className="logo-container"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                >
+
+                >{/*/Icono-Posible.png se añadio una barra al principio porque el logo se rompia dependiendo la ruta en la que estes*/}
                     <img
                         src="/Icono-Posible.png"
                         alt="Logo Easy-Flights"
