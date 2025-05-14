@@ -1,13 +1,13 @@
 
 .about-container {
-    background-color: var(--clr-black) !important;
+    background-color: transparent;
     font-family: Arial, sans-serif;
     text-align: center;
     padding-bottom: 40px;
   }
   
   .about-header {
-    background-color: var(--clr-black) !important;
+    background-color:transparent;
     color: white;
     padding: 20px 0;
   }
@@ -25,6 +25,7 @@
   }
   
   .intro {
+    background-color: transparent;
     max-width: 700px;
     margin: 20px auto;
     padding: 0 20px;
@@ -63,7 +64,7 @@
   }
   
   .flip-card-front-au, .flip-card-back-au {
-    background-color: var(--clr-black) !important;
+    background-color: transparent;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -89,7 +90,7 @@
   }
   
   .flip-card-back-au {
-    background-color: var(--clr-black) !important;
+    background-color:transparent;
     transform: rotateY(180deg);
   }
   
@@ -101,22 +102,14 @@
   }
   
   .flip-card-back-au a {
-    color: #007BFF;
     text-decoration: none;
     margin: 0 5px;
   }
   
 
-  h3{
-    color: #ffffff;
-  }
-
-  
-
 .diagram-section {
-  background-color: var(--clr-black) !important;
+  background-color: transparent;
   padding: 40px 20px;
-  background-color: #1a1a1a;
 }
 
 .diagram-grid {
@@ -125,16 +118,18 @@
   gap: 20px;
   max-width: 1000px;
   margin: auto;
+  background-color: transparent;
 }
 
 .diagram-card {
-  background-color: #2a2a2a;
+  background-color:transparent;
   border-left: 6px solid #00bfff46;
   border-radius: 10px;
   padding: 20px;
   color: white;
   box-shadow: 0 0 8px rgba(0, 191, 255, 0.4);
   transition: transform 0.3s ease;
+  margin-bottom: 25px;
 }
 
 .diagram-card:hover {
@@ -142,6 +137,6 @@
 }
 
 .diagram-card h3 {
-  color: #ffffff;
-  margin-bottom: 10px;
+
+
 }
