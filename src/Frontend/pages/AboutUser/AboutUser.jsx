@@ -49,58 +49,58 @@ const AboutUser = () => {
     }, []);
 
     // Función para obtener el historial de vuelos
-    const fetchUserFlights = async (id) => {
-        try {
-            // Verificar que tenemos un ID de usuario
-            const userId = id || user?.id;
-            if (!userId) return;
+    // const fetchUserFlights = async (id) => {
+    //     try {
+    //         // Verificar que tenemos un ID de usuario
+    //         const userId = id || user?.id;
+    //         if (!userId) return;
 
-            const response = await fetch(`${URL}/api/user/${userId}/flights`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${access_token}`,
-                },
-            });
+    //         const response = await fetch(`${URL}/api/user/${userId}/flights`, {
+    //             method: "GET",
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //                 Authorization: `Bearer ${access_token}`,
+    //             },
+    //         });
 
-            if (!response.ok) {
-                throw new Error(`Error ${response.status}: ${response.statusText}`);
-            }
+    //         if (!response.ok) {
+    //             throw new Error(`Error ${response.status}: ${response.statusText}`);
+    //         }
 
-            const data = await response.json();
-            setHistory(data.flights || []);
-        } catch (error) {
-            console.error("Error fetching flight history:", error);
-            showNotification("Error al cargar historial de vuelos", "error");
-        }
-    };
+    //         const data = await response.json();
+    //         setHistory(data.flights || []);
+    //     } catch (error) {
+    //         console.error("Error fetching flight history:", error);
+    //         showNotification("Error al cargar historial de vuelos", "error");
+    //     }
+    // };
 
-    // Función para obtener las compras del usuario
-    const fetchUserPurchases = async (id) => {
-        try {
-            // Verificar que tenemos un ID de usuario
-            const userId = id || user?.id;
-            if (!userId) return;
+    // // Función para obtener las compras del usuario
+    // const fetchUserPurchases = async (id) => {
+    //     try {
+    //         // Verificar que tenemos un ID de usuario
+    //         const userId = id || user?.id;
+    //         if (!userId) return;
 
-            const response = await fetch(`${URL}/api/user/${userId}/purchases`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${access_token}`,
-                },
-            });
+    //         const response = await fetch(`${URL}/api/user/${userId}/purchases`, {
+    //             method: "GET",
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //                 Authorization: `Bearer ${access_token}`,
+    //             },
+    //         });
 
-            if (!response.ok) {
-                throw new Error(`Error ${response.status}: ${response.statusText}`);
-            }
+    //         if (!response.ok) {
+    //             throw new Error(`Error ${response.status}: ${response.statusText}`);
+    //         }
 
-            const data = await response.json();
-            setPurchases(data.purchases || []);
-        } catch (error) {
-            console.error("Error fetching purchases:", error);
-            showNotification("Error al cargar historial de compras", "error");
-        }
-    };
+    //         const data = await response.json();
+    //         setPurchases(data.purchases || []);
+    //     } catch (error) {
+    //         console.error("Error fetching purchases:", error);
+    //         showNotification("Error al cargar historial de compras", "error");
+    //     }
+    // };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -141,7 +141,6 @@ const AboutUser = () => {
                 return res.json();
             })
             .then((data) => {
-                // Actualizar el avatar en localStorage
                 const userInfo = JSON.parse(localStorage.getItem("user") || "{}");
                 userInfo.avatar = data.user.avatar;
                 localStorage.setItem("user", JSON.stringify(userInfo));

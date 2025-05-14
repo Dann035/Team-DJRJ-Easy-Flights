@@ -1,3 +1,4 @@
+import os
 from typing import TYPE_CHECKING
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import String, Boolean, ForeignKey, DateTime
@@ -35,11 +36,21 @@ class User(db.Model):
         return [user_role.role.name for user_role in self.user_roles]
 
     def serialize(self):
+        avatar_path = self.avatar
+        # Si hay avatar, verifica que el archivo exista
+        if avatar_path and avatar_path.strip() != "":
+            # Quita el primer '/' si existe
+            avatar_file = avatar_path[1:] if avatar_path.startswith('/') else avatar_path
+            if not os.path.exists(avatar_file):
+                avatar_path = None
+        else:
+            avatar_path = None
+        
         return {
             "id": self.id,
             "name": self.name,
             "email": self.email,
             "suscription": self.suscription,
-            "avatar": self.avatar,
+            "avatar": avatar_path,
             "roles": self.roles
         }
