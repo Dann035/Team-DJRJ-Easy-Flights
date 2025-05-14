@@ -56,7 +56,7 @@ app.config['MAIL_DEFAULT_SENDER'] = os.getenv('EMAIL_FROM', 'Easy Flights <norep
 MIGRATE = Migrate(app, db, compare_type=True)
 db.init_app(app)
 
-CORS(app, origins=["https://team-djrj-easy-flights-frontend.onrender.com"], supports_credentials=True)
+CORS(app, origins="*", supports_credentials=True)
 
 # add the admin
 setup_admin(app)
