@@ -94,7 +94,6 @@ def upload_avatar(user_id):
         if user.email != current_user_email:
             return jsonify({"msg": "Access denied"}), 403
 
-        # Verificar si el directorio de carga existe
         if 'avatar' not in request.files:
             return jsonify({"msg": "No file part"}), 400
 
@@ -104,22 +103,25 @@ def upload_avatar(user_id):
 
         if file and allowed_file(file.filename):
             os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-            
+
+            # Eliminar avatar anterior si existe
+            if user.avatar and user.avatar.strip() != "":
+                old_avatar_path = user.avatar.lstrip("/")
+                if os.path.exists(old_avatar_path):
+                    try:
+                        os.remove(old_avatar_path)
+                    except Exception as e:
+                        print(f"Error deleting old avatar: {str(e)}")
+
             # Generar nombre de archivo seguro
             filename = secure_filename(file.filename)
-            # Añadir ID de usuario para evitar colisiones
             filename = f"user_{user.id}_{filename}"
-            
-            # Ruta completa para guardar el archivo
             save_path = os.path.join(UPLOAD_FOLDER, filename)
-            
-            # Guardar el archivo
+
             file.save(save_path)
-            
-            # Guardar la ruta relativa en la base de datos
             user.avatar = f"/{save_path}"
             db.session.commit()
-            
+
             return jsonify({
                 "msg": "Avatar updated",
                 "user": user.serialize()
@@ -128,7 +130,7 @@ def upload_avatar(user_id):
             return jsonify({"msg": "File type not allowed"}), 400
 
     except Exception as e:
-        db.session.rollback()  # Rollback on error
+        db.session.rollback()
         print(f"Error uploading avatar: {str(e)}")
         return jsonify({"msg": f"Error uploading avatar: {str(e)}"}), 400
 
