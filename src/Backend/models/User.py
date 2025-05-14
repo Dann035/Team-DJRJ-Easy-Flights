@@ -18,7 +18,7 @@ class User(db.Model):
     email: Mapped[str] = mapped_column(String(120), unique=True, nullable=False)
     password: Mapped[str] = mapped_column(String(255),nullable=False)
     suscription: Mapped[str] = mapped_column(String(120),nullable=True,default="FREE")
-    avatar: Mapped[str] = mapped_column(String(120),nullable=True)
+    avatar: Mapped[str] = mapped_column(String(255),nullable=True)
     is_active: Mapped[bool] = mapped_column(Boolean(), nullable=False, default=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc))
     role: Mapped[str] = mapped_column(String(120),nullable=False)
@@ -37,12 +37,16 @@ class User(db.Model):
 
     def serialize(self):
         avatar_path = self.avatar
-        # Si hay avatar, verifica que el archivo exista
+
         if avatar_path and avatar_path.strip() != "":
-            # Quita el primer '/' si existe
-            avatar_file = avatar_path[1:] if avatar_path.startswith('/') else avatar_path
-            if not os.path.exists(avatar_file):
-                avatar_path = None
+            # Si es una URL (Cloudinary), la devolvemos tal cual
+            if avatar_path.startswith("http"):
+                pass  # avatar_path ya es la URL correcta
+            else:
+                # Es un archivo local, comprobamos si existe
+                avatar_file = avatar_path[1:] if avatar_path.startswith('/') else avatar_path
+                if not os.path.exists(avatar_file):
+                    avatar_path = None
         else:
             avatar_path = None
         
