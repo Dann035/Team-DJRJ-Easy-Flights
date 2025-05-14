@@ -39,9 +39,68 @@ const AboutUser = () => {
                 subscription: userObj.subscription || "",
                 avatar: userObj.avatar || null,
             }));
+            
+            // Fetch user flight history and purchases once user data is loaded
+            fetchUserFlights(userObj.id);
+            fetchUserPurchases(userObj.id);
+            
             setIsLoading(false);
         }
     }, []);
+
+    // Función para obtener el historial de vuelos
+    const fetchUserFlights = async (id) => {
+        try {
+            // Verificar que tenemos un ID de usuario
+            const userId = id || user?.id;
+            if (!userId) return;
+
+            const response = await fetch(`${URL}/api/user/${userId}/flights`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${access_token}`,
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error ${response.status}: ${response.statusText}`);
+            }
+
+            const data = await response.json();
+            setHistory(data.flights || []);
+        } catch (error) {
+            console.error("Error fetching flight history:", error);
+            showNotification("Error al cargar historial de vuelos", "error");
+        }
+    };
+
+    // Función para obtener las compras del usuario
+    const fetchUserPurchases = async (id) => {
+        try {
+            // Verificar que tenemos un ID de usuario
+            const userId = id || user?.id;
+            if (!userId) return;
+
+            const response = await fetch(`${URL}/api/user/${userId}/purchases`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${access_token}`,
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error ${response.status}: ${response.statusText}`);
+            }
+
+            const data = await response.json();
+            setPurchases(data.purchases || []);
+        } catch (error) {
+            console.error("Error fetching purchases:", error);
+            showNotification("Error al cargar historial de compras", "error");
+        }
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -82,7 +141,6 @@ const AboutUser = () => {
                 return res.json();
             })
             .then((data) => {
-                // Actualizar el avatar en localStorage
                 const userInfo = JSON.parse(localStorage.getItem("user") || "{}");
                 userInfo.avatar = data.user.avatar;
                 localStorage.setItem("user", JSON.stringify(userInfo));
@@ -161,8 +219,14 @@ const AboutUser = () => {
 
             showNotification("Perfil actualizado correctamente", "success");
         } catch (error) {
-            showNotification("Error al actualizar perfil", "error");
+            showNotification(`Error al actualizar perfil: ${error.message}`, "error");
         }
+    };
+
+    // Function to format date
+    const formatDate = (dateString) => {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        return new Date(dateString).toLocaleDateString('es-ES', options);
     };
 
     // Animation variants for framer-motion
@@ -346,7 +410,193 @@ const AboutUser = () => {
                 </aside>
 
                 <section className="ausr-main">
-                    {/* ...rest of your code... */}
+                    {activeTab === "history" && (
+                        <motion.div
+                            className="ausr-tab-content"
+                            variants={containerVariants}
+                            initial="hidden"
+                            animate="visible"
+                        >
+                            <h2 className="ausr-section-title">Historial de Viajes</h2>
+                            
+                            {history.length > 0 ? (
+                                <div className="ausr-cards-grid">
+                                    {history.map((flight, index) => (
+                                        <motion.div
+                                            key={index}
+                                            className="ausr-card"
+                                            variants={itemVariants}
+                                        >
+                                            <div className="ausr-card-header">
+                                                <h3>{flight.destination}</h3>
+                                                <span className="ausr-card-date">
+                                                    {formatDate(flight.date)}
+                                                </span>
+                                            </div>
+                                            <div className="ausr-card-body">
+                                                <p>Origen: {flight.origin}</p>
+                                                <p>Destino: {flight.destination}</p>
+                                                <p>Pasajeros: {flight.passengers}</p>
+                                                <p className="ausr-card-price">
+                                                    Precio: ${flight.price}
+                                                </p>
+                                            </div>
+                                        </motion.div>
+                                    ))}
+                                </div>
+                            ) : (
+                                <div className="ausr-empty-state">
+                                    <svg
+                                        className="ausr-empty-icon"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    >
+                                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                    </svg>
+                                    <h3>No tienes historial de viajes</h3>
+                                    <p>
+                                        Tu historial de viajes aparecerá aquí una vez que
+                                        hayas realizado algún viaje.
+                                    </p>
+                                </div>
+                            )}
+                        </motion.div>
+                    )}
+
+                    {activeTab === "purchases" && (
+                        <motion.div
+                            className="ausr-tab-content"
+                            variants={containerVariants}
+                            initial="hidden"
+                            animate="visible"
+                        >
+                            <h2 className="ausr-section-title">Historial de Compras</h2>
+                            
+                            {purchases.length > 0 ? (
+                                <div className="ausr-cards-grid">
+                                    {purchases.map((purchase, index) => (
+                                        <motion.div
+                                            key={index}
+                                            className="ausr-card"
+                                            variants={itemVariants}
+                                        >
+                                            <div className="ausr-card-header">
+                                                <h3>Compra #{purchase.id}</h3>
+                                                <span className="ausr-card-date">
+                                                    {formatDate(purchase.date)}
+                                                </span>
+                                            </div>
+                                            <div className="ausr-card-body">
+                                                <p>Producto: {purchase.item}</p>
+                                                <p>Cantidad: {purchase.quantity}</p>
+                                                <p className="ausr-card-price">
+                                                    Total: ${purchase.total}
+                                                </p>
+                                            </div>
+                                        </motion.div>
+                                    ))}
+                                </div>
+                            ) : (
+                                <div className="ausr-empty-state">
+                                    <svg
+                                        className="ausr-empty-icon"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    >
+                                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                                    </svg>
+                                    <h3>No tienes compras recientes</h3>
+                                    <p>
+                                        Tu historial de compras aparecerá aquí una vez que
+                                        hayas realizado alguna compra.
+                                    </p>
+                                </div>
+                            )}
+                        </motion.div>
+                    )}
+
+                    {activeTab === "subscription" && (
+                        <motion.div
+                            className="ausr-tab-content"
+                            variants={containerVariants}
+                            initial="hidden"
+                            animate="visible"
+                        >
+                            <h2 className="ausr-section-title">Gestionar Suscripción</h2>
+                            
+                            <form onSubmit={handleSubmit} className="ausr-form">
+                                <div className="ausr-form-group">
+                                    <label htmlFor="name">Nombre completo</label>
+                                    <input
+                                        type="text"
+                                        id="name"
+                                        name="name"
+                                        value={userData.name}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
+                                
+                                <div className="ausr-form-group">
+                                    <label htmlFor="email">Correo electrónico</label>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        value={userData.email}
+                                        disabled
+                                        className="ausr-input-disabled"
+                                    />
+                                    <small>(El correo electrónico no se puede modificar)</small>
+                                </div>
+                                
+                                <div className="ausr-form-group">
+                                    <label htmlFor="subscription">Plan de suscripción</label>
+                                    <select
+                                        id="subscription"
+                                        name="subscription"
+                                        value={userData.subscription}
+                                        onChange={handleChange}
+                                    >
+                                        <option value="free">Plan Básico (Gratuito)</option>
+                                        <option value="premium">Plan Premium ($9.99/mes)</option>
+                                        <option value="business">Plan Business ($19.99/mes)</option>
+                                    </select>
+                                </div>
+                                
+                                <button type="submit" className="ausr-btn ausr-btn-primary">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="20"
+                                        height="20"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    >
+                                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                                        <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                                        <polyline points="7 3 7 8 15 8"></polyline>
+                                    </svg>
+                                    Guardar Cambios
+                                </button>
+                            </form>
+                        </motion.div>
+                    )}
                 </section>
             </div>
         </motion.div>

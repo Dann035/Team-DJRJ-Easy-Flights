@@ -168,8 +168,9 @@ export const Navbar = () => {
                                             boxShadow:
                                                 "0 0 15px rgba(0, 211, 211, 0.8)",
                                         }}
-                                        >
-                                        {user.avatar ? (
+                                    >
+                                        {user.avatar &&
+                                        user.avatar.trim() !== "" ? (
                                             <img
                                                 src={user.avatar}
                                                 alt="User Avatar"

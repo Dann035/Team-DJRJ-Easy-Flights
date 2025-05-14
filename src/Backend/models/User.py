@@ -1,3 +1,4 @@
+import os
 from typing import TYPE_CHECKING
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import String, Boolean, ForeignKey, DateTime
@@ -17,7 +18,7 @@ class User(db.Model):
     email: Mapped[str] = mapped_column(String(120), unique=True, nullable=False)
     password: Mapped[str] = mapped_column(String(255),nullable=False)
     suscription: Mapped[str] = mapped_column(String(120),nullable=True,default="FREE")
-    avatar: Mapped[str] = mapped_column(String(120),nullable=True)
+    avatar: Mapped[str] = mapped_column(String(255),nullable=True)
     is_active: Mapped[bool] = mapped_column(Boolean(), nullable=False, default=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc))
     role: Mapped[str] = mapped_column(String(120),nullable=False)
@@ -35,11 +36,25 @@ class User(db.Model):
         return [user_role.role.name for user_role in self.user_roles]
 
     def serialize(self):
+        avatar_path = self.avatar
+
+        if avatar_path and avatar_path.strip() != "":
+            # Si es una URL (Cloudinary), la devolvemos tal cual
+            if avatar_path.startswith("http"):
+                pass  # avatar_path ya es la URL correcta
+            else:
+                # Es un archivo local, comprobamos si existe
+                avatar_file = avatar_path[1:] if avatar_path.startswith('/') else avatar_path
+                if not os.path.exists(avatar_file):
+                    avatar_path = None
+        else:
+            avatar_path = None
+        
         return {
             "id": self.id,
             "name": self.name,
             "email": self.email,
             "suscription": self.suscription,
-            "avatar": self.avatar,
+            "avatar": avatar_path,
             "roles": self.roles
         }
