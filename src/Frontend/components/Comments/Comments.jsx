@@ -23,29 +23,29 @@ function Comments() {
   
 
   //DELETE COMMENT
-  const deleteComment = (id) => {
-    if (!id) return;
+  const deleteComment = (commentId) => {
+  if (!commentId) return;
 
-    fetch(`${url}/api/comments/${id}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
+  fetch(`${url}/api/comments/${commentId}`, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+  })
+    .then((resp) => {
+      if (!resp.ok) throw new Error("Failed to delete comment");
+      return resp.json();
     })
-      .then((resp) => {
-        if (!resp.ok) throw new Error("Failed to delete comment");
-        return resp.json();
-      })
-      .then(() => {
-        // Refresh the comments list
-        return fetch(`${url}/api/offers/${offer_id}/comments`);
-      })
-      .then(res => res.json())
-      .then(data => {
-        dispatch({ type: "SET_COMMENTS", payload: data });
-      })
-      .catch((error) =>
-        console.error("Error when deleting your comment:", error)
-      );
-  };
+    .then(() => {
+      // Refresca la lista de comentarios usando el id correcto de la oferta
+      return fetch(`${url}/api/offers/${id}/comments`);
+    })
+    .then(res => res.json())
+    .then(data => {
+      dispatch({ type: "SET_COMMENTS", payload: data });
+    })
+    .catch((error) =>
+      console.error("Error when deleting your comment:", error)
+    );
+};
 
   useEffect(() => {
     getComments();
@@ -87,9 +87,10 @@ function Comments() {
                 {/* <small className="text-muted">{texts.travelBlogger}</small> */}
                 <p className="fst-italic mt-2">"{c.content}"</p>
                 {/* <small className="text-muted d-block mb-2">Comentario número {c.id}</small> */}
-                <button
+                {/* <button
                   //onClick={()=> editComment(c.id)}
-                  className="btn btn-secondary btn-sm mt-3 me-2">Editar</button>
+                  className="btn btn-secondary btn-sm mt-3 me-2">Editar
+                </button> */}
                 <button
                   onClick={() => deleteComment(c.id)}
                   className="btn btn-danger btn-sm"
