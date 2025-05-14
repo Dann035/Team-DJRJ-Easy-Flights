@@ -76,7 +76,7 @@ export const OffersList = () => {
 
         <div className="container-fluid d-flex flex-column align-items-center justify-content-center">
           <h2 className="text-center mb-2">Búsqueda</h2>
-          <input value={search} onChange={searcher} type="text" placeholder="Paris..." className="form-control w-25 text-center mb-3"/>
+          <input value={search} onChange={searcher} type="text" placeholder="Introduce una ubicación" className="form-control w-25 text-center mb-3"/>
           <h1 className="text-center title-offers">OFERTAS</h1>
 
             <div className="row mt-5 of-list">

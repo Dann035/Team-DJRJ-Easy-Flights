@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import { Calendar, MapPin, Star, StarsIcon } from "lucide-react";
+import { useParams} from "react-router-dom";
+import { Calendar} from "lucide-react";
 import "./OffersDetails.css"
 import Comments from "../../components/Comments/Comments";
 import { useAuth } from "../../hooks/useAuthContext";
@@ -21,6 +21,11 @@ export const OffersDetails = () => {
   const [newComment, setNewComment] = useState("");
   const [selectedRating, setsSelectedRating] = useState("");
   //const [comments, setComments] = useState([]);
+
+  const { user } = useAuth();
+  const isCompany = user && Array.isArray(user.roles) && user.roles.includes("COMPANY");
+
+
 
   const getComments = () => {
     fetch(`${url}/api/offers/${id}/comments`)
@@ -200,9 +205,9 @@ export const OffersDetails = () => {
                     </div>
 
                     {/*button trigger modal*/}
-                    <button
+                    <button 
                       type="button"
-                      className="btn btn-primary"
+                      className={`btn btn-primary${!isCompany ? "d-none" : ""}`}
                       onClick={() => {
                         const modalEl = document.getElementById("exampleModal");
                         if (modalEl && window.bootstrap) {

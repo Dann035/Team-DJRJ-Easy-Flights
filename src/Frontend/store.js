@@ -53,6 +53,16 @@ export default function storeReducer(store, action = {type:""}) {
     
     case "SET_COMMENTS":
       return { ...store, comments: action.payload };
+    
+
+    case "delete_comment":
+      let filterComments = store.comments.filter(
+        (comment) => comment.id !== action.payload
+      );
+      return {
+        ...store,
+        comments: filterComments,
+      };
 
     default:
       throw Error("Unknown action.");
