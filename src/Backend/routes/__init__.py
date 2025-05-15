@@ -9,6 +9,7 @@ from .comment import comments_bp
 from .payment import payment_bp
 from .auth import auth_bp
 from .password_reset import pass_bp
+from .purchase import purchase_bp
 
 from flask_cors import CORS
 
@@ -25,3 +26,4 @@ api.register_blueprint(payment_bp)
 api.register_blueprint(comments_bp)
 api.register_blueprint(auth_bp)
 api.register_blueprint(pass_bp)
+api.register_blueprint(purchase_bp)

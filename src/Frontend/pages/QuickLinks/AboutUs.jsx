@@ -50,28 +50,17 @@ const diagramCards = [
     content:
       "Brindar una plataforma confiable y sencilla para planificar viajes personalizados.",
   },
-  {
-    title: "Visión",
-    content:
-      "Ser la herramienta líder en planificación de viajes colaborativos y eficientes.",
-  },
+  
   {
     title: "Objetivo ",
     content:
       "Permitir la creación de presupuestos precisos para todo tipo de viajes.",
   },
   {
-    title: "Facilitando",
-    content: "la división de gastos entre grupos de personas fácilmente.",
-  },
-  {
     title: "Promoviendo",
     content: "Acceso a paquetes de viajes prediseñados por agencias aliadas.",
   },
-  {
-    title: "Fomentando",
-    content: "La transparencia financiera durante los viajes en grupo.",
-  },
+  
 ];
 
 const AboutUs = () => {
@@ -120,7 +109,7 @@ const AboutUs = () => {
                 <img src={member.image} alt={member.name} />
                 <h3>{member.name}</h3>
               </div>
-              <div className="flip-card-back-au">
+              <div className="flip-card-back-au imgstyle">
                 <img src={member.smallImage} alt={`Mini ${member.name}`} />
                 <p>{member.description}</p>
                 <a

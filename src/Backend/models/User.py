@@ -11,6 +11,7 @@ if TYPE_CHECKING:
     from .Payments import Payments
     from .UserRole import UserRole
 
+
 class User(db.Model):
     __tablename__ = 'users'
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -26,9 +27,11 @@ class User(db.Model):
 
     #relations
     comments = relationship('Comments',back_populates='user',cascade="all, delete-orphan")
-    payments = relationship('Payments',back_populates='user',cascade="all, delete-orphan")
+    
+    payments = relationship('Payments', back_populates='user')
     user_roles = relationship('UserRole',back_populates='user',cascade="all, delete-orphan")
     companies = relationship('Companies',back_populates='owner',cascade="all, delete-orphan")
+    purchases = relationship('Purchase', back_populates='user')
 
     @property
     def roles(self):
@@ -56,5 +59,7 @@ class User(db.Model):
             "email": self.email,
             "suscription": self.suscription,
             "avatar": avatar_path,
-            "roles": self.roles
+            "roles": self.roles,
+            "purchases": [purchase.serialize() for purchase in self.purchases],
+
         }

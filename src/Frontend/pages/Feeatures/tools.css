@@ -1,4 +1,4 @@
-.container{
+.containertools{
     border-radius: 8px;
   background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
@@ -109,9 +109,13 @@
     color: rgba(96, 242, 242, 0.849);
 }
 .buttonsave{
+    background-color: #097a99;
     
 
 }
 .buttonsave:hover{
-    background-color: green;
+    background-color: rgba(47, 165, 173, 0.945);
+}
+.alert strong{
+    color: #090a0f;
 }

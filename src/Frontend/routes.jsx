@@ -33,7 +33,9 @@ import Instagram from "./pages/FollowUs/Instagram.jsx";
 import Facebook from "./pages/FollowUs/Facebook.jsx";
 import TravelQuiz from "./pages/Feeatures/TravelQuiz.jsx";
 import Comments from "./components/Comments/Comments.jsx";
-
+import OffersAPI from "./pages/Offers/OffersAPI/OffersAPI.jsx";
+import PaymentApi from "./pages/Offers/OffersAPI/PaymentApi.jsx";
+import BillAPI from "./pages/Offers/OffersAPI/BillApi.jsx";
 
 
 export const router = createBrowserRouter(
@@ -51,6 +53,10 @@ export const router = createBrowserRouter(
         <Route path="/tools" element={<Tools />} />
         <Route path="/addoffer" element={<AddOffers/>} />
         <Route path="/offerdetails/:id" element={<OffersDetails/>}/>
+        <Route path="/offerdetails/:id/pago" element={<PaymentPage />} /> 
+        <Route path="/offers" element={<OffersAPI />} />
+        <Route path="offers/:id/payment" element={<PaymentApi />} />
+        <Route path="/offers/:id/payment" element={<BillAPI />} />
         <Route path="/comments/:id1" element={<Comments/>}/>
         <Route path="/offerslist" element={<OffersList/>}/>
         <Route path="/offerdetails/:id/pago" element={<PaymentPage />} /> 

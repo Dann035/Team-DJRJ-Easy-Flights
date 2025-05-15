@@ -17,7 +17,7 @@ const AboutUser = () => {
     });
     const [history, setHistory] = useState([]);
     const [purchases, setPurchases] = useState([]);
-    const [activeTab, setActiveTab] = useState("history");
+    const [activeTab, setActiveTab] = useState("history");87
     const [isLoading, setIsLoading] = useState(true);
     const [notification, setNotification] = useState({
         show: false,
@@ -82,7 +82,7 @@ const AboutUser = () => {
             const userId = id || user?.id;
             if (!userId) return;
 
-            const response = await fetch(`${URL}/api/user/${userId}/purchases`, {
+            const response = await fetch(`${URL}/api/user/${id}/purchases`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -469,63 +469,69 @@ const AboutUser = () => {
                     )}
 
                     {activeTab === "purchases" && (
-                        <motion.div
-                            className="ausr-tab-content"
-                            variants={containerVariants}
-                            initial="hidden"
-                            animate="visible"
-                        >
-                            <h2 className="ausr-section-title">Historial de Compras</h2>
-                            
-                            {purchases.length > 0 ? (
-                                <div className="ausr-cards-grid">
-                                    {purchases.map((purchase, index) => (
-                                        <motion.div
-                                            key={index}
-                                            className="ausr-card"
-                                            variants={itemVariants}
-                                        >
-                                            <div className="ausr-card-header">
-                                                <h3>Compra #{purchase.id}</h3>
-                                                <span className="ausr-card-date">
-                                                    {formatDate(purchase.date)}
-                                                </span>
-                                            </div>
-                                            <div className="ausr-card-body">
-                                                <p>Producto: {purchase.item}</p>
-                                                <p>Cantidad: {purchase.quantity}</p>
-                                                <p className="ausr-card-price">
-                                                    Total: ${purchase.total}
-                                                </p>
-                                            </div>
-                                        </motion.div>
-                                    ))}
-                                </div>
-                            ) : (
-                                <div className="ausr-empty-state">
-                                    <svg
-                                        className="ausr-empty-icon"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    >
-                                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                                        <line x1="3" y1="6" x2="21" y2="6"></line>
-                                        <path d="M16 10a4 4 0 0 1-8 0"></path>
-                                    </svg>
-                                    <h3>No tienes compras recientes</h3>
-                                    <p>
-                                        Tu historial de compras aparecerá aquí una vez que
-                                        hayas realizado alguna compra.
-                                    </p>
-                                </div>
-                            )}
-                        </motion.div>
-                    )}
+    <motion.div
+        className="ausr-tab-content"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+    >
+        <h2 className="ausr-section-title">Historial de Compras</h2>
+        
+        {purchases.length > 0 ? (
+            <div className="ausr-cards-grid">
+                {purchases.map((purchase, index) => (
+                    <motion.div
+                        key={index}
+                        className="ausr-card"
+                        variants={itemVariants}
+                    >
+                        <div className="ausr-card-header">
+                            <h3>Compra #{purchase.id}</h3>
+                            <span className="ausr-card-date">
+                                {formatDate(purchase.purchase_date)}  {/* Asumimos que `purchase.purchase_date` tiene la fecha */}
+                            </span>
+                        </div>
+                        <div className="ausr-card-body">
+                            <p><strong>Producto:</strong> {purchase.offer.title}</p> {/* Muestra el título de la oferta */}
+                            <p><strong>Descripción:</strong> {purchase.offer.description}</p> {/* Descripción de la oferta */}
+                            <p><strong>Cantidad:</strong> {purchase.quantity}</p> {/* Suponemos que tienes la cantidad de productos */}
+                            <p className="ausr-card-price">
+                                <strong>Total:</strong> €{purchase.total_amount} {/* Muestra el monto total de la compra */}
+                            </p>
+
+                            {/* Muestra detalles del pago */}
+                            <div className="payment-details">
+                                <p><strong>Método de pago:</strong> {purchase.payment.payment_method}</p>
+                                <p><strong>Tarjeta:</strong> **** **** **** {purchase.payment.card_number.slice(-4)}</p>
+                            </div>
+                        </div>
+                    </motion.div>
+                ))}
+            </div>
+        ) : (
+            <div className="ausr-empty-state">
+                <svg
+                    className="ausr-empty-icon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                >
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <path d="M16 10a4 4 0 0 1-8 0"></path>
+                </svg>
+                <h3>No tienes compras recientes</h3>
+                <p>
+                    Tu historial de compras aparecerá aquí una vez que hayas realizado alguna compra.
+                </p>
+            </div>
+        )}
+    </motion.div>
+)}
 
                     {activeTab === "subscription" && (
                         <motion.div

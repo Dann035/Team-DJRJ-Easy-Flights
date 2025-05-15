@@ -137,7 +137,7 @@ export default function Tools() {
     };
 
     return (
-        <div className="container my-5 px-3" style={{ maxWidth: '960px' }}>
+        <div className="container my-5 px-3 containertools" style={{ maxWidth: '960px' }}>
             {vista === 'menu' && (
                 <div className="row text-center">
                     <h1 className="mb-4">🧳 Herramientas de Viaje</h1>
@@ -336,9 +336,9 @@ export default function Tools() {
 
                     {/* Botón para guardar el presupuesto */}
                     <div className="mt-4">
-                        <button className="btn buttonsaveuser w-100" onClick={guardarDivisionEnPerfil}>
+                        {/*<button className="btn buttonsaveuser w-100" onClick={guardarDivisionEnPerfil}>
                         Guardar este presupuesto en tu perfil
-                        </button>
+                        </button>*/}
                     </div>
                     </>
                 )}
@@ -430,9 +430,9 @@ export default function Tools() {
                     )}
 
                     <div className="mt-4">
-                        <button className="btn buttonsave  w-100" onClick={guardarDivisionEnPerfil}>
+                       {/* <button className="btn buttonsave  w-100" onClick={guardarDivisionEnPerfil}>
                             Guardar esta división en tu perfil
-                        </button>
+                        </button>*/}
                     </div>
                 </div>
             )}

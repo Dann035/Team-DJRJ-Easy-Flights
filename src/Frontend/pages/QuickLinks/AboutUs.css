@@ -24,14 +24,6 @@
     transition: none; 
   }
   
-  .intro {
-    background-color: transparent;
-    max-width: 700px;
-    margin: 20px auto;
-    padding: 0 20px;
-    font-size: 1.1em;
-  }
-  
   .team {
     display: flex;
     justify-content: center;
@@ -82,7 +74,6 @@
   
   .flip-card-front-au img {
     width: 100px;
-    height: 100px;
     object-fit: cover;
     margin-bottom: 10px;
     transition: none;
@@ -96,7 +87,6 @@
   
   .flip-card-back-au img {
     width: 60px;
-    height: 60px;
     margin-bottom: 10px;
     
   }
@@ -136,7 +126,4 @@
   transform: translateY(-5px);
 }
 
-.diagram-card h3 {
 
-
-}
