@@ -1,7 +1,7 @@
+from src.Backend.models import db, Offers
+from src.Backend.auth_decorators import role_required
 from flask import request, jsonify, Blueprint
-from Backend.models import db, Offers
 from flask_jwt_extended import jwt_required
-from Backend.auth_decorators import role_required
 
 offers_bp = Blueprint('offers', __name__)
 
@@ -15,7 +15,7 @@ def create_offer():
         data = request.get_json()
 
         if not all(field in data for field in ['title', 'description', 'price', 'type_offert', 'image_url', 'location', 'duration', 'tags',
-                                               'imagedetails1','imagedetails2','imagedetails3','imagedetails4','start_date','end_date']):
+                                                'imagedetails1','imagedetails2','imagedetails3','imagedetails4','start_date','end_date']):
             return jsonify({'message': 'Missing fields'}), 400
 
         new_offer = Offers(

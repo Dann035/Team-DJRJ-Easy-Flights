@@ -1,5 +1,5 @@
-from flask import Blueprint, request, jsonify
 from src.Backend.models import User, db
+from flask import Blueprint, request, jsonify
 from flask_jwt_extended import create_access_token
 import random
 import string

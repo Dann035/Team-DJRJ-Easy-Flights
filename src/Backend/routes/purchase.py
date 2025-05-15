@@ -1,5 +1,5 @@
+from src.Backend.models import db, Purchase, User, Offers, Payments
 from flask import Blueprint, jsonify, request
-from Backend.models import db, Purchase, User, Offers, Payments
 from sqlalchemy.orm import joinedload
 from datetime import datetime
 from flask_jwt_extended import jwt_required, get_jwt_identity
