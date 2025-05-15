@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy import String, Boolean, ForeignKey, Float, Integer, DateTime, Enum, Text
+from sqlalchemy import String, ForeignKey, Float, DateTime, Integer
+from datetime import datetime
 from .base import db
 from typing import TYPE_CHECKING
 
@@ -7,28 +8,32 @@ if TYPE_CHECKING:
     from .User import User
     from .Offers import Offers
     from .Companies import Companies
+    from .Purchase import Purchase
 
 class Payments(db.Model):
     __tablename__ = 'payments'
     
     id: Mapped[int] = mapped_column(primary_key=True)
     amount: Mapped[float] = mapped_column(Float, nullable=False)
-    payment_method: Mapped[str] = mapped_column(String(120))
-    created_at: Mapped[str] = mapped_column(String(120))
-    status: Mapped[str] = mapped_column(String(120))
-    user_id: Mapped[int] = mapped_column(ForeignKey('users.id'))
-    offer_id: Mapped[int] = mapped_column(ForeignKey('offers.id'))
+    payment_method: Mapped[str] = mapped_column(String(120), nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    status: Mapped[str] = mapped_column(String(120), nullable=False)
+    
+    user_id: Mapped[int] = mapped_column(ForeignKey('users.id'), nullable=False)
+    offer_id: Mapped[int] = mapped_column(ForeignKey('offers.id'), nullable=False)
+    purchase_id: Mapped[int] = mapped_column(ForeignKey('purchases.id'), nullable=False)
 
-    # relaciones
+    # Relaciones
     user = relationship('User', back_populates='payments')
-    offer = relationship('Offers', back_populates='payments')  # Cambié 'offert' a 'offer'
+    offer = relationship('Offers', back_populates='payments')
+    purchase = relationship('Purchase', back_populates='payments')
 
-    # serializar
     def serialize(self):
         return {
             "id": self.id,
             "amount": self.amount,
             "payment_method": self.payment_method,
-            "created_at": self.created_at,
+            "created_at": self.created_at.isoformat() if self.created_at else None,
             "status": self.status,
+            "purchase_id": self.purchase_id
         }

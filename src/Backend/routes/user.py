@@ -1,6 +1,6 @@
 import os
 from flask import Blueprint, request, jsonify
-from Backend.models import db, User,Companies, Roles, UserRole
+from Backend.models import db, User,Companies, Roles, UserRole, Payments, Offers
 from sqlalchemy.exc import IntegrityError
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity, get_jwt
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -238,3 +238,65 @@ def update_password():
             'status': 'ERROR', 
             'message': f'Error al actualizar la contraseña: {str(e)}'
         }), 500
+
+
+#endpoint de pagos 
+@user_bp.route('/user/<int:user_id>/payments', methods=['POST'])
+@jwt_required()
+def create_payment(user_id):
+    try:
+        current_user_email = get_jwt_identity()
+        user = User.query.filter_by(email=current_user_email).first()
+
+        if not user or user.id != user_id:
+            return jsonify({"msg": "Access denied"}), 403
+
+        data = request.get_json()
+        required_fields = ['amount', 'payment_method', 'status', 'offer_id']
+
+        if not all(field in data for field in required_fields):
+            return jsonify({"msg": "Faltan campos requeridos"}), 400
+
+        new_payment = Payments(
+            amount=data['amount'],
+            payment_method=data['payment_method'],
+            created_at=datetime.utcnow().isoformat(),
+            status=data['status'],
+            user_id=user_id,
+            offer_id=data['offer_id']
+        )
+
+        db.session.add(new_payment)
+        db.session.commit()
+
+        return jsonify({
+            "msg": "Pago registrado exitosamente",
+            "payment": new_payment.serialize()
+        }), 201
+
+    except Exception as e:
+        db.session.rollback()
+        print(f"Error al registrar el pago: {str(e)}")
+        return jsonify({"msg": f"Error al registrar el pago: {str(e)}"}), 500
+
+@user_bp.route('/user/<int:user_id>/payments', methods=['GET'])
+@jwt_required()
+def get_user_payments(user_id):
+    try:
+        current_user_email = get_jwt_identity()
+        user = User.query.filter_by(email=current_user_email).first()
+
+        if not user or user.id != user_id:
+            return jsonify({"msg": "Access denied"}), 403
+
+        payments = Payments.query.filter_by(user_id=user_id).order_by(Payments.created_at.desc()).all()
+
+        return jsonify({
+            "payments": [p.serialize() for p in payments]
+        }), 200
+
+    except Exception as e:
+        print(f"Error al obtener pagos: {str(e)}")
+        return jsonify({"msg": f"Error al obtener pagos: {str(e)}"}), 500
+    
+    #PURCHASE

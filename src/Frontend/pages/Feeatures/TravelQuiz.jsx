@@ -52,41 +52,55 @@ const TravelQuiz = () => {
     }
   };
 
+  // Modificación aquí: Reiniciar el cuestionario sin recargar la página
   const handleRestart = () => {
-    window.location.reload(); // Simple forma de reiniciar todo
+    setAnswers([]);  // Resetear respuestas
+    setCurrentQuestion(0);  // Volver a la primera pregunta
+    setQuizFinished(false);  // Restablecer estado de finalización
+    setResult("");  // Eliminar el resultado anterior
+
+    // Re-aleatorizar las preguntas
+    const randomQuestions = [];
+    const copy = [...allQuestions];
+    for (let i = 0; i < 8; i++) {
+      const randIndex = Math.floor(Math.random() * copy.length);
+      randomQuestions.push(copy.splice(randIndex, 1)[0]);
+    }
+    setSelectedQuestions(randomQuestions);  // Asignar nuevas preguntas aleatorias
   };
 
-return (
-  <div className="quiz-page">
-    <div className="quiz-container">
-      {!quizFinished ? (
-        <div className="quiz-card">
-          <h2 className="question-title">{selectedQuestions[currentQuestion]?.question}</h2>
-          <div className="options-container">
-            {selectedQuestions[currentQuestion]?.options.map((option, index) => (
-              <button key={index} className="option-btn" onClick={() => handleAnswer(option)}>
-                {option}
-              </button>
-            ))}
+  return (
+    <div className="quiz-page">
+      <div className="quizcontainer">
+        {!quizFinished ? (
+          <div className="quizcard">
+            <h2 className="questiontitle">{selectedQuestions[currentQuestion]?.question}</h2>
+            <div className="options-container">
+              {selectedQuestions[currentQuestion]?.options.map((option, index) => (
+                <button key={index} className="option-btn" onClick={() => handleAnswer(option)}>
+                  {option}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
-      ) : (
-        <div className="result-card">
-          <h2 className="result-title">¡Tu destino es...</h2>
-          <div className="result-name">
-            <span>{result}</span>
+        ) : (
+          <div className="resultcard">
+            <h2 className="resulttitle">¡Tu destino es...</h2>
+            <div className="resultname">
+              <span>{result}</span>
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
 
-    {/* Ahora el botón va aquí, debajo de todo */}
-    <div className="restart-container">
-      <button className="restart-btn" onClick={handleRestart}>
-        Reiniciar Cuestionario
-      </button>
+      {/* Ahora el botón va aquí, debajo de todo */}
+      <div className="restartcontainer">
+        <button className="btn restartbtn" onClick={handleRestart}>
+          Reiniciar Cuestionario
+        </button>
+      </div>
     </div>
-  </div>
-);}
+  );
+};
 
 export default TravelQuiz;
