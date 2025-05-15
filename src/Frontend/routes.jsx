@@ -59,7 +59,6 @@ export const router = createBrowserRouter(
         <Route path="/offers/:id/payment" element={<BillAPI />} />
         <Route path="/comments/:id1" element={<Comments/>}/>
         <Route path="/offerslist" element={<OffersList/>}/>
-        <Route path="/offerdetails/:id/pago" element={<PaymentPage />} /> 
         <Route path="/bill/:id/:paymentId" element={<BillPage />} />       
         <Route path="/terms-of-service" element={<TermsofService />} />
         <Route path="/cookies-policy" element={<CookiesPolicy />} />

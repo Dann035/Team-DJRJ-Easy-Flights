@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import useGlobalReducer from "../../../hooks/useGlobalReducer";
 import { useLanguage } from "../../../context/LanguageContext";
+import "./OffersAPI.css";
 import { FaMapMarkerAlt, FaClock, FaPlane } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
@@ -10,10 +11,9 @@ function OffersAPI() {
     const data = store.offersAPI || [];
     const [displayCount, setDisplayCount] = useState(3);
 
-    const show4More = () => {
+    const show4More = (displayCount) => {
         setDisplayCount(displayCount + 3);
     };
-
     const limitedOffers = data.slice(0, displayCount);
 
     return (
@@ -22,7 +22,10 @@ function OffersAPI() {
             <div className="flights-container">
                 {Array.isArray(data) && data.length > 0 ? (
                     limitedOffers.map((offer) => (
-                        <div className="flight-offer-card" key={offer?.content?.id}>
+                        <div
+                            className="flight-offer-card"
+                            key={offer?.content?.id}
+                        >
                             <div className="flight-offer-inner">
                                 <div className="flight-offer-front">
                                     <div className="flight-image-container">
@@ -37,30 +40,58 @@ function OffersAPI() {
                                     </div>
                                     <div className="flight-details">
                                         <div>
-                                            <h3 className="flight-title">{texts.specialOffers}</h3>
+                                            <h3 className="flight-title">
+                                                {texts.specialOffers}
+                                            </h3>
                                             <div className="flight-origin">
                                                 <FaPlane />
-                                                <span><strong>Origen:</strong> {offer?.content?.inboundLeg?.destinationAirport?.name || "N/A"}</span>
+                                                <span>
+                                                    <strong>Origen:</strong>{" "}
+                                                    {offer?.content?.inboundLeg
+                                                        ?.destinationAirport
+                                                        ?.name || "N/A"}
+                                                </span>
                                             </div>
                                             <div className="flight-destination">
                                                 <FaMapMarkerAlt />
-                                                <span><strong>Destino:</strong> {offer?.content?.inboundLeg?.originAirport?.name || "N/A"}</span>
+                                                <span>
+                                                    <strong>Destino:</strong>{" "}
+                                                    {offer?.content?.inboundLeg
+                                                        ?.originAirport?.name ||
+                                                        "N/A"}
+                                                </span>
                                             </div>
                                             <div className="flight-duration">
                                                 <FaClock />
-                                                <span><strong>Duración:</strong> {offer?.content?.tripDuration || "N/A"}</span>
+                                                <span>
+                                                    <strong>Duración:</strong>{" "}
+                                                    {offer?.content
+                                                        ?.tripDuration || "N/A"}
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="flight-offer-back">
-                                    <h3 className="flight-back-title">Detalles del Vuelo</h3>
-                                    <p><strong>Fecha de Salida:</strong> {offer?.content?.inboundLeg?.localDepartureDate || "N/A"}</p>
-                                    <p><strong>Duración:</strong> {offer?.content?.tripDuration || "N/A"}</p>
-                                    <p><strong>Precio:</strong> {offer?.content?.price || "N/A"}</p>
-                                    <Link to={`/payment/${offer?.content?.id}`} className="flight-link">
-                                        {texts.reserveNow}
-                                    </Link>
+                                    <h3 className="flight-back-title">
+                                        Detalles del Vuelo
+                                    </h3>
+                                    <p>
+                                        <strong>Fecha de Salida:</strong>{" "}
+                                        {offer?.content?.inboundLeg
+                                            ?.localDepartureDate || "N/A"}
+                                    </p>
+                                    <p>
+                                        <strong>Duración:</strong>{" "}
+                                        {offer?.content?.tripDuration || "N/A"}
+                                    </p>
+                                    <p>
+                                        <strong>Precio:</strong>{" "}
+                                        {offer?.content?.price || "N/A"}
+                                    </p>
+                                    <Link to={`/offers/${offer?.content?.id}/payment`} className="flight-link">
+  {texts.reserveNow}
+</Link>
                                 </div>
                             </div>
                         </div>
@@ -72,7 +103,7 @@ function OffersAPI() {
                     <div>
                         <button
                             className="botonAdd"
-                            onClick={show4More}
+                            onClick={() => show4More(displayCount)}
                         >
                             {texts.viewMoreOffers}
                         </button>
