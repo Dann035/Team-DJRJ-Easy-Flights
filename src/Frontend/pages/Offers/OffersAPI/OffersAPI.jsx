@@ -3,6 +3,7 @@ import useGlobalReducer from "../../../hooks/useGlobalReducer";
 import { useLanguage } from "../../../context/LanguageContext";
 import "./OffersAPI.css";
 import { FaMapMarkerAlt, FaClock, FaPlane } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function OffersAPI() {
     const { texts } = useLanguage();
@@ -88,9 +89,9 @@ function OffersAPI() {
                                         <strong>Precio:</strong>{" "}
                                         {offer?.content?.price || "N/A"}
                                     </p>
-                                    <a href="#" className="flight-link">
-                                        {texts.reserveNow}
-                                    </a>
+                                    <Link to={`/offers/${offer?.content?.id}/payment`} className="flight-link">
+  {texts.reserveNow}
+</Link>
                                 </div>
                             </div>
                         </div>

@@ -1,21 +1,23 @@
 /* Postales generales */
-.postcard-title {
+
+.postcard h1 {
   font-family: 'Shadows Into Light', cursive;
   font-size: 3rem;
-  color: #d2691e;
+  color: rgba(0, 255, 255, 0.829);
 }
-
-.titlecountry {
+ 
+.card-title {
   font-family: 'Shadows Into Light', cursive;
   font-size: 2rem;
-  color: #d2691e;
+  color: aqua;
+
 }
 
 /* Tarjetas de destino */
-.card {
+.row .card {
   font-family: 'Special Elite', monospace;
   background-color: transparent;
-  border: 2px solid #e0c097;
+  border: 2px solid #97e0ddae;
   border-radius: 15px;
   box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease-in-out;
@@ -35,27 +37,22 @@
 }
 
 /* Contenido interno */
-.card-title {
-  font-family: 'Shadows Into Light', cursive;
-  color: #d2691e;
-  font-size: 1.5rem;
-}
 
 .card-text {
   font-size: 0.95rem;
-  color: #444;
+  color: #ffffff;
 }
 
 /* Botón de enlace */
-.btn-primary {
-  background-color: #d2691e;
-  border-color: #d2691e;
+.btn-url {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+  border-color:transparent;
 }
 
 .btn-primary:hover {
-  background-color: #b2581c;
-  border-color: #b2581c;
-}
-.textblack p{
-  color: black;
+  background-color: #1cb2ad;
+  border-color: #1c5db2;
+  transition: 1s;
+  
+  
 }

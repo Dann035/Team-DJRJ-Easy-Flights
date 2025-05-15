@@ -9,12 +9,13 @@ from .comment import comments_bp
 from .payment import payment_bp
 from .auth import auth_bp
 from .password_reset import pass_bp
+from .purchase import purchase_bp
 
 from flask_cors import CORS
 
 # Allow CORS requests to this API
 api = Blueprint('api', __name__)
-CORS(api, origins=["https://team-djrj-easy-flights-frontend.onrender.com", "https://team-djrj-easy-flights-backend.onrender.com"], supports_credentials=True)
+CORS(api, origins="*", supports_credentials=True)
 
 # Registra los blueprints de cada módulo
 api.register_blueprint(user_bp)
@@ -25,3 +26,4 @@ api.register_blueprint(payment_bp)
 api.register_blueprint(comments_bp)
 api.register_blueprint(auth_bp)
 api.register_blueprint(pass_bp)
+api.register_blueprint(purchase_bp)

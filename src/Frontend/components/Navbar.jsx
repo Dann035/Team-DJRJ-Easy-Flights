@@ -51,8 +51,8 @@ export const Navbar = () => {
                     className="logo-container"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
+
                 >
-                    {/*/Icono-Posible.png se añadio una barra al principio porque el logo se rompia dependiendo la ruta en la que estes*/}
                     <img
                         src="/Icono-Posible.png"
                         alt="Logo Easy-Flights"
@@ -61,7 +61,6 @@ export const Navbar = () => {
                     />
                 </motion.div>
 
-                {/* Mobile menu button with animation */}
                 <motion.button
                     className={`navbar-toggler ${
                         mobileMenuOpen ? "active" : ""
@@ -76,7 +75,7 @@ export const Navbar = () => {
                     <span className="navbar-toggler-icon"></span>
                 </motion.button>
 
-                {/* Navbar content with animation */}
+
                 <AnimatePresence>
                     <motion.div
                         className={`collapse navbar-collapse navbar-interno ${
@@ -169,7 +168,8 @@ export const Navbar = () => {
                                                 "0 0 15px rgba(0, 211, 211, 0.8)",
                                         }}
                                     >
-                                        {user.avatar ? (
+                                        {user.avatar &&
+                                        user.avatar.trim() !== "" ? (
                                             <img
                                                 src={user.avatar}
                                                 alt="User Avatar"

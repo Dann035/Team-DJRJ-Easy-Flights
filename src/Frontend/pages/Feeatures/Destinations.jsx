@@ -92,14 +92,14 @@ export default function Destinations() {
     };
 
     return (
-        <div className="container my-5">
+        <div className="postcard container my-5">
             <h1 className="text-center mb-4">🌍 Top 10 Destinos Turísticos</h1>
             <p className="text-center mb-5">Explora lugares increíbles. Haz clic en una postal para más detalles.</p>
 
             <div className="row">
                 {destinations.map((destination, index) => (
                     <div key={index} className="col-md-6 col-lg-4 mb-4 ">
-                        <div className="card h-100 shadow-sm textblack" onClick={() => toggleCard(index)} style={{ cursor: 'pointer' }}>
+                        <div className="card h-100 shadow-sm" onClick={() => toggleCard(index)} style={{ cursor: 'pointer' }}>
                             <img src={destination.imageUrl} className="card-img-top" alt={destination.name} />
                             <div className="card-body">
                                 <h5 className="card-title ">{destination.name}</h5>
@@ -107,7 +107,7 @@ export default function Destinations() {
                                 {expandedCard === index && (
                                     <>
                                         <p>{destination.detail}</p>
-                                        <a href={destination.siteUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+                                        <a href={destination.siteUrl} target="_blank" rel="noopener noreferrer" className="btn btn-url">
                                             Visita: {destination.site}
                                         </a>
                                     </>

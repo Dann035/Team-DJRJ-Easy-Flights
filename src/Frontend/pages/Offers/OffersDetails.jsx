@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import { Calendar, MapPin, Star, StarsIcon } from "lucide-react";
+import { useParams } from "react-router-dom";
+import { Calendar } from "lucide-react";
 import "./OffersDetails.css"
 import Comments from "../../components/Comments/Comments";
 import { useAuth } from "../../hooks/useAuthContext";
@@ -22,6 +22,11 @@ export const OffersDetails = () => {
   const [selectedRating, setsSelectedRating] = useState("");
   //const [comments, setComments] = useState([]);
 
+  const { user } = useAuth();
+  const isCompany = user && Array.isArray(user.roles) && user.roles.includes("COMPANY");
+
+  //console.log("Stored user:", JSON.parse(localStorage.getItem("user")));
+
   const getComments = () => {
     fetch(`${url}/api/offers/${id}/comments`)
       .then(res => res.json())
@@ -34,10 +39,13 @@ export const OffersDetails = () => {
   const handleCommentSubmit = (e) => {
     e.preventDefault();
 
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+
     const payload = {
       offer_id: parseInt(id), // backend check
       content: newComment,
       rating: selectedRating,
+      user_id: storedUser?.id,
     };
 
     console.log("Sending comment payload:", JSON.stringify(payload, null, 2));
@@ -56,8 +64,8 @@ export const OffersDetails = () => {
       .then((data) => {
         console.log("Comment posted:", data);
         setNewComment("");
-        document.getElementById("exampleModal").classList.remove("show"); 
-        document.body.classList.remove("modal-open");                     
+        document.getElementById("exampleModal").classList.remove("show");
+        document.body.classList.remove("modal-open");
         setsSelectedRating("");
         getComments();
 
@@ -113,7 +121,7 @@ export const OffersDetails = () => {
       if (modalEl && window.bootstrap) {
         window.bootstrap.Modal.getOrCreateInstance(modalEl);
       }
-    }, 0); // you can also try 100 if needed
+    }, 0);
 
     return () => clearTimeout(timeout);
   }, []);
@@ -202,7 +210,7 @@ export const OffersDetails = () => {
                     {/*button trigger modal*/}
                     <button
                       type="button"
-                      className="btn btn-primary"
+                      className={`btn-add-comment ${isCompany ? "d-none" : ""}`}
                       onClick={() => {
                         const modalEl = document.getElementById("exampleModal");
                         if (modalEl && window.bootstrap) {
@@ -311,9 +319,11 @@ export const OffersDetails = () => {
                                 </div>
 
                               </div>
-                              <button type="submit" className="button-submit" >
-                                Submit Comment
-                              </button>
+                              <div className="d-flex justify-content-end">
+                                <button type="submit" className="button-submit">
+                                  Submit Comment
+                                </button>
+                              </div>
                             </form>
                           </div>
                           <div className="modal-footer">
@@ -323,9 +333,6 @@ export const OffersDetails = () => {
                               data-bs-dismiss="modal"
                             >
                               Close
-                            </button>
-                            <button type="button" className="button-save" onClick={() => addNewComment()}>
-                              Save changes
                             </button>
                           </div>
                         </div>

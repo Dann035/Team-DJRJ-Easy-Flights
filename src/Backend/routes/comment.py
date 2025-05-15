@@ -1,6 +1,6 @@
 from flask import request, jsonify, Blueprint
-from flask_jwt_extended import jwt_required, get_jwt_identity
-from src.Backend.models import db, Comments, Offers
+from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt
+from Backend.models import db, Comments, Offers
 
 
 
@@ -8,31 +8,26 @@ comments_bp = Blueprint('comments', __name__)
 
 # endpoint para crear un comentario   
 @comments_bp.route('/comments', methods=['POST'])
-#@jwt_required() #necesario tener usuario si qres hacer comentario
+#@jwt_required() 
 def create_comments():
-    #commentario extrae el contenido, el id de la oferta y el id del usuario
-    #user_id= get_jwt_identity #funcion extrae id dekl user
-    data= request.get_json()#extrae todos los datos del request en json
-    content=data.get("content", None)#extrae contenido de data
-    offer_id=data.get("offer_id", None)#extrae el id de la oferta de data
-    rating=data.get("rating", None)#extrae la valoración de data
-    
-    created_at = data.get("created_at", None)
+    data = request.get_json()
+    content = data.get("content")
+    offer_id = data.get("offer_id")
+    rating = data.get("rating")
+    user_id = data.get("user_id")
 
-    if not content:
-        return jsonify({"error": "Missing content"}), 400 #comentario no puede estar vacío
-    #objeto de comentario
-    comment= Comments(
-        #user_id=user_id,
-        created_at=created_at,
+    if not content or not user_id:
+        return jsonify({"error": "Missing content or user_id"}), 400
+
+    comment = Comments(
+        user_id=user_id,
         content=content,
         offer_id=offer_id,
         rating=rating
-       
     )
     db.session.add(comment)
     db.session.commit()
-    return jsonify(comment.serialize()), 201#success
+    return jsonify(comment.serialize()), 201
 
 #endpoint para extraer comentarios de una offer en particular
 @comments_bp.route('/offers/<int:offer_id>/comments', methods=['GET'])#ruta debe tener offer_id. No necesario tener usuario

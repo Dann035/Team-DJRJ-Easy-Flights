@@ -1,9 +1,16 @@
+.accordion-item{
+    background-color:transparent;
+}
+
 .accordion-button{
     color: white;
-    background-color: var(--clr-black) !important;
+    background-color: transparent;
+}
+.accordion-button:hover{
+background-color: rgb(69, 223, 223);
 }
 
 .accordion-body{
-    background-color: var(--clr-black) !important;
+    background-color:transparent;
     color: white;
 }

@@ -1,13 +1,13 @@
 
 .about-container {
-    background-color: var(--clr-black) !important;
+    background-color: transparent;
     font-family: Arial, sans-serif;
     text-align: center;
     padding-bottom: 40px;
   }
   
   .about-header {
-    background-color: var(--clr-black) !important;
+    background-color:transparent;
     color: white;
     padding: 20px 0;
   }
@@ -22,13 +22,6 @@
     pointer-events: none;
     box-shadow: none; 
     transition: none; 
-  }
-  
-  .intro {
-    max-width: 700px;
-    margin: 20px auto;
-    padding: 0 20px;
-    font-size: 1.1em;
   }
   
   .team {
@@ -63,7 +56,7 @@
   }
   
   .flip-card-front-au, .flip-card-back-au {
-    background-color: var(--clr-black) !important;
+    background-color: transparent;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -81,7 +74,6 @@
   
   .flip-card-front-au img {
     width: 100px;
-    height: 100px;
     object-fit: cover;
     margin-bottom: 10px;
     transition: none;
@@ -89,34 +81,25 @@
   }
   
   .flip-card-back-au {
-    background-color: var(--clr-black) !important;
+    background-color:transparent;
     transform: rotateY(180deg);
   }
   
   .flip-card-back-au img {
     width: 60px;
-    height: 60px;
     margin-bottom: 10px;
     
   }
   
   .flip-card-back-au a {
-    color: #007BFF;
     text-decoration: none;
     margin: 0 5px;
   }
   
 
-  h3{
-    color: #ffffff;
-  }
-
-  
-
 .diagram-section {
-  background-color: var(--clr-black) !important;
+  background-color: transparent;
   padding: 40px 20px;
-  background-color: #1a1a1a;
 }
 
 .diagram-grid {
@@ -125,23 +108,22 @@
   gap: 20px;
   max-width: 1000px;
   margin: auto;
+  background-color: transparent;
 }
 
 .diagram-card {
-  background-color: #2a2a2a;
+  background-color:transparent;
   border-left: 6px solid #00bfff46;
   border-radius: 10px;
   padding: 20px;
   color: white;
   box-shadow: 0 0 8px rgba(0, 191, 255, 0.4);
   transition: transform 0.3s ease;
+  margin-bottom: 25px;
 }
 
 .diagram-card:hover {
   transform: translateY(-5px);
 }
 
-.diagram-card h3 {
-  color: #ffffff;
-  margin-bottom: 10px;
-}
+
