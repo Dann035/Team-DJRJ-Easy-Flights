@@ -20,7 +20,6 @@ function ForgetPass() {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [passwordsMatch, setPasswordsMatch] = useState(null);
-    
     const [email, setEmail] = useState("");
     const [verificationCode, setVerificationCode] = useState("");
     const [password, setPassword] = useState({

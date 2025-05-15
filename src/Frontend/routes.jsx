@@ -23,7 +23,6 @@ import TermsofService from "./pages/Policy/TermsofService.jsx";
 import PrivacyPolicy from "./pages/Policy/PolicyInfo.jsx";
 import CookiesPolicy from "./pages/Policy/UserConsent.jsx";
 import {OffersList } from "./pages/Offers/OffersList.jsx";
-import ProfilePage from "./components/Profilepage/ProfilePage.jsx";
 import PaymentPage from "./pages/PaymentPage/PaymentPage.jsx";
 import BillPage from "./pages/PaymentPage/BillPage.jsx";
 import AboutUser from "./pages/AboutUser/AboutUser.jsx";
@@ -42,7 +41,6 @@ export const router = createBrowserRouter(
       <Route path="/" element={<Layout />} errorElement={<h1>Not found!</h1>} >
         <Route path= "/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signupCompany" element={<SignupCompany />} />
         <Route path="/travel-tips" element={<TravelTips />} />

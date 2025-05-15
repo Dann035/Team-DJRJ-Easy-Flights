@@ -25,7 +25,7 @@ export const OffersDetails = () => {
   const { user } = useAuth();
   const isCompany = user && Array.isArray(user.roles) && user.roles.includes("COMPANY");
 
-
+  //console.log("Stored user:", JSON.parse(localStorage.getItem("user")));
 
   const getComments = () => {
     fetch(`${url}/api/offers/${id}/comments`)
@@ -39,10 +39,13 @@ export const OffersDetails = () => {
   const handleCommentSubmit = (e) => {
     e.preventDefault();
 
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+
     const payload = {
       offer_id: parseInt(id), // backend check
       content: newComment,
       rating: selectedRating,
+      user_id: storedUser?.id,
     };
 
     console.log("Sending comment payload:", JSON.stringify(payload, null, 2));
@@ -118,7 +121,7 @@ export const OffersDetails = () => {
       if (modalEl && window.bootstrap) {
         window.bootstrap.Modal.getOrCreateInstance(modalEl);
       }
-    }, 0); // you can also try 100 if needed
+    }, 0);
 
     return () => clearTimeout(timeout);
   }, []);

@@ -27,3 +27,4 @@ pyyaml==6.0.1
 six==1.16.0
 urllib3==2.2.1
 werkzeug==3.0.2
+cloudinary == 2.6.1
