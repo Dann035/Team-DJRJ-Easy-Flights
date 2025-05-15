@@ -26,10 +26,10 @@ export const Footer = () => (
 				<h5>Follow Us</h5>
 				<ul className="list-unstyled">
 					<li><a href="/facebook">Facebook</a></li>
-					<li><a href="#">Twitter</a></li>
+					{/*<li><a href="#">Twitter</a></li>*/}
 					<li><a href="/instagram">Instagram</a></li>
-					<li><a href="#">LinkedIn</a></li>
-					<li><a href="#">YouTube</a></li>
+					{/*<li><a href="#">LinkedIn</a></li>*/}
+					{/*<li><a href="#">YouTube</a></li>*/}
 				</ul>
 			</section>
 		</div>
