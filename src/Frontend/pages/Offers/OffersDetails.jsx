@@ -210,7 +210,7 @@ export const OffersDetails = () => {
                     {/*button trigger modal*/}
                     <button
                       type="button"
-                      className={`btn btn-primary${!isCompany ? "d-none" : ""}`}
+                      className={`btn-add-comment ${isCompany ? "d-none" : ""}`}
                       onClick={() => {
                         const modalEl = document.getElementById("exampleModal");
                         if (modalEl && window.bootstrap) {
