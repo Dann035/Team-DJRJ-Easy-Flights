@@ -1,0 +1,113 @@
+/* Estilos generales */
+.discovercontainer {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 3rem;
+  max-width: 800px;
+  margin: auto;
+  background-color:transparent; /* Fondo suave azul claro */
+  border-radius: 12px; /* Bordes redondeados */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para los textos principales */
+.discovercontainer h1 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.discovercontainer p {
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  
+}
+
+.discovercontainer strong {
+}
+
+/* Estilo del input de búsqueda */
+.discovercontainer input {
+  padding: 12px;
+  width: 70%;
+  margin-right: 15px;
+  font-size: 1rem;
+  color: #333;
+  border: 2px solid #ccccccaf;
+  border-radius: 6px;
+  transition: border-color 0.3s ease;
+  background-color: transparent;
+}
+
+.discovercontainer input:focus {
+  outline: none;
+  border-color: #0077cc;
+  background-color: aliceblue;
+}
+
+/* Estilo del botón de búsqueda */
+.discovercontainer button {
+  padding: 12px 20px;
+  background-color: #0077cc;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.discovercontainer button:hover {
+  background-color: #005fa3;
+}
+
+/* Caja de información del país */
+.discovercontainer .infobox {
+  margin-top: 30px;
+  background:transparent;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.discovercontainer .infobox h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  color: aliceblue;
+  
+}
+
+.discovercontainer .infobox p {
+  font-size: 1.5rem;
+  line-height: 1.5;
+}
+
+.discovercontainer .infobox img {
+  width: 200px;
+  margin-top: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Enlace de más información turística */
+.discovercontainer .infobox a {
+  display: inline-block;
+  margin-top: 15px;
+  color: #0077cc;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.discovercontainer .infobox a:hover {
+  color: #005fa3;
+}
+
+/* Estilo del mensaje de error */
+.discovercontainer .error {
+  color: red;
+  font-size: 1.1rem;
+  margin-top: 15px;
+  text-align: center;
+}

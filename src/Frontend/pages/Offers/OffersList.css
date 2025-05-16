@@ -5,10 +5,12 @@
     object-fit: cover;
 }
 
-.of-list{
-  display: grid !important; 
-  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-  gap: 1rem;
+.of-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; 
+  justify-content: space-between; 
+  padding: 10px;
 }
 
 .card {

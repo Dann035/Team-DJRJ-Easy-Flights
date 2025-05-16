@@ -36,6 +36,7 @@ import Comments from "./components/Comments/Comments.jsx";
 import OffersAPI from "./pages/Offers/OffersAPI/OffersAPI.jsx";
 import PaymentApi from "./pages/Offers/OffersAPI/PaymentApi.jsx";
 import BillAPI from "./pages/Offers/OffersAPI/BillApi.jsx";
+import Discover from "./components/Discover/Discover.jsx";
 
 
 export const router = createBrowserRouter(
@@ -69,6 +70,7 @@ export const router = createBrowserRouter(
         <Route path="/instagram" element={<Instagram />} />
         <Route path="/facebook" element={<Facebook />} />
         <Route path="/forgotPass" element={<ForgetPass />} />
+        <Route path="/discover" element={<Discover />} />
 
       </Route>
     ),
