@@ -95,6 +95,10 @@ export const AuthProvider = ({ children }) => {
                 Authorization: `Bearer ${localStorage.getItem('access_token')}`
             }
         })
+        if (!response.ok) {
+            console.error('Error al cerrar sesión');
+            return;
+        }
         const data = await response.json();
         localStorage.removeItem('access_token');
         localStorage.removeItem('user');
