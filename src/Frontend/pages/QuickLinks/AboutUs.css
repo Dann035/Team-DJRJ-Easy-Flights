@@ -1,129 +1,354 @@
+/* AboutUs.css - Estilos para el componente AboutUs */
 
-.about-container {
-    background-color: transparent;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding-bottom: 40px;
-  }
-  
-  .about-header {
-    background-color:transparent;
-    color: white;
-    padding: 20px 0;
-  }
-  
-  .main-image img {
-    
-    width: 80%;
-    max-width: 800px;
-    margin: 20px auto;
-    display: block;
-    border-radius: 10px;
-    pointer-events: none;
-    box-shadow: none; 
-    transition: none; 
-  }
-  
-  .team {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 20px;
-  }
-  
-  .flip-card-au {
-    background-color: transparent;
-    width: 250px;
-    height: 320px;
-    perspective: 1000px;
-    border: 1px solid #ccc;
-    border-radius: 12px;
-  } 
-  
-  .flip-card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    transition: transform 0.6s;
-    transform-style: preserve-3d;
-    border-radius: 12px;
-  }
-  
-  .flip-card-au:hover .flip-card-inner {
-    transform: rotateY(180deg);
-  }
-  
-  .flip-card-front-au, .flip-card-back-au {
-    background-color: transparent;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    background: transparent;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: white;
-  }
-  
-  .flip-card-front-au img {
-    width: 100px;
-    object-fit: cover;
-    margin-bottom: 10px;
-    transition: none;
-    
-  }
-  
-  .flip-card-back-au {
-    background-color:transparent;
-    transform: rotateY(180deg);
-  }
-  
-  .flip-card-back-au img {
-    width: 60px;
-    margin-bottom: 10px;
-    
-  }
-  
-  .flip-card-back-au a {
-    text-decoration: none;
-    margin: 0 5px;
-  }
-  
-
-.diagram-section {
-  background-color: transparent;
-  padding: 40px 20px;
-}
-
-.diagram-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-  max-width: 1000px;
-  margin: auto;
-  background-color: transparent;
-}
-
-.diagram-card {
-  background-color:transparent;
-  border-left: 6px solid #00bfff46;
-  border-radius: 10px;
-  padding: 20px;
+/* Contenedor principal */
+.about-us-container {
+  position: relative;
+  min-height: 100vh;
+  background-color: black;
   color: white;
-  box-shadow: 0 0 8px rgba(0, 191, 255, 0.4);
-  transition: transform 0.3s ease;
-  margin-bottom: 25px;
+  overflow: hidden;
 }
 
-.diagram-card:hover {
-  transform: translateY(-5px);
+/* Estilos del logo */
+.logo-container-aur {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 0;
+  opacity: 0.2;
 }
 
+.logo-wrapper {
+  position: relative;
+}
 
+.logo-text {
+  font-size: 4rem;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 40px #0ff;
+}
+
+.logo-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: transparent;
+  opacity: 0.7;
+  text-shadow: 0 0 15px #0ff, 0 0 30px #0ff;
+  animation: pulse 2s infinite;
+}
+
+/* Contenido principal */
+.main-content {
+  position: relative;
+  z-index: 10;
+}
+
+/* Descripción del proyecto */
+.project-description {
+  padding-top: 5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .project-description {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+}
+
+.project-title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  background: linear-gradient(to right, #4dd0e1, #3b82f6, #9333ea);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (min-width: 768px) {
+  .project-title {
+    font-size: 4.5rem;
+  }
+}
+
+.description-content {
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+.description-subtitle {
+  font-size: 1.25rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #e0f7fa;
+}
+
+@media (min-width: 768px) {
+  .description-subtitle {
+    font-size: 1.5rem;
+  }
+}
+
+.description-text {
+  font-size: 1.125rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #d1d5db;
+}
+
+@media (min-width: 768px) {
+  .description-text {
+    font-size: 1.25rem;
+  }
+}
+
+.divider {
+  width: 8rem;
+  height: 0.25rem;
+  background: linear-gradient(to right, #4dd0e1, #9333ea);
+  margin: 4rem auto;
+}
+
+/* Título del equipo */
+.team-title-container {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.team-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
+}
+
+@media (min-width: 768px) {
+  .team-title {
+    font-size: 3rem;
+  }
+}
+
+/* Contenedor de miembros del equipo */
+.team-members-container {
+  padding: 0 1rem;
+  padding-bottom: 8rem;
+}
+
+@media (min-width: 768px) {
+  .team-members-container {
+    padding: 0 3rem;
+    padding-bottom: 8rem;
+  }
+}
+
+/* Miembro del equipo */
+.team-member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 8rem;
+  transition: all 1s ease;
+}
+
+@media (min-width: 768px) {
+  .team-member {
+    flex-direction: row;
+    gap: 4rem;
+  }
+}
+
+/* Estados de visibilidad para animaciones */
+.hidden-left {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.hidden-right {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Imagen del miembro */
+.member-image {
+  width: 16rem;
+  height: 16rem;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .member-image {
+    width: 20rem;
+    height: 20rem;
+  }
+  
+  .order-first {
+    order: 1;
+  }
+  
+  .order-last {
+    order: 2;
+  }
+}
+
+.image-gradient {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom right, #4dd0e1, #3b82f6, #9333ea);
+}
+
+.member-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: overlay;
+  opacity: 0.8;
+}
+
+.image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, black, transparent, transparent);
+}
+
+/* Información del miembro */
+.member-info {
+  max-width: 24rem;
+  position: relative;
+}
+
+.info-card {
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  background: linear-gradient(to bottom right, rgba(17, 24, 39, 0.8), rgba(17, 24, 39, 0.5));
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(75, 85, 99, 0.5);
+}
+
+.member-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(to right, #7edce2, #3b82f6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (min-width: 768px) {
+  .member-name {
+    font-size: 1.875rem;
+  }
+}
+
+.member-alias {
+  font-size: 1.25rem;
+}
+
+.member-role {
+  font-size: 1.125rem;
+  color: #d8b4fe;
+  margin-bottom: 1rem;
+}
+
+.member-description {
+  color: #d1d5db;
+  margin-bottom: 1.5rem;
+}
+
+/* Enlaces sociales */
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  transition: all 0.3s;
+}
+
+.github-button {
+  background: linear-gradient(to right, #1f2937, #4b5563);
+}
+
+.github-button:hover {
+  background: linear-gradient(to right, #164e63, #075985);
+}
+
+.linkedin-button {
+  background: linear-gradient(to right, #1f2937, #4b5563);
+}
+
+.linkedin-button:hover {
+  background: linear-gradient(to right, #4c1d95, #1e40af);
+}
+
+.icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Partículas */
+.particles-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 8rem;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: #4dd0e1;
+  animation: fadeOut ease-out infinite;
+}
+
+/* Animaciones */
+@keyframes fadeOut {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-100px) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
