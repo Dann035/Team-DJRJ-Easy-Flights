@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-const url = import.meta.env.VITE_BACKEND_URL
 import { useLanguage } from "../../context/LanguageContext";
 import "./Comments.css";
 import { useParams } from "react-router-dom";
 import useGlobalReducer from "../../hooks/useGlobalReducer";
 import { useAuth } from "../../hooks/useAuthContext";
+const url = import.meta.env.VITE_BACKEND_URL
 
 
 function Comments() {
@@ -13,11 +13,16 @@ function Comments() {
   const comments = store.comments;
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const { texts } = useLanguage();
+
+  
   //GET COMMENT FROM OFFER
   const { id } = useParams();
   const getComments = () => {
     fetch(`${url}/api/offers/${id}/comments`)
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) throw new Error("Failed to fetch comments");
+        return res.json();
+      })
       .then(data => {
         dispatch({ type: "SET_COMMENTS", payload: data });
       })
@@ -38,22 +43,23 @@ function Comments() {
         return resp.json();
       })
       .then(() => {
-        // Refresca la lista de comentarios usando el id correcto de la oferta
         return fetch(`${url}/api/offers/${id}/comments`);
       })
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) throw new Error("Failed to fetch comments after deletion");
+        return res.json();
+      })
       .then(data => {
         dispatch({ type: "SET_COMMENTS", payload: data });
         console.log("Fetched comments:", data);
       })
       .catch((error) =>
-        console.error("Error when deleting your comment:", error)
+        console.error("Error in your comments:", error)
       );
   };
 
   useEffect(() => {
     getComments();
-    // eslint-disable-next-line
   }, []);
 
   return (
