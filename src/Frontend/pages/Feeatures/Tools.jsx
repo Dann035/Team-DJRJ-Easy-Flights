@@ -137,7 +137,7 @@ export default function Tools() {
     };
 
     return (
-        <div className="container my-5 px-3" style={{ maxWidth: '960px' }}>
+        <div className="container my-5 px-3 containertools" style={{ maxWidth: '960px' }}>
             {vista === 'menu' && (
                 <div className="row text-center">
                     <h1 className="mb-4">🧳 Herramientas de Viaje</h1>
@@ -146,7 +146,7 @@ export default function Tools() {
                             className="shadow-sm p-4 tools-card"
                             role="button"
                             onClick={() => setVista('planificador')}
-                            style={{ border: '1px solid #ddd', borderRadius: '8px', cursor: 'pointer' }}
+                            style={{ borderRadius: '8px', cursor: 'pointer' }}
                         >
                             <img
                                 src="https://previews.123rf.com/images/firstblood/firstblood1307/firstblood130700513/20653892-c%C3%A1lculo-del-presupuesto-de-la-casa-la-calculadora-una-pluma-el-diagrama.jpg"
@@ -162,7 +162,7 @@ export default function Tools() {
                             className="shadow-sm p-4 tools-card"
                             role="button"
                             onClick={() => setVista('divisor')}
-                            style={{ border: '1px solid #ddd', borderRadius: '8px', cursor: 'pointer' }}
+                            style={{  borderRadius: '8px', cursor: 'pointer' }}
                         >
                             <img
                                 src="https://www.togetherprice.com/es/static/b7afeb3174d09b9322080c90f4cb1ab1/c61e6/dividir_gastos_entre_amigos.jpg"
@@ -178,14 +178,14 @@ export default function Tools() {
 
             {(vista === 'planificador' || vista === 'divisor') && (
                 <div className="mb-4">
-                    <button className="btn btn-secondary" onClick={() => setVista('menu')}> 🔙 Volver a Herramientas</button>
+                    <button className="btn buttonback" onClick={() => setVista('menu')}> 🔙 Volver a Herramientas</button>
                 </div>
             )}
 
             {/* PLANIFICADOR DE VIAJE/PRESUPUESTOS*/}
             {vista === 'planificador' && (
             <div className=" d-flex justify-content-center my-5 planifier">
-                <div className="p-4 shadow bg-light rounded " style={{ width: '100%', maxWidth: '600px' }}>
+                <div className="p-4 rounded " style={{ width: '100%', maxWidth: '600px' }}>
                 <h2 className="mb-4 text-center">📊 Planificador de Viaje</h2>
 
                 {/* Selector de moneda */}
@@ -294,7 +294,7 @@ export default function Tools() {
                 )}
 
                 <div className="d-grid">
-                    <button className="btn btn-primary" onClick={calcularTotal}>Calcular Total del Viaje</button>
+                    <button className="btn buttonresult" onClick={calcularTotal}>Calcular Total del Viaje</button>
                 </div>
 
                 {/* Mostrar lista de resultados detallados */}
@@ -336,9 +336,9 @@ export default function Tools() {
 
                     {/* Botón para guardar el presupuesto */}
                     <div className="mt-4">
-                        <button className="btn btn-success w-100" onClick={guardarDivisionEnPerfil}>
+                        {/*<button className="btn buttonsaveuser w-100" onClick={guardarDivisionEnPerfil}>
                         Guardar este presupuesto en tu perfil
-                        </button>
+                        </button>*/}
                     </div>
                     </>
                 )}
@@ -348,7 +348,7 @@ export default function Tools() {
 
         {/* DIVISOR DE GASTOS POR PERSONAS */}
             {vista === 'divisor' && (
-                <div  className="p-4 shadow bg-white rounded split" >
+                <div  className="p-4 shadow rounded split" >
                     <h2 className="mb-3 text-center">👥 División de Gastos por Personas</h2>
 
                     <div className="mb-4">
@@ -430,9 +430,9 @@ export default function Tools() {
                     )}
 
                     <div className="mt-4">
-                        <button className="btn btn-success w-100" onClick={guardarDivisionEnPerfil}>
+                       {/* <button className="btn buttonsave  w-100" onClick={guardarDivisionEnPerfil}>
                             Guardar esta división en tu perfil
-                        </button>
+                        </button>*/}
                     </div>
                 </div>
             )}

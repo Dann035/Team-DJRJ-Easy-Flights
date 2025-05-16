@@ -1,13 +1,12 @@
-    h1,h2,h3,p,span{
-      font-family: Verdana, Geneva, Tahoma, sans-serif;
-
-    }
+  .details{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: .7rem !important;
+  }
 
   #img-offer{
     display: flex;
     width: 600px;
     width: 630px;
-
   }
 
   #img-offer img{
@@ -80,7 +79,7 @@
   }
   
   .info h2, .info h3 {
-    margin-bottom: 0.5rem;
+    margin-bottom: .5rem;
   }
   
   .included {
@@ -120,8 +119,6 @@
     min-width: 320px;
     right: 5%;
     position:relative;
-
-    
   }
   
   
@@ -132,9 +129,10 @@
     right: 20%;
     text-align: center;
     align-items: center;
+    width: 300px;
     min-width: 280px;
     color: #6f00ff;
-    height: 350px;
+    height: 370px;
     border-radius: 10px;
   }
   
@@ -159,8 +157,8 @@
   
   .book-btn {
     display: inline-block;
-    margin-top: 1rem;
-    background: #031d46;
+    margin-top: .2rem;
+    background: var(--clr-primary700-blue);
     color: white;
     padding: 0.8rem 1.5rem;
     border-radius: 8px;
@@ -170,7 +168,20 @@
   }
   
   .book-btn:hover {
-    background: #2563eb;
+    background: #031d46;
+  }
+
+  .btn-add-comment{
+    background: var(--turquoise);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+  .btn-add-comment:hover {
+    background: #031d46;
   }
 
   .rating {

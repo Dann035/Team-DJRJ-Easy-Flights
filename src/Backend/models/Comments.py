@@ -19,6 +19,7 @@ class Comments(db.Model):
     offer_id: Mapped[int] = mapped_column(ForeignKey('offers.id'),nullable=True)
     company_id: Mapped[int] = mapped_column(ForeignKey('companies.id'),nullable=True)
     rating: Mapped[float] = mapped_column(Float, nullable=True)
+    
 
 
 
@@ -34,4 +35,6 @@ class Comments(db.Model):
             "content": self.content,
             "user_id": self.user_id,
             "rating": self.rating,
+            "user_name": self.user.name if self.user else None,
+            "user_avatar": self.user.avatar if self.user and self.user.avatar else None
         }

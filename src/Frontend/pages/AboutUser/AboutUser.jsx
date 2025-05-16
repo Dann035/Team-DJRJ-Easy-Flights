@@ -15,9 +15,9 @@ const AboutUser = () => {
         subscription: "",
         avatar: null,
     });
-    const [history, setHistory] = useState([]);
-    const [purchases, setPurchases] = useState([]);
-    const [activeTab, setActiveTab] = useState("history");
+    // const [history, setHistory] = useState([]);
+    // const [purchases, setPurchases] = useState([]);
+    const [activeTab, setActiveTab] = useState("subscription");
     const [isLoading, setIsLoading] = useState(true);
     const [notification, setNotification] = useState({
         show: false,
@@ -40,67 +40,67 @@ const AboutUser = () => {
                 avatar: userObj.avatar || null,
             }));
             
-            // Fetch user flight history and purchases once user data is loaded
-            fetchUserFlights(userObj.id);
-            fetchUserPurchases(userObj.id);
+            // // Fetch user flight history and purchases once user data is loaded
+            // fetchUserFlights(userObj.id);
+            // fetchUserPurchases(userObj.id);
             
             setIsLoading(false);
         }
     }, []);
 
-    // Función para obtener el historial de vuelos
-    const fetchUserFlights = async (id) => {
-        try {
-            // Verificar que tenemos un ID de usuario
-            const userId = id || user?.id;
-            if (!userId) return;
+    // // Función para obtener el historial de vuelos
+    // const fetchUserFlights = async (id) => {
+    //     try {
+    //         // Verificar que tenemos un ID de usuario
+    //         const userId = id || user?.id;
+    //         if (!userId) return;
 
-            const response = await fetch(`${URL}/api/user/${userId}/flights`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${access_token}`,
-                },
-            });
+    //         const response = await fetch(`${URL}/api/user/${userId}/flights`, {
+    //             method: "GET",
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //                 Authorization: `Bearer ${access_token}`,
+    //             },
+    //         });
 
-            if (!response.ok) {
-                throw new Error(`Error ${response.status}: ${response.statusText}`);
-            }
+    //         if (!response.ok) {
+    //             throw new Error(`Error ${response.status}: ${response.statusText}`);
+    //         }
 
-            const data = await response.json();
-            setHistory(data.flights || []);
-        } catch (error) {
-            console.error("Error fetching flight history:", error);
-            showNotification("Error al cargar historial de vuelos", "error");
-        }
-    };
+    //         const data = await response.json();
+    //         setHistory(data.flights || []);
+    //     } catch (error) {
+    //         console.error("Error fetching flight history:", error);
+    //         showNotification("Error al cargar historial de vuelos", "error");
+    //     }
+    // };
 
-    // Función para obtener las compras del usuario
-    const fetchUserPurchases = async (id) => {
-        try {
-            // Verificar que tenemos un ID de usuario
-            const userId = id || user?.id;
-            if (!userId) return;
+    // // Función para obtener las compras del usuario
+    // const fetchUserPurchases = async (id) => {
+    //     try {
+    //         // Verificar que tenemos un ID de usuario
+    //         const userId = id || user?.id;
+    //         if (!userId) return;
 
-            const response = await fetch(`${URL}/api/user/${userId}/purchases`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${access_token}`,
-                },
-            });
+    //         const response = await fetch(`${URL}/api/user/${userId}/purchases`, {
+    //             method: "GET",
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //                 Authorization: `Bearer ${access_token}`,
+    //             },
+    //         });
 
-            if (!response.ok) {
-                throw new Error(`Error ${response.status}: ${response.statusText}`);
-            }
+    //         if (!response.ok) {
+    //             throw new Error(`Error ${response.status}: ${response.statusText}`);
+    //         }
 
-            const data = await response.json();
-            setPurchases(data.purchases || []);
-        } catch (error) {
-            console.error("Error fetching purchases:", error);
-            showNotification("Error al cargar historial de compras", "error");
-        }
-    };
+    //         const data = await response.json();
+    //         setPurchases(data.purchases || []);
+    //     } catch (error) {
+    //         console.error("Error fetching purchases:", error);
+    //         showNotification("Error al cargar historial de compras", "error");
+    //     }
+    // };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -342,7 +342,7 @@ const AboutUser = () => {
                     </div>
 
                     <nav className="ausr-nav">
-                        <button
+                        {/* <button
                             onClick={() => setActiveTab("history")}
                             className={`ausr-nav-btn ${
                                 activeTab === "history" ? "active" : ""
@@ -362,8 +362,8 @@ const AboutUser = () => {
                                 <polyline points="12 6 12 12 16 14"></polyline>
                             </svg>
                             Historial de Viajes
-                        </button>
-                        <button
+                        </button> */}
+                        {/* <button
                             onClick={() => setActiveTab("purchases")}
                             className={`ausr-nav-btn ${
                                 activeTab === "purchases" ? "active" : ""
@@ -384,8 +384,8 @@ const AboutUser = () => {
                                 <path d="M16 10a4 4 0 0 1-8 0"></path>
                             </svg>
                             Compras
-                        </button>
-                        <button
+                        </button> */}
+                        {/* <button
                             onClick={() => setActiveTab("subscription")}
                             className={`ausr-nav-btn ${
                                 activeTab === "subscription" ? "active" : ""
@@ -405,12 +405,12 @@ const AboutUser = () => {
                                 <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
                             </svg>
                             Subscripción
-                        </button>
+                        </button> */}
                     </nav>
                 </aside>
 
                 <section className="ausr-main">
-                    {activeTab === "history" && (
+                    {/* {activeTab === "history" && (
                         <motion.div
                             className="ausr-tab-content"
                             variants={containerVariants}
@@ -466,9 +466,9 @@ const AboutUser = () => {
                                 </div>
                             )}
                         </motion.div>
-                    )}
+                    )} */}
 
-                    {activeTab === "purchases" && (
+                    {/* {activeTab === "purchases" && (
                         <motion.div
                             className="ausr-tab-content"
                             variants={containerVariants}
@@ -525,7 +525,7 @@ const AboutUser = () => {
                                 </div>
                             )}
                         </motion.div>
-                    )}
+                    )} */}
 
                     {activeTab === "subscription" && (
                         <motion.div
