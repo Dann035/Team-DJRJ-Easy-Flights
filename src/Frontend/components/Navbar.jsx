@@ -54,7 +54,7 @@ export const Navbar = () => {
 
                 >
                     <img
-                        src="../assets/Icono-Posible.png"
+                        src="public/assets/Icono-Posible.png"
                         alt="Logo Easy-Flights"
                         className="img-nav navbar-brand"
                         onClick={() => navigate("/")}
