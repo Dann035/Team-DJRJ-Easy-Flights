@@ -120,6 +120,40 @@ export default function AboutUs() {
         
     ];
 
+    const mentores = [
+        {
+            id: 5,
+            name: "Irio Gomez",
+            alias: "Irio",
+            role: "Full Stack Developer Senior / Mentor",
+            image: "./Irio-avatar.webp",
+            github: "https://github.com/irio-dev",
+            linkedin: "https://www.linkedin.com/in/iriogomez/",
+            direction: "left",
+        },
+        {
+            id: 6,
+            name: "Robert Tovar",
+            alias: "Robert",
+            role: "Full Stack Developer / Mentor",
+            github: "https://github.com/Roberttovarv",
+            linkedin: "https://www.linkedin.com/in/roberttovarv/",
+            image: "./Robert-avatar.webp",
+            direction: "right",
+        },
+        {
+            id: 7,
+            name: "Lucas Solari",
+            alias: "Luca",
+            role: "Full Stack Developer / Mentor",
+            github: "https://github.com/Lucaso1992",
+            linkedin: "https://www.linkedin.com/in/lucas-solari/",
+            image: "./Lucas-avatar.webp",
+            direction: "left",
+        }
+
+    ]
+
     return (
         <div className="about-us-container">
             {/* Logo con efecto neón */}
@@ -158,7 +192,7 @@ export default function AboutUs() {
                     ))}
                 </div>
 
-                {/* <div className="team-title-container">
+                <div className="team-title-container">
                     <h2 className="team-title">NUESTROS MENTORES</h2>
                 </div>
 
@@ -170,7 +204,7 @@ export default function AboutUs() {
                             scrollY={scrollY}
                         />
                     ))}
-                </div> */}
+                </div>
             </div>
         </div>
     );
