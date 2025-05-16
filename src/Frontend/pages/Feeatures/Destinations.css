@@ -12,6 +12,16 @@
   color: aqua;
 
 }
+.buttoncountry{
+  color: rgb(101, 211, 211);
+  font-size: 2rem;
+  border:none;
+  
+
+}
+.buttoncountry:hover{
+  color: #1f749b;
+}
 
 /* Tarjetas de destino */
 .row .card {

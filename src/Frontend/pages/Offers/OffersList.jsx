@@ -4,6 +4,8 @@ import { OfCard2 } from "./OfCard2/OfCard2";
 import useGlobalReducer from "../../hooks/useGlobalReducer";
 import { MapPin,Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
+import "./OffersList.css"
+
 
 const url = import.meta.env.VITE_BACKEND_URL
 export const OffersList = () => {
