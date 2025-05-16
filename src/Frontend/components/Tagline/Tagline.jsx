@@ -34,11 +34,11 @@ function Tagline() {
 
     const API_KEY = "3df7b5ea34msh823b5e336152f23p145132jsn0be3c1afda1b";
 
-    const URL = `https://skyscanner89.p.rapidapi.com/flights/roundtrip/list?`;
+    const URL = `https://flights-sky.p.rapidapi.com/flights/search-roundtrip?`;
     const options = {
         headers: {
             "x-rapidapi-key": API_KEY,
-            "x-rapidapi-host": "skyscanner89.p.rapidapi.com",
+            'x-rapidapi-host': 'flights-sky.p.rapidapi.com'
         },
     };
 
@@ -54,7 +54,7 @@ function Tagline() {
 
         try {
             const response = await fetch(
-                URL + `originId=${origen}&destinationId=${destino}`,
+                URL + `deEntityId=${origen}&toEntityId=${destino}`,
                 options
             );
             const data = await response.json();
@@ -78,13 +78,13 @@ function Tagline() {
     // Destinations data with images and descriptions
     const destinations = [
         {
-            id: "27542715",
+            id: "FMM",
             name: texts.lasVegas,
             image: "/images/destinations/las-vegas.jpg",
             desc: "La ciudad que nunca duerme",
         },
         {
-            id: "27537542",
+            id: "PIT",
             name: texts.newYork,
             image: "/images/destinations/new-york.jpg",
             desc: "La Gran Manzana",
