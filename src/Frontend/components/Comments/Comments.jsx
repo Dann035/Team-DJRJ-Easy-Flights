@@ -60,8 +60,7 @@ function Comments() {
     <section className="cm-container d-flex justify-content-center my-5">
       <div
         className="cm-box p-4 shadow rounded"
-        style={{ maxWidth: "700px", width: "100%" }}
-      >
+        style={{ maxWidth: "700px", width: "100%" }} >
         <h1 className="title-comments mb-3">{texts.offerReviews}</h1>
         <span style={{ fontSize: "1.5rem" }}></span>
 

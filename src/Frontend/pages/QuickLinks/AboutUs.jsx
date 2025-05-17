@@ -76,7 +76,7 @@ export default function AboutUs() {
             alias: "z3ro",
             role: "Full Stack Developer / Team Lead",
             github: "https://github.com/Dann035",
-            linkedin: "https://linkedin.com/in/daniellanda",
+            linkedin: "https://www.linkedin.com/in/daniel-landa-57337b349/",
             image: "./daniel-landa.jpg",
             description:
                 "Especializado en arquitectura de aplicaciones, Seguridad, desarrollo Backend y Frontend.",
