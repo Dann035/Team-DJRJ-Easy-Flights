@@ -89,7 +89,7 @@ export default function AboutUs() {
             role: "Full Stack Developer / Database Specialist",
             github: "https://github.com/JavierML-git",
             linkedin: "https://linkedin.com/in/javiermartinez",
-            image: "https://static.vecteezy.com/system/resources/previews/051/075/308/large_2x/a-man-with-glasses-and-a-beige-jacket-free-png.png",
+            image: "./img-javier-avatar.jpg",
             description:
             "Especializado en optimización de bases de datos y lógica.",
             direction: "right",
