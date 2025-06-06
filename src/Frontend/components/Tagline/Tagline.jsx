@@ -32,9 +32,9 @@ function Tagline() {
 
     const navigate = useNavigate();
 
-    const API_KEY = "3df7b5ea34msh823b5e336152f23p145132jsn0be3c1afda1b";
-
+    const API_KEY = import.meta.env.API_KEY;
     const URL = `https://flights-sky.p.rapidapi.com/flights/search-roundtrip?`;
+
     const options = {
         headers: {
             "x-rapidapi-key": API_KEY,

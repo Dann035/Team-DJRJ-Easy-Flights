@@ -54,7 +54,9 @@ app.config['MAIL_DEFAULT_SENDER'] = os.getenv('EMAIL_FROM', 'Easy Flights <norep
 MIGRATE = Migrate(app, db, compare_type=True)
 db.init_app(app)
 
-CORS(app, origins="*", supports_credentials=True)
+frontend_url = os.getenv('VITE_FRONTEND_URL')
+CORS(app, origins=[frontend_url], supports_credentials=True)
+
 
 # add the admin
 setup_admin(app)
@@ -92,6 +94,6 @@ def serve_any_other_file(path):
 
 
 # this only runs if `$ python src/main.py` is executed
+port = int(os.environ.get('PORT', 3001))
 if __name__ == '__main__':
-    PORT = int(os.environ.get('PORT', 3001))
-    app.run(host='0.0.0.0', port=PORT, debug=True)
+    app.run(host='0.0.0.0', port=port, debug=True)
