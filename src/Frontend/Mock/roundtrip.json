@@ -241,6 +241,7 @@
                                 "type": "Airport"
                             }
                         },
+                        "imgURL": "https://content.skyscnr.com/m/60b0a9f4bc25015a/original/Garita-Old-San-Juan.jpg",
                         "price": "$587",
                         "rawPrice": 587.0,
                         "tripDuration": "2-day trip"
@@ -325,6 +326,7 @@
                                 "type": "Airport"
                             }
                         },
+                        "imgURL": "https://content.skyscnr.com/6479e5cf34fcf9a9aa130df1b534eb19/GettyImages-120992245.jpg",
                         "price": "$562",
                         "rawPrice": 562.0,
                         "tripDuration": "4-day trip"

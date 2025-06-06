@@ -396,3 +396,374 @@
         opacity: 0.4;
     }
 }
+
+/* === MEDIA QUERIES === */
+
+/* Extra large screens (1440px and up) */
+@media (min-width: 1440px) {
+    .nav-container {
+        padding: 15px 8%;
+    }
+
+    .img-nav {
+        height: 200px;
+        width: 200px;
+        margin-right: 180px;
+    }
+
+    .nav-container.scrolled .img-nav {
+        height: 100px;
+        width: 100px;
+        margin-right: 150px;
+    }
+
+    .nav-container .nav-list .item-nav {
+        font-size: 1.05rem;
+        margin-right: 30px;
+    }
+
+    #btn-nav-login {
+        font-size: 0.9rem;
+        padding: 12px 25px;
+    }
+}
+
+/* Large desktop screens (1200px to 1439px) */
+@media (min-width: 1200px) and (max-width: 1439px) {
+    .nav-container {
+        padding: 12px 6%;
+    }
+    
+    .img-nav {
+        height: 180px;
+        width: 180px;
+        margin-right: 150px;
+    }
+}
+
+/* Regular desktop screens (992px to 1199px) */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .nav-container {
+        padding: 10px 5%;
+    }
+
+    .img-nav {
+        height: 150px;
+        width: 150px;
+        margin-right: 100px;
+    }
+
+    .nav-container.scrolled .img-nav {
+        height: 70px;
+        width: 70px;
+        margin-right: 80px;
+    }
+
+    .nav-container .nav-list .item-nav {
+        font-size: 0.9rem;
+        margin-right: 20px;
+    }
+
+    #btn-nav-login {
+        font-size: 0.8rem;
+        margin-right: 20px;
+    }
+
+    .user-profile-container {
+        gap: 10px;
+    }
+}
+
+/* Tablets and small desktops (768px to 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+    .nav-container {
+        padding: 8px 4%;
+    }
+
+    .img-nav {
+        height: 120px;
+        width: 120px;
+        margin-right: 50px;
+        margin-left: 0;
+    }
+
+    .nav-container.scrolled .img-nav {
+        height: 60px;
+        width: 60px;
+        margin-right: 40px;
+    }
+
+    .nav-container .nav-list .item-nav {
+        font-size: 0.85rem;
+        margin-right: 15px;
+    }
+
+    #btn-nav-login {
+        font-size: 0.8rem;
+        padding: 8px 15px;
+        margin-right: 15px;
+    }
+
+    .user-profile-container {
+        padding: 3px 8px 3px 3px;
+        gap: 8px;
+    }
+
+    .user-avatar {
+        width: 32px;
+        height: 32px;
+    }
+
+    .btn-logout {
+        font-size: 0.8rem;
+        padding: 8px 15px;
+    }
+}
+
+/* Large mobile devices (576px to 767px) */
+@media (min-width: 576px) and (max-width: 767px) {
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-container {
+        padding: 8px 4%;
+    }
+
+    .img-nav {
+        height: 100px;
+        width: 100px;
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    .nav-container.scrolled .img-nav {
+        height: 50px;
+        width: 50px;
+        margin-right: 0;
+    }
+
+    .nav-list {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background: rgba(13, 35, 48, 0.95);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: 80px;
+        transition: right 0.4s ease;
+        z-index: 15;
+        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-list.open {
+        right: 0;
+    }
+
+    .nav-container .nav-list .item-nav {
+        margin-right: 0;
+        margin-bottom: 25px;
+        font-size: 1.1rem;
+        padding: 10px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .item-nav::after {
+        bottom: 0;
+        width: 50%;
+        left: 25%;
+    }
+
+    #btn-nav-login {
+        margin: 15px auto;
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+
+    .user-profile-container {
+        margin: 0 auto;
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .user-avatar {
+        width: 45px;
+        height: 45px;
+        margin-bottom: 10px;
+    }
+
+    .btn-logout {
+        width: 80%;
+    }
+
+    /* Overlay para cerrar el menú al hacer clic fuera */
+    .nav-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.6);
+        display: none;
+        z-index: 10;
+    }
+
+    .nav-overlay.open {
+        display: block;
+    }
+}
+
+/* Small mobile devices (up to 575px) */
+@media (max-width: 575px) {
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-container {
+        padding: 6px 3%;
+    }
+
+    .img-nav {
+        height: 80px;
+        width: 80px;
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    .nav-container.scrolled .img-nav {
+        height: 40px;
+        width: 40px;
+        margin-right: 0;
+    }
+
+    .nav-list {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 85%;
+        height: 100vh;
+        background: rgba(13, 35, 48, 0.98);
+        backdrop-filter: blur(15px);
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: 70px;
+        transition: right 0.4s ease;
+        z-index: 15;
+        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-list.open {
+        right: 0;
+    }
+
+    .nav-container .nav-list .item-nav {
+        margin-right: 0;
+        margin-bottom: 20px;
+        font-size: 1rem;
+        padding: 8px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .item-nav::after {
+        bottom: 0;
+        width: 40%;
+        left: 30%;
+    }
+
+    #btn-nav-login {
+        margin: 10px auto;
+        padding: 8px 15px;
+        font-size: 0.85rem;
+        width: 80%;
+        justify-content: center;
+    }
+
+    .user-profile-container {
+        margin: 0 auto;
+        flex-direction: column;
+        padding: 8px;
+    }
+
+    .user-avatar {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 8px;
+    }
+
+    .btn-logout {
+        width: 80%;
+        font-size: 0.8rem;
+        padding: 8px 15px;
+    }
+
+    /* Overlay para cerrar el menú al hacer clic fuera */
+    .nav-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.7);
+        display: none;
+        z-index: 10;
+    }
+
+    .nav-overlay.open {
+        display: block;
+    }
+
+    /* Ajuste para línea de escaneo */
+    @keyframes scan-line {
+        0% {
+            transform: translateX(-300%);
+        }
+        100% {
+            transform: translateX(300%);
+        }
+    }
+}
+
+/* Extra small devices (less than 375px) */
+@media (max-width: 374px) {
+    .nav-container {
+        padding: 5px 2%;
+    }
+
+    .img-nav {
+        height: 60px;
+        width: 60px;
+    }
+
+    .nav-container.scrolled .img-nav {
+        height: 35px;
+        width: 35px;
+    }
+
+    .nav-container .nav-list .item-nav {
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }
+
+    #btn-nav-login {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+}
+
+/* Para orientación horizontal en móviles */
+@media (max-height: 500px) and (orientation: landscape) {
+    .nav-list {
+        padding-top: 50px;
+        overflow-y: auto;
+    }
+
+    .nav-container .nav-list .item-nav {
+        margin-bottom: 10px;
+        font-size: 0.9rem;
+    }
+}
