@@ -1,206 +1,142 @@
-{
-    "data": [
-        {
-            "presentation": {
-                "title": "Pittsburgh International",
-                "suggestionTitle": "Pittsburgh International (PIT)",
-                "subtitle": "United States",
-                "id": "eyJlIjoiOTU2NzM4NzkiLCJzIjoiUElUIiwiaCI6IjI3NTM2NDkwIiwidCI6IkFJUlBPUlQifQ==",
-                "skyId": "PIT"
-            },
-            "navigation": {
-                "entityId": "95673879",
-                "entityType": "AIRPORT",
-                "localizedName": "Pittsburgh International",
-                "relevantFlightParams": {
-                    "skyId": "PIT",
-                    "entityId": "95673879",
-                    "flightPlaceType": "AIRPORT",
-                    "localizedName": "Pittsburgh International"
-                },
-                "relevantHotelParams": {
-                    "entityId": "27536490",
-                    "entityType": "CITY",
-                    "localizedName": "Pittsburgh"
-                }
-            }
+[
+    {
+        "class": "City",
+        "entityId": "27542715",
+        "entityName": "Las Vegas",
+        "entityType": "city",
+        "hierarchy": "Clark County|Nevada|United States",
+        "highlight": {
+            "entityName": "",
+            "hierarchy": ""
         },
-        {
-            "presentation": {
-                "title": "Memmingen Allgäu",
-                "suggestionTitle": "Memmingen Allgäu (FMM)",
-                "subtitle": "Germany",
-                "id": "eyJlIjoiMTI4NjY4NTgxIiwicyI6IkZNTSIsImgiOiIyNzU0MTY4MCIsInQiOiJBSVJQT1JUIn0=",
-                "skyId": "FMM"
-            },
-            "navigation": {
-                "entityId": "128668581",
-                "entityType": "AIRPORT",
-                "localizedName": "Memmingen Allgäu",
-                "relevantFlightParams": {
-                    "skyId": "FMM",
-                    "entityId": "128668581",
-                    "flightPlaceType": "AIRPORT",
-                    "localizedName": "Memmingen Allgäu"
-                },
-                "relevantHotelParams": {
-                    "entityId": "27541680",
-                    "entityType": "CITY",
-                    "localizedName": "Memmingen"
-                }
-            }
+        "location": "36.1684484459, -115.2308964814",
+        "pois": null,
+        "score": 0
+    },
+    {
+        "class": "City",
+        "entityId": "27537542",
+        "entityName": "New York",
+        "entityType": "city",
+        "hierarchy": "New York|United States",
+        "highlight": {
+            "entityName": "",
+            "hierarchy": ""
         },
-        {
-            "presentation": {
-                "title": "Allentown",
-                "suggestionTitle": "Allentown (ABE)",
-                "subtitle": "United States",
-                "id": "eyJlIjoiOTU1NjYyOTEiLCJzIjoiQUJFIiwiaCI6IjI3NTM2NDIxIiwidCI6IkFJUlBPUlQifQ==",
-                "skyId": "ABE"
-            },
-            "navigation": {
-                "entityId": "95566291",
-                "entityType": "AIRPORT",
-                "localizedName": "Allentown",
-                "relevantFlightParams": {
-                    "skyId": "ABE",
-                    "entityId": "95566291",
-                    "flightPlaceType": "AIRPORT",
-                    "localizedName": "Allentown"
-                },
-                "relevantHotelParams": {
-                    "entityId": "27536421",
-                    "entityType": "CITY",
-                    "localizedName": "Allentown"
-                }
-            }
+        "location": "40.6940959901, -73.9282670243",
+        "pois": null,
+        "score": 0
+    },
+    {
+        "class": "City",
+        "entityId": "27542089",
+        "entityName": "Tokyo",
+        "entityType": "city",
+        "hierarchy": "Tokyo|Japan",
+        "highlight": {
+            "entityName": "",
+            "hierarchy": ""
         },
-        {
-            "presentation": {
-                "title": "Marsa Allam",
-                "suggestionTitle": "Marsa Allam (RMF)",
-                "subtitle": "Egypt",
-                "id": "eyJlIjoiMTI4NjY4OTgwIiwicyI6IlJNRiIsImgiOiIyNzU0NjE4NSIsInQiOiJBSVJQT1JUIn0=",
-                "skyId": "RMF"
-            },
-            "navigation": {
-                "entityId": "128668980",
-                "entityType": "AIRPORT",
-                "localizedName": "Marsa Allam",
-                "relevantFlightParams": {
-                    "skyId": "RMF",
-                    "entityId": "128668980",
-                    "flightPlaceType": "AIRPORT",
-                    "localizedName": "Marsa Allam"
-                },
-                "relevantHotelParams": {
-                    "entityId": "27546185",
-                    "entityType": "CITY",
-                    "localizedName": "Marsa Allam"
-                }
-            }
+        "location": "29.992220724554866, 140.76724260851924",
+        "pois": null,
+        "score": 0
+    },
+    {
+        "class": "City",
+        "entityId": "27536644",
+        "entityName": "Miami",
+        "entityType": "city",
+        "hierarchy": "Miami-Dade|Florida|United States",
+        "highlight": {
+            "entityName": "",
+            "hierarchy": ""
         },
-        {
-            "presentation": {
-                "title": "Alliance",
-                "suggestionTitle": "Alliance (AIA)",
-                "subtitle": "United States",
-                "id": "eyJlIjoiMTI4NjY4MDQ3IiwicyI6IkFJQSIsImgiOiIyNzUzNjUwNSIsInQiOiJBSVJQT1JUIn0=",
-                "skyId": "AIA"
-            },
-            "navigation": {
-                "entityId": "128668047",
-                "entityType": "AIRPORT",
-                "localizedName": "Alliance",
-                "relevantFlightParams": {
-                    "skyId": "AIA",
-                    "entityId": "128668047",
-                    "flightPlaceType": "AIRPORT",
-                    "localizedName": "Alliance"
-                },
-                "relevantHotelParams": {
-                    "entityId": "27536505",
-                    "entityType": "CITY",
-                    "localizedName": "Alliance"
-                }
-            }
+        "location": "25.775337343897853, -80.2098170861841",
+        "pois": null,
+        "score": 0
+    },
+    {
+        "class": "City",
+        "entityId": "27544008",
+        "entityName": "London",
+        "entityType": "city",
+        "hierarchy": "England|United Kingdom",
+        "highlight": {
+            "entityName": "",
+            "hierarchy": ""
         },
-        {
-            "presentation": {
-                "title": "Fort Wayne",
-                "suggestionTitle": "Fort Wayne (FWA)",
-                "subtitle": "United States",
-                "id": "eyJlIjoiOTU2NzM5ODIiLCJzIjoiRldBIiwiaCI6IjI3NTQxNzQzIiwidCI6IkFJUlBPUlQifQ==",
-                "skyId": "FWA"
-            },
-            "navigation": {
-                "entityId": "95673982",
-                "entityType": "AIRPORT",
-                "localizedName": "Fort Wayne",
-                "relevantFlightParams": {
-                    "skyId": "FWA",
-                    "entityId": "95673982",
-                    "flightPlaceType": "AIRPORT",
-                    "localizedName": "Fort Wayne"
-                },
-                "relevantHotelParams": {
-                    "entityId": "27541743",
-                    "entityType": "CITY",
-                    "localizedName": "Fort Wayne"
-                }
-            }
+        "location": "51.5041174139, -0.0943465343",
+        "pois": null,
+        "score": 0
+    },
+    {
+        "class": "City",
+        "entityId": "27540602",
+        "entityName": "Cancun",
+        "entityType": "city",
+        "hierarchy": "Quintana Roo|Mexico",
+        "highlight": {
+            "entityName": "",
+            "hierarchy": ""
         },
-        {
-            "presentation": {
-                "title": "Alluitsup Paa",
-                "suggestionTitle": "Alluitsup Paa (LLU)",
-                "subtitle": "Greenland",
-                "id": "eyJlIjoiMTI4NjY4Nzk3IiwicyI6IkxMVSIsImgiOiIyNzU0NDA5MCIsInQiOiJBSVJQT1JUIn0=",
-                "skyId": "LLU"
-            },
-            "navigation": {
-                "entityId": "128668797",
-                "entityType": "AIRPORT",
-                "localizedName": "Alluitsup Paa",
-                "relevantFlightParams": {
-                    "skyId": "LLU",
-                    "entityId": "128668797",
-                    "flightPlaceType": "AIRPORT",
-                    "localizedName": "Alluitsup Paa"
-                },
-                "relevantHotelParams": {
-                    "entityId": "27544090",
-                    "entityType": "CITY",
-                    "localizedName": "Alluitsup Paa"
-                }
-            }
+        "location": "21.140230192533792, -86.86960602788567",
+        "pois": null,
+        "score": 0
+    },
+    {
+        "class": "City",
+        "entityId": "27542899",
+        "entityName": "Orlando",
+        "entityType": "city",
+        "hierarchy": "Orange County|Florida|United States",
+        "highlight": {
+            "entityName": "",
+            "hierarchy": ""
         },
-        {
-            "presentation": {
-                "title": "Allakaket",
-                "suggestionTitle": "Allakaket (AET)",
-                "subtitle": "United States",
-                "id": "eyJlIjoiMTI4NjY4MjA4IiwicyI6IkFFVCIsImgiOiIyNzUzNjQ2NyIsInQiOiJBSVJQT1JUIn0=",
-                "skyId": "AET"
-            },
-            "navigation": {
-                "entityId": "128668208",
-                "entityType": "AIRPORT",
-                "localizedName": "Allakaket",
-                "relevantFlightParams": {
-                    "skyId": "AET",
-                    "entityId": "128668208",
-                    "flightPlaceType": "AIRPORT",
-                    "localizedName": "Allakaket"
-                },
-                "relevantHotelParams": {
-                    "entityId": "27536467",
-                    "entityType": "CITY",
-                    "localizedName": "Allakaket"
-                }
-            }
-        }
-    ],
-    "status": true,
-    "message": "Successful"
-}
+        "location": "28.479954876954967, -81.34454668903375",
+        "pois": null,
+        "score": 0
+    },
+    {
+        "class": "City",
+        "entityId": "27546347",
+        "entityName": "San Juan",
+        "entityType": "city",
+        "hierarchy": "San Juan|Puerto Rico",
+        "highlight": {
+            "entityName": "",
+            "hierarchy": ""
+        },
+        "location": "18.386913150925082, -66.06072817653188",
+        "pois": null,
+        "score": 0
+    },
+    {
+        "class": "City",
+        "entityId": "27544891",
+        "entityName": "Chicago",
+        "entityType": "city",
+        "hierarchy": "Cook County|Illinois|United States",
+        "highlight": {
+            "entityName": "",
+            "hierarchy": ""
+        },
+        "location": "41.83825789091468, -87.68580861660885",
+        "pois": null,
+        "score": 0
+    },
+    {
+        "class": "City",
+        "entityId": "27539733",
+        "entityName": "Paris",
+        "entityType": "city",
+        "hierarchy": "Île-de-France|France",
+        "highlight": {
+            "entityName": "",
+            "hierarchy": ""
+        },
+        "location": "48.85662237511698, 2.3428759930239886",
+        "pois": null,
+        "score": 0
+    }
+]

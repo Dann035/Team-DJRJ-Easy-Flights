@@ -1,0 +1,1770 @@
+{
+    "data": {
+        "context": {
+            "sessionId": "UNFOCUSED_SESSION_ID",
+            "status": "complete",
+            "totalResults": 0
+        },
+        "differentDestination": {
+            "context": {
+                "sessionId": "UNFOCUSED_SESSION_ID",
+                "status": "complete",
+                "totalResults": 0
+            },
+            "location": {
+                "id": "29475437",
+                "name": "United States",
+                "skyCode": "US",
+                "type": "Nation"
+            }
+        },
+        "flightQuotes": {
+            "buckets": [
+                {
+                    "id": "CheapestFlights",
+                    "label": "Cheapest flights",
+                    "resultIds": [
+                        "{bl}:202504301456*D*JFK*HNL*20250603*wfus*AS|202504301456*D*HNL*JFK*20250612*wfus*AS",
+                        "{bl}:202504301456*D*JFK*HNL*20250603*wfus*AS|202504301456*D*HNL*JFK*20250612*wfus*AS",
+                        "{bl}:202504301952*D*JFK*HNL*20250603*wfus*AS|202504301952*D*HNL*JFK*20250610*wfus*AS",
+                        "{bl}:202504301952*D*JFK*HNL*20250603*wfus*AS|202504301952*D*HNL*JFK*20250610*wfus*AS",
+                        "{bl}:202504301952*D*JFK*HNL*20250603*wfus*AS|202504301952*D*HNL*JFK*20250610*wfus*AS",
+                        "{bl}:202505011521*D*JFK*HNL*20250605*wfus*AS|202505011521*D*HNL*JFK*20250609*wfus*AS",
+                        "{bl}:202505011521*D*JFK*HNL*20250605*wfus*AS|202505011521*D*HNL*JFK*20250609*wfus*AS",
+                        "{bl}:202505011521*D*JFK*HNL*20250605*wfus*AS|202505011521*D*HNL*JFK*20250609*wfus*AS",
+                        "{bl}:202505010055*D*JFK*HNL*20250610*wfus*AS|202505010055*D*HNL*JFK*20250617*wfus*AS"
+                    ]
+                },
+                {
+                    "id": "DIRECT_FLIGHT_QUOTES",
+                    "label": "Direct flights",
+                    "resultIds": [
+                        "{bl}:202504301456*D*JFK*HNL*20250603*wfus*AS|202504301456*D*HNL*JFK*20250612*wfus*AS",
+                        "{bl}:202504301952*D*JFK*HNL*20250603*wfus*AS|202504301952*D*HNL*JFK*20250610*wfus*AS",
+                        "{bl}:202505011521*D*JFK*HNL*20250605*wfus*AS|202505011521*D*HNL*JFK*20250609*wfus*AS",
+                        "{bl}:202505010055*D*JFK*HNL*20250610*wfus*AS|202505010055*D*HNL*JFK*20250617*wfus*AS",
+                        "{bl}:202504302222*D*JFK*HNL*20250604*wfus*AS|202504302222*D*HNL*JFK*20250611*wfus*AS",
+                        "{bl}:202505010937*D*JFK*HNL*20250609*wfus*AS|202505010937*D*HNL*JFK*20250617*wfus*AS",
+                        "{bl}:202505011448*D*JFK*HNL*20250612*wfus*AS|202505011448*D*HNL*JFK*20250616*wfus*AS",
+                        "{bl}:202504300353*D*JFK*HNL*20250603*smtf*AS|202504300353*D*HNL*JFK*20250611*smtf*AS",
+                        "{bl}:202504301028*D*JFK*HNL*20250612*smtf*AS|202504301028*D*HNL*JFK*20250617*smtf*AS"
+                    ]
+                },
+                {
+                    "id": "Weekend_1_1",
+                    "label": "Weekend trips",
+                    "resultIds": [
+                        "{bl}:202505011521*D*JFK*HNL*20250605*wfus*AS|202505011521*D*HNL*JFK*20250607*wfus*AS",
+                        "{bl}:202504290815*D*JFK*HNL*20250601*smtf*AS|202504290815*D*HNL*JFK*20250603*smtf*AS",
+                        "{bl}:202504281340*D*JFK*HNL*20250606*wfus*AS|202504281340*D*HNL*JFK*20250608*wfus*AS",
+                        "{bl}:202504280101*D*JFK*HNL*20250613*smtf*AS|202504280101*D*HNL*JFK*20250615*smtf*AS",
+                        "{bl}:202504272214*I*EWR*HNL*20250621*cust*AS|202504272214*I*HNL*EWR*20250623*cust*AS",
+                        "{bl}:202505011616*I*EWR*HNL*20250620*vaya*AS|202505011616*I*HNL*EWR*20250622*vaya*AS",
+                        "{bl}:202504300751*I*JFK*HNL*20250627*smtf*AS|202504300751*I*HNL*EWR*20250629*smtf*AS",
+                        "{bl}:202505011616*D*JFK*HNL*20250620*suus*AS|202505011616*D*HNL*JFK*20250622*suus*AS",
+                        "{bl}:202504290917*I*JFK*HNL*20250619*skyp*AS|202504290917*I*HNL*JFK*20250621*skyp*HA"
+                    ]
+                },
+                {
+                    "id": "LongWeekend_2_3",
+                    "label": "Long weekends",
+                    "resultIds": [
+                        "{bl}:202505011521*D*JFK*HNL*20250605*wfus*AS|202505011521*D*HNL*JFK*20250609*wfus*AS",
+                        "{bl}:202505011448*D*JFK*HNL*20250612*wfus*AS|202505011448*D*HNL*JFK*20250616*wfus*AS",
+                        "{bl}:202505011351*D*JFK*HNL*20250607*wfus*AS|202505011351*D*HNL*JFK*20250610*wfus*AS",
+                        "{bl}:202504272134*D*JFK*HNL*20250605*wfus*AS|202504272134*D*HNL*JFK*20250608*wfus*AS",
+                        "{bl}:202504291221*D*JFK*HNL*20250604*smtf*AS|202504291221*D*HNL*JFK*20250608*smtf*AS",
+                        "{bl}:202504292123*D*JFK*HNL*20250611*hawa*HA|202504292123*D*HNL*JFK*20250615*hawa*HA",
+                        "{bl}:202504271801*I*JFK*HNL*20250607*dela*DL|202504271801*I*HNL*JFK*20250611*dela*DL",
+                        "{bl}:202504281956*D*JFK*HNL*20250613*smtf*AS|202504281956*D*HNL*JFK*20250616*smtf*AS",
+                        "{bl}:202504272109*I*EWR*HNL*20250621*vaya*AS|202504272109*I*HNL*EWR*20250625*vaya*AS"
+                    ]
+                },
+                {
+                    "id": "TripDurationRangeDays_2_4",
+                    "label": "3–4 days",
+                    "resultIds": [
+                        "{bl}:202505011521*D*JFK*HNL*20250605*wfus*AS|202505011521*D*HNL*JFK*20250609*wfus*AS",
+                        "{bl}:202505011448*D*JFK*HNL*20250612*wfus*AS|202505011448*D*HNL*JFK*20250616*wfus*AS",
+                        "{bl}:202505010104*I*JFK*HNL*20250604*smtf*AS|202505010104*I*HNL*EWR*20250609*smtf*AS",
+                        "{bl}:202504301028*D*JFK*HNL*20250612*smtf*AS|202504301028*D*HNL*JFK*20250617*smtf*AS",
+                        "{bl}:202505010104*D*JFK*HNL*20250604*smtf*AS|202505010104*D*HNL*JFK*20250609*smtf*AS",
+                        "{bl}:202504272040*D*JFK*HNL*20250609*smtf*AS|202504272040*D*HNL*JFK*20250612*smtf*AS",
+                        "{bl}:202504281356*D*JFK*HNL*20250611*smtf*AS|202504281356*D*HNL*JFK*20250616*smtf*AS",
+                        "{bl}:202505011232*D*JFK*HNL*20250605*smtf*AS|202505011232*D*HNL*JFK*20250610*smtf*AS",
+                        "{bl}:202504272234*I*EWR*HNL*20250601*dhop*NK|202504272234*I*HNL*EWR*20250605*dhop*HA"
+                    ]
+                },
+                {
+                    "id": "OneWeek_4_6",
+                    "label": "1 week",
+                    "resultIds": [
+                        "{bl}:202504301952*D*JFK*HNL*20250603*wfus*AS|202504301952*D*HNL*JFK*20250610*wfus*AS",
+                        "{bl}:202505010055*D*JFK*HNL*20250610*wfus*AS|202505010055*D*HNL*JFK*20250617*wfus*AS",
+                        "{bl}:202504302222*D*JFK*HNL*20250604*wfus*AS|202504302222*D*HNL*JFK*20250611*wfus*AS",
+                        "{bl}:202505010104*I*JFK*HNL*20250604*smtf*AS|202505010104*I*HNL*EWR*20250609*smtf*AS",
+                        "{bl}:202504301028*D*JFK*HNL*20250612*smtf*AS|202504301028*D*HNL*JFK*20250617*smtf*AS",
+                        "{bl}:202504292059*D*JFK*HNL*20250605*smtf*AS|202504292059*D*HNL*JFK*20250612*smtf*AS",
+                        "{bl}:202504282311*D*JFK*HNL*20250603*smtf*AS|202504282311*D*HNL*JFK*20250609*smtf*AS",
+                        "{bl}:202505010503*D*JFK*HNL*20250604*smtf*AS|202505010503*D*HNL*JFK*20250610*smtf*AS",
+                        "{bl}:202504280054*D*JFK*HNL*20250605*smtf*AS|202504280054*D*HNL*JFK*20250611*smtf*AS"
+                    ]
+                },
+                {
+                    "id": "OnePlusWeeks_6_12",
+                    "label": "1+ weeks",
+                    "resultIds": [
+                        "{bl}:202504301456*D*JFK*HNL*20250603*wfus*AS|202504301456*D*HNL*JFK*20250612*wfus*AS",
+                        "{bl}:202504301952*D*JFK*HNL*20250603*wfus*AS|202504301952*D*HNL*JFK*20250610*wfus*AS",
+                        "{bl}:202505010055*D*JFK*HNL*20250610*wfus*AS|202505010055*D*HNL*JFK*20250617*wfus*AS",
+                        "{bl}:202504302222*D*JFK*HNL*20250604*wfus*AS|202504302222*D*HNL*JFK*20250611*wfus*AS",
+                        "{bl}:202505010937*D*JFK*HNL*20250609*wfus*AS|202505010937*D*HNL*JFK*20250617*wfus*AS",
+                        "{bl}:202504300353*D*JFK*HNL*20250603*smtf*AS|202504300353*D*HNL*JFK*20250611*smtf*AS",
+                        "{bl}:202504292059*D*JFK*HNL*20250605*smtf*AS|202504292059*D*HNL*JFK*20250612*smtf*AS",
+                        "{bl}:202505010107*D*JFK*HNL*20250605*smtf*AS|202505010107*D*HNL*JFK*20250617*smtf*AS",
+                        "{bl}:202504301331*I*JFK*HNL*20250602*wfus*AS|202504301331*I*HNL*JFK*20250609*wfus*AS"
+                    ]
+                }
+            ],
+            "context": {
+                "sessionId": "UNFOCUSED_SESSION_ID",
+                "status": "complete",
+                "totalResults": 37
+            },
+            "months": [
+                {
+                    "month": 5,
+                    "monthLabel": "May",
+                    "selected": false,
+                    "year": 2025
+                },
+                {
+                    "month": 6,
+                    "monthLabel": "Jun",
+                    "selected": true,
+                    "year": 2025
+                },
+                {
+                    "month": 7,
+                    "monthLabel": "Jul",
+                    "selected": false,
+                    "year": 2025
+                },
+                {
+                    "month": 8,
+                    "monthLabel": "Aug",
+                    "selected": false,
+                    "year": 2025
+                },
+                {
+                    "month": 9,
+                    "monthLabel": "Sep",
+                    "selected": false,
+                    "year": 2025
+                },
+                {
+                    "month": 10,
+                    "monthLabel": "Oct",
+                    "selected": false,
+                    "year": 2025
+                },
+                {
+                    "month": 11,
+                    "monthLabel": "Nov",
+                    "selected": false,
+                    "year": 2025
+                },
+                {
+                    "month": 12,
+                    "monthLabel": "Dec",
+                    "selected": false,
+                    "year": 2025
+                },
+                {
+                    "month": 1,
+                    "monthLabel": "Jan",
+                    "selected": false,
+                    "year": 2026
+                },
+                {
+                    "month": 2,
+                    "monthLabel": "Feb",
+                    "selected": false,
+                    "year": 2026
+                },
+                {
+                    "month": 3,
+                    "monthLabel": "Mar",
+                    "selected": false,
+                    "year": 2026
+                },
+                {
+                    "month": 4,
+                    "monthLabel": "Apr",
+                    "selected": false,
+                    "year": 2026
+                }
+            ],
+            "results": [
+                {
+                    "content": {
+                        "direct": true,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-03",
+                            "localDepartureDateLabel": "Tue, Jun 3",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-01",
+                            "localDepartureDateLabel": "Sun, Jun 1",
+                            "originAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            }
+                        },
+                        "imgURL": "https://content.skyscnr.com/m/60b0a9f4bc25015a/original/Garita-Old-San-Juan.jpg",
+                        "price": "$587",
+                        "rawPrice": 587.0,
+                        "tripDuration": "2-day trip"
+                    },
+                    "id": "{bl}:202504290815*D*JFK*HNL*20250601*smtf*AS|202504290815*D*HNL*JFK*20250603*smtf*AS",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": true,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-10",
+                            "localDepartureDateLabel": "Tue, Jun 10",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-07",
+                            "localDepartureDateLabel": "Sat, Jun 7",
+                            "originAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$577",
+                        "rawPrice": 577.0,
+                        "tripDuration": "3-day trip"
+                    },
+                    "id": "{bl}:202505011351*D*JFK*HNL*20250607*wfus*AS|202505011351*D*HNL*JFK*20250610*wfus*AS",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": false,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565059",
+                                "name": "EWR",
+                                "skyCode": "EWR",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-05",
+                            "localDepartureDateLabel": "Thu, Jun 5",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-01",
+                            "localDepartureDateLabel": "Sun, Jun 1",
+                            "originAirport": {
+                                "id": "95565059",
+                                "name": "EWR",
+                                "skyCode": "EWR",
+                                "type": "Airport"
+                            }
+                        },
+                        "imgURL": "https://content.skyscnr.com/6479e5cf34fcf9a9aa130df1b534eb19/GettyImages-120992245.jpg",
+                        "price": "$562",
+                        "rawPrice": 562.0,
+                        "tripDuration": "4-day trip"
+                    },
+                    "id": "{bl}:202504272234*I*EWR*HNL*20250601*dhop*NK|202504272234*I*HNL*EWR*20250605*dhop*HA",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": false,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565059",
+                                "name": "EWR",
+                                "skyCode": "EWR",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-23",
+                            "localDepartureDateLabel": "Mon, Jun 23",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-21",
+                            "localDepartureDateLabel": "Sat, Jun 21",
+                            "originAirport": {
+                                "id": "95565059",
+                                "name": "EWR",
+                                "skyCode": "EWR",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$734",
+                        "rawPrice": 734.0,
+                        "tripDuration": "2-day trip"
+                    },
+                    "id": "{bl}:202504272214*I*EWR*HNL*20250621*cust*AS|202504272214*I*HNL*EWR*20250623*cust*AS",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": true,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-08",
+                            "localDepartureDateLabel": "Sun, Jun 8",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-04",
+                            "localDepartureDateLabel": "Wed, Jun 4",
+                            "originAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$587",
+                        "rawPrice": 587.0,
+                        "tripDuration": "4-day trip"
+                    },
+                    "id": "{bl}:202504291221*D*JFK*HNL*20250604*smtf*AS|202504291221*D*HNL*JFK*20250608*smtf*AS",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": true,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-09",
+                            "localDepartureDateLabel": "Mon, Jun 9",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-03",
+                            "localDepartureDateLabel": "Tue, Jun 3",
+                            "originAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$557",
+                        "rawPrice": 557.0,
+                        "tripDuration": "6-day trip"
+                    },
+                    "id": "{bl}:202504282311*D*JFK*HNL*20250603*smtf*AS|202504282311*D*HNL*JFK*20250609*smtf*AS",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": true,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-17",
+                            "localDepartureDateLabel": "Tue, Jun 17",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-05",
+                            "localDepartureDateLabel": "Thu, Jun 5",
+                            "originAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$558",
+                        "rawPrice": 558.0,
+                        "tripDuration": "12-day trip"
+                    },
+                    "id": "{bl}:202505010107*D*JFK*HNL*20250605*smtf*AS|202505010107*D*HNL*JFK*20250617*smtf*AS",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": true,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-22",
+                            "localDepartureDateLabel": "Sun, Jun 22",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-20",
+                            "localDepartureDateLabel": "Fri, Jun 20",
+                            "originAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$957",
+                        "rawPrice": 957.0,
+                        "tripDuration": "2-day trip"
+                    },
+                    "id": "{bl}:202505011616*D*JFK*HNL*20250620*suus*AS|202505011616*D*HNL*JFK*20250622*suus*AS",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": true,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-17",
+                            "localDepartureDateLabel": "Tue, Jun 17",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-09",
+                            "localDepartureDateLabel": "Mon, Jun 9",
+                            "originAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$548",
+                        "rawPrice": 548.0,
+                        "tripDuration": "8-day trip"
+                    },
+                    "id": "{bl}:202505010937*D*JFK*HNL*20250609*wfus*AS|202505010937*D*HNL*JFK*20250617*wfus*AS",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": true,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-12",
+                            "localDepartureDateLabel": "Thu, Jun 12",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-09",
+                            "localDepartureDateLabel": "Mon, Jun 9",
+                            "originAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$558",
+                        "rawPrice": 558.0,
+                        "tripDuration": "3-day trip"
+                    },
+                    "id": "{bl}:202504272040*D*JFK*HNL*20250609*smtf*AS|202504272040*D*HNL*JFK*20250612*smtf*AS",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": true,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-17",
+                            "localDepartureDateLabel": "Tue, Jun 17",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-12",
+                            "localDepartureDateLabel": "Thu, Jun 12",
+                            "originAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$557",
+                        "rawPrice": 557.0,
+                        "tripDuration": "5-day trip"
+                    },
+                    "id": "{bl}:202504301028*D*JFK*HNL*20250612*smtf*AS|202504301028*D*HNL*JFK*20250617*smtf*AS",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": true,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-15",
+                            "localDepartureDateLabel": "Sun, Jun 15",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-13",
+                            "localDepartureDateLabel": "Fri, Jun 13",
+                            "originAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$617",
+                        "rawPrice": 617.0,
+                        "tripDuration": "2-day trip"
+                    },
+                    "id": "{bl}:202504280101*D*JFK*HNL*20250613*smtf*AS|202504280101*D*HNL*JFK*20250615*smtf*AS",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": false,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565059",
+                                "name": "EWR",
+                                "skyCode": "EWR",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-22",
+                            "localDepartureDateLabel": "Sun, Jun 22",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-20",
+                            "localDepartureDateLabel": "Fri, Jun 20",
+                            "originAirport": {
+                                "id": "95565059",
+                                "name": "EWR",
+                                "skyCode": "EWR",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$828",
+                        "rawPrice": 828.0,
+                        "tripDuration": "2-day trip"
+                    },
+                    "id": "{bl}:202505011616*I*EWR*HNL*20250620*vaya*AS|202505011616*I*HNL*EWR*20250622*vaya*AS",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": true,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-12",
+                            "localDepartureDateLabel": "Thu, Jun 12",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-03",
+                            "localDepartureDateLabel": "Tue, Jun 3",
+                            "originAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$548",
+                        "rawPrice": 548.0,
+                        "tripDuration": "9-day trip"
+                    },
+                    "id": "{bl}:202504301456*D*JFK*HNL*20250603*wfus*AS|202504301456*D*HNL*JFK*20250612*wfus*AS",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": true,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-16",
+                            "localDepartureDateLabel": "Mon, Jun 16",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-11",
+                            "localDepartureDateLabel": "Wed, Jun 11",
+                            "originAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$558",
+                        "rawPrice": 558.0,
+                        "tripDuration": "5-day trip"
+                    },
+                    "id": "{bl}:202504281356*D*JFK*HNL*20250611*smtf*AS|202504281356*D*HNL*JFK*20250616*smtf*AS",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": true,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-11",
+                            "localDepartureDateLabel": "Wed, Jun 11",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-05",
+                            "localDepartureDateLabel": "Thu, Jun 5",
+                            "originAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$558",
+                        "rawPrice": 558.0,
+                        "tripDuration": "6-day trip"
+                    },
+                    "id": "{bl}:202504280054*D*JFK*HNL*20250605*smtf*AS|202504280054*D*HNL*JFK*20250611*smtf*AS",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": true,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-09",
+                            "localDepartureDateLabel": "Mon, Jun 9",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-04",
+                            "localDepartureDateLabel": "Wed, Jun 4",
+                            "originAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$558",
+                        "rawPrice": 558.0,
+                        "tripDuration": "5-day trip"
+                    },
+                    "id": "{bl}:202505010104*D*JFK*HNL*20250604*smtf*AS|202505010104*D*HNL*JFK*20250609*smtf*AS",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": true,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-16",
+                            "localDepartureDateLabel": "Mon, Jun 16",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-13",
+                            "localDepartureDateLabel": "Fri, Jun 13",
+                            "originAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$619",
+                        "rawPrice": 619.0,
+                        "tripDuration": "3-day trip"
+                    },
+                    "id": "{bl}:202504281956*D*JFK*HNL*20250613*smtf*AS|202504281956*D*HNL*JFK*20250616*smtf*AS",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": true,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-10",
+                            "localDepartureDateLabel": "Tue, Jun 10",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-03",
+                            "localDepartureDateLabel": "Tue, Jun 3",
+                            "originAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$548",
+                        "rawPrice": 548.0,
+                        "tripDuration": "7-day trip"
+                    },
+                    "id": "{bl}:202504301952*D*JFK*HNL*20250603*wfus*AS|202504301952*D*HNL*JFK*20250610*wfus*AS",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": true,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-08",
+                            "localDepartureDateLabel": "Sun, Jun 8",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-05",
+                            "localDepartureDateLabel": "Thu, Jun 5",
+                            "originAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$586",
+                        "rawPrice": 586.0,
+                        "tripDuration": "3-day trip"
+                    },
+                    "id": "{bl}:202504272134*D*JFK*HNL*20250605*wfus*AS|202504272134*D*HNL*JFK*20250608*wfus*AS",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": true,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-08",
+                            "localDepartureDateLabel": "Sun, Jun 8",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-06",
+                            "localDepartureDateLabel": "Fri, Jun 6",
+                            "originAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$606",
+                        "rawPrice": 606.0,
+                        "tripDuration": "2-day trip"
+                    },
+                    "id": "{bl}:202504281340*D*JFK*HNL*20250606*wfus*AS|202504281340*D*HNL*JFK*20250608*wfus*AS",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": true,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-11",
+                            "localDepartureDateLabel": "Wed, Jun 11",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-04",
+                            "localDepartureDateLabel": "Wed, Jun 4",
+                            "originAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$548",
+                        "rawPrice": 548.0,
+                        "tripDuration": "7-day trip"
+                    },
+                    "id": "{bl}:202504302222*D*JFK*HNL*20250604*wfus*AS|202504302222*D*HNL*JFK*20250611*wfus*AS",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": false,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565059",
+                                "name": "EWR",
+                                "skyCode": "EWR",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-29",
+                            "localDepartureDateLabel": "Sun, Jun 29",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-27",
+                            "localDepartureDateLabel": "Fri, Jun 27",
+                            "originAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$881",
+                        "rawPrice": 881.0,
+                        "tripDuration": "2-day trip"
+                    },
+                    "id": "{bl}:202504300751*I*JFK*HNL*20250627*smtf*AS|202504300751*I*HNL*EWR*20250629*smtf*AS",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": true,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-09",
+                            "localDepartureDateLabel": "Mon, Jun 9",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-05",
+                            "localDepartureDateLabel": "Thu, Jun 5",
+                            "originAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$548",
+                        "rawPrice": 548.0,
+                        "tripDuration": "4-day trip"
+                    },
+                    "id": "{bl}:202505011521*D*JFK*HNL*20250605*wfus*AS|202505011521*D*HNL*JFK*20250609*wfus*AS",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": true,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-10",
+                            "localDepartureDateLabel": "Tue, Jun 10",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-04",
+                            "localDepartureDateLabel": "Wed, Jun 4",
+                            "originAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$558",
+                        "rawPrice": 558.0,
+                        "tripDuration": "6-day trip"
+                    },
+                    "id": "{bl}:202505010503*D*JFK*HNL*20250604*smtf*AS|202505010503*D*HNL*JFK*20250610*smtf*AS",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": true,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-11",
+                            "localDepartureDateLabel": "Wed, Jun 11",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-03",
+                            "localDepartureDateLabel": "Tue, Jun 3",
+                            "originAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$557",
+                        "rawPrice": 557.0,
+                        "tripDuration": "8-day trip"
+                    },
+                    "id": "{bl}:202504300353*D*JFK*HNL*20250603*smtf*AS|202504300353*D*HNL*JFK*20250611*smtf*AS",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": true,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-16",
+                            "localDepartureDateLabel": "Mon, Jun 16",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-12",
+                            "localDepartureDateLabel": "Thu, Jun 12",
+                            "originAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$548",
+                        "rawPrice": 548.0,
+                        "tripDuration": "4-day trip"
+                    },
+                    "id": "{bl}:202505011448*D*JFK*HNL*20250612*wfus*AS|202505011448*D*HNL*JFK*20250616*wfus*AS",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": false,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-11",
+                            "localDepartureDateLabel": "Wed, Jun 11",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-07",
+                            "localDepartureDateLabel": "Sat, Jun 7",
+                            "originAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$612",
+                        "rawPrice": 612.0,
+                        "tripDuration": "4-day trip"
+                    },
+                    "id": "{bl}:202504271801*I*JFK*HNL*20250607*dela*DL|202504271801*I*HNL*JFK*20250611*dela*DL",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": false,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565059",
+                                "name": "EWR",
+                                "skyCode": "EWR",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-25",
+                            "localDepartureDateLabel": "Wed, Jun 25",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-21",
+                            "localDepartureDateLabel": "Sat, Jun 21",
+                            "originAirport": {
+                                "id": "95565059",
+                                "name": "EWR",
+                                "skyCode": "EWR",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$666",
+                        "rawPrice": 666.0,
+                        "tripDuration": "4-day trip"
+                    },
+                    "id": "{bl}:202504272109*I*EWR*HNL*20250621*vaya*AS|202504272109*I*HNL*EWR*20250625*vaya*AS",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": true,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-17",
+                            "localDepartureDateLabel": "Tue, Jun 17",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-10",
+                            "localDepartureDateLabel": "Tue, Jun 10",
+                            "originAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$548",
+                        "rawPrice": 548.0,
+                        "tripDuration": "7-day trip"
+                    },
+                    "id": "{bl}:202505010055*D*JFK*HNL*20250610*wfus*AS|202505010055*D*HNL*JFK*20250617*wfus*AS",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": true,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-15",
+                            "localDepartureDateLabel": "Sun, Jun 15",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-11",
+                            "localDepartureDateLabel": "Wed, Jun 11",
+                            "originAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$602",
+                        "rawPrice": 602.0,
+                        "tripDuration": "4-day trip"
+                    },
+                    "id": "{bl}:202504292123*D*JFK*HNL*20250611*hawa*HA|202504292123*D*HNL*JFK*20250615*hawa*HA",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": true,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-12",
+                            "localDepartureDateLabel": "Thu, Jun 12",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-05",
+                            "localDepartureDateLabel": "Thu, Jun 5",
+                            "originAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$557",
+                        "rawPrice": 557.0,
+                        "tripDuration": "7-day trip"
+                    },
+                    "id": "{bl}:202504292059*D*JFK*HNL*20250605*smtf*AS|202504292059*D*HNL*JFK*20250612*smtf*AS",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": false,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565059",
+                                "name": "EWR",
+                                "skyCode": "EWR",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-09",
+                            "localDepartureDateLabel": "Mon, Jun 9",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-04",
+                            "localDepartureDateLabel": "Wed, Jun 4",
+                            "originAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$552",
+                        "rawPrice": 552.0,
+                        "tripDuration": "5-day trip"
+                    },
+                    "id": "{bl}:202505010104*I*JFK*HNL*20250604*smtf*AS|202505010104*I*HNL*EWR*20250609*smtf*AS",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": false,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-21",
+                            "localDepartureDateLabel": "Sat, Jun 21",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-19",
+                            "localDepartureDateLabel": "Thu, Jun 19",
+                            "originAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$962",
+                        "rawPrice": 962.0,
+                        "tripDuration": "2-day trip"
+                    },
+                    "id": "{bl}:202504290917*I*JFK*HNL*20250619*skyp*AS|202504290917*I*HNL*JFK*20250621*skyp*HA",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": true,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-07",
+                            "localDepartureDateLabel": "Sat, Jun 7",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-05",
+                            "localDepartureDateLabel": "Thu, Jun 5",
+                            "originAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$577",
+                        "rawPrice": 577.0,
+                        "tripDuration": "2-day trip"
+                    },
+                    "id": "{bl}:202505011521*D*JFK*HNL*20250605*wfus*AS|202505011521*D*HNL*JFK*20250607*wfus*AS",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": false,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-09",
+                            "localDepartureDateLabel": "Mon, Jun 9",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-02",
+                            "localDepartureDateLabel": "Mon, Jun 2",
+                            "originAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$562",
+                        "rawPrice": 562.0,
+                        "tripDurtion": "7-day trip"
+                    },
+                    "id": "{bl}:202504301331*I*JFK*HNL*20250602*wfus*AS|202504301331*I*HNL*JFK*20250609*wfus*AS",
+                    "type": "FLIGHT_QUOTE"
+                },
+                {
+                    "content": {
+                        "direct": true,
+                        "inboundLeg": {
+                            "destinationAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-10",
+                            "localDepartureDateLabel": "Tue, Jun 10",
+                            "originAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            }
+                        },
+                        "outboundLeg": {
+                            "destinationAirport": {
+                                "id": "95673827",
+                                "name": "HNL",
+                                "skyCode": "HNL",
+                                "type": "Airport"
+                            },
+                            "localDepartureDate": "2025-06-05",
+                            "localDepartureDateLabel": "Thu, Jun 5",
+                            "originAirport": {
+                                "id": "95565058",
+                                "name": "JFK",
+                                "skyCode": "JFK",
+                                "type": "Airport"
+                            }
+                        },
+                        "price": "$558",
+                        "rawPrice": 558.0,
+                        "tripDuration": "5-day trip"
+                    },
+                    "id": "{bl}:202505011232*D*JFK*HNL*20250605*smtf*AS|202505011232*D*HNL*JFK*20250610*smtf*AS",
+                    "type": "FLIGHT_QUOTE"
+                }
+            ]
+        }
+    },
+    "status": "success",
+    "token": "eyJjYyI6ICJlY29ub215IiwgImEiOiAxLCAiYyI6IDAsICJpIjogMCwgImwiOiBbWyJOWUNBIiwgIkhOTCIsICJhbnl0aW1lIl0sIFsiSE5MIiwgIk5ZQ0EiLCAiYW55dGltZSJdXX0="
+}
