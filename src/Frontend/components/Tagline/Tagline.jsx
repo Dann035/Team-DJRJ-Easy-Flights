@@ -18,49 +18,41 @@ import {
 } from "react-icons/fa";
 import { te } from "date-fns/locale";
 
+
 function Tagline() {
-    const { store, dispatch } = useGlobalReducer();
+    const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+    const [isSearching, setIsSearching] = useState(false);
+    const [showModal, setShowModal] = useState(false);
     const [startDate, setStartDate] = useState(null);
+    const { store, dispatch } = useGlobalReducer();
     const [endDate, setEndDate] = useState(null);
     const [personas, setPersonas] = useState(1);
+    const [destino, setDestino] = useState("");
     const [origen, setOrigen] = useState("");
     const { texts } = useLanguage();
-    const [destino, setDestino] = useState("");
-    const [showModal, setShowModal] = useState(false);
-    const [isSearching, setIsSearching] = useState(false);
-    const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
     const navigate = useNavigate();
-
+    const URL = import.meta.env.VITE_BACKEND_URL;
     const API_KEY = import.meta.env.API_KEY;
-    const URL = `https://flights-sky.p.rapidapi.com/flights/search-roundtrip?`;
 
-    const options = {
-        headers: {
-            "x-rapidapi-key": API_KEY,
-            'x-rapidapi-host': 'flights-sky.p.rapidapi.com'
-        },
-    };
-
-    const showData = async () => {
+    function validateOrigins(){
         if (!origen || !destino) {
             // Use a more elegant notification instead of alert
             setShowModal(true);
             setTimeout(() => setShowModal(false), 3000);
             return;
         }
+    }
 
+    const showData = async () => {
+        validateOrigins();
         setIsSearching(true);
 
         try {
-            const response = await fetch(
-                URL + `deEntityId=${origen}&toEntityId=${destino}`,
-                options
-            );
+            const response = await fetch( URL + `/api/vuelos?origen=${origen}&destino=${destino}`);
             const data = await response.json();
-            const results = (await data?.data?.flightQuotes?.results) || [];
             dispatch({ type: "clear_offersAPI"});
-            dispatch({ type: "set_offersAPI", payload: results });
+            dispatch({ type: "set_offersAPI", payload: data });
         } catch (error) {
             console.error("Error la offerAPI", error.message);
             dispatch({ type: "clear_offersAPI"});
@@ -78,13 +70,13 @@ function Tagline() {
     // Destinations data with images and descriptions
     const destinations = [
         {
-            id: "FMM",
+            id: "27542715",
             name: texts.lasVegas,
             image: "/images/destinations/las-vegas.jpg",
             desc: "La ciudad que nunca duerme",
         },
         {
-            id: "PIT",
+            id: "27537542",
             name: texts.newYork,
             image: "/images/destinations/new-york.jpg",
             desc: "La Gran Manzana",
