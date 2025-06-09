@@ -22,7 +22,7 @@ function OffersAPI() {
       <div className="flights-container">
         {Array.isArray(data) && data.length > 0 ? (
           limitedOffers.map((offer) => (
-            <div className="flight-offer-card" key={offer?.id}>
+            <div className="flight-offer-card" key={offer?.content?.id}>
               <div className="flight-offer-inner">
                 <div className="flight-offer-front">
                   <div className="flight-image-container">

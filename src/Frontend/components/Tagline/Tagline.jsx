@@ -16,7 +16,7 @@ import {
     FaSearch,
     FaInfoCircle,
 } from "react-icons/fa";
-import { te } from "date-fns/locale";
+
 
 
 function Tagline() {
@@ -49,7 +49,7 @@ function Tagline() {
         setIsSearching(true);
 
         try {
-            const response = await fetch( URL + `/api/vuelos?origen=${origen}&destino=${destino}`);
+            const response = await fetch( URL + `/api/vuelos?origen=${destino}&destino=${origen}`);
             const data = await response.json();
             dispatch({ type: "clear_offersAPI"});
             dispatch({ type: "set_offersAPI", payload: data });
@@ -94,13 +94,13 @@ function Tagline() {
             desc: "Playas y vida nocturna",
         },
         {
-            id: "27544008",
+            id: "27536655",
             name: texts.london,
             image: "/images/destinations/london.jpg",
             desc: "Historia y cultura",
         },
         {
-            id: "27540602",
+            id: "27538888",
             name: texts.mexico,
             image: "/images/destinations/mexico.jpg",
             desc: "Gastronomía y color",
@@ -112,12 +112,18 @@ function Tagline() {
             desc: "Paraíso caribeño",
         },
         {
-            id: "27539733",
+            id: "27539999",
             name: texts.paris,
             image: "/images/destinations/paris.jpg",
             desc: "La ciudad del amor",
         },
     ];
+
+    let hoy = new Date();
+
+    const fechas = [
+        
+    ]
 
     return (
         <div className="tagline-wrapper">
