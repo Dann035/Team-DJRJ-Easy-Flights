@@ -51,7 +51,7 @@ export const router = createBrowserRouter(
         <Route path="/signupCompany" element={<SignupCompany />} />
         <Route path="/travel-tips" element={<TravelTips />} />
         <Route path="/about" element={<AboutUs />} />
-        <Route path="/destinations" element={<Destinations />} />
+        <Route path="/destinations" element={<Destinations />} />out
         <Route path="packages" element={<Packages />} />
         <Route path="/quiz" element={<TravelQuiz />} />
         <Route path="/tools" element={<Tools />} />
@@ -76,7 +76,7 @@ export const router = createBrowserRouter(
         <Route path="/donate" element={<Donate />} />
         <Route path="/donar" element={<DonateForm />} />
         <Route path="/discover" element={<Discover />} />
-        <Route path="/discover" element={<Discover />} />
+
 
       </Route>
     ),
