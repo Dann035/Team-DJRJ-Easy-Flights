@@ -29,8 +29,8 @@ function Features() {
                 {/* Box Feature 2: Packages */}
                 <Link to="/quiz" className="box-feature feature-2">
                     <i></i>
-                    <h3>{texts.feature2Title}</h3>
-                    <p>{texts.feature2Desc}</p>
+                    <h3>QUIZ Game</h3>
+                    <p>Descubre que destino es el que mejor te define contestando nuestro divertido cuestionario</p>
                 </Link>
 
                 {/* Box Feature 3: Tools */}
@@ -43,8 +43,12 @@ function Features() {
                 </Link>
             </div>
             <div className="d-flex justify-content-center gap-3 mt-4 mb-3">
-                <button className="btn-feature">{texts.learnMore}</button>
-                <button className="btn-feature">{texts.signUp}</button>
+                <Link to={"/destinations"}>
+                    <button className="btn-feature">{texts.learnMore}</button>
+                </Link>
+                <Link to={"/signup"}>
+                    <button className="btn-feature">{texts.signUp}</button>
+                </Link>
             </div>
         </section>
     );

@@ -16,51 +16,43 @@ import {
     FaSearch,
     FaInfoCircle,
 } from "react-icons/fa";
-import { te } from "date-fns/locale";
+
+
 
 function Tagline() {
-    const { store, dispatch } = useGlobalReducer();
+    const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+    const [isSearching, setIsSearching] = useState(false);
+    const [showModal, setShowModal] = useState(false);
     const [startDate, setStartDate] = useState(null);
+    const { store, dispatch } = useGlobalReducer();
     const [endDate, setEndDate] = useState(null);
     const [personas, setPersonas] = useState(1);
+    const [destino, setDestino] = useState("");
     const [origen, setOrigen] = useState("");
     const { texts } = useLanguage();
-    const [destino, setDestino] = useState("");
-    const [showModal, setShowModal] = useState(false);
-    const [isSearching, setIsSearching] = useState(false);
-    const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
     const navigate = useNavigate();
+    const URL = import.meta.env.VITE_BACKEND_URL;
+    const API_KEY = import.meta.env.API_KEY;
 
-    const API_KEY = "3df7b5ea34msh823b5e336152f23p145132jsn0be3c1afda1b";
-
-    const URL = `https://skyscanner89.p.rapidapi.com/flights/roundtrip/list?`;
-    const options = {
-        headers: {
-            "x-rapidapi-key": API_KEY,
-            "x-rapidapi-host": "skyscanner89.p.rapidapi.com",
-        },
-    };
-
-    const showData = async () => {
+    function validateOrigins(){
         if (!origen || !destino) {
             // Use a more elegant notification instead of alert
             setShowModal(true);
             setTimeout(() => setShowModal(false), 3000);
             return;
         }
+    }
 
+    const showData = async () => {
+        validateOrigins();
         setIsSearching(true);
 
         try {
-            const response = await fetch(
-                URL + `originId=${origen}&destinationId=${destino}`,
-                options
-            );
+            const response = await fetch( URL + `/api/vuelos?origen=${destino}&destino=${origen}`);
             const data = await response.json();
-            const results = (await data?.data?.flightQuotes?.results) || [];
             dispatch({ type: "clear_offersAPI"});
-            dispatch({ type: "set_offersAPI", payload: results });
+            dispatch({ type: "set_offersAPI", payload: data });
         } catch (error) {
             console.error("Error la offerAPI", error.message);
             dispatch({ type: "clear_offersAPI"});
@@ -102,13 +94,13 @@ function Tagline() {
             desc: "Playas y vida nocturna",
         },
         {
-            id: "27544008",
+            id: "27536655",
             name: texts.london,
             image: "/images/destinations/london.jpg",
             desc: "Historia y cultura",
         },
         {
-            id: "27540602",
+            id: "27538888",
             name: texts.mexico,
             image: "/images/destinations/mexico.jpg",
             desc: "Gastronomía y color",
@@ -120,12 +112,18 @@ function Tagline() {
             desc: "Paraíso caribeño",
         },
         {
-            id: "27539733",
+            id: "27539999",
             name: texts.paris,
             image: "/images/destinations/paris.jpg",
             desc: "La ciudad del amor",
         },
     ];
+
+    let hoy = new Date();
+
+    const fechas = [
+        
+    ]
 
     return (
         <div className="tagline-wrapper">
@@ -246,41 +244,6 @@ function Tagline() {
                         </div>
 
                         <div className="form-row">
-                            <div className="form-group dates">
-                                <label>
-                                    <FaCalendarAlt className="icon" />
-                                    {texts.dates}
-                                </label>
-                                <div className="date-pickers">
-                                    <DatePicker
-                                        className="date-input"
-                                        selected={startDate}
-                                        onChange={(date) => setStartDate(date)}
-                                        selectsStart
-                                        startDate={startDate}
-                                        endDate={endDate}
-                                        placeholderText={
-                                            texts.departurePlaceholder
-                                        }
-                                        dateFormat="dd/MM/yyyy"
-                                        minDate={new Date()}
-                                    />
-                                    <DatePicker
-                                        className="date-input"
-                                        selected={endDate}
-                                        onChange={(date) => setEndDate(date)}
-                                        selectsEnd
-                                        startDate={startDate}
-                                        endDate={endDate}
-                                        minDate={startDate}
-                                        placeholderText={
-                                            texts.returnPlaceholder
-                                        }
-                                        dateFormat="dd/MM/yyyy"
-                                    />
-                                </div>
-                            </div>
-
                             <div className="form-group passengers">
                                 <label>
                                     <FaUsers className="icon" />
@@ -335,45 +298,6 @@ function Tagline() {
                     </div>
                 </div>
             </motion.section>
-
-            {/* Popular Destinations Section */}
-            {/* <section className="popular-destinations">
-                <h2 className="section-title">Destinos Populares</h2>
-                <p className="section-subtitle">Descubre nuestros destinos más buscados</p>
-                
-                <div className="destinations-grid">
-                    {destinations.slice(0, 4).map((dest, index) => (
-                        <motion.div 
-                            className="destination-card"
-                            key={dest.id}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: 0.1 * index }}
-                            whileHover={{ 
-                                y: -10,
-                                boxShadow: "0 15px 30px rgba(0,0,0,0.2)"
-                            }}
-                        >
-                            <div className="destination-image">
-                                <img src={dest.image || `https://source.unsplash.com/300x200/?${dest.name}`} alt={dest.name} />
-                            </div>
-                            <div className="destination-info">
-                                <h3>{dest.name}</h3>
-                                <p>{dest.desc}</p>
-                                <button className="btn-view-deals">Ver Ofertas</button>
-                            </div>
-                        </motion.div>
-                    ))}
-                </div>
-                
-                <motion.button 
-                    className="btn-view-all"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                >
-                    Ver Todos los Destinos
-                </motion.button>
-            </section> */}
 
             {/* Notification Modal */}
             <AnimatePresence>

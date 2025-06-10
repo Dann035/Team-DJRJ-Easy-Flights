@@ -1,41 +1,43 @@
 import React from "react";
+import { Link } from "react-router-dom"; // Importa Link para navegación interna
 import "./AboutUs.css";
 
+// Datos del equipo
 const teamMembers = [
   {
-    name: "Daniel Alejandro Landa",
+    name: "Daniel A. Landa",
     github: "https://github.com/Dann035",
-    instagram: "https://instagram.com/usuario1",
+    LinkedIn: "https://www.linkedin.com/in/daniel-landa-dev/",
     image:
-      "https://static.vecteezy.com/system/resources/previews/056/827/314/large_2x/a-man-in-a-beige-jacket-and-jeans-free-png.png",
+      "./DanielAvatar1.png",
     description: "Desarrollador Full Stack apasionado por la tecnología.",
     smallImage:
-      "https://static.vecteezy.com/system/resources/previews/056/827/314/large_2x/a-man-in-a-beige-jacket-and-jeans-free-png.png",
+      "./DanielAvatar1.png",
   },
   {
     name: "Javier Martínez López",
     github: "https://github.com/JavierML-git",
-    instagram: "https://instagram.com/usuario2",
+    LinkedIn: "https://www.linkedin.com/in/javierml28",
     image:
-      "https://static.vecteezy.com/system/resources/previews/051/075/308/large_2x/a-man-with-glasses-and-a-beige-jacket-free-png.png",
+      "./JavierAvatar1.png",
     description: "Full Stack Developer con experiencia en React y Node.",
     smallImage:
-      "https://static.vecteezy.com/system/resources/previews/051/075/308/large_2x/a-man-with-glasses-and-a-beige-jacket-free-png.png",
+      "./JavierAvatar1.png",
   },
   {
     name: "Jean Pierre Pluas",
     github: "https://github.com/Jampiier25",
-    instagram: "https://instagram.com/usuario3",
+    LinkedIn: "https://www.linkedin.com/in/jeanpierrepluas-dev/",
     image:
-      "https://static.vecteezy.com/system/resources/previews/055/757/552/large_2x/man-with-crossed-arms-posing-over-transparent-background-free-png.png",
+      "./JeanpAvatar1.png",
     description: "Desarrollador con pasión por la innovación y UX.",
     smallImage:
-      "https://static.vecteezy.com/system/resources/previews/055/757/552/large_2x/man-with-crossed-arms-posing-over-transparent-background-free-png.png",
+      "./JeanpAvatar1.png",
   },
   {
     name: "Rafael Abad Giner",
     github: "https://github.com/Rafael468",
-    instagram: "https://instagram.com/usuario4",
+    LinkedIn: "https://instagram.com/usuario4",
     image:
       "https://static.vecteezy.com/system/resources/previews/051/765/375/large_2x/portrait-of-a-young-man-with-his-arms-crossed-free-png.png",
     description: "Full Stack Developer enfocado en soluciones escalables.",
@@ -44,15 +46,15 @@ const teamMembers = [
   },
 ];
 
+// Tarjetas de información
 const diagramCards = [
   {
-    title: " Nuestra Misión",
+    title: "Nuestra Misión",
     content:
       "Brindar una plataforma confiable y sencilla para planificar viajes personalizados.",
   },
-  
   {
-    title: "Objetivo ",
+    title: "Objetivo",
     content:
       "Permitir la creación de presupuestos precisos para todo tipo de viajes.",
   },
@@ -60,18 +62,17 @@ const diagramCards = [
     title: "Promoviendo",
     content: "Acceso a paquetes de viajes prediseñados por agencias aliadas.",
   },
-  
 ];
 
 const AboutUs = () => {
   return (
     <div className="about-container">
-      <header className="about-header">
-      </header>
+      <header className="about-header"></header>
 
       <section className="main-image">
         <img src="Icono-Posible.png" alt="Equipo EasyFlights" />
       </section>
+
       <section className="container">
         <h2>
           Bienvenido a EasyFlights, tu plataforma de confianza para planificar
@@ -83,7 +84,8 @@ const AboutUs = () => {
           optimizar cada etapa de tu viaje.
         </h2>
       </section>
-      <br></br>
+
+      <br />
 
       <section className="diagram-section">
         <div className="diagram-grid">
@@ -95,12 +97,14 @@ const AboutUs = () => {
           ))}
         </div>
       </section>
+
       <h2 className="container">
         Detrás de EasyFlights estamos Daniel, Javier, Jean Pierre y Rafa, un
         equipo comprometido con la innovación y la experiencia del usuario.
         Combinamos nuestra pasión por la tecnología y los viajes para ofrecerte
-        una solución clara, funcional y confiable.t
+        una solución clara, funcional y confiable.
       </h2>
+
       <section className="team">
         {teamMembers.map((member, index) => (
           <div className="flip-card-au" key={index}>
@@ -119,20 +123,27 @@ const AboutUs = () => {
                 >
                   GitHub
                 </a>{" "}
-                |
+                |{" "}
                 <a
-                  href={member.instagram}
+                  href={member.LinkedIn}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {" "}
-                  Instagram
+                  LinkedIn
                 </a>
               </div>
             </div>
           </div>
         ))}
       </section>
+
+      {/* Enlace al final hacia la página de donaciones */}
+      <div className="donate-link-wrapper">
+        <p>¿Te gustaría apoyar el desarrollo y crecimiento de EasyFlights?</p>
+        <Link to="/donate" className="donate-link">
+          Conoce cómo puedes colaborar con el proyecto
+        </Link>
+      </div>
     </div>
   );
 };
