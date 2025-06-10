@@ -48,11 +48,11 @@
 /* Botón volver */
 .buttonback {
     margin-bottom: 1rem;
-    background-color: transparent;
+    background-color: rgba(0, 255, 255, 0.656);
     border:transparent;
 }
 .buttonback:hover{
-    background-color: #2e8b57;
+    background-color: #0c88a0a2;
 }
 
 
