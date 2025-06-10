@@ -1,5 +1,5 @@
-from Backend.models import db, User,Companies, Roles, UserRole
-from Backend.auth_decorators import role_required
+from src.Backend.models import db, User,Companies, Roles, UserRole
+from src.Backend.auth_decorators import role_required
 import os
 from flask import Blueprint, request, jsonify
 from sqlalchemy.exc import IntegrityError

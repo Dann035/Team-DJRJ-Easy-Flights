@@ -1,9 +1,9 @@
-from Backend.utils import APIException, generate_sitemap
-from Backend.models.base import db
-from Backend.models import User, Roles, Companies, Payments, Comments 
-from Backend.routes import api, admin
-from Backend.admin import setup_admin
-from Backend.commands import setup_commands
+from src.Backend.utils import APIException, generate_sitemap
+from src.Backend.models.base import db
+from src.Backend.models import User, Roles, Companies, Payments, Comments 
+from src.Backend.routes import api, admin
+from src.Backend.admin import setup_admin
+from src.Backend.commands import setup_commands
 import cloudinary
 import os
 from flask import Flask, request, jsonify, url_for, send_from_directory
@@ -54,8 +54,7 @@ app.config['MAIL_DEFAULT_SENDER'] = os.getenv('EMAIL_FROM', 'Easy Flights <norep
 MIGRATE = Migrate(app, db, compare_type=True)
 db.init_app(app)
 
-frontend_url = os.getenv('VITE_FRONTEND_URL')
-CORS(app, origins=[frontend_url], supports_credentials=True)
+CORS(app, origins=["*"], supports_credentials=True)
 
 
 # add the admin

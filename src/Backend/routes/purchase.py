@@ -1,4 +1,4 @@
-from Backend.models import db, Purchase, User, Offers, Payments
+from src.Backend.models import db, Purchase, User, Offers, Payments
 from flask import Blueprint, jsonify, request
 from sqlalchemy.orm import joinedload
 from datetime import datetime
