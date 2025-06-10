@@ -177,7 +177,16 @@ export default function AboutUs() {
                         <div className="divider"></div>
                     </div>
                 </div>
-
+                <section className="diagram-section">
+                    <div className="diagram-grid">
+                    {diagramCards.map((card, idx) => (
+                        <div className="diagram-card" key={idx}>
+                        <h3>{card.title}</h3>
+                        <p>{card.content}</p>
+                        </div>
+                    ))}
+                    </div>
+                </section>
                 <div className="team-title-container">
                     <h2 className="team-title">NUESTRO EQUIPO</h2>
                 </div>
