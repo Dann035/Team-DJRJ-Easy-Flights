@@ -15,6 +15,7 @@ from flask_mail import Mail
 
 
 
+
 # from models import Person
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
 static_file_dir = os.path.join(os.path.dirname(
@@ -54,8 +55,8 @@ app.config['MAIL_DEFAULT_SENDER'] = os.getenv('EMAIL_FROM', 'Easy Flights <norep
 MIGRATE = Migrate(app, db, compare_type=True)
 db.init_app(app)
 
-frontend_url = os.getenv('VITE_FRONTEND_URL')
-CORS(app, origins=[frontend_url], supports_credentials=True)
+
+CORS(app, origins=["*"], supports_credentials=True)
 
 
 # add the admin

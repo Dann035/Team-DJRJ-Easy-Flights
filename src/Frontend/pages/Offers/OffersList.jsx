@@ -11,7 +11,7 @@ const url = import.meta.env.VITE_BACKEND_URL
 export const OffersList = () => {
 
     const {store,dispatch} = useGlobalReducer()
-    const [users,setUsers] = useState([])
+    const [offers,setOffers] = useState([])
 
     const link = url + "/api/offers"
 
@@ -22,12 +22,12 @@ export const OffersList = () => {
         const data = await response.json()
       
       if (Array.isArray(data)) {
-        setUsers(data);
+        setOffers(data);
       } else if (Array.isArray(data.offers)) {
-        setUsers(data.offers);
+        setOffers(data.offers);
       } else {
         console.error("La respuesta no es un array válido:", data);
-        setUsers([]);
+        setOffers([]);
       }
     } catch (error) {
       console.error("Error al obtener datos:", error);
@@ -64,7 +64,7 @@ export const OffersList = () => {
 
             <div className="row mt-5 of-list">
                 
-                {resultado.map((offert,index)=>(
+                {offers.map((offert,index)=>(
                     <div className="col-md-3 mb-5" key={index}>
                           <OfCard2 offert={offert} />
                     </div>

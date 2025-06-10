@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import "./PaymentPage.css";
 
+const URL = import.meta.env.VITE_BACKEND_URL;
+
 const PaymentPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -17,7 +19,7 @@ const PaymentPage = () => {
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_BACKEND_URL}/api/offers/${id}`)
+    fetch(`${URL}/api/offers/${id}`)
       .then((res) => res.json())
       .then((data) => setOffer(data.offer))
       .catch((err) => console.error("Error fetching offer:", err));
@@ -45,49 +47,58 @@ const PaymentPage = () => {
     setForm((prev) => ({ ...prev, paymentMethod: e.target.value }));
   };
 
+  const validateForm = (form) => {
+    const errors = {};
+    if (!form.cardholderName) errors.cardholderName = "El nombre del titular es obligatorio.";
+    if (!form.cardNumber) errors.cardNumber = "El número de tarjeta es obligatorio.";
+    if (!form.expirationDate) errors.expirationDate = "La fecha de expiración es obligatoria.";
+    if (!form.cvv || form.cvv.length !== 3) errors.cvv = "El CVV debe tener 3 dígitos.";
+    if (!form.paymentMethod) errors.paymentMethod = "Selecciona un método de pago.";
+    return errors;
+  };
+  
+  // Lógica para enviar el pago
+  const submitPayment = async (paymentData, token) => {
+    const response = await fetch(`${URL}/api/payments`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(paymentData),
+    });
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.msg || "Error al guardar el pago.");
+    return result;
+  };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formErrors = {};
-
-    if (!form.cardholderName) formErrors.cardholderName = "El nombre del titular es obligatorio.";
-    if (!form.cardNumber) formErrors.cardNumber = "El número de tarjeta es obligatorio.";
-    if (!form.expirationDate) formErrors.expirationDate = "La fecha de expiración es obligatoria.";
-    if (!form.cvv || form.cvv.length !== 3) formErrors.cvv = "El CVV debe tener 3 dígitos.";
-    if (!form.paymentMethod) formErrors.paymentMethod = "Selecciona un método de pago.";
-
+    const formErrors = validateForm(form);
     setErrors(formErrors);
-
-    if (Object.keys(formErrors).length === 0) {
-      try {
-        const token = localStorage.getItem("access_token");
-
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/payments`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            offer_id: id,
-            amount: offer.price,
-            payment_method: form.paymentMethod,
-            status: "completed",
-          }),
-        });
-
-        const result = await response.json();
-
-        if (!response.ok) {
-          throw new Error(result.msg || "Error al guardar el pago.");
-        }
-
-        navigate(`/bill/${id}/${result.payment.id}`, {
-          state: { offer, payment: result.payment },
-        });
-      } catch (error) {
-        console.error("Error al procesar el pago:", error);
-        alert("No se pudo procesar el pago. Intenta de nuevo.");
-      }
+  
+    if (Object.keys(formErrors).length > 0) return;
+  
+    try {
+      const token = localStorage.getItem("access_token");
+      const paymentData = {
+        offer_id: id,
+        amount: offer.price,
+        payment_method: form.paymentMethod,
+        status: "completed",
+        cardholderName: form.cardholderName,
+        cardNumber: form.cardNumber,
+        expirationDate: form.expirationDate,
+        cvv: form.cvv,
+      };
+      const result = await submitPayment(paymentData, token);
+  
+      navigate(`/bill/${id}/${result.payment.id}`, {
+        state: { offer, payment: result.payment },
+      });
+    } catch (error) {
+      console.error("Error al procesar el pago:", error);
+      alert("No se pudo procesar el pago. Intenta de nuevo.");
     }
   };
 
