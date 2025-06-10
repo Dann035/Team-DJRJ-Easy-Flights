@@ -1,0 +1,139 @@
+.donateform-container {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+  border-radius: 8px;
+  color: white;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(29, 233, 248, 0.03) 0%, transparent 20%),
+    radial-gradient(circle at 90% 80%, rgba(54, 74, 255, 0.03) 0%, transparent 20%);
+}
+
+.donateform-container h1 {
+  color: rgba(22, 226, 226, 0.808);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.donateform-container form {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.donateform-container label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  
+}
+
+.donateform-container input,
+textarea {
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+  font-size: 1rem;
+  color: #ffffff;
+  border-color: transparent;
+}
+
+.donateform-container textarea {
+  resize: vertical;
+  min-height: 80px;
+  color: #090a0f;
+}
+
+.donateform-container input::placeholder {
+  color: #aaa;
+}
+
+.payment-method-select {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.payment-method-select p {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.payment-method-select button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: rgba(74, 155, 155, 0.795);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  margin: 0 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.payment-method-select button:hover {
+  background-color: rgba(22, 226, 226, 0.9);
+}
+
+.paypal-login {
+  text-align: center;
+}
+
+.paypal-login h3 {
+  color: rgba(22, 226, 226, 0.8);
+  margin-bottom: 15px;
+}
+
+.btn.paybutton {
+  background-color: #0a68cc00;
+  color: #fff;
+  padding: 12px 20px;
+  border: 1px solid #1de9f8;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn.paybutton:hover {
+  background-color: #00b35fe5;
+}
+
+.confirmation {
+  text-align: center;
+  padding: 2rem;
+  color: #00ffcc;
+}
+
+.cancelbutton {
+  background-color: rgba(205, 50, 50, 0);
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cancelbutton:hover {
+  background-color: rgb(132, 34, 34);
+}
+
+.receipt-card {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(29, 233, 248, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(29, 233, 248, 0.2);
+  color: #fff;
+  text-align: left;
+  font-size: 1rem;
+}
+
+.receipt-card p {
+  margin: 10px 0;
+  line-height: 1.4;
+}

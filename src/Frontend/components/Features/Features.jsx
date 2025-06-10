@@ -29,8 +29,8 @@ function Features() {
                 {/* Box Feature 2: Packages */}
                 <Link to="/quiz" className="box-feature feature-2">
                     <i></i>
-                    <h3>{texts.feature2Title}</h3>
-                    <p>{texts.feature2Desc}</p>
+                    <h3>QUIZ Game</h3>
+                    <p>Descubre que destino es el que mejor te define contestando nuestro divertido cuestionario</p>
                 </Link>
 
                 {/* Box Feature 3: Tools */}
