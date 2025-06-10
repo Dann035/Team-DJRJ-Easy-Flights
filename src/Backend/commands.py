@@ -1,7 +1,7 @@
 
 import click
-from Backend.models.base import db
-from Backend.models.User import User
+from src.Backend.models.base import db
+from src.Backend.models.User import User
 
 
 def setup_commands(app):
