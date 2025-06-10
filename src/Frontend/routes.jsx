@@ -73,7 +73,7 @@ export const router = createBrowserRouter(
         <Route path="/support" element={<SupportCenter />} />
         <Route path="/instagram" element={<Instagram />} />
         <Route path="/facebook" element={<Facebook />} />
-        <Route path="/forgotPass" element={<ForgetPass />
+        <Route path="/forgotPass" element={<ForgetPass/>} />
         <Route path="/donate" element={<Donate />} />
         <Route path="/donar" element={<DonateForm />} />
         <Route path="/discover" element={<Discover />} />
