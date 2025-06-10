@@ -1,102 +1,116 @@
-from flask import Blueprint, request, jsonify, abort
-from datetime import datetime
-from Backend.models import db, Payments, Offers, User
+from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
+from Backend.models import db, User, Payments, Offers
+from datetime import datetime
 
-payment_bp = Blueprint('payment_bp', __name__)
+payment_bp = Blueprint('payment', __name__)
 
-# Ruta para crear un nuevo pago
+
+# Crear un nuevo pago
 @payment_bp.route('/payments', methods=['POST'])
-@jwt_required()  # Asegúrate de que el usuario esté autenticado
+@jwt_required()
 def create_payment():
-    data = request.get_json()
-
-    # Validación de campos requeridos
-    required_fields = ['offer_id', 'payment_method', 'cardholder_name', 'card_number']
-    for field in required_fields:
-        if field not in data:
-            return jsonify({'error': f'Falta el campo {field}'}), 400
-
-    # Verificar si la oferta existe
-    offer = Offers.query.get(data['offer_id'])
-    if not offer:
-        return jsonify({'error': 'Oferta no encontrada'}), 404
-
-    # Obtener el user_id del JWT
-    user_id = get_jwt_identity()  # Se obtiene directamente del JWT
-    if not user_id:
-        return jsonify({'error': 'Usuario no autenticado'}), 401
-
-    user = User.query.get(user_id)
-    if not user:
-        return jsonify({'error': 'Usuario no encontrado'}), 404
-
-    # Crear el nuevo pago
-    payment = Payments(
-        amount=offer.price,
-        payment_method=data['payment_method'],
-        status='completed',
-        created_at=datetime.utcnow(),
-        cardholder_name=data['cardholder_name'],
-        card_number=data['card_number'],
-        user_id=user.id,
-        offer_id=offer.id
-    )
-
     try:
+        user_id = get_jwt_identity()
+        user = User.query.get(user_id)
+
+        if not user or user.role != 'cliente':
+            return jsonify({"msg": "Solo los clientes pueden hacer pagos"}), 403
+
+        data = request.get_json()
+        amount = data.get('amount')
+        offer_id = data.get('offer_id')
+        payment_method = data.get('payment_method', 'Paypal')
+        status = data.get('status', 'completed')
+
+        if not all([amount, offer_id]):
+            return jsonify({"msg": "Faltan datos obligatorios"}), 400
+
+        offer = Offers.query.get(offer_id)
+        if not offer:
+            return jsonify({"msg": "Oferta no encontrada"}), 404
+
+        payment = Payments(
+            amount=amount,
+            offer_id=offer.id,
+            user_id=user.id,
+            payment_method=payment_method,
+            status=status,
+            created_at=datetime.utcnow()
+        )
+
         db.session.add(payment)
         db.session.commit()
-        return jsonify({'message': 'Pago creado exitosamente', 'payment': payment.serialize()}), 201
+
+        return jsonify({"msg": "Pago creado con éxito", "payment": payment.serialize()}), 201
+
     except Exception as e:
-        db.session.rollback()
-        return jsonify({'error': str(e)}), 500
+        return jsonify({"msg": "Error creando el pago", "error": str(e)}), 400
 
-# Ruta para obtener un pago específico
-@payment_bp.route('/payments/<int:id>', methods=['GET'])
-def get_payment(id):
-    payment = Payments.query.get(id)
-    if not payment:
-        return jsonify({'error': 'Pago no encontrado'}), 404
-    return jsonify({'payment': payment.serialize()}), 200
 
-# Ruta para obtener todos los pagos de un usuario
-@payment_bp.route('/users/<int:user_id>/payments', methods=['GET'])
-def get_user_payments(user_id):
-    user = User.query.get(user_id)
-    if not user:
-        return jsonify({'error': 'Usuario no encontrado'}), 404
+# Obtener todos los pagos (admin)
+@payment_bp.route('/payments', methods=['GET'])
+@jwt_required()
+def get_all_payments():
+    user = User.query.get(get_jwt_identity())
+    if not user or user.role != 'admin':
+        return jsonify({"msg": "Acceso restringido a administradores"}), 403
+
+    payments = Payments.query.all()
+    return jsonify([p.serialize() for p in payments]), 200
+
+
+# Obtener pagos propios (cliente)
+@payment_bp.route('/payments/mine', methods=['GET'])
+@jwt_required()
+def get_my_payments():
+    user = User.query.get(get_jwt_identity())
+    if not user or user.role != 'cliente':
+        return jsonify({"msg": "Solo los clientes pueden ver sus pagos"}), 403
+
     payments = Payments.query.filter_by(user_id=user.id).all()
-    return jsonify({'payments': [payment.serialize() for payment in payments]}), 200
+    return jsonify([p.serialize() for p in payments]), 200
 
-# Ruta para actualizar un pago
-@payment_bp.route('/payments/<int:id>', methods=['PUT'])
-@jwt_required()  # Asegúrate de que el usuario esté autenticado
-def update_payment(id):
-    # Obtener el user_id del JWT
+
+# Obtener pago por ID (admin o dueño)
+@payment_bp.route('/payments/<int:id>', methods=['GET'])
+@jwt_required()
+def get_payment(id):
     user = User.query.get(get_jwt_identity())
     payment = Payments.query.get_or_404(id)
 
-    # Verificar que el usuario sea el propietario del pago o sea un administrador
+    if user.role != 'admin' and payment.user_id != user.id:
+        return jsonify({"msg": "No autorizado"}), 403
+
+    return jsonify(payment.serialize()), 200
+
+
+# Actualizar pago (admin o dueño)
+@payment_bp.route('/payments/<int:id>', methods=['PUT'])
+@jwt_required()
+def update_payment(id):
+    user = User.query.get(get_jwt_identity())
+    payment = Payments.query.get_or_404(id)
+
     if user.role != 'admin' and payment.user_id != user.id:
         return jsonify({"msg": "No autorizado"}), 403
 
     data = request.get_json()
+    payment.amount = data.get('amount', payment.amount)
     payment.payment_method = data.get('payment_method', payment.payment_method)
     payment.status = data.get('status', payment.status)
-    payment.purchase_id = data.get('purchase_id', payment.purchase_id)
 
     db.session.commit()
     return jsonify({"msg": "Pago actualizado", "payment": payment.serialize()}), 200
 
-# Ruta para eliminar un pago
+
+# Eliminar pago (admin o dueño)
 @payment_bp.route('/payments/<int:id>', methods=['DELETE'])
-@jwt_required()  # Asegúrate de que el usuario esté autenticado
+@jwt_required()
 def delete_payment(id):
-    # Obtener el user_id del JWT
     user = User.query.get(get_jwt_identity())
     payment = Payments.query.get_or_404(id)
 
-    # Verificar que el usuario sea el propietario del pago o sea un administrador
     if user.role != 'admin' and payment.user_id != user.id:
         return jsonify({"msg": "No autorizado"}), 403
 
