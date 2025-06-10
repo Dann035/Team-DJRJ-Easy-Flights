@@ -1,0 +1,6 @@
+
+GET https://flights-sky.p.rapidapi.com/web/flights/auto-complete?query=City
+
+### Peticion de vuelos con origen y destino
+GET http://localhost:3001/api/vuelos?origen=27542715&destino=27537542
+Content-Type: application/json

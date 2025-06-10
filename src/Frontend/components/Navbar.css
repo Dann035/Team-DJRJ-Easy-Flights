@@ -172,14 +172,6 @@
 
 .img-nav:hover {
     transform: scale(1.05) rotate(5deg);
-    filter: drop-shadow(0 0 2px var(--primary-color));
-}
-
-/* Ajuste del logo cuando se hace scroll */
-.nav-container.scrolled .img-nav {
-    height: 80px;
-    width: 80px;
-    margin-right: 120px;
 }
 
 /* ESTILOS PARA PERFIL DE USUARIO Y BOTÓN DE CERRAR SESIÓN */
