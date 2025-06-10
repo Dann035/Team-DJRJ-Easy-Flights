@@ -27,12 +27,8 @@ const PaymentPage = () => {
     const { name, value } = e.target;
 
     if (name === "cardNumber") {
-      // Eliminar cualquier carácter no numérico
       let formattedValue = value.replace(/\D/g, "");
-
-      // Dividir el número de tarjeta en bloques de 4 dígitos
       formattedValue = formattedValue.replace(/(.{4})(?=.)/g, "$1 ");
-
       setForm((prev) => ({ ...prev, [name]: formattedValue }));
     } else if (name === "expirationDate") {
       let formatted = value.replace(/\D/g, "");
@@ -49,9 +45,10 @@ const PaymentPage = () => {
     setForm((prev) => ({ ...prev, paymentMethod: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formErrors = {};
+
     if (!form.cardholderName) formErrors.cardholderName = "El nombre del titular es obligatorio.";
     if (!form.cardNumber) formErrors.cardNumber = "El número de tarjeta es obligatorio.";
     if (!form.expirationDate) formErrors.expirationDate = "La fecha de expiración es obligatoria.";
@@ -59,9 +56,38 @@ const PaymentPage = () => {
     if (!form.paymentMethod) formErrors.paymentMethod = "Selecciona un método de pago.";
 
     setErrors(formErrors);
+
     if (Object.keys(formErrors).length === 0) {
-      const paymentId = Math.random().toString(36).substring(2, 9);
-      navigate(`/bill/${id}/${paymentId}`, { state: { offer, payment: form } });
+      try {
+        const token = localStorage.getItem("access_token");
+
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/payments`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            offer_id: id,
+            amount: offer.price,
+            payment_method: form.paymentMethod,
+            status: "completed",
+          }),
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.msg || "Error al guardar el pago.");
+        }
+
+        navigate(`/bill/${id}/${result.payment.id}`, {
+          state: { offer, payment: result.payment },
+        });
+      } catch (error) {
+        console.error("Error al procesar el pago:", error);
+        alert("No se pudo procesar el pago. Intenta de nuevo.");
+      }
     }
   };
 
@@ -71,8 +97,7 @@ const PaymentPage = () => {
     <div className="payment-container">
       <h2>Formulario de Pago</h2>
       <form className="payment-form" onSubmit={handleSubmit}>
-        <label> Seleccionar metodo de pago</label>
-        {/* Selección de método de pago */}
+        <label>Seleccionar método de pago</label>
         <div className="payment-methods">
           <div className="payment-method">
             <input
@@ -84,10 +109,9 @@ const PaymentPage = () => {
               onChange={handleRadioChange}
             />
             <label htmlFor="visa">
-              <i className="fab fa-cc-visa"></i> 
+              <i className="fab fa-cc-visa"></i>
             </label>
           </div>
-
           <div className="payment-method">
             <input
               type="radio"
@@ -101,7 +125,6 @@ const PaymentPage = () => {
               <i className="fab fa-cc-mastercard"></i>
             </label>
           </div>
-
           <div className="payment-method">
             <input
               type="radio"
@@ -112,10 +135,9 @@ const PaymentPage = () => {
               onChange={handleRadioChange}
             />
             <label htmlFor="applePay">
-              <i className="fab fa-apple"></i> 
+              <i className="fab fa-apple"></i>
             </label>
           </div>
-
           <div className="payment-method">
             <input
               type="radio"
@@ -126,12 +148,11 @@ const PaymentPage = () => {
               onChange={handleRadioChange}
             />
             <label htmlFor="googlePay">
-              <i className="fab fa-google-pay"></i> 
+              <i className="fab fa-google-pay"></i>
             </label>
           </div>
         </div>
         {errors.paymentMethod && <span className="error-text">{errors.paymentMethod}</span>}
-
 
         <div className="form-group">
           <label>Nombre del titular</label>
@@ -151,7 +172,7 @@ const PaymentPage = () => {
             name="cardNumber"
             value={form.cardNumber}
             onChange={handleChange}
-            maxLength="19" // 16 dígitos + 3 espacios
+            maxLength="19"
             placeholder="1234 5678 9012 3456"
             className="form-control"
           />
