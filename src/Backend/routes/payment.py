@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
-from flask_jwt_extended import jwt_required, get_jwt_identity
-from src.Backend.models import db, User, Payments, Offers
+from flask_jwt_extended import jwt_required, get_jwt, get_jwt_identity
+from Backend.models import db, User, Payments, Offers
 from datetime import datetime
 
 payment_bp = Blueprint('payment', __name__)
@@ -11,19 +11,28 @@ payment_bp = Blueprint('payment', __name__)
 @jwt_required()
 def create_payment():
     try:
-        user_id = get_jwt_identity()
-        user = User.query.get(user_id)
+        claims = get_jwt()
+        user_id = claims.get('user_id')
+        roles = claims.get('roles', [])
 
-        if not user or user.role != 'cliente':
+        if not user_id or 'USER' not in roles:
             return jsonify({"msg": "Solo los clientes pueden hacer pagos"}), 403
+
+        user = User.query.get(user_id)
+        if not user:
+            return jsonify({"msg": "Usuario no encontrado"}), 404
 
         data = request.get_json()
         amount = data.get('amount')
         offer_id = data.get('offer_id')
         payment_method = data.get('payment_method', 'Paypal')
         status = data.get('status', 'completed')
+        cardholder_name = data.get('cardholderName')
+        card_number = data.get('cardNumber')
+        # Solo guardar los últimos 4 dígitos
+        card_last4 = card_number[-4:] if card_number and len(card_number.replace(" ", "")) >= 4 else None
 
-        if not all([amount, offer_id]):
+        if not all([amount, offer_id, cardholder_name, card_last4, payment_method]):
             return jsonify({"msg": "Faltan datos obligatorios"}), 400
 
         offer = Offers.query.get(offer_id)
@@ -36,13 +45,21 @@ def create_payment():
             user_id=user.id,
             payment_method=payment_method,
             status=status,
+            cardholder_name=cardholder_name,
+            card_number=card_number,
             created_at=datetime.utcnow()
         )
 
         db.session.add(payment)
         db.session.commit()
 
-        return jsonify({"msg": "Pago creado con éxito", "payment": payment.serialize()}), 201
+        # Serializar el pago incluyendo los datos necesarios para la factura
+        payment_data = payment.serialize()
+        payment_data["cardholderName"] = cardholder_name
+        payment_data["paymentMethod"] = payment_method
+        payment_data["cardNumber"] = f"**** **** **** {card_number}" if card_number else "No disponible"
+
+        return jsonify({"msg": "Pago creado con éxito", "payment": payment_data}), 201
 
     except Exception as e:
         return jsonify({"msg": "Error creando el pago", "error": str(e)}), 400
