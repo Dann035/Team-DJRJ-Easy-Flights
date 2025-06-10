@@ -1,31 +1,31 @@
 
 // // CARDS DE MISIÓN, VISIÓN, ETC.
-// const diagramCards = [
-//   {
-//     title: "Nuestra Misión",
-//     content: "Brindar una plataforma confiable y sencilla para planificar viajes personalizados.",
-//   },
-//   {
-//     title: "Visión",
-//     content: "Ser la herramienta líder en planificación de viajes colaborativos y eficientes.",
-//   },
-//   {
-//     title: "Objetivo",
-//     content: "Permitir la creación de presupuestos precisos para todo tipo de viajes.",
-//   },
-//   {
-//     title: "Facilitando",
-//     content: "La división de gastos entre grupos de personas fácilmente.",
-//   },
-//   {
-//     title: "Promoviendo",
-//     content: "Acceso a paquetes de viajes prediseñados por agencias aliadas.",
-//   },
-//   {
-//     title: "Fomentando",
-//     content: "La transparencia financiera durante los viajes en grupo.",
-//   }
-// ];
+const diagramCards = [
+  {
+    title: "Nuestra Misión",
+    content: "Brindar una plataforma confiable y sencilla para planificar viajes personalizados.",
+  },
+  {
+    title: "Visión",
+    content: "Ser la herramienta líder en planificación de viajes colaborativos y eficientes.",
+  },
+  {
+    title: "Objetivo",
+    content: "Permitir la creación de presupuestos precisos para todo tipo de viajes.",
+  },
+  {
+    title: "Facilitando",
+    content: "La división de gastos entre grupos de personas fácilmente.",
+  },
+  {
+    title: "Promoviendo",
+    content: "Acceso a paquetes de viajes prediseñados por agencias aliadas.",
+  },
+  {
+    title: "Fomentando",
+    content: "La transparencia financiera durante los viajes en grupo.",
+  }
+];
 
 import { useState, useEffect } from "react";
 import "./AboutUs.css"; // Importamos el archivo CSS externo
@@ -120,39 +120,39 @@ export default function AboutUs() {
         
     ];
 
-    const mentores = [
-        {
-            id: 5,
-            name: "Irio Gomez",
-            alias: "Irio",
-            role: "Full Stack Developer Senior / Mentor",
-            image: "./Irio-avatar.webp",
-            github: "https://github.com/irio-dev",
-            linkedin: "https://www.linkedin.com/in/iriogomez/",
-            direction: "left",
-        },
-        {
-            id: 6,
-            name: "Robert Tovar",
-            alias: "Robert",
-            role: "Full Stack Developer / Mentor",
-            github: "https://github.com/Roberttovarv",
-            linkedin: "https://www.linkedin.com/in/roberttovarv/",
-            image: "./Robert-avatar.webp",
-            direction: "right",
-        },
-        {
-            id: 7,
-            name: "Lucas Solari",
-            alias: "Luca",
-            role: "Full Stack Developer / Mentor",
-            github: "https://github.com/Lucaso1992",
-            linkedin: "https://www.linkedin.com/in/lucas-solari/",
-            image: "./Lucas-avatar.webp",
-            direction: "left",
-        }
+    // const mentores = [
+    //     {
+    //         id: 5,
+    //         name: "Irio Gomez",
+    //         alias: "Irio",
+    //         role: "Full Stack Developer Senior / Mentor",
+    //         image: "./Irio-avatar.webp",
+    //         github: "https://github.com/irio-dev",
+    //         linkedin: "https://www.linkedin.com/in/iriogomez/",
+    //         direction: "left",
+    //     },
+    //     {
+    //         id: 6,
+    //         name: "Robert Tovar",
+    //         alias: "Robert",
+    //         role: "Full Stack Developer / Mentor",
+    //         github: "https://github.com/Roberttovarv",
+    //         linkedin: "https://www.linkedin.com/in/roberttovarv/",
+    //         image: "./Robert-avatar.webp",
+    //         direction: "right",
+    //     },
+    //     {
+    //         id: 7,
+    //         name: "Lucas Solari",
+    //         alias: "Luca",
+    //         role: "Full Stack Developer / Mentor",
+    //         github: "https://github.com/Lucaso1992",
+    //         linkedin: "https://www.linkedin.com/in/lucas-solari/",
+    //         image: "./Lucas-avatar.webp",
+    //         direction: "left",
+    //     }
 
-    ]
+    // ]
 
     return (
         <div className="about-us-container">
@@ -166,7 +166,7 @@ export default function AboutUs() {
             <div className="main-content">
                 {/* Descripción del proyecto */}
                 <div className="project-description">
-                    <h1 className="project-title">Proyecto Easy-Flights</h1>
+                    <h1 className="project-title">Easy-Flights</h1>
                     <div className="description-content">
                         <p className="description-subtitle">
                             Llevando el viaje al siguiente nivel
@@ -192,7 +192,7 @@ export default function AboutUs() {
                     ))}
                 </div>
 
-                <div className="team-title-container">
+                {/* <div className="team-title-container">
                     <h2 className="team-title">NUESTROS MENTORES</h2>
                 </div>
 
@@ -204,7 +204,7 @@ export default function AboutUs() {
                             scrollY={scrollY}
                         />
                     ))}
-                </div>
+                </div> */}
             </div>
         </div>
     );
