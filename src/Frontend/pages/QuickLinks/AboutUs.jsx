@@ -17,7 +17,7 @@ const teamMembers = [
   {
     name: "Javier Martínez López",
     github: "https://github.com/JavierML-git",
-    LinkedIn: "https://instagram.com/usuario2",
+    LinkedIn: "https://www.linkedin.com/in/javierml28",
     image:
       "./JavierAvatar1.png",
     description: "Full Stack Developer con experiencia en React y Node.",
