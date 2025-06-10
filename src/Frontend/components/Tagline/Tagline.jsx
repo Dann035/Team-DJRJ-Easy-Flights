@@ -244,41 +244,6 @@ function Tagline() {
                         </div>
 
                         <div className="form-row">
-                            <div className="form-group dates">
-                                <label>
-                                    <FaCalendarAlt className="icon" />
-                                    {texts.dates}
-                                </label>
-                                <div className="date-pickers">
-                                    <DatePicker
-                                        className="date-input"
-                                        selected={startDate}
-                                        onChange={(date) => setStartDate(date)}
-                                        selectsStart
-                                        startDate={startDate}
-                                        endDate={endDate}
-                                        placeholderText={
-                                            texts.departurePlaceholder
-                                        }
-                                        dateFormat="dd/MM/yyyy"
-                                        minDate={new Date()}
-                                    />
-                                    <DatePicker
-                                        className="date-input"
-                                        selected={endDate}
-                                        onChange={(date) => setEndDate(date)}
-                                        selectsEnd
-                                        startDate={startDate}
-                                        endDate={endDate}
-                                        minDate={startDate}
-                                        placeholderText={
-                                            texts.returnPlaceholder
-                                        }
-                                        dateFormat="dd/MM/yyyy"
-                                    />
-                                </div>
-                            </div>
-
                             <div className="form-group passengers">
                                 <label>
                                     <FaUsers className="icon" />
@@ -333,45 +298,6 @@ function Tagline() {
                     </div>
                 </div>
             </motion.section>
-
-            {/* Popular Destinations Section */}
-            {/* <section className="popular-destinations">
-                <h2 className="section-title">Destinos Populares</h2>
-                <p className="section-subtitle">Descubre nuestros destinos más buscados</p>
-                
-                <div className="destinations-grid">
-                    {destinations.slice(0, 4).map((dest, index) => (
-                        <motion.div 
-                            className="destination-card"
-                            key={dest.id}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: 0.1 * index }}
-                            whileHover={{ 
-                                y: -10,
-                                boxShadow: "0 15px 30px rgba(0,0,0,0.2)"
-                            }}
-                        >
-                            <div className="destination-image">
-                                <img src={dest.image || `https://source.unsplash.com/300x200/?${dest.name}`} alt={dest.name} />
-                            </div>
-                            <div className="destination-info">
-                                <h3>{dest.name}</h3>
-                                <p>{dest.desc}</p>
-                                <button className="btn-view-deals">Ver Ofertas</button>
-                            </div>
-                        </motion.div>
-                    ))}
-                </div>
-                
-                <motion.button 
-                    className="btn-view-all"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                >
-                    Ver Todos los Destinos
-                </motion.button>
-            </section> */}
 
             {/* Notification Modal */}
             <AnimatePresence>

@@ -39,7 +39,6 @@ import BillAPI from "./pages/Offers/OffersAPI/BillApi.jsx";
 import Donate from "./pages/QuickLinks/Donate/Donate.jsx";
 import DonateForm from "./pages/QuickLinks/Donate/DonateForm.jsx";
 import Discover from "./pages/Feeatures/Discover/Discover.jsx";
-import Discover from "./components/Discover/Discover.jsx";
 
 
 
@@ -73,7 +72,7 @@ export const router = createBrowserRouter(
         <Route path="/support" element={<SupportCenter />} />
         <Route path="/instagram" element={<Instagram />} />
         <Route path="/facebook" element={<Facebook />} />
-        <Route path="/forgotPass" element={<ForgetPass />
+        <Route path="/forgotPass" element={<ForgetPass/>} />
         <Route path="/donate" element={<Donate />} />
         <Route path="/donar" element={<DonateForm />} />
         <Route path="/discover" element={<Discover />} />
