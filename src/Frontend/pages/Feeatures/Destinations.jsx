@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';  // Importa el componente Link de react-router-dom
 import './Destinations.css';
 
 export default function Destinations() {
@@ -95,6 +96,13 @@ export default function Destinations() {
         <div className="postcard container my-5">
             <h1 className="text-center mb-4">🌍 Top 10 Destinos Turísticos</h1>
             <p className="text-center mb-5">Explora lugares increíbles. Haz clic en una postal para más detalles.</p>
+
+            {/* Link para navegar a la página de "Discover" */}
+            <div className="text-center mb-4">
+                <Link to="/discover" className="btn buttoncountry">
+                    Buscar Información de País
+                </Link>
+            </div>
 
             <div className="row">
                 {destinations.map((destination, index) => (
