@@ -1,4 +1,4 @@
-from src.Backend.models import db, User, Payments, Offers
+from Backend.models import db, User, Payments, Offers
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from datetime import datetime

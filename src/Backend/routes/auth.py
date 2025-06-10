@@ -1,5 +1,5 @@
-from src.Backend.models import db, User,Companies, Roles, UserRole
-from src.Backend.auth_decorators import role_required
+from Backend.models import db, User,Companies, Roles, UserRole
+from Backend.auth_decorators import role_required
 import os
 from flask import Blueprint, request, jsonify
 from sqlalchemy.exc import IntegrityError
@@ -15,7 +15,6 @@ auth_bp = Blueprint('auth', __name__)
 def signup_user():
     data = request.get_json()
     user_type = data.get('role')  # 'USER' o 'COMPANY'
-    
     # Verifica en ambas tablas
     company = Companies.query.filter_by(email=data['email']).first()
     user = User.query.filter_by(email=data['email']).first()
@@ -177,7 +176,7 @@ def secret():
         claims = get_jwt()
         
         if not current_user:
-            return jsonify({"msg": "Missing user" , "Error": str(e)}), 400
+            return jsonify({"msg": "Missing user"}), 400
         
         user = User.query.filter_by(email=current_user).first()
         if not user:

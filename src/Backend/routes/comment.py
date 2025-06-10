@@ -1,6 +1,6 @@
 from flask import request, jsonify, Blueprint
 from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt
-from src.Backend.models import db, Comments, Offers
+from Backend.models import db, Comments, Offers
 
 
 
@@ -73,8 +73,8 @@ def delete_comment(comment_id):
 #endpoint para contar los comentarios que tiene una página
 @comments_bp.route('/comments/<int:offer_id>/count', methods=['GET'])
 def count_comments(offer_id):
-    count=Comments.query.filter_by(offer_id=offer.id).count()
-    return jsonify({"offer id":offer.id,"comment count:":count}),200
+    count=Comments.query.filter_by(offer_id=offer_id).count()
+    return jsonify({"offer id": offer_id,"comment count:":count}),200
 #más ideas: borrar comentarios de un usuario determinado, ver los comentarios más recientes, añadir likes a comentarios? y filtrar por likes
 #endpoint para ver los comentarios más recientes
 @comments_bp.route('/comments/<int:offer_id>/recent', methods=['GET'])

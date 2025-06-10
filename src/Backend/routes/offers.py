@@ -1,5 +1,5 @@
-from src.Backend.models import db, Offers
-from src.Backend.auth_decorators import role_required
+from Backend.models import db, Offers
+from Backend.auth_decorators import role_required
 from flask import request, jsonify, Blueprint
 from flask_jwt_extended import jwt_required
 
